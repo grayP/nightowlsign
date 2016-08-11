@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -6,6 +7,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using nightowlsigns.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Security;
 
 namespace nightowlsigns
 {
@@ -63,6 +66,62 @@ namespace nightowlsigns
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+            //AddUserAndRole(ApplicationDbContext.Create());
+            Security security= new Security();
+            security.AddUserToRole(ApplicationDbContext.Create(),"gray.pritchett@optusnet.com.au", "Admin");
+            
+
         }
+
+
+        internal class Security
+        {
+           // = new ApplicationDbContext();
+
+            internal void AddUserToRole(ApplicationDbContext context ,string userName, string roleName)
+            {
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+                try
+                {
+                    var user = UserManager.FindByName(userName);
+                    UserManager.AddToRole(user.Id, roleName);
+                    context.SaveChanges();
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        bool AddUserAndRole(ApplicationDbContext context)
+        {
+            IdentityResult ir;
+            var rm = new RoleManager<IdentityRole>
+                (new RoleStore<IdentityRole>(context));
+            ir = rm.Create(new IdentityRole("Admin"));
+            var um = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(context));
+
+
+
+ 
+
+          var  user = new ApplicationUser()
+            {
+                UserName = "ctyquin@goa.com.au",
+                Email = "ctyquin@goa.com.au",
+            };
+            
+            
+            ir = um.AddToRole(user.Id, "Admin");
+
+         
+
+            return ir.Succeeded;
+
+        }
+
     }
 }
