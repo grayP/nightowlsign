@@ -67,9 +67,10 @@ namespace nightowlsigns
             //    ClientSecret = ""
             //});
             //AddUserAndRole(ApplicationDbContext.Create());
-            Security security= new Security();
-            security.AddUserToRole(ApplicationDbContext.Create(),"gray.pritchett@optusnet.com.au", "Admin");
-            
+         //   SeedUsers();
+         //   var success = AddUserAndRole(ApplicationDbContext.Create());
+         //    Security security= new Security();
+//security.AddUserToRole(ApplicationDbContext.Create(),"gray.pritchett@optusnet.com.au", "Admin");
 
         }
 
@@ -95,7 +96,32 @@ namespace nightowlsigns
             }
         }
 
-        bool AddUserAndRole(ApplicationDbContext context)
+
+
+        private void SeedUsers()
+        {
+
+            string _role = "Admin";
+            if (!Roles.RoleExists(_role))
+                Roles.CreateRole(_role);
+
+            if (!Roles.IsUserInRole("gray.pritchett@optusnet.com.au", _role))
+                Roles.AddUserToRole("gray.pritchett@optusnet.com.au", _role);
+            if (!Roles.IsUserInRole("ctyquin@goa.com.au", _role))
+                Roles.AddUserToRole("ctyquin@goa.com.au", _role);
+            if (!Roles.IsUserInRole("GClarke@bne.mcgees.com.au", _role))
+                Roles.AddUserToRole("GClarke@bne.mcgees.com.au", _role);
+            if (!Roles.IsUserInRole("alex@propsol.com.au", _role))
+                Roles.AddUserToRole("alex@propsol.com.au", _role);
+            if (!Roles.IsUserInRole("pcrooke@bretts.com.au", _role))
+                Roles.AddUserToRole("pcrooke@bretts.com.au", _role);
+            if (!Roles.IsUserInRole("fraser@rsaarchitects.net", _role))
+                Roles.AddUserToRole("fraser@rsaarchitects.net", _role);
+        }
+
+
+
+        bool AddUserAndRole(nightowlsigns.Models.ApplicationDbContext context)
         {
             IdentityResult ir;
             var rm = new RoleManager<IdentityRole>
@@ -106,22 +132,73 @@ namespace nightowlsigns
 
 
 
- 
+            var user = new ApplicationUser()
+            {
+                UserName = "gray.pritchett@optusnet.com.au",
+                Email = "gray.pritchett@optusnet.com.au"
+            };
 
-          var  user = new ApplicationUser()
+            ir = um.Create(user, "P@ssword1");
+            //if (ir.Succeeded == false)
+            //    return ir.Succeeded;
+            ir = um.AddToRole(user.Id, "Admin");
+
+            user = new ApplicationUser()
             {
                 UserName = "ctyquin@goa.com.au",
                 Email = "ctyquin@goa.com.au",
             };
-            
-            
+
+            ir = um.Create(user, "P@ssword1");
+            //if (ir.Succeeded == false)
+            //    return ir.Succeeded;
             ir = um.AddToRole(user.Id, "Admin");
 
-         
+            user = new ApplicationUser()
+            {
+                UserName = "GClarke@bne.mcgees.com.au",
+                Email = "GClarke@bne.mcgees.com.au",
+            };
+
+            ir = um.Create(user, "P@ssword1");
+            //if (ir.Succeeded == false)
+            //    return ir.Succeeded;
+            ir = um.AddToRole(user.Id, "Admin");
+
+            user = new ApplicationUser()
+            {
+                UserName = "alex@propsol.com.au",
+                Email = "alex@propsol.com.au",
+            };
+
+            ir = um.Create(user, "P@ssword1");
+            //if (ir.Succeeded == false)
+            //    return ir.Succeeded;
+            ir = um.AddToRole(user.Id, "Admin");
+
+            user = new ApplicationUser()
+            {
+                UserName = "pcrooke@bretts.com.au",
+                Email = "pcrooke@bretts.com.au",
+            };
+
+            ir = um.Create(user, "P@ssword1");
+
+            ir = um.AddToRole(user.Id, "Admin");
+
+
+            user = new ApplicationUser()
+            {
+                UserName = "fraser@rsaarchitects.net",
+                Email = "fraser@rsaarchitects.net",
+            };
+
+            ir = um.Create(user, "P@ssword1");
+
+            ir = um.AddToRole(user.Id, "Admin");
 
             return ir.Succeeded;
 
         }
-
     }
 }

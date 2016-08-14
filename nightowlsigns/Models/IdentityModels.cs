@@ -29,5 +29,7 @@ namespace nightowlsigns.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<nightowlsign.data.Sign> Signs { get; set; }
     }
 }

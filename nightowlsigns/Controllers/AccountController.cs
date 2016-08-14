@@ -13,6 +13,7 @@ using nightowlsigns.Models;
 namespace nightowlsigns.Controllers
 {
     [Authorize]
+
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
