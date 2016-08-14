@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using nightowlsigns.Models;
+using nightowlsign.Models;
 
-namespace nightowlsigns
+namespace nightowlsign
 {
     public class EmailService : IIdentityMessageService
     {

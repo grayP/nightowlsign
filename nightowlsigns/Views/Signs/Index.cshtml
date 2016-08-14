@@ -1,7 +1,5 @@
-﻿@model IEnumerable<nightowlsign.data.Sign>
+﻿@model nightowlsign.data.Models.Signs.SignViewModel
 
-
-@model DataRepository.Models.RegattaViewModel
 
 @{
     ViewBag.Title = "Signs";
@@ -29,8 +27,8 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    @Html.LabelFor(m => m.SearchEntity.RegattaName, "Regatta")
-                    @Html.TextBoxFor(m => m.SearchEntity.RegattaName, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.SearchEntity.Model, "Model")
+                    @Html.TextBoxFor(m => m.SearchEntity.Model, new { @class = "form-control" })
                 </div>
 
             </div>
@@ -59,7 +57,7 @@
                     <tr>
                         <th class="pdsa-action-button-column">Edit</th>
                         <th>Regatta</th>
-                        <th align="right">Action</th>
+                        @*<th align="right">Action</th>*@
                         <th>Year</th>
                         <th>Date</th>
                         <th>Result</th>
@@ -67,25 +65,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.regattas)
+                    @foreach (var item in Model.Signs)
                     {
                         <tr>
-                            <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
+                            <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td>
-                                @Html.ActionLink(@item.RegattaName, "Index", "Display", new { RegattaID = item.Id, RegattaName = item.RegattaName }, null)
+                                
+                                @Html.ActionLink(@item.Model, "Index", "Display", new {id = item.id, Model = item.Model}, null)
                             </td>
                             <td align="right">
-                                <a href="@Url.Action("Index", "RegattaCrew",new { RegattaID = item.Id, RegattaName = item.RegattaName }, null)" class="btn btn-sm btn-default" alt="Crw List"><i class="glyphicon glyphicon-user"></i></a>
-                                <a href="@Url.Action("Index", "Image",new { RegattaID = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
-                                <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
-                                <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="shop" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-glass"></i></a>
-                                <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>
+                                @*<a href="@Url.Action("Index", "RegattaCrew",new { RegattaID = item.Id, RegattaName = item.RegattaName }, null)" class="btn btn-sm btn-default" alt="Crw List"><i class="glyphicon glyphicon-user"></i></a>
+                                    <a href="@Url.Action("Index", "Image",new { RegattaID = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="shop" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-glass"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>*@
 
                             </td>
-                            <td>@item.RegattaYear</td>
-                            <td>@item.StartDate.Value.ToString("dd MMM yyyy")</td>
-                            <td>@item.Result</td>
-                            <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            <td>@item.Height</td>
+                            <td>@item.Width</td>
+                            <td>@item.InstallDate.Value.ToString("dd MMM yyyy")</td>
+                            <td>@item.IPAddress</td>
+                            <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }
                 </tbody>
@@ -123,24 +123,29 @@
                 </div>
                 <!-- End message Area-->
                 <div class="form-group">
-                    @Html.HiddenFor(m => m.Entity.Id)
-                    @Html.LabelFor(m => m.Entity.RegattaName, "Regatta")
-                    @Html.TextBoxFor(m => m.Entity.RegattaName, new { @class = "form-control" })
+                    @Html.HiddenFor(m => m.Entity.id)
+                    @Html.LabelFor(m => m.Entity.Model, "Model")
+                    @Html.TextBoxFor(m => m.Entity.Model, new { @class = "form-control" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.RegattaYear, "Year")
-                    @Html.TextBoxFor(m => m.Entity.RegattaYear, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Entity.Height, "Height")
+                    @Html.TextBoxFor(m => m.Entity.Height, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Width, "Width")
+                    @Html.TextBoxFor(m => m.Entity.Width, new { @class = "form-control" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.StartDate, "Start Date")
-                    @Html.Kendo().DatePickerFor(m => m.Entity.StartDate).Format("d/MM/yyyy").HtmlAttributes(new { @class = "form-control" })
-                </div>
+                    @Html.LabelFor(m => m.Entity.InstallDate, "Install Date")
+                    @*@Html.Kendo().DatePickerFor(m => m.Entity.InstallDate).Format("d/MM/yyyy").HtmlAttributes(new { @class = "form-control" })*@
+                    @Html.TextBoxFor(m => m.Entity.InstallDate, new { @class = "form-control" })
+               </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Result, "Result")
-                    @Html.TextBoxFor(m => m.Entity.Result, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Entity.IPAddress, "Ip Address")
+                    @Html.TextBoxFor(m => m.Entity.IPAddress, new { @class = "form-control" })
                 </div>
 
             </div>

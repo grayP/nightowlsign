@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nightowlsign.data.Models.Signs;
 
 namespace nightowlsign.data.Models.Signs
 {
@@ -25,7 +26,7 @@ namespace nightowlsign.data.Models.Signs
             public List<Sign> Get(Sign Entity)
             {
                 List<Sign> ret = new List<Sign>();
-                using (NightOwlSignDB db = new NightOwlSignDB())
+                using (nightowlsign_Entities db = new nightowlsign_Entities())
                 {
                     ret = db.Signs.OrderBy(x => x.Model).ToList<Sign>();
 
@@ -43,7 +44,7 @@ namespace nightowlsign.data.Models.Signs
             public Sign Find(int signID)
             {
                 Sign ret = null;
-                using (NightOwlSignDB db = new NightOwlSignDB())
+                using (nightowlsign_Entities db = new nightowlsign_Entities())
                 {
                     ret = db.Signs.Find(signID);
                 }
@@ -75,7 +76,7 @@ namespace nightowlsign.data.Models.Signs
                 {
                     try
                     {
-                        using (NightOwlSignDB db = new NightOwlSignDB())
+                        using (nightowlsign_Entities db = new nightowlsign_Entities())
                         {
                             db.Signs.Attach(entity);
                             var modifiedSign = db.Entry(entity);
@@ -107,7 +108,7 @@ namespace nightowlsign.data.Models.Signs
                     ret = Validate(entity);
                     if (ret)
                     {
-                        using (NightOwlSignDB db = new NightOwlSignDB())
+                        using (nightowlsign_Entities db = new nightowlsign_Entities())
                         {
                             Sign NewSign = new Sign()
                             {
@@ -137,7 +138,7 @@ namespace nightowlsign.data.Models.Signs
             public bool Delete(Sign entity)
             {
                 bool ret = false;
-                using (NightOwlSignDB db = new NightOwlSignDB())
+                using (nightowlsign_Entities db = new nightowlsign_Entities())
                 {
                     db.Signs.Attach(entity);
                     db.Signs.Remove(entity);

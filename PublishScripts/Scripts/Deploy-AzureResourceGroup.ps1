@@ -9,8 +9,8 @@ Param(
   [string] $StorageAccountName,
   [string] $StorageAccountResourceGroupName, 
   [string] $StorageContainerName = $ResourceGroupName.ToLowerInvariant() + '-stageartifacts',
-  [string] $TemplateFile = '..\Templates\nightowlsigns.json',
-  [string] $TemplateParametersFile = '..\Templates\nightowlsigns.param.dev.json',
+  [string] $TemplateFile = '..\Templates\nightowlsign.json',
+  [string] $TemplateParametersFile = '..\Templates\nightowlsign.param.dev.json',
   [string] $ArtifactStagingDirectory = '..\bin\staging',
   [string] $DSCSourceFolder = '.'
 )

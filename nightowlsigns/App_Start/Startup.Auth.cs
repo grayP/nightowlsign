@@ -6,11 +6,11 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using nightowlsigns.Models;
+using nightowlsign.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Security;
 
-namespace nightowlsigns
+namespace nightowlsign
 {
     public partial class Startup
     {
@@ -121,7 +121,7 @@ namespace nightowlsigns
 
 
 
-        bool AddUserAndRole(nightowlsigns.Models.ApplicationDbContext context)
+        bool AddUserAndRole(nightowlsign.Models.ApplicationDbContext context)
         {
             IdentityResult ir;
             var rm = new RoleManager<IdentityRole>

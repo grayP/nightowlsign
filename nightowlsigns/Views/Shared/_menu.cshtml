@@ -1,15 +1,15 @@
 ﻿@if (User.IsInRole("Admin"))
 {
     <li>@Html.ActionLink("Home", "Index", "home")</li>
-    <li>@Html.ActionLink("Signs", "Index", "Sign")</li>
-    <li>@Html.ActionLink("Stores", "Index", "Store")</li>
+    <li>@Html.ActionLink("Signs", "Index", "Signs")</li>
+    <li>@Html.ActionLink("Stores", "Index", "Stores")</li>
 
 }
 else
 {
 
     <li>@Html.ActionLink("Home", "Index", "home")</li>
-    <li>@Html.ActionLink("Sign", "Index", "Sign")</li>
-    <li>@Html.ActionLink("Store", "Index", "Store")</li>
+    <li>@Html.ActionLink("Sign", "Index", "Signs")</li>
+    <li>@Html.ActionLink("Store", "Index", "Stores")</li>
 
 }

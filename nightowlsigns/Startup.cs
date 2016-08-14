@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(nightowlsigns.Startup))]
-namespace nightowlsigns
+[assembly: OwinStartupAttribute(typeof(nightowlsign.Startup))]
+namespace nightowlsign
 {
     public partial class Startup
     {

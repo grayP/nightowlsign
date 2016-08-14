@@ -6,123 +6,55 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using nightowlsign.data;
-using nightowlsigns.Models;
+using nightowlsign.data.Models.Signs;
+using nightowlsign.Models;
 
 namespace nightowlsign.Controllers
 {
     public class SignsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: Signs
+        // GET: 
+        [Authorize(Roles="Admin")]
         public ActionResult Index()
         {
-            return View(db.Signs.ToList());
-        }
+            SignViewModel svm = new SignViewModel();
+            svm.HandleRequest();
 
-        // GET: Signs/Details/5
-        public ActionResult Details(int? id)
+            return View(svm);
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult show()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Sign sign = db.Signs.Find(id);
-            if (sign == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sign);
+            SignViewModel svm = new SignViewModel();
+            svm.HandleRequest();
+
+            return View(svm);
         }
 
-        // GET: Signs/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Signs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Model,Width,Height,IPAddress,InstallDate,StoreId")] Sign sign)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index(SignViewModel svm)
         {
-            if (ModelState.IsValid)
+            svm.IsValid = ModelState.IsValid;
+            svm.HandleRequest();
+
+            if (svm.IsValid)
             {
-                db.Signs.Add(sign);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.Clear();
+            }
+            else
+            {
+                foreach (KeyValuePair<string, string> item in svm.ValidationErrors)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+
             }
 
-            return View(sign);
+            return View(svm);
         }
 
-        // GET: Signs/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Sign sign = db.Signs.Find(id);
-            if (sign == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sign);
-        }
-
-        // POST: Signs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Model,Width,Height,IPAddress,InstallDate,StoreId")] Sign sign)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sign).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(sign);
-        }
-
-        // GET: Signs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Sign sign = db.Signs.Find(id);
-            if (sign == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sign);
-        }
-
-        // POST: Signs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Sign sign = db.Signs.Find(id);
-            db.Signs.Remove(sign);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

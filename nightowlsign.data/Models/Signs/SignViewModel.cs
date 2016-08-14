@@ -20,7 +20,10 @@ namespace nightowlsign.data.Models.Signs
 
         protected override void Init()
         {
-            base.HandleRequest();
+            Signs = new List<Sign>();
+            SearchEntity= new Sign();
+            Entity= new Sign();
+            base.Init();
         }
 
         protected override void ResetSearch()

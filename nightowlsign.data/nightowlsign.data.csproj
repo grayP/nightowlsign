@@ -53,53 +53,39 @@
   <ItemGroup>
     <Compile Include="Models\Signs\SignManager.cs" />
     <Compile Include="Models\Signs\SignViewModel.cs" />
-    <Compile Include="nightownsign.Context.cs">
+    <Compile Include="NightOwlSignModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>nightownsign.Context.tt</DependentUpon>
+      <DependentUpon>NightOwlSignModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="nightownsign.cs">
+    <Compile Include="NightOwlSignModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>nightownsign.tt</DependentUpon>
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="nightownsign.Designer.cs">
+    <Compile Include="NightOwlSignModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>nightownsign.edmx</DependentUpon>
+      <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sign.cs">
-      <DependentUpon>nightownsign.tt</DependentUpon>
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="store.cs">
-      <DependentUpon>nightownsign.tt</DependentUpon>
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="nightownsign.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>nightownsign.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="nightownsign.edmx.diagram">
-      <DependentUpon>nightownsign.edmx</DependentUpon>
+    <EntityDeploy Include="NightOwlSignModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NightOwlSignModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="NightOwlSignModel.edmx.diagram">
+      <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="nightownsign.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>nightownsign.edmx</DependentUpon>
-      <LastGenOutput>nightownsign.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="nightownsign.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>nightownsign.edmx</DependentUpon>
-      <LastGenOutput>nightownsign.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -109,6 +95,18 @@
       <Project>{ce5565be-0f62-4d0d-911b-be540af7d2a3}</Project>
       <Name>basemodel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NightOwlSignModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
+      <LastGenOutput>NightOwlSignModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="NightOwlSignModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
+      <LastGenOutput>NightOwlSignModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
