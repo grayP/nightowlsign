@@ -1,9 +1,8 @@
-﻿using 
-@model nightowlsign.data.Models.Signs.SignViewModel
+﻿@model nightowlsign.data.Models.Stores.StoreViewModel
 
 
 @{
-    ViewBag.Title = "Signs";
+    ViewBag.Title = "Stores";
 }
 
 
@@ -22,14 +21,12 @@
     {
         <div class="panel panel-primary">
             <div class="panel-heading">
-
-
                 <div class="panel-title"></div>
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    @Html.LabelFor(m => m.SearchEntity.Model, "Model")
-                    @Html.TextBoxFor(m => m.SearchEntity.Model, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.SearchEntity.Name, "Name")
+                    @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control" })
                 </div>
 
             </div>
@@ -57,23 +54,22 @@
                 <thead>
                     <tr>
                         <th class="pdsa-action-button-column">Edit</th>
-                        <th>Model</th>
+                        <th>Name</th>
                         @*<th align="right">Action</th>*@
-                        <th>Height</th>
-                        <th>Width</th>
-                        <th>Install Date</th>
-                        <th>IP Address</th>
+                        <th>Address</th>
+                        <th>Manager</th>
+                        <th>Phone</th>
                         <th class="pdsa-action-button-column">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Signs)
+                    @foreach (var item in Model.Stores)
                     {
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td>
                                 
-                                @Html.ActionLink(@item.Model, "Index", "Display", new {id = item.id, Model = item.Model}, null)
+                                @Html.ActionLink(@item.Name, "Index", "Display", new {id = item.id, Model = item.Name}, null)
                             </td>
                             @*<td align="right">
                                 <a href="@Url.Action("Index", "RegattaCrew",new { RegattaID = item.Id, RegattaName = item.RegattaName }, null)" class="btn btn-sm btn-default" alt="Crw List"><i class="glyphicon glyphicon-user"></i></a>
@@ -83,10 +79,10 @@
                                     <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>
 
                             </td>*@
-                            <td>@item.Height</td>
-                            <td>@item.Width</td>
-                            <td>@item.InstallDate.Value.ToString("dd MMM yyyy")</td>
-                            <td>@item.IPAddress</td>
+                            <td>@item.Address @item.Suburb</td>
+                            <td>@item.Manager</td>
+                            <td>@item.Phone</td>
+                            
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }
@@ -99,7 +95,6 @@
 
     if (Model.IsDetailVisible)
     {
-
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h1 class="panel-title">
@@ -126,28 +121,35 @@
                 <!-- End message Area-->
                 <div class="form-group">
                     @Html.HiddenFor(m => m.Entity.id)
-                    @Html.LabelFor(m => m.Entity.Model, "Model")
-                    @Html.TextBoxFor(m => m.Entity.Model, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Entity.Name, "Store")
+                    @Html.TextBoxFor(m => m.Entity.Name, new { @class = "form-control" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Height, "Height")
-                    @Html.TextBoxFor(m => m.Entity.Height, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Entity.Address, "Address")
+                    @Html.TextBoxFor(m => m.Entity.Address, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Width, "Width")
-                    @Html.TextBoxFor(m => m.Entity.Width, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Entity.Suburb, "Suburb")
+                    @Html.TextBoxFor(m => m.Entity.Suburb, new { @class = "form-control" })
                 </div>
 
+  
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.InstallDate, "Install Date")
-                    @Html.Kendo().DatePickerFor(m => m.Entity.InstallDate).Format("d/MM/yyyy").HtmlAttributes(new { @class = "form-control" })
-                    @*@Html.TextBoxFor(m => m.Entity.InstallDate, new { @class = "form-control" })*@
-               </div>
-
+                    @Html.LabelFor(m => m.Entity.Manager, "Manager")
+                    @Html.TextBoxFor(m => m.Entity.Manager, new { @class = "form-control" })
+                </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.IPAddress, "Ip Address")
-                    @Html.TextBoxFor(m => m.Entity.IPAddress, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Entity.Phone, "Phone")
+                    @Html.TextBoxFor(m => m.Entity.Phone, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Latitude, "Latitude")
+                    @Html.TextBoxFor(m => m.Entity.Latitude, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Longitude, "Longitude")
+                    @Html.TextBoxFor(m => m.Entity.Longitude, new { @class = "form-control" })
                 </div>
 
             </div>

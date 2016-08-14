@@ -26,6 +26,7 @@ namespace nightowlsign.data
         }
     
         public virtual DbSet<Sign> Signs { get; set; }
-        public virtual DbSet<store> stores { get; set; }
+        public virtual DbSet<Store> Store { get; set; }
+        public virtual DbSet<StoreSign> StoreSigns { get; set; }
     }
 }

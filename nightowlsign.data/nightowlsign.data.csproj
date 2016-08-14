@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="Models\Signs\SignManager.cs" />
     <Compile Include="Models\Signs\SignViewModel.cs" />
+    <Compile Include="Models\Stores\StoreManager.cs" />
+    <Compile Include="Models\Stores\StoreViewModel.cs" />
     <Compile Include="NightOwlSignModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -72,7 +74,10 @@
     <Compile Include="Sign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="store.cs">
+    <Compile Include="Store.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

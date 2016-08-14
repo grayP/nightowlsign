@@ -17,7 +17,7 @@
           <Property Name="InstallDate" Type="datetime" />
           <Property Name="StoreId" Type="int" />
         </EntityType>
-        <EntityType Name="store">
+        <EntityType Name="Store">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -28,10 +28,24 @@
           <Property Name="State" Type="nchar" MaxLength="10" />
           <Property Name="Latitude" Type="decimal" Precision="10" Scale="4" />
           <Property Name="Longitude" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StoreSign">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreId" Type="int" />
+          <Property Name="SignId" Type="int" />
+          <Property Name="InstallDate" Type="datetime" />
+          <Property Name="DateUpdated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Sign" EntityType="Self.Sign" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="store" EntityType="Self.store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreSign" EntityType="Self.StoreSign" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -49,7 +63,12 @@
           <Property Name="InstallDate" Type="DateTime" Precision="3" />
           <Property Name="StoreId" Type="Int32" />
         </EntityType>
-        <EntityType Name="store">
+        <EntityContainer Name="nightowlsign_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Signs" EntityType="Self.Sign" />
+          <EntitySet Name="Store" EntityType="Models.Store" />
+          <EntitySet Name="StoreSigns" EntityType="Models.StoreSign" />
+        </EntityContainer>
+        <EntityType Name="Store">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -60,11 +79,20 @@
           <Property Name="State" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Latitude" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="Longitude" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="nightowlsign_Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Signs" EntityType="Self.Sign" />
-          <EntitySet Name="stores" EntityType="Self.store" />
-        </EntityContainer>
+        <EntityType Name="StoreSign">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreId" Type="Int32" />
+          <Property Name="SignId" Type="Int32" />
+          <Property Name="InstallDate" Type="DateTime" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -84,16 +112,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="stores">
-            <EntityTypeMapping TypeName="Models.store">
-              <MappingFragment StoreEntitySet="store">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <EntitySetMapping Name="Store">
+            <EntityTypeMapping TypeName="Models.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreSigns">
+            <EntityTypeMapping TypeName="Models.StoreSign">
+              <MappingFragment StoreEntitySet="StoreSign">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="InstallDate" ColumnName="InstallDate" />
+                <ScalarProperty Name="SignId" ColumnName="SignId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
