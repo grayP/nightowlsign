@@ -11,5 +11,6 @@ namespace nightowlsign.data.Models
         public bool selected { get; set; }
         public int Id { get; set; }
         public string Model { get; set; }
+        public string IpAddress  { get; set; }
     }
 }

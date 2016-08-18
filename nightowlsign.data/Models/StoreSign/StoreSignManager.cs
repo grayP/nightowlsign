@@ -63,7 +63,8 @@ namespace nightowlsign.data.Models
                 {
                     SignId = signSelect.Id,
                     StoreId = store.id,
-                    DateUpdated = DateTime.Now
+                    DateUpdated = DateTime.Now,
+                    IPAddress = signSelect.IpAddress
 
                 };
                 if (signSelect.selected)
@@ -93,7 +94,17 @@ namespace nightowlsign.data.Models
             return ret;
         }
 
-       
+        internal string GetIpAddress(int signId, int storeId)
+        {
+            StoreSign storeSign = null;
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                storeSign = db.StoreSigns.FirstOrDefault(x => x.StoreId == storeId && x.SignId == signId);
+            }
+            return (storeSign != null) ? storeSign.IPAddress : "";
+        }
+
+
     }
 
 }

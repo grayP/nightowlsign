@@ -45,6 +45,7 @@ namespace nightowlsign.data.Models
             foreach (SignSelect ss in AllSigns )
             {
                 ss.selected = sm.IsSelected(ss.Id, store.id);
+                ss.IpAddress = sm.GetIpAddress(ss.Id, store.id);
             }
         }
 

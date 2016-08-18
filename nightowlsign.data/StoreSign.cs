@@ -20,5 +20,6 @@ namespace nightowlsign.data
         public Nullable<System.DateTime> InstallDate { get; set; }
         public Nullable<System.DateTime> DateUpdated { get; set; }
         public string UpdatedBy { get; set; }
+        public string IPAddress { get; set; }
     }
 }

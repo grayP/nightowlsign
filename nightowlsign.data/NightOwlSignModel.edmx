@@ -22,10 +22,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="255" />
-          <Property Name="Address" Type="nchar" MaxLength="255" />
-          <Property Name="Suburb" Type="nchar" MaxLength="50" />
-          <Property Name="State" Type="nchar" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Suburb" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="10" />
           <Property Name="Latitude" Type="decimal" Precision="10" Scale="4" />
           <Property Name="Longitude" Type="decimal" Precision="10" Scale="4" />
           <Property Name="Manager" Type="nvarchar" MaxLength="50" />
@@ -41,6 +41,7 @@
           <Property Name="InstallDate" Type="datetime" />
           <Property Name="DateUpdated" Type="datetime" />
           <Property Name="UpdatedBy" Type="nchar" MaxLength="10" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="StoreSignIP">
           <Key>
@@ -83,10 +84,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
-          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Latitude" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="Longitude" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -102,6 +103,7 @@
           <Property Name="InstallDate" Type="DateTime" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StoreSignIP">
           <Key>
@@ -148,6 +150,7 @@
           <EntitySetMapping Name="StoreSigns">
             <EntityTypeMapping TypeName="Models.StoreSign">
               <MappingFragment StoreEntitySet="StoreSign">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="InstallDate" ColumnName="InstallDate" />
