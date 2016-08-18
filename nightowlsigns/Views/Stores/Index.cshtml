@@ -55,7 +55,7 @@
                     <tr>
                         <th class="pdsa-action-button-column">Edit</th>
                         <th>Name</th>
-                        @*<th align="right">Action</th>*@
+                        <th align="right">Action</th>
                         <th>Address</th>
                         <th>Manager</th>
                         <th>Phone</th>
@@ -71,14 +71,14 @@
                                 
                                 @Html.ActionLink(@item.Name, "Index", "Display", new {id = item.id, Model = item.Name}, null)
                             </td>
-                            @*<td align="right">
-                                <a href="@Url.Action("Index", "RegattaCrew",new { RegattaID = item.Id, RegattaName = item.RegattaName }, null)" class="btn btn-sm btn-default" alt="Crw List"><i class="glyphicon glyphicon-user"></i></a>
-                                    <a href="@Url.Action("Index", "Image",new { RegattaID = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
-                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
-                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="shop" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-glass"></i></a>
-                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>
+                            <td align="right">
+                                <a href="@Url.Action("Index", "StoreSign", new {storeId = item.id, storeName = item.Name})" class="btn btn-sm btn-default" alt="Sign List"><i class="glyphicon glyphicon-picture"></i></a>
+                                    @*<a href="@Url.Action("Index", "Image",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="shop" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-glass"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>*@
 
-                            </td>*@
+                            </td>
                             <td>@item.Address @item.Suburb</td>
                             <td>@item.Manager</td>
                             <td>@item.Phone</td>

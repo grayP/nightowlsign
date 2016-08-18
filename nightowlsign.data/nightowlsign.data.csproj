@@ -53,6 +53,11 @@
   <ItemGroup>
     <Compile Include="Models\Signs\SignManager.cs" />
     <Compile Include="Models\Signs\SignViewModel.cs" />
+    <Compile Include="Models\StoreSignIP\StoreSignIPManager.cs" />
+    <Compile Include="Models\StoreSignIP\StoreSignIPViewModel.cs" />
+    <Compile Include="Models\StoreSign\SignSelect.cs" />
+    <Compile Include="Models\StoreSign\StoreSignManager.cs" />
+    <Compile Include="Models\StoreSign\StoreSignViewModel.cs" />
     <Compile Include="Models\Stores\StoreManager.cs" />
     <Compile Include="Models\Stores\StoreViewModel.cs" />
     <Compile Include="NightOwlSignModel.Context.cs">
@@ -78,6 +83,9 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StoreSign.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreSignIP.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

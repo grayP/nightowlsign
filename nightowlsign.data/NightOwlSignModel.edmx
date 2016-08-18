@@ -42,10 +42,19 @@
           <Property Name="DateUpdated" Type="datetime" />
           <Property Name="UpdatedBy" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="StoreSignIP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreSignId" Type="int" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Sign" EntityType="Self.Sign" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreSign" EntityType="Self.StoreSign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreSignIP" EntityType="Self.StoreSignIP" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -67,6 +76,7 @@
           <EntitySet Name="Signs" EntityType="Self.Sign" />
           <EntitySet Name="Store" EntityType="Models.Store" />
           <EntitySet Name="StoreSigns" EntityType="Models.StoreSign" />
+          <EntitySet Name="StoreSignIPs" EntityType="Models.StoreSignIP" />
         </EntityContainer>
         <EntityType Name="Store">
           <Key>
@@ -92,6 +102,14 @@
           <Property Name="InstallDate" Type="DateTime" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StoreSignIP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreSignId" Type="Int32" />
+          <Property Name="IPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -135,6 +153,15 @@
                 <ScalarProperty Name="InstallDate" ColumnName="InstallDate" />
                 <ScalarProperty Name="SignId" ColumnName="SignId" />
                 <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreSignIPs">
+            <EntityTypeMapping TypeName="Models.StoreSignIP">
+              <MappingFragment StoreEntitySet="StoreSignIP">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="StoreSignId" ColumnName="StoreSignId" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

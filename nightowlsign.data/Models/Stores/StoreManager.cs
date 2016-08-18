@@ -103,14 +103,14 @@ namespace nightowlsign.data.Models.Stores
                     {
                         Store newStore = new Store()
                         {
-                            Name = entity.Name,
+                            Name = entity.Name.Trim(),
                             Address = entity.Address,
                             Suburb = entity.Suburb,
                             State = entity.State,
-                            Latitude = entity.Latitude,
-                            Longitude = entity.Longitude,
                             Manager = entity.Manager,
-                            Phone = entity.Phone
+                            Phone = entity.Phone ,
+                            Latitude = entity.Latitude,
+                            Longitude = entity.Longitude
                         };
 
                         db.Store.Add(newStore);

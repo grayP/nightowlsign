@@ -61,8 +61,8 @@
                         @*<th align="right">Action</th>*@
                         <th>Height</th>
                         <th>Width</th>
-                        <th>Install Date</th>
-                        <th>IP Address</th>
+                        @*<th>Install Date</th>
+                        <th>IP Address</th>*@
                         <th class="pdsa-action-button-column">Delete</th>
                     </tr>
                 </thead>
@@ -76,17 +76,17 @@
                                 @Html.ActionLink(@item.Model, "Index", "Display", new {id = item.id, Model = item.Model}, null)
                             </td>
                             @*<td align="right">
-                                <a href="@Url.Action("Index", "RegattaCrew",new { RegattaID = item.Id, RegattaName = item.RegattaName }, null)" class="btn btn-sm btn-default" alt="Crw List"><i class="glyphicon glyphicon-user"></i></a>
-                                    <a href="@Url.Action("Index", "Image",new { RegattaID = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
-                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
-                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="shop" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-glass"></i></a>
-                                    <a href="@Url.Action("Index", "Document",new { RegattaID = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>
+                                <a href="@Url.Action("Index", "RegattaCrew",new { storeId = item.Id, storeName = item.storeName }, null)" class="btn btn-sm btn-default" alt="Crw List"><i class="glyphicon glyphicon-user"></i></a>
+                                    <a href="@Url.Action("Index", "Image",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="shop" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-glass"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>
 
                             </td>*@
                             <td>@item.Height</td>
                             <td>@item.Width</td>
-                            <td>@item.InstallDate.Value.ToString("dd MMM yyyy")</td>
-                            <td>@item.IPAddress</td>
+                            @*<td>@item.InstallDate.Value.ToString("dd MMM yyyy")</td>
+                            <td>@item.IPAddress</td>*@
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }
@@ -139,16 +139,16 @@
                     @Html.TextBoxFor(m => m.Entity.Width, new { @class = "form-control" })
                 </div>
 
-                <div class="form-group">
+                @*<div class="form-group">
                     @Html.LabelFor(m => m.Entity.InstallDate, "Install Date")
                     @Html.Kendo().DatePickerFor(m => m.Entity.InstallDate).Format("d/MM/yyyy").HtmlAttributes(new { @class = "form-control" })
-                    @*@Html.TextBoxFor(m => m.Entity.InstallDate, new { @class = "form-control" })*@
-               </div>
+                    @Html.TextBoxFor(m => m.Entity.InstallDate, new { @class = "form-control" })
+               @*</div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.Entity.IPAddress, "Ip Address")
                     @Html.TextBoxFor(m => m.Entity.IPAddress, new { @class = "form-control" })
-                </div>
+                </div>*@
 
             </div>
             <div class="panel-footer">

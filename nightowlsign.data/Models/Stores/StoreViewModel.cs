@@ -23,6 +23,10 @@ namespace nightowlsign.data.Models.Stores
             Entity = new Store();
             base.Init();
         }
+        public override void HandleRequest()
+        {
+            base.HandleRequest();
+        }
         protected override void ResetSearch()
         {
             SearchEntity = new Store();

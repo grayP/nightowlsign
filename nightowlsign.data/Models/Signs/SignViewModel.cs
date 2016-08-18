@@ -25,7 +25,10 @@ namespace nightowlsign.data.Models.Signs
             Entity= new Sign();
             base.Init();
         }
-
+        public override void HandleRequest()
+        {
+            base.HandleRequest();
+        }
         protected override void ResetSearch()
         {
             SearchEntity = new Sign();

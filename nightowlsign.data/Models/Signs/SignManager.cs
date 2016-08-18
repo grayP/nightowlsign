@@ -58,10 +58,10 @@ namespace nightowlsign.data.Models.Signs
 
                 if (!string.IsNullOrEmpty(entity.Model))
                 {
-                    if (entity.Model.ToLower() == entity.Model)
-                    {
-                        ValidationErrors.Add(new KeyValuePair<string, string>("Sign Name", "Sign Name cannot be all lower case"));
-                    }
+                    //if (entity.Model.ToLower() == entity.Model)
+                    //{
+                    //    ValidationErrors.Add(new KeyValuePair<string, string>("Sign Name", "Sign Name cannot be all lower case"));
+                    //}
 
                 }
                 return (ValidationErrors.Count == 0);
