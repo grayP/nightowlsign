@@ -41,8 +41,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,10 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Image.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Image\ImageManager.cs" />
+    <Compile Include="Models\Image\ImageViewModel.cs" />
+    <Compile Include="Models\Schedule\ScheduleManager.cs" />
+    <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\Signs\SignManager.cs" />
     <Compile Include="Models\Signs\SignViewModel.cs" />
-    <Compile Include="Models\StoreSignIP\StoreSignIPManager.cs" />
-    <Compile Include="Models\StoreSignIP\StoreSignIPViewModel.cs" />
     <Compile Include="Models\StoreSign\SignSelect.cs" />
     <Compile Include="Models\StoreSign\StoreSignManager.cs" />
     <Compile Include="Models\StoreSign\StoreSignViewModel.cs" />
@@ -76,6 +83,9 @@
       <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Sign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
@@ -83,9 +93,6 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StoreSign.cs">
-      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreSignIP.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -104,6 +111,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\boxer\ImageStorage\ImageStorage.csproj">
+      <Project>{79e031a3-0046-4c41-bdd8-2b124e691076}</Project>
+      <Name>ImageStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\basemodel\basemodel.csproj">
       <Project>{ce5565be-0f62-4d0d-911b-be540af7d2a3}</Project>
       <Name>basemodel</Name>

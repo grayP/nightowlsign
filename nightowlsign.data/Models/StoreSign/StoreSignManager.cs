@@ -38,7 +38,7 @@ namespace nightowlsign.data.Models
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
                 var query = (from s in db.Signs
-                             select new SignSelect() {Id =s.id, Model = s.Model });
+                             select new SignSelect() {Id =s.id, Model = s.Model});
                 return query.ToList();
             }
         }
@@ -64,6 +64,7 @@ namespace nightowlsign.data.Models
                     SignId = signSelect.Id,
                     StoreId = store.id,
                     DateUpdated = DateTime.Now,
+                    InstallDate = DateTime.Now,
                     IPAddress = signSelect.IpAddress
 
                 };
@@ -74,12 +75,16 @@ namespace nightowlsign.data.Models
                 }
                 else
                 {
-                    if (db.StoreSigns.Any(x => x.SignId == storeSign.SignId && x.StoreId == storeSign.StoreId))
+                    List<StoreSign> storeSigns =
+                        db.StoreSigns.Where(
+                            x => x.SignId.Value == storeSign.SignId.Value && x.StoreId == storeSign.StoreId).ToList();
+                    foreach (StoreSign sign in storeSigns)
                     {
-                        db.StoreSigns.Attach(storeSign);
-                        db.StoreSigns.Remove(storeSign);
+                        db.StoreSigns.Attach(sign);
+                        db.StoreSigns.Remove(sign);
                         db.SaveChanges();
                     }
+                   
                 }
             }
         }

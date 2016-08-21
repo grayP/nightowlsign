@@ -444,7 +444,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\SignsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\StoreSignController.cs" />
@@ -1093,8 +1095,8 @@
     <Content Include="Views\Shared\_menu.cshtml" />
     <Content Include="Views\Signs\Index.cshtml" />
     <Content Include="Views\Signs\show.cshtml" />
-    <Content Include="Views\Stores\Index.cshtml" />
-    <Content Include="Views\Stores\show.cshtml" />
+    <Content Include="Views\Schedules\Index.cshtml" />
+    <Content Include="Views\Schedules\show.cshtml" />
     <Content Include="Scripts\kendo\jquery.min.map" />
     <Content Include="Scripts\kendo\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo\kendo.angular.min.js.map" />
@@ -1218,6 +1220,10 @@
     <Content Include="Scripts\kendo\kendo.window.min.js.map" />
     <Content Include="Views\StoreSign\Index.cshtml" />
     <Content Include="Views\StoreSign\EditorTemplates\SignSelect.cshtml" />
+    <Content Include="Views\Image\Index.cshtml" />
+    <Content Include="Views\Image\Show.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Schedule\show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
@@ -1232,6 +1238,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\boxer\ImageStorage\ImageStorage.csproj">
+      <Project>{79e031a3-0046-4c41-bdd8-2b124e691076}</Project>
+      <Name>ImageStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\basemodel\basemodel.csproj">
       <Project>{ce5565be-0f62-4d0d-911b-be540af7d2a3}</Project>
       <Name>basemodel</Name>

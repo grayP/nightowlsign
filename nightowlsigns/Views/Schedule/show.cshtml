@@ -1,7 +1,7 @@
-﻿@model nightowlsign.data.Models.Stores.StoreViewModel
+﻿@model nightowlsign.data.Models.Signs.SignViewModel
 
 @{.
-    ViewBag.Title = "Stores";
+    ViewBag.Title = "Signs";
 }
 
 
@@ -12,21 +12,20 @@
         <table class="table table-condensed table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Store</th>
+                    <th>Model</th>
                     <th align="right">Action</th>
-                    <th>Address</th>
-                    <th>Suburb</th>
-                    <th>Manager</th>
-                    <th>Phone</th>
-
+                    <th>Height</th>
+                    <th>Width</th>
+                    <th>Ip Address</th>
+                    <th>Install Date</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Stores)
+                @foreach (var item in Model.Signs)
                 {
                     <tr>
                         <td>
-                            @Html.ActionLink(@item.Name, "Index", "Display", new { Id = item.id, Model = item.Model }, null)
+                            @Html.ActionLink(@item.Model, "Index", "Display", new { Id = item.id, Model = item.Model }, null)
                         </td>
                         <td align="right">
                         @*//    <a href="@Url.Action("show", "Image",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
@@ -34,10 +33,10 @@
 
                         </td>
                       
-                        <td>@item.Address</td>
-                        <td>@item.Suburb</td>
-                        <td>@item.Manager</td>
-                        <td>@item.Phone</td>
+                        <td>@item.Height</td>
+                        <td>@item.Width</td>
+                        <td>@item.IPAddress</td>
+                        <td>@item.InstallDate.Value.ToString("dd MMM yyyy")</td>
                     </tr>
                 }
             </tbody>

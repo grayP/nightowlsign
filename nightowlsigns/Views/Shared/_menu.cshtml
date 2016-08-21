@@ -1,8 +1,10 @@
 ﻿@if (User.IsInRole("Admin"))
 {
                     <li>@Html.ActionLink("Home", "Index", "home")</li>
-                    <li>@Html.ActionLink("Signs", "Index", "Signs")</li>
+                    <li>@Html.ActionLink("Images", "Index", "Image")</li>
+                    <li>@Html.ActionLink("Schedules", "Index", "Schedules")</li>
                     <li>@Html.ActionLink("Stores", "Index", "Stores")</li>
+                    <li>@Html.ActionLink("Signs", "Index", "Signs")</li>
 
 }
 else

@@ -5,6 +5,27 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThumbNailSmall" Type="image" />
+          <Property Name="ThumbNailLarge" Type="image" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="Caption" Type="nvarchar(max)" />
+          <Property Name="DateTaken" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Valid" Type="bit" />
+        </EntityType>
         <EntityType Name="Sign">
           <Key>
             <PropertyRef Name="id" />
@@ -43,19 +64,12 @@
           <Property Name="UpdatedBy" Type="nchar" MaxLength="10" />
           <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="StoreSignIP">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StoreSignId" Type="int" />
-          <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
-        </EntityType>
         <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sign" EntityType="Self.Sign" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreSign" EntityType="Self.StoreSign" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StoreSignIP" EntityType="Self.StoreSignIP" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -77,7 +91,8 @@
           <EntitySet Name="Signs" EntityType="Self.Sign" />
           <EntitySet Name="Store" EntityType="Models.Store" />
           <EntitySet Name="StoreSigns" EntityType="Models.StoreSign" />
-          <EntitySet Name="StoreSignIPs" EntityType="Models.StoreSignIP" />
+          <EntitySet Name="Images" EntityType="Models.Image" />
+          <EntitySet Name="Schedules" EntityType="Models.Schedule" />
         </EntityContainer>
         <EntityType Name="Store">
           <Key>
@@ -105,13 +120,26 @@
           <Property Name="UpdatedBy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="IPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="StoreSignIP">
+        <EntityType Name="Image">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StoreSignId" Type="Int32" />
-          <Property Name="IPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThumbNailSmall" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ThumbNailLarge" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Caption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateTaken" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Valid" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -160,12 +188,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StoreSignIPs">
-            <EntityTypeMapping TypeName="Models.StoreSignIP">
-              <MappingFragment StoreEntitySet="StoreSignIP">
-                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
-                <ScalarProperty Name="StoreSignId" ColumnName="StoreSignId" />
-                <ScalarProperty Name="id" ColumnName="id" />
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="Models.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="DateTaken" ColumnName="DateTaken" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ThumbNailLarge" ColumnName="ThumbNailLarge" />
+                <ScalarProperty Name="ThumbNailSmall" ColumnName="ThumbNailSmall" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="Models.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="Valid" ColumnName="Valid" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
