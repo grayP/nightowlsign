@@ -56,6 +56,7 @@
     <Compile Include="Image.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MetaData\MetaData.cs" />
     <Compile Include="Models\Image\ImageManager.cs" />
     <Compile Include="Models\Image\ImageViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleManager.cs" />
@@ -82,6 +83,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PartialClasses\PartialClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>

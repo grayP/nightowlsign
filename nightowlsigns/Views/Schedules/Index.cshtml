@@ -80,8 +80,8 @@
 
                             </td>
                            
-                            <td>@item.StartDate</td>
-                            <td>@item.EndDate</td>
+                            <td>@item.StartDate.Value.ToString("dd MMM yyyy")</td>
+                            <td>@item.EndDate.Value.ToString("dd MMM yyyy")</td>
                             <td>@item.Valid</td>
                             
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
@@ -125,15 +125,17 @@
                     @Html.LabelFor(m => m.Entity.Name, "Schedule")
                     @Html.TextBoxFor(m => m.Entity.Name, new { @class = "form-control" })
                 </div>
-
+                
                 <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.StartDate, "StartDate")
-                    @Html.TextBoxFor(m => m.Entity.StartDate, new { @class = "form-control datepicker", placeholder = "Enter End Date date here..." })
-                    @Html.ValidationMessageFor(m => m.Entity.StartDate)
+                    @Html.EditorFor(m => m.Entity.StartDate,  new { @class = "form-control datePicker", placeholder = "Enter Start Date date here..." })
+                    @*@Html.TextBoxFor(m => m.Entity.StartDate, "{0:dd MMM yyyy}", new { @class = "form-control datePicker", placeholder = "Enter Start Date date here..." })*@
+  @Html.ValidationMessageFor(m => m.Entity.StartDate)
+                    
                 </div>
                 <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.EndDate, "EndDate")
-                    @Html.TextBoxFor(m => m.Entity.EndDate, new { @class = "form-control datepicker", placeholder = "Enter End Date date here..." })
+                    @Html.TextBoxFor(m => m.Entity.EndDate, "{0:dd MMM yyyy}", new { @class = "form-control datePicker", placeholder = "Enter End Date date here..." })
                     @Html.ValidationMessageFor(m => m.Entity.EndDate)
                 </div>
             
@@ -164,7 +166,33 @@
 {
  <script type="text/javascript">
     $(function () { // will trigger when the document is ready
-       $('.datepicker').datepicker(); //Initialise any date pickers
+        $(".datePicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd MMM yyyy',
+            yearRange: "2013:2070"
+        });
+    });
+
+
+
+
+    $(function () {
+        $.validator.addMethod('date',
+        function (value, element) {
+            if (this.optional(element)) {
+                return true;
+            }
+            var ok = true;
+            try {
+                $.datepicker.parseDate('dd mmm yyyy', value);
+            }
+            catch (err) {
+                ok = false;
+            }
+            return ok;
+        });
+        $(".datefield").datepicker({ dateFormat: 'dd mmm yyyy', changeYear: true });
     });
 </script>
 
