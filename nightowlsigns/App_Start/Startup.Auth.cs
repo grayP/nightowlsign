@@ -66,8 +66,8 @@ namespace nightowlsign
             //    ClientId = "",
             //    ClientSecret = ""
             //});
-            //AddUserAndRole(ApplicationDbContext.Create());
-         //   SeedUsers();
+          //AddUserAndRole(ApplicationDbContext.Create());
+         //  SeedUsers();
          //   var success = AddUserAndRole(ApplicationDbContext.Create());
          //    Security security= new Security();
 //security.AddUserToRole(ApplicationDbContext.Create(),"gray.pritchett@optusnet.com.au", "Admin");
@@ -105,8 +105,8 @@ namespace nightowlsign
             if (!Roles.RoleExists(_role))
                 Roles.CreateRole(_role);
 
-            if (!Roles.IsUserInRole("gray.pritchett@optusnet.com.au", _role))
-                Roles.AddUserToRole("gray.pritchett@optusnet.com.au", _role);
+            if (!Roles.IsUserInRole("sam@elitetiger.com", _role))
+                Roles.AddUserToRole("sam@elitetiger.com", _role);
             if (!Roles.IsUserInRole("ctyquin@goa.com.au", _role))
                 Roles.AddUserToRole("ctyquin@goa.com.au", _role);
             if (!Roles.IsUserInRole("GClarke@bne.mcgees.com.au", _role))
@@ -134,8 +134,8 @@ namespace nightowlsign
 
             var user = new ApplicationUser()
             {
-                UserName = "gray.pritchett@optusnet.com.au",
-                Email = "gray.pritchett@optusnet.com.au"
+                UserName = "sam@elitetiger.com",
+                Email = "sam@elitetiger.com"
             };
 
             ir = um.Create(user, "P@ssword1");
@@ -145,8 +145,8 @@ namespace nightowlsign
 
             user = new ApplicationUser()
             {
-                UserName = "ctyquin@goa.com.au",
-                Email = "ctyquin@goa.com.au",
+                UserName = "sam@elitetiger.com",
+                Email = "sam@elitetiger.com",
             };
 
             ir = um.Create(user, "P@ssword1");

@@ -41,11 +41,18 @@ namespace nightowlsign.data.Models
 
             StoreSignManager sm = new StoreSignManager();
             storesign = sm.Get(store);
-            AllSigns = sm.GetAllSigns();
+            AllSigns = sm.GetAllSigns(store.id);
             foreach (SignSelect ss in AllSigns )
             {
-                ss.selected = sm.IsSelected(ss.Id, store.id);
-                ss.IpAddress = sm.GetIpAddress(ss.Id, store.id);
+               StoreSign selected=sm.GetValues(ss);
+                if (selected != null)
+                {
+                    ss.selected = true;
+                    ss.Id = selected.id;
+                    ss.IpAddress = selected.IPAddress;
+                }
+                //ss.selected = sm.IsSelected(ss.SignId, store.id);
+                //ss.IpAddress = sm.GetIpAddress(ss.SignId, store.id);
             }
         }
 

@@ -1,0 +1,21 @@
+﻿@model nightowlsign.data.Models.ImageSelect
+
+@{
+
+    string imageBase64 = Convert.ToBase64String(Model.ThumbNail);
+    string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+}
+
+<tr>
+    <td class="centrealign">
+        @Html.CheckBoxFor(m => m.Selected)
+    </td>
+    <td>
+        <img class="img-responsive myThumbnail" src="@imageSrc" style="height: auto;">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.ImageId)
+        @Html.HiddenFor(m => m.ScheduleId)
+        @Html.HiddenFor(m => m.Name)
+        @Html.DisplayFor(m => m.Name)
+    </td>
+</tr>

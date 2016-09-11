@@ -44,9 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kendo.Mvc">
-      <HintPath>..\packages\Kendo.Mvc.2016.2.630-Preview\lib\net451\Kendo.Mvc.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Kendo.Mvc, Version=2016.2.630.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\KENDOUIMVC\2015.3.1111.545.Trial\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.1.0.0\lib\net451\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
@@ -447,6 +447,8 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\ScheduleImageController.cs" />
+    <Compile Include="Controllers\ScheduleStoreController.cs" />
     <Compile Include="Controllers\SignsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\StoreSignController.cs" />
@@ -1222,8 +1224,12 @@
     <Content Include="Views\StoreSign\EditorTemplates\SignSelect.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Image\Show.cshtml" />
-    <Content Include="Views\Schedule\Index.cshtml" />
-    <Content Include="Views\Schedule\show.cshtml" />
+    <Content Include="Views\Stores\Index.cshtml" />
+    <Content Include="Views\Stores\show.cshtml" />
+    <Content Include="Views\ScheduleStore\EditorTemplates\StoreSelect.cshtml" />
+    <Content Include="Views\ScheduleStore\Index.cshtml" />
+    <Content Include="Views\ScheduleImage\EditorTemplates\ImageSelect.cshtml" />
+    <Content Include="Views\ScheduleImage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
@@ -1238,10 +1244,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\boxer\ImageStorage\ImageStorage.csproj">
-      <Project>{79e031a3-0046-4c41-bdd8-2b124e691076}</Project>
-      <Name>ImageStorage</Name>
-    </ProjectReference>
     <ProjectReference Include="..\basemodel\basemodel.csproj">
       <Project>{ce5565be-0f62-4d0d-911b-be540af7d2a3}</Project>
       <Name>basemodel</Name>
@@ -1249,6 +1251,10 @@
     <ProjectReference Include="..\nightowlsign.data\nightowlsign.data.csproj">
       <Project>{e006fac5-fa56-4a62-921c-2e0cc550ae5f}</Project>
       <Name>nightowlsign.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nightowlsign.ImageStorage\ImageStorage.csproj">
+      <Project>{a31b574d-0beb-4b15-b608-271ff545d81e}</Project>
+      <Name>ImageStorage</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

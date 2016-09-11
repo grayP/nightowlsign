@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ImageStorage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace nightowlsign.ImageService
+namespace ImageStorage
 
 {
         public interface IImageService

@@ -1,11 +1,8 @@
-﻿using 
-@model nightowlsign.data.Models.Signs.SignViewModel
-
+﻿@model nightowlsign.data.Models.Signs.SignViewModel
 
 @{
     ViewBag.Title = "Signs";
 }
-
 
 @using (Html.BeginForm())
 {
@@ -14,16 +11,11 @@
     @Html.HiddenFor(m => m.EventArgument)
     @Html.HiddenFor(m => m.Mode)
     <!-- End Hidden form-->
-
-
-
     <!-- Start Search Area -->
     if (Model.IsSearchVisible)
     {
         <div class="panel panel-primary">
             <div class="panel-heading">
-
-
                 <div class="panel-title"></div>
             </div>
             <div class="panel-body">
@@ -44,7 +36,6 @@
                     <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add
                 </button>
             </div>
-
         </div>
     }
     <!-- End Search Area-->

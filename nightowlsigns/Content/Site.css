@@ -71,7 +71,13 @@ body {
     padding:2px;
     opacity:.9;
 }
-
+/* Tables */
+.rightalign {
+    text-align: right;
+}
+.centrealign {
+    text-align: center;
+}
 /* left column on layout page */
 .leftaside      {}
 

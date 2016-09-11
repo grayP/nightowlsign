@@ -4,99 +4,96 @@
     ViewBag.Title = "NightOwl Sign System Images";
 }
 
-    @if (Model.IsListAreaVisible)
-    {
-        <div class="row">
-            <div class="col-lg-12">
+@if (Model.IsListAreaVisible)
+{
+    <div class="row">
+        <div class="col-lg-12">
 
-                <div class="alert">
-                    @Model.Message
-                    <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add" data-pdsa-val="@Model.searchRegattaID">
-                        <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add photo to gallery
-                    </button>
+            <div class="alert">
+                @Model.Message
+                <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add" data-pdsa-val="@Model.searchRegattaID">
+                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add photo to gallery
+                </button>
+            </div>
+
+        </div>
+        @foreach (var item in Model.Images)
+        {
+
+            string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
+            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+
+                <a class="thumbnail" href="@item.ImageURL">
+                    <img class="img-responsive myThumbnail" src="@imageSrc" style="height: auto;" alt="@item.Caption">
+                </a>
+                <div class="desc">
+                    <div class="desc_content">@item.Caption</div>
+
+                    <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
                 </div>
 
             </div>
-            @foreach (var item in Model.Images)
-            {
-
-                string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
-                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-
-                    <a class="thumbnail" href="@item.ImageURL">
-                        <img class="img-responsive myThumbnail" src="@imageSrc" style="height: auto;" alt="@item.Caption">
 
 
-
-                    </a>
-                    <div class="desc">
-                        <div class="desc_content">@item.Caption</div>
-
-                        <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
-                    </div>
-
-                </div>
-
-
-            }
-        </div>
-    }
-    <!-- End List Area-->
-    @using (Html.BeginForm("Index", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
+        }
+    </div>
+}
+<!-- End List Area-->
+@using (Html.BeginForm("Index", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     <!-- Start Hidden form -->
-        @Html.HiddenFor(m => m.EventCommand)
-        @Html.HiddenFor(m => m.EventArgument)
-        @Html.HiddenFor(m => m.Mode)
-        @Html.HiddenFor(m => m.imageToUpload.Url)
+    @Html.HiddenFor(m => m.EventCommand)
+    @Html.HiddenFor(m => m.EventArgument)
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.imageToUpload.Url)
 
-        if (Model.IsDetailVisible)
-        {
+    if (Model.IsDetailVisible)
+    {
 
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h1 class="panel-title">
-                        Images
-                    </h1>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">
+                    Images
+                </h1>
+            </div>
+            <div class="panel-body">
+                <!-- Begin Message Area -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        @if (!Model.IsValid)
+                        {
+                            <div class="alert alert-danger alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dissmiss="alert">
+                                    <span aria-hidden="true">&times</span>
+
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                @Html.ValidationSummary(false)
+                            </div>
+                        }
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <!-- Begin Message Area -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @if (!Model.IsValid)
-                            {
-                                <div class="alert alert-danger alert-dismissable" role="alert">
-                                    <button type="button" class="close" data-dissmiss="alert">
-                                        <span aria-hidden="true">&times</span>
-
-                                        <span class="sr-only">Close</span>
-                                    </button>
-                                    @Html.ValidationSummary(false)
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <!-- End message Area-->
-                    @if (@Model.CommandString != "save")
+                <!-- End message Area-->
+                @if (@Model.CommandString != "save")
                     {
-                        <div class="form-group">
-                            <input capture="camera" accept="image/*" id="cameraInput" type="file" name="file" style="max-width: 800px; width: 500px;" class="btn btn-primary" />
-                        </div>
-                    }
-
-                    <div class="well well-sm">
-                        <img src="@Model.imageToUpload.Url" id="fotoImg" />
-                    </div>
-
                     <div class="form-group">
-                        @Html.HiddenFor(m => m.imageToUpload.Id)
-                        @Html.LabelFor(m => m.imageToUpload.Caption, "Photo Caption")
-                        @Html.TextBoxFor(m => m.imageToUpload.Caption, new { @class = "form-control" , style = "max-width:500px;" })
+                        <input capture="camera" accept="image/*" id="cameraInput" type="file" name="file" style="max-width: 800px; width: 500px;" class="btn btn-primary" />
                     </div>
-                    @*<div class="form-group">
+                }
+
+                <div class="well well-sm">
+                    <img src="@Model.imageToUpload.Url" id="fotoImg" />
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(m => m.imageToUpload.Id)
+                    @Html.LabelFor(m => m.imageToUpload.Caption, "Photo Caption")
+                    @Html.TextBoxFor(m => m.imageToUpload.Caption, new { @class = "form-control", style = "max-width:500px;" })
+                </div>
+                @*<div class="form-group">
                         @Html.LabelFor(m => m.imageToUpload.RegattaID, "Regatta")
                         @Html.DropDownListFor(m => m.imageToUpload.RegattaID, new SelectList(Model.RegattaList, "RegattaID", "Regatta", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
 
@@ -104,36 +101,36 @@
 
 
 
-                </div>
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-sm-12">
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-12">
 
-                            @if (!Model.imageToUpload.Status)
-                            {
-                                <button class="btn btn-primary" id="btnSave" data-pdsa-action="@Model.CommandString">
-                                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
-                                </button>
-
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Add Another Image", "Index", "Image", null, new { @class = "btn btn-primary" })
-                            }
-
-
-                            <button class="btn btn-primary" formnovalidate id="btnCancel" data-pdsa-action="cancel">
-                                <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
+                        @if (!Model.imageToUpload.Status)
+                        {
+                            <button class="btn btn-primary" id="btnSave" data-pdsa-action="@Model.CommandString">
+                                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
                             </button>
-                        </div>
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Add Another Image", "Index", "Image", null, new { @class = "btn btn-primary" })
+                        }
+
+
+                        <button class="btn btn-primary" formnovalidate id="btnCancel" data-pdsa-action="cancel">
+                            <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
+                        </button>
                     </div>
                 </div>
             </div>
-
-        }
-
+        </div>
 
     }
+
+
+}
 
 
 

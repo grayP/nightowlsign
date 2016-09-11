@@ -59,6 +59,12 @@
     <Compile Include="MetaData\MetaData.cs" />
     <Compile Include="Models\Image\ImageManager.cs" />
     <Compile Include="Models\Image\ImageViewModel.cs" />
+    <Compile Include="Models\ScheduleImage\ScheduleImageManager.cs" />
+    <Compile Include="Models\ScheduleImage\ScheduleImageViewModel.cs" />
+    <Compile Include="Models\ScheduleImage\ImageSelect.cs" />
+    <Compile Include="Models\ScheduleStore\StoreSelect.cs" />
+    <Compile Include="Models\ScheduleStore\ScheduleStoreManager.cs" />
+    <Compile Include="Models\ScheduleStore\ScheduleStoreViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleManager.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
     <Compile Include="Models\Signs\SignManager.cs" />
@@ -86,6 +92,12 @@
     <Compile Include="PartialClasses\PartialClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleImage.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleStore.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Sign.cs">

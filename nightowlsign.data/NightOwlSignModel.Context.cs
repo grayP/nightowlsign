@@ -30,5 +30,7 @@ namespace nightowlsign.data
         public virtual DbSet<StoreSign> StoreSigns { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
+        public virtual DbSet<ScheduleStore> ScheduleStores { get; set; }
+        public virtual DbSet<ScheduleImage> ScheduleImages { get; set; }
     }
 }

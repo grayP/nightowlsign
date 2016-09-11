@@ -33,12 +33,12 @@ namespace nightowlsign.data.Models
 
         }
 
-        public List<SignSelect> GetAllSigns()
+        public List<SignSelect> GetAllSigns(int storeID)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
                 var query = (from s in db.Signs
-                             select new SignSelect() {Id =s.id, Model = s.Model});
+                             select new SignSelect() {SignId = s.id, Model= s.Model, StoreId = storeID});
                 return query.ToList();
             }
         }
@@ -61,7 +61,8 @@ namespace nightowlsign.data.Models
             {
                StoreSign storeSign = new StoreSign()
                 {
-                    SignId = signSelect.Id,
+                    id = signSelect.Id,
+                    SignId = signSelect.SignId,
                     StoreId = store.id,
                     DateUpdated = DateTime.Now,
                     InstallDate = DateTime.Now,
@@ -75,7 +76,7 @@ namespace nightowlsign.data.Models
                 }
                 else
                 {
-                    List<StoreSign> storeSigns =
+                        List<StoreSign> storeSigns =
                         db.StoreSigns.Where(
                             x => x.SignId.Value == storeSign.SignId.Value && x.StoreId == storeSign.StoreId).ToList();
                     foreach (StoreSign sign in storeSigns)
@@ -89,7 +90,7 @@ namespace nightowlsign.data.Models
             }
         }
 
-        internal bool IsSelected(int signId, int storeId)
+        internal bool IsSelected(int? signId, int storeId)
         {
             bool ret = false;
             using (nightowlsign_Entities db = new nightowlsign_Entities())
@@ -99,7 +100,18 @@ namespace nightowlsign.data.Models
             return ret;
         }
 
-        internal string GetIpAddress(int signId, int storeId)
+        internal StoreSign GetValues(SignSelect signSelect)
+        {
+            StoreSign storeSign = null;
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                storeSign =
+                    db.StoreSigns.FirstOrDefault(x => x.StoreId == signSelect.StoreId && x.SignId == signSelect.SignId);
+            }
+            return storeSign;
+        }
+
+        internal string GetIpAddress(int? signId, int storeId)
         {
             StoreSign storeSign = null;
             using (nightowlsign_Entities db = new nightowlsign_Entities())

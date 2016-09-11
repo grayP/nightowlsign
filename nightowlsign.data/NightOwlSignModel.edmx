@@ -26,6 +26,22 @@
           <Property Name="EndDate" Type="datetime" />
           <Property Name="Valid" Type="bit" />
         </EntityType>
+        <EntityType Name="ScheduleImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScheduleID" Type="int" />
+          <Property Name="ImageID" Type="int" />
+        </EntityType>
+        <EntityType Name="ScheduleStore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScheduleID" Type="int" />
+          <Property Name="StoreId" Type="int" />
+        </EntityType>
         <EntityType Name="Sign">
           <Key>
             <PropertyRef Name="id" />
@@ -67,6 +83,8 @@
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleImage" EntityType="Self.ScheduleImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleStore" EntityType="Self.ScheduleStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sign" EntityType="Self.Sign" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreSign" EntityType="Self.StoreSign" Schema="dbo" store:Type="Tables" />
@@ -93,6 +111,8 @@
           <EntitySet Name="StoreSigns" EntityType="Models.StoreSign" />
           <EntitySet Name="Images" EntityType="Models.Image" />
           <EntitySet Name="Schedules" EntityType="Models.Schedule" />
+          <EntitySet Name="ScheduleStores" EntityType="Models.ScheduleStore" />
+          <EntitySet Name="ScheduleImages" EntityType="Models.ScheduleImage" />
         </EntityContainer>
         <EntityType Name="Store">
           <Key>
@@ -140,6 +160,22 @@
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Valid" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ScheduleStore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScheduleID" Type="Int32" />
+          <Property Name="StoreId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ScheduleImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScheduleID" Type="Int32" />
+          <Property Name="ImageID" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -207,6 +243,24 @@
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleStores">
+            <EntityTypeMapping TypeName="Models.ScheduleStore">
+              <MappingFragment StoreEntitySet="ScheduleStore">
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleImages">
+            <EntityTypeMapping TypeName="Models.ScheduleImage">
+              <MappingFragment StoreEntitySet="ScheduleImage">
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -1,0 +1,180 @@
+﻿@model nightowlsign.data.Models.Stores.StoreViewModel
+
+
+@{
+    ViewBag.Title = "Stores";
+}
+
+
+@using (Html.BeginForm())
+{
+    <!-- Start Hidden form -->
+    @Html.HiddenFor(m => m.EventCommand)
+    @Html.HiddenFor(m => m.EventArgument)
+    @Html.HiddenFor(m => m.Mode)
+    <!-- End Hidden form-->
+
+
+
+    <!-- Start Search Area -->
+    if (Model.IsSearchVisible)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title"></div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SearchEntity.Name, "Name")
+                    @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control" })
+                </div>
+
+            </div>
+            <div class="panel-footer">
+                <button id="btnSearch" class="btn btn-sm btn-primary" data-pdsa-action="search">
+                    <i class="glyphicon glyphicon-search"></i>&nbsp;Search
+                </button>
+                <button id="btnReset" class="btn btn-sm btn-primary" data-pdsa-action="resetsearch">
+                    <i class="glyphicon glyphicon-share-alt"></i>&nbsp; Reset
+                </button>
+                <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add">
+                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add
+                </button>
+            </div>
+
+        </div>
+    }
+    <!-- End Search Area-->
+
+     <!-- Start List Area  -->
+    if (Model.IsListAreaVisible)
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="pdsa-action-button-column">Edit</th>
+                        <th>Name</th>
+                        <th class="centrealign">Action</th>
+                        <th>Address</th>
+                        <th>Manager</th>
+                        <th>Phone</th>
+                        <th class="pdsa-action-button-column">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Stores)
+                    {
+                        <tr>
+                            <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
+                            <td>
+                                
+                                @Html.ActionLink(@item.Name, "Index", "Display", new {id = item.id, Model = item.Name}, null)
+                            </td>
+                            <td class="centrealign">
+                                <a href="@Url.Action("Index", "StoreSign", new {storeId = item.id, storeName = item.Name})" class="btn btn-sm btn-default" alt="Sign List"><i class="glyphicon glyphicon-film"></i></a>
+                                    @*<a href="@Url.Action("Index", "Image",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="shop" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-glass"></i></a>
+                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>*@
+
+                            </td>
+                            <td>@item.Address @item.Suburb</td>
+                            <td>@item.Manager</td>
+                            <td>@item.Phone</td>
+                            
+                            <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    <!-- End List Area-->
+    <!--Detail Area-->
+
+    if (Model.IsDetailVisible)
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">
+                    Regatta
+                </h1>
+            </div>
+            <div class="panel-body">
+                <!-- Begin Message Area -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        @if (!Model.IsValid)
+                        {
+                            <div class="alert alert-danger alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dissmiss="alert">
+                                    <span aria-hidden="true">&times</span>
+
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                @Html.ValidationSummary(false)
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- End message Area-->
+                <div class="form-group">
+                    @Html.HiddenFor(m => m.Entity.id)
+                    @Html.LabelFor(m => m.Entity.Name, "Store")
+                    @Html.TextBoxFor(m => m.Entity.Name, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Address, "Address")
+                    @Html.TextBoxFor(m => m.Entity.Address, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Suburb, "Suburb")
+                    @Html.TextBoxFor(m => m.Entity.Suburb, new { @class = "form-control" })
+                </div>
+
+  
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Manager, "Manager")
+                    @Html.TextBoxFor(m => m.Entity.Manager, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Phone, "Phone")
+                    @Html.TextBoxFor(m => m.Entity.Phone, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Latitude, "Latitude")
+                    @Html.TextBoxFor(m => m.Entity.Latitude, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Entity.Longitude, "Longitude")
+                    @Html.TextBoxFor(m => m.Entity.Longitude, new { @class = "form-control" })
+                </div>
+
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary" id="btnSave" data-pdsa-action="save">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
+                        </button>
+                        <button class="btn btn-primary" formnovalidate id="btnCancel" data-pdsa-action="cancel">
+                            <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    <!-- End Detail Area-->
+
+}
+
+@section scripts
+{
+
+
+}
