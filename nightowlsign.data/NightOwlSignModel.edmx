@@ -80,6 +80,11 @@
           <Property Name="UpdatedBy" Type="nchar" MaxLength="10" />
           <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'nightowlsign.dbo.ListCurrentImages' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ListCurrentImages">
+          <Property Name="Image" Type="image" />
+        </EntityType>-->
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
