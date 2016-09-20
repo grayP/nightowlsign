@@ -15,6 +15,7 @@
           <Property Name="ImageURL" Type="nvarchar" MaxLength="255" />
           <Property Name="Caption" Type="nvarchar(max)" />
           <Property Name="DateTaken" Type="datetime" />
+          <Property Name="SignSize" Type="int" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -80,11 +81,6 @@
           <Property Name="UpdatedBy" Type="nchar" MaxLength="10" />
           <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'nightowlsign.dbo.ListCurrentImages' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ListCurrentImages">
-          <Property Name="Image" Type="image" />
-        </EntityType>-->
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
@@ -155,6 +151,7 @@ warning 6013: The table/view 'nightowlsign.dbo.ListCurrentImages' does not have 
           <Property Name="ImageURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Caption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateTaken" Type="DateTime" Precision="3" />
+          <Property Name="SignSize" Type="Int32" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -232,6 +229,7 @@ warning 6013: The table/view 'nightowlsign.dbo.ListCurrentImages' does not have 
           <EntitySetMapping Name="Images">
             <EntityTypeMapping TypeName="Models.Image">
               <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="SignSize" ColumnName="SignSize" />
                 <ScalarProperty Name="DateTaken" ColumnName="DateTaken" />
                 <ScalarProperty Name="Caption" ColumnName="Caption" />
                 <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />

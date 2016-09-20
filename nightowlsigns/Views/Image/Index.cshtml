@@ -11,8 +11,8 @@
 
             <div class="alert">
                 @Model.Message
-                <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add" data-pdsa-val="@Model.searchRegattaID">
-                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add photo to gallery
+                <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add" data-pdsa-val="@Model.searchSignID">
+                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add image to image gallery
                 </button>
             </div>
 
@@ -34,10 +34,7 @@
                     <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
                     <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
                 </div>
-
             </div>
-
-
         }
     </div>
 }
@@ -52,8 +49,7 @@
 
     if (Model.IsDetailVisible)
     {
-
-        <div class="panel panel-primary">
+       <div class="panel panel-primary">
             <div class="panel-heading">
                 <h1 class="panel-title">
                     Images
@@ -90,18 +86,15 @@
 
                 <div class="form-group">
                     @Html.HiddenFor(m => m.imageToUpload.Id)
-                    @Html.LabelFor(m => m.imageToUpload.Caption, "Photo Caption")
+                    @Html.LabelFor(m => m.imageToUpload.Caption, "Image Description")
                     @Html.TextBoxFor(m => m.imageToUpload.Caption, new { @class = "form-control", style = "max-width:500px;" })
                 </div>
-                @*<div class="form-group">
-                        @Html.LabelFor(m => m.imageToUpload.RegattaID, "Regatta")
-                        @Html.DropDownListFor(m => m.imageToUpload.RegattaID, new SelectList(Model.RegattaList, "RegattaID", "Regatta", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
+                <div class="form-group">
+                        @Html.LabelFor(m => m.imageToUpload.SignSize, "Sign")
+                        @Html.DropDownListFor(m => m.imageToUpload.SignSize, new SelectList(Model.SignList, "SignID", "Model", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
 
-                    </div>*@
-
-
-
-            </div>
+                </div>
+           </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-12">

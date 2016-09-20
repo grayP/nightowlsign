@@ -20,7 +20,7 @@ namespace nightowlsign.Controllers
         public ActionResult Index(int? scheduleId)
         {
 
-            imv.searchRegattaID = scheduleId ?? 0;
+            imv.searchSignID = scheduleId ?? 0;
             imv.HandleRequest();
             imv.imageToUpload.Status = false;
 
@@ -30,7 +30,7 @@ namespace nightowlsign.Controllers
         public ActionResult show(int? RegattaID)
         {
 
-            imv.searchRegattaID = RegattaID ?? 0;
+           // imv.searchRegattaID = RegattaID ?? 0;
             imv.HandleRequest();
             imv.imageToUpload.Status = false;
 

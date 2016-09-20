@@ -14,9 +14,7 @@ namespace nightowlsign.data.Models.Images
 
         public ImageViewModel() : base()
         {
-           
-
-        }
+       }
 
         //Properties--------------
         public List<Image> Images { get; set; }
@@ -28,29 +26,27 @@ namespace nightowlsign.data.Models.Images
 
         public string CommandString { get; set; }
         public string Message { get; set; }
-        public int? searchRegattaID { get; set; }
-        //public IList<RegattaSelectItem> RegattaList
-        //{
-        //    get
-        //    {
-        //        using (nightowlsign_Entities db = new nightowlsign_Entities())
-        //        {
-        //            var SelectList = (from item in
-        //                              db.Store.OrderBy(x => x.id)
-        //                              select new RegattaSelectItem()
-        //                              {
-        //                                  RegattaID = item.Id,
-        //                                  Regatta = item.RegattaName
-        //                              }).ToList();
+        public int? searchSignID { get; set; }
+        public IList<SignSelect> SignList
+        {
+            get
+            {
+                using (nightowlsign_Entities db = new nightowlsign_Entities())
+                {
+                    var selectList = (from item in
+                                       db.Signs.OrderBy(x => x.Model)
+                                      select new SignSelect()
+                                      {
+                                          Id = item.id,
+                                          Model = item.Model
+                                      }).ToList();
 
-        //            return SelectList;
-        //        }
+                    return selectList;
+                }
 
-        //    }
-
-
-        //    set { }
-        //}
+            }
+            set { }
+        }
 
 
 
@@ -63,9 +59,9 @@ namespace nightowlsign.data.Models.Images
             Entity = new Image();
             Entity.DateTaken = DateTime.Now;
 
-            
+
             imageToUpload = new UploadedImage();
-           // imageToUpload.RegattaID = 0;
+            //imageToUpload. = 0;
             imageToUpload.DateTaken = DateTime.Now;
             base.Init();
         }
@@ -80,7 +76,7 @@ namespace nightowlsign.data.Models.Images
                     break;
 
                 case "add":
-                   CommandString = "insert";
+                    CommandString = "insert";
                     break;
                 default:
                     CommandString = "";
@@ -105,7 +101,7 @@ namespace nightowlsign.data.Models.Images
         protected override void Get()
         {
             ImageManager cmm = new ImageManager();
-            SearchEntity.Caption = SearchEntity.Caption ;
+            SearchEntity.Caption = SearchEntity.Caption;
 
             Images = cmm.Get(SearchEntity);
         }
@@ -171,10 +167,10 @@ namespace nightowlsign.data.Models.Images
                     Message = "Error uploading image";
                 };
             }
-          
+
             ValidationErrors = imm.ValidationErrors;
             return success;
-           
+
         }
 
         protected override void Delete()

@@ -37,7 +37,7 @@ namespace nightowlsign.data.Models
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                var query = (from s in db.Signs
+                var query = (from s in db.Signs orderby s.Model
                              select new SignSelect() {SignId = s.id, Model= s.Model, StoreId = storeID});
                 return query.ToList();
             }

@@ -6,9 +6,6 @@ using System.Web;
 
 namespace ImageStorage
 {
-
-
-
     public class UploadedImage
     {
         public UploadedImage()
@@ -25,14 +22,7 @@ namespace ImageStorage
         public string Url { get; set; }
         public List<Thumbnail> Thumbnails { get; set; }
         public DateTime DateTaken { get; set; }
-
-        // 
-
-
-
-
-
-
+        public int SignSize { get; set; }
     }
     public class Thumbnail
     {
