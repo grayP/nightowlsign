@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace imageprocessor.CP5200
 {
-    public class CP5200External
+    public class Cp5200External
     {
         public IntPtr Pointer { get; set; }
-        public ushort ScreenWidth { get; set; }
-        public ushort ScreenHeight { get; set; }
-        public ushort DisplayTime { get; set; }
-        public byte ColourMode { get; set; }
+        private readonly ushort _screenWidth;
+        private readonly ushort _screenHeight;
+        private readonly ushort _displayTime;
+        private readonly byte _colourMode;
 
         private int _playWindowNumber;
 
@@ -32,19 +32,19 @@ namespace imageprocessor.CP5200
         [DllImport("CP5200.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern int CP5200_Program_AddPlayWindow(IntPtr hobj, ushort x, ushort y, ushort cx, ushort cy);
 
-        public CP5200External(ushort width, ushort height, ushort displayTime,byte colourMode)
+        public Cp5200External(ushort width, ushort height, ushort displayTime, byte colourMode)
         {
-            ScreenWidth = width;
-            ScreenHeight = height;
-            DisplayTime = displayTime;
-            ColourMode = colourMode;
+            _screenWidth = width;
+            _screenHeight = height;
+            _displayTime = displayTime;
+            _colourMode = colourMode;
         }
 
-        public bool Program_Create( )
+        public bool Program_Create()
         {
             try
             {
-                Pointer = CP5200_Program_Create(ScreenWidth, ScreenHeight, ColourMode);
+                Pointer = CP5200_Program_Create(_screenWidth, _screenHeight, _colourMode);
                 return true;
             }
             catch (Exception ex)
@@ -52,12 +52,12 @@ namespace imageprocessor.CP5200
                 Debug.WriteLine(ex.InnerException.ToString());
                 return false;
             }
-            
+
         }
 
         public void SetPlayWindowNumber()
         {
-            if (Program_SetProperty(DisplayTime , (uint)Set_Program_Property.ProgramPlayTime) > 0)
+            if (Program_SetProperty(_displayTime, (uint)Set_Program_Property.ProgramPlayTime) > 0)
             {
                 _playWindowNumber = Program_AddPlayWindow();
             }
@@ -78,7 +78,7 @@ namespace imageprocessor.CP5200
 
         public int Program_AddPlayWindow()
         {
-            return CP5200_Program_AddPlayWindow(Pointer, 0, 0,ScreenWidth, ScreenHeight);
+            return CP5200_Program_AddPlayWindow(Pointer, 0, 0, _screenWidth, _screenHeight);
         }
     }
 }
