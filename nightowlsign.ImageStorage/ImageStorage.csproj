@@ -85,10 +85,6 @@
       <Project>{ce5565be-0f62-4d0d-911b-be540af7d2a3}</Project>
       <Name>basemodel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\nightowlsign.data\nightowlsign.data.csproj">
-      <Project>{E006FAC5-FA56-4A62-921C-2E0CC550AE5F}</Project>
-      <Name>nightowlsign.data</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

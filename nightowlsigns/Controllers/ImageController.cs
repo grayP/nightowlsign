@@ -27,10 +27,10 @@ namespace nightowlsign.Controllers
             return View(imv);
         }
         [AllowAnonymous]
-        public ActionResult show(int? RegattaID)
+        public ActionResult show(int? SignId)
         {
 
-           // imv.searchRegattaID = RegattaID ?? 0;
+            imv.searchSignID = SignId ?? 0;
             imv.HandleRequest();
             imv.imageToUpload.Status = false;
 
@@ -47,6 +47,8 @@ namespace nightowlsign.Controllers
             if (Request != null)
             {
                 iVm.file = Request.Files["file"];
+
+                
             }
 
             iVm.HandleRequest();

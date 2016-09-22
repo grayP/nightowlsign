@@ -88,7 +88,8 @@ namespace nightowlsign.data.Models.Images
                     {
                         Id = imageToUpDate.Id,
                         Caption = imageToUpDate.Caption,
-                        DateTaken = imageToUpDate.DateTaken
+                        DateTaken = imageToUpDate.DateTaken,
+                        SignSize=imageToUpDate.SignId
                     };
                     using (nightowlsign_Entities db = new nightowlsign_Entities())
                     {
@@ -96,6 +97,7 @@ namespace nightowlsign.data.Models.Images
                         var modifiedImage = db.Entry(entity);
                         modifiedImage.Property(e => e.Caption).IsModified = true;
                         modifiedImage.Property(e => e.DateTaken).IsModified = true;
+                        modifiedImage.Property(e => e.SignSize).IsModified = true;
                         // modifiedImage.Property(e => e.ImageURL).IsModified = true;
                         db.SaveChanges();
                         ret = true;
@@ -123,6 +125,7 @@ namespace nightowlsign.data.Models.Images
                 entity.ThumbNailLarge = ImageService.ImageToByte(imageToUpload.Thumbnails[1].bitmap);
                 entity.ThumbNailSmall = ImageService.ImageToByte(imageToUpload.Thumbnails[0].bitmap);
                 entity.DateTaken = imageToUpload.DateTaken;
+                entity.SignSize = imageToUpload.SignId;
                 ret = Validate(entity);
                 if (ret)
                 {

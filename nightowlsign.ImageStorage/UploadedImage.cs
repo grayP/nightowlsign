@@ -22,7 +22,7 @@ namespace ImageStorage
         public string Url { get; set; }
         public List<Thumbnail> Thumbnails { get; set; }
         public DateTime DateTaken { get; set; }
-        public int SignSize { get; set; }
+        public int SignId { get; set; }
     }
     public class Thumbnail
     {

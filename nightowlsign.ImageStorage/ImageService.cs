@@ -42,29 +42,19 @@ namespace ImageStorage
             {
                 byte[] fileBytes = new byte[file.ContentLength];
                 await file.InputStream.ReadAsync(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-
-
-
                 Image _image = Image.FromStream(file.InputStream);
-
-
 
                 try
                 {
                     PropertyItem propItem = _image.GetPropertyItem(36867);
                     string dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
                     imageDate = DateTime.Parse(dateTaken);
-                }
+                 }
                 catch (Exception)
                 {
                     imageDate = DateTime.Now;
-
                 }
-
-
                 CreateThumbnails(_image, oldImage);
-
-
 
 
 
@@ -79,7 +69,9 @@ namespace ImageStorage
                     Url = String.Format("{0}/{1}",
                     _imageRootPath,
                     file.FileName.ToString()),
-                    DateTaken = imageDate
+                    DateTaken = imageDate,
+                    SignId = oldImage.SignId
+
                 };
             }
             return null;

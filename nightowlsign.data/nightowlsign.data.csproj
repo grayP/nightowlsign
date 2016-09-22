@@ -125,13 +125,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\boxer\ImageStorage\ImageStorage.csproj">
-      <Project>{79e031a3-0046-4c41-bdd8-2b124e691076}</Project>
-      <Name>ImageStorage</Name>
-    </ProjectReference>
     <ProjectReference Include="..\basemodel\basemodel.csproj">
       <Project>{ce5565be-0f62-4d0d-911b-be540af7d2a3}</Project>
       <Name>basemodel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nightowlsign.ImageStorage\ImageStorage.csproj">
+      <Project>{a31b574d-0beb-4b15-b608-271ff545d81e}</Project>
+      <Name>ImageStorage</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

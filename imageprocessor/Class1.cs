@@ -33,11 +33,7 @@ namespace imageprocessor
             ushort screenHeight = 66;
             ushort PeriodToShowImage = 6; //Seconds
             byte colourMode = 0x77;
-
-
             CP5200External cp5200 = new CP5200External(screenWidth, screenHeight,PeriodToShowImage, colourMode);
-
-
 
             if (cp5200.Program_Create())
             {

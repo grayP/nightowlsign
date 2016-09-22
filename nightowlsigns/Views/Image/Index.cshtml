@@ -90,8 +90,8 @@
                     @Html.TextBoxFor(m => m.imageToUpload.Caption, new { @class = "form-control", style = "max-width:500px;" })
                 </div>
                 <div class="form-group">
-                        @Html.LabelFor(m => m.imageToUpload.SignSize, "Sign")
-                        @Html.DropDownListFor(m => m.imageToUpload.SignSize, new SelectList(Model.SignList, "SignID", "Model", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
+                        @Html.LabelFor(m => m.imageToUpload.SignId, "Sign")
+                        @Html.DropDownListFor(m => m.imageToUpload.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
 
                 </div>
            </div>
@@ -104,14 +104,11 @@
                             <button class="btn btn-primary" id="btnSave" data-pdsa-action="@Model.CommandString">
                                 <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
                             </button>
-
                         }
                         else
                         {
                             @Html.ActionLink("Add Another Image", "Index", "Image", null, new { @class = "btn btn-primary" })
                         }
-
-
                         <button class="btn btn-primary" formnovalidate id="btnCancel" data-pdsa-action="cancel">
                             <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
                         </button>

@@ -37,7 +37,7 @@ namespace nightowlsign.data.Models.Images
                                        db.Signs.OrderBy(x => x.Model)
                                       select new SignSelect()
                                       {
-                                          Id = item.id,
+                                          SignId = item.id,
                                           Model = item.Model
                                       }).ToList();
 
@@ -61,7 +61,7 @@ namespace nightowlsign.data.Models.Images
 
 
             imageToUpload = new UploadedImage();
-            //imageToUpload. = 0;
+            
             imageToUpload.DateTaken = DateTime.Now;
             base.Init();
         }
@@ -102,6 +102,7 @@ namespace nightowlsign.data.Models.Images
         {
             ImageManager cmm = new ImageManager();
             SearchEntity.Caption = SearchEntity.Caption;
+           
 
             Images = cmm.Get(SearchEntity);
         }
@@ -115,7 +116,9 @@ namespace nightowlsign.data.Models.Images
             imageToUpload.Id = Entity.Id;
             imageToUpload.Url = Entity.ImageURL;
             imageToUpload.DateTaken = Entity.DateTaken ?? DateTime.Now;
-
+            imageToUpload.SignId = Entity.SignSize ?? 0;
+           
+           
             base.Edit();
         }
 
@@ -125,7 +128,7 @@ namespace nightowlsign.data.Models.Images
             //Entity = new Image();
             //Entity.Caption = "";
             imageToUpload = new UploadedImage();
-            //imageToUpload.RegattaID = Convert.ToInt32(EventArgument ?? "0");
+            imageToUpload.SignId = Entity.SignSize ?? 0;
             base.Add();
         }
 
