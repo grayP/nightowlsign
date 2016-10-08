@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "Stores";
+    ViewBag.Title = "Schedules";
 }
 
 
@@ -58,7 +58,6 @@
                         <th class="centrealign">Action</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-                        <th>Valid</th>
                         <th class="pdsa-action-button-column">Delete</th>
                     </tr>
                 </thead>
@@ -72,18 +71,12 @@
                                 @*@Html.ActionLink(@item.Name, "Index", "Display", new { id = item.Id, Model = item.Name }, null)*@
                             </td>
                             <td class="centrealign">
-                                <a href="@Url.Action("Index", "ScheduleStore", new {scheduleId = item.Id, scheduleName = item.Name})" data-toggle="tooltip" title="Stores to apply the schedule to." class="btn btn-sm btn-default" alt="Sign List"><i class="fa fa-building-o" aria-hidden="true"></i></a>
+                                <a href="@Url.Action("Index", "ScheduleSign", new {scheduleId = item.Id, scheduleName = item.Name})" data-toggle="tooltip" title="Signs to apply the schedule to." class="btn btn-sm btn-default" alt="Sign List"><i class="fa fa-television" aria-hidden="true"></i></a>
                                 <a href="@Url.Action("Index", "ScheduleImage",new {scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Images to apply to the schedule." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="glyphicon glyphicon-camera"></i></a>
-                                @* <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
-                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="shop" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-glass"></i></a>
-                                    <a href="@Url.Action("Index", "Document",new { storeId = item.Id, DocumentType="list" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-wrench"></i></a>*@
-
-                            </td>
-
+                                <a href="@Url.Action("Index", "SendToSign",new {scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Create PlayBil file and send Images down to Sign." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="fa fa-upload" aria-hidden="true"></i></a>
+                           </td>
                             <td>@item.StartDate.Value.ToString("dd MMM yyyy")</td>
                             <td>@item.EndDate.Value.ToString("dd MMM yyyy")</td>
-                            <td>@item.Valid</td>
-
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }

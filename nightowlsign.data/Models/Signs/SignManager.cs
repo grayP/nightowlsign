@@ -29,7 +29,6 @@ namespace nightowlsign.data.Models.Signs
                 using (nightowlsign_Entities db = new nightowlsign_Entities())
                 {
                     ret = db.Signs.OrderBy(x => x.Model).ToList<Sign>();
-
                 }
 
                 if (!string.IsNullOrEmpty(Entity.Model))

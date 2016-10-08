@@ -1,4 +1,4 @@
-﻿using imageprocessor.Enums;
+﻿using ImageProcessor.Enums;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace imageprocessor.CP5200
+namespace ImageProcessor.CP5200
 {
     public class Cp5200External
     {

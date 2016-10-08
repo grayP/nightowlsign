@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace imageprocessor.Enums
+namespace ImageProcessor.Enums
 {   public enum Set_Program_Property : uint
         {
             RepititionPlayTimes = 1,

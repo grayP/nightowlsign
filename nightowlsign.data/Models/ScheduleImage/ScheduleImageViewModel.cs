@@ -37,7 +37,7 @@ namespace nightowlsign.data.Models
 
             ScheduleImageManager sm = new ScheduleImageManager();
          //   schedulestore = sm.Get(Schedule);
-            AllImages = sm.GetAllImages();
+            AllImages = sm.GetAllImages(Schedule.Id);
             foreach (ImageSelect imageSelect in AllImages)
             {
                 imageSelect.ScheduleId = Schedule.Id;

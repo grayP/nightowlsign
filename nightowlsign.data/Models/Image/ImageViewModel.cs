@@ -6,15 +6,17 @@ using System.Web;
 
 using System.Threading.Tasks;
 using System.Linq;
+using nightowlsign.data.Models.Signs;
 
 namespace nightowlsign.data.Models.Images
 {
     public class ImageViewModel : BaseModel.ViewModelBase
     {
-
+        private readonly SignManager signManager;
         public ImageViewModel() : base()
         {
-       }
+            signManager = new SignManager();
+        }
 
         //Properties--------------
         public List<Image> Images { get; set; }
@@ -61,7 +63,7 @@ namespace nightowlsign.data.Models.Images
 
 
             imageToUpload = new UploadedImage();
-            
+
             imageToUpload.DateTaken = DateTime.Now;
             base.Init();
         }
@@ -102,8 +104,6 @@ namespace nightowlsign.data.Models.Images
         {
             ImageManager cmm = new ImageManager();
             SearchEntity.Caption = SearchEntity.Caption;
-           
-
             Images = cmm.Get(SearchEntity);
         }
 
@@ -117,18 +117,17 @@ namespace nightowlsign.data.Models.Images
             imageToUpload.Url = Entity.ImageURL;
             imageToUpload.DateTaken = Entity.DateTaken ?? DateTime.Now;
             imageToUpload.SignId = Entity.SignSize ?? 0;
-           
-           
+
             base.Edit();
         }
 
         protected override void Add()
         {
             IsValid = true;
-            //Entity = new Image();
-            //Entity.Caption = "";
-            imageToUpload = new UploadedImage();
-            imageToUpload.SignId = Entity.SignSize ?? 0;
+            imageToUpload = new UploadedImage
+            {
+                SignId = Entity.SignSize ?? 0
+            };
             base.Add();
         }
 
@@ -140,13 +139,9 @@ namespace nightowlsign.data.Models.Images
                 Mode = "List";
                 Message = "Image successfully updated";
             }
-
             ValidationErrors = imm.ValidationErrors;
-
             base.Save();
-
         }
-
 
         protected async Task<Boolean> Insert()
         {
@@ -156,6 +151,12 @@ namespace nightowlsign.data.Models.Images
             {
                 ImageService _imageService = new ImageService();
 
+                if (imageToUpload.SignId >0)
+                {
+                    var sign = signManager.Find(imageToUpload.SignId);
+                    imageToUpload.SignHeight = sign.Height ?? 96;
+                    imageToUpload.SignWidth = sign.Width ?? 244;
+                }
                 imageToUpload = await _imageService.CreateUploadedImage(file, imageToUpload);
                 await _imageService.AddImageToBlobStorageAsync(imageToUpload);
 
@@ -170,10 +171,8 @@ namespace nightowlsign.data.Models.Images
                     Message = "Error uploading image";
                 };
             }
-
             ValidationErrors = imm.ValidationErrors;
             return success;
-
         }
 
         protected override void Delete()

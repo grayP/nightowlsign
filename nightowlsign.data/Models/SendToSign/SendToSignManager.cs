@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using nightowlsign.data;
+using nightowlsign.data.Models.Signs;
 
 
 namespace nightowlsign.data.Models
 {
-    public class ScheduleImageManager
+    public class SendToSignManager
     {
-        public ScheduleImageManager()
+        public SendToSignManager()
         {
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
@@ -29,21 +30,58 @@ namespace nightowlsign.data.Models
 
         }
 
-        public List<ImageSelect> GetAllImages(int scheduleId)
+        public List<ImageSelect> GetImagesForThisSchedule(int scheduleId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
                 var query = (from s in db.Images
-                             join ss in db.ScheduleSigns.Where(ss=>ss.ScheduleID==scheduleId) 
-                             on s.SignSize equals ss.SignId
-                             select new ImageSelect() { ImageId =s.Id, Name = s.Caption, ThumbNail = s.ThumbNailSmall });
+                             join si in db.ScheduleImages.Where(si => si.ScheduleID == scheduleId)
+                             on s.Id equals si.ImageID
+                             join ss in db.ScheduleSigns on si.ScheduleID equals ss.ScheduleID
+                             join sign in db.Signs on ss.SignId equals sign.id
+                             select new ImageSelect()
+                             {
+                                 ImageId = s.Id,
+                                 Name = s.Caption,
+                                 ThumbNail = s.ThumbNailSmall,
+                                 ScheduleId = scheduleId,
+                                 SignSize = ss.SignId ?? 0,
+                                 ImageUrl = s.ImageURL
+                             });
                 return query.ToList();
             }
         }
 
+        internal List<SignDto> GetSignsForSchedule(int scheduleId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                var query = (from ss in db.ScheduleSigns.Where(ss => ss.ScheduleID == scheduleId)
+                             join s in db.Signs on ss.SignId equals s.id
+                             select new SignDto
+                             {
+                                 Id = ss.Id,
+                                 Width = s.Width ?? 0,
+                                 Height = s.Height ?? 0,
+                                 Model = s.Model
+                             });
+                return query.ToList();
+            }
+        }
 
-
-
+        public SignParameters GetSignParameters(int SignId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                var query = (from s in db.Signs.Where(s => s.id == SignId)
+                             select new SignParameters()
+                             {
+                                 Width = s.Width ?? 0,
+                                 Height = s.Height ?? 0
+                             }).FirstOrDefault();
+                return query;
+            }
+        }
 
         public Image Find(int Id)
         {
@@ -53,7 +91,6 @@ namespace nightowlsign.data.Models
                 ret = db.Images.Find(Id);
             }
             return ret;
-
         }
 
         public void UpdateImageList(ImageSelect imageSelect, data.Schedule schedule)

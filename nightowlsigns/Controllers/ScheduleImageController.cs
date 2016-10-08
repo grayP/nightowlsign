@@ -32,6 +32,7 @@ namespace nightowlsign.Controllers
             {
                 sim.UpdateImageList(imageSelect, model.Schedule);
             }
+
             return RedirectToAction("Index", "Schedules");
 
         }

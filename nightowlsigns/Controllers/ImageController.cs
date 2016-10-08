@@ -47,9 +47,7 @@ namespace nightowlsign.Controllers
             if (Request != null)
             {
                 iVm.file = Request.Files["file"];
-
-                
-            }
+             }
 
             iVm.HandleRequest();
 
@@ -63,7 +61,6 @@ namespace nightowlsign.Controllers
                 {
                     ModelState.AddModelError(item.Key, item.Value);
                 }
-
             }
             return View(iVm);
         }

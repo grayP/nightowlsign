@@ -5,10 +5,10 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{150B2F5D-B12E-43AE-8E73-018B30A93918}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>imageprocessor</RootNamespace>
-    <AssemblyName>imageprocessor</AssemblyName>
+    <RootNamespace>ImageProcessor</RootNamespace>
+    <AssemblyName>ImageProcessor</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,14 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Services\CreatePlayBill.cs" />
     <Compile Include="CP5200\CP5200External.cs" />
     <Compile Include="Enums\ImageProcessorConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EmbeddedResource Include="dlls\CP5200.lib" />
+    <EmbeddedResource Include="dlls\CP5200.lib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nightowlsign.data\nightowlsign.data.csproj">
@@ -61,11 +63,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dlls\CP5200.dll" />
+    <EmbeddedResource Include="dlls\CP5200.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dlls\CP5200API.h" />
-    <EmbeddedResource Include="dlls\LafDll.dll" />
+    <EmbeddedResource Include="dlls\CP5200API.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlls\LafDll.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

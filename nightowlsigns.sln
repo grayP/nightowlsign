@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nightowlsign.data", "nighto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageStorage", "nightowlsign.ImageStorage\ImageStorage.csproj", "{A31B574D-0BEB-4B15-B608-271FF545D81E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imageprocessor", "imageprocessor\imageprocessor.csproj", "{150B2F5D-B12E-43AE-8E73-018B30A93918}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessor", "imageprocessor\ImageProcessor.csproj", "{150B2F5D-B12E-43AE-8E73-018B30A93918}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

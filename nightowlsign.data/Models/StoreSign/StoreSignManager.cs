@@ -33,12 +33,12 @@ namespace nightowlsign.data.Models
 
         }
 
-        public List<SignSelect> GetAllSigns(int storeID)
+        public List<SignSelect> GetAllSigns(int storeId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
                 var query = (from s in db.Signs orderby s.Model
-                             select new SignSelect() {SignId = s.id, Model= s.Model, StoreId = storeID});
+                             select new SignSelect() {SignId = s.id, Model= s.Model, StoreId = storeId});
                 return query.ToList();
             }
         }

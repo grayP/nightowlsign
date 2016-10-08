@@ -1,19 +1,19 @@
-﻿@model nightowlsign.data.Models.ScheduleImageViewModel
+﻿@model nightowlsign.data.Models.ScheduleSignViewModel
 
 @{
-    ViewBag.Title = "Image List";
+    ViewBag.Title = "Sign List";
 }
 
-<h2>Store List - @Model.Schedule.Name</h2>
+<h2>Sign List - @Model.schedule.Name</h2>
 
-@using (Html.BeginForm("Index", "ScheduleImage", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
+@using (Html.BeginForm("Index", "ScheduleSign", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
 {
     <!-- Start Hidden form -->
     @Html.HiddenFor(m => m.EventCommand)
     @Html.HiddenFor(m => m.EventArgument)
     @Html.HiddenFor(m => m.Mode)
-    @Html.HiddenFor(m => m.Schedule.Id)
-    @Html.HiddenFor(m => m.Schedule.Name)
+    @Html.HiddenFor(m => m.schedule.Id)
+    @Html.HiddenFor(m => m.schedule.Name)
     <!-- End Hidden form-->
 
    
@@ -22,11 +22,12 @@
                     <thead>
                         <tr>
                             <th class="centrealign">Select</th>
-                            <th>Image</th>
+                            <th class="centrealign">Sign</th>
+                            <th class="centrealign">Aspect Ratio</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @Html.EditorFor(model => model.AllImages)
+                        @Html.EditorFor(model => model.AllSigns)
                     </tbody>
                 </table>
 
@@ -46,4 +47,8 @@
             <!-- End Detail Area-->
             }
 
+            @section scripts
+{
 
+
+            }

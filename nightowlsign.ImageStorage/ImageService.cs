@@ -79,13 +79,12 @@ namespace ImageStorage
 
         private void CreateThumbnails(Image image, UploadedImage oldImage)
         {
-
-
-            for (int i = 200; i <= 600; i += 200)
+           
+            for (int i = 1; i <= 3; i +=1)
             {
                 Thumbnail thumb = new Thumbnail()
                 {
-                    bitmap = ResizeImage(image, i),
+                    bitmap = ResizeImage(image, oldImage.SignHeight*i, oldImage.SignWidth * i),
                     Height = i
                 };
                 oldImage.Thumbnails.Add(thumb);
@@ -102,10 +101,10 @@ namespace ImageStorage
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
 
-        public static Bitmap ResizeImage(Image image, int height)
+        public static Bitmap ResizeImage(Image image, int height, int width)
         {
-            double aspectRatio = (double)image.Height / image.Width;
-            int width = (int)(height / aspectRatio);
+          //  double aspectRatio = (double)image.Height / image.Width;
+            //int width = (int)(height / aspectRatio);
 
             var destRect = new Rectangle(0, 0, width, height);
             var destImage = new Bitmap(width, height);

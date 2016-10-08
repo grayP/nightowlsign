@@ -61,15 +61,18 @@
     <Compile Include="Models\Image\ImageViewModel.cs" />
     <Compile Include="Models\ScheduleImage\ScheduleImageManager.cs" />
     <Compile Include="Models\ScheduleImage\ScheduleImageViewModel.cs" />
-    <Compile Include="Models\ScheduleImage\ImageSelect.cs" />
-    <Compile Include="Models\ScheduleStore\StoreSelect.cs" />
-    <Compile Include="Models\ScheduleStore\ScheduleStoreManager.cs" />
-    <Compile Include="Models\ScheduleStore\ScheduleStoreViewModel.cs" />
+    <Compile Include="Models\Image\ImageSelect.cs" />
     <Compile Include="Models\Schedule\ScheduleManager.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
+    <Compile Include="Models\SendToSign\SendToSignViewModel.cs" />
+    <Compile Include="Models\SendToSign\SendToSignManager.cs" />
+    <Compile Include="Models\Signs\SignDto.cs" />
+    <Compile Include="Models\Signs\SignParameters.cs" />
     <Compile Include="Models\Signs\SignManager.cs" />
     <Compile Include="Models\Signs\SignViewModel.cs" />
-    <Compile Include="Models\StoreSign\SignSelect.cs" />
+    <Compile Include="Models\ScheduleSign\ScheduleSignManager.cs" />
+    <Compile Include="Models\ScheduleSign\ScheduleSignViewModel.cs" />
+    <Compile Include="Models\Signs\SignSelect.cs" />
     <Compile Include="Models\StoreSign\StoreSignManager.cs" />
     <Compile Include="Models\StoreSign\StoreSignViewModel.cs" />
     <Compile Include="Models\Stores\StoreManager.cs" />
@@ -95,6 +98,9 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ScheduleImage.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleSign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ScheduleStore.cs">

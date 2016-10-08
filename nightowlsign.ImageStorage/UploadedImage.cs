@@ -23,6 +23,10 @@ namespace ImageStorage
         public List<Thumbnail> Thumbnails { get; set; }
         public DateTime DateTaken { get; set; }
         public int SignId { get; set; }
+        public int SignHeight { get; set; }
+        public int SignWidth { get; set; }
+
+     
     }
     public class Thumbnail
     {

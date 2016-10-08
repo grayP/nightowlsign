@@ -8,7 +8,9 @@
         public int ImageId { get; set; }
         public string Name { get; set; }
         public byte[] ThumbNail { get; set; }
-
         public int SignSize { get; set; }
+        public string ImageUrl { get; set; }
     }
+
+    
 }
