@@ -13,9 +13,13 @@
     @Html.HiddenFor(m => m.EventArgument)
     @Html.HiddenFor(m => m.Mode)
     @Html.HiddenFor(m => m.Schedule.Id)
+    @Html.HiddenFor(m => m.Schedule.Name)
     for (int i = 0; i < Model.signsForSchedule.Count; i++)
     {
         @Html.HiddenFor(model => Model.signsForSchedule[i].Id)
+        @Html.HiddenFor(model => Model.signsForSchedule[i].Width)
+        @Html.HiddenFor(model => Model.signsForSchedule[i].Height)
+        @Html.HiddenFor(model => Model.signsForSchedule[i].Model)
     }
    <!-- End Hidden form-->
 

@@ -7,12 +7,13 @@
 }
 
 <tr>
-   <td>
+    <td>
         <img class="img-responsive myThumbnail" src="@imageSrc" style="height: auto;">
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.ImageId)
         @Html.HiddenFor(m => m.ScheduleId)
         @Html.HiddenFor(m => m.Name)
         @Html.HiddenFor(m => m.SignSize)
+        @Html.HiddenFor(m => m.ImageUrl)
     </td>
 </tr>

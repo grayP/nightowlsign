@@ -28,7 +28,8 @@ namespace nightowlsign.Controllers
             svm.IsValid = ModelState.IsValid;
            
             CreatePlayBill ip = new CreatePlayBill(svm.signsForSchedule,svm.AllImagesInSchedule);
-            ip.GeneratethePlayBillFile();
+            ip.GeneratethePlayBillFile(svm.Schedule.Name);
+            
 
             //if (svm.IsValid)
             //{

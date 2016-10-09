@@ -10,6 +10,7 @@ using ImageProcessor.Enums;
 using nightowlsign.data;
 using nightowlsign.data.Models;
 using nightowlsign.data.Models.Signs;
+using System.Web;
 
 namespace ImageProcessor.Services
 
@@ -18,6 +19,7 @@ namespace ImageProcessor.Services
     {
         private readonly List<SignDto> _SignSizesForSchedule;
         private readonly List<ImageSelect> _imagesToSend;
+        private readonly SignManager sm = new SignManager();
 
         //public static extern IntPtr CP5200_Program_Create(ushort width, ushort height, byte colour);
         //[DllImport("CP5200.dll", CallingConvention = CallingConvention.StdCall)]
@@ -32,7 +34,16 @@ namespace ImageProcessor.Services
             _SignSizesForSchedule = signsForSchedule;
             _imagesToSend = imagesToSend;
         }
-        public void GeneratethePlayBillFile()
+
+        public void PopulateSignList()
+        {
+            foreach (var signDto in _SignSizesForSchedule)
+            {
+               sm.Find(signDto.Id);
+
+            }
+        }
+        public void GeneratethePlayBillFile(string scheduleName)
         {
             int PlayItemNo = -1;
           
@@ -53,12 +64,23 @@ namespace ImageProcessor.Services
                 foreach (var image in _imagesToSend)
                 {
                   PlayItemNo = cp5200.Program_AddPicture(image.ImageUrl, (int)RenderMode.Zoom_to_fit_the_window, 0, 0, PeriodToShowImage, 1);
-                   // PlayItemNo = cp5200.Program_AddPicture("D:\\nightowl\\nightowlsigns\\nightowlsigns\\Content\\images\\night_owl.gif", (int)RenderMode.Zoom_to_fit_the_window, 0, 0, PeriodToShowImage, 1);
                 }
-                Console.WriteLine(PlayItemNo);
+                var FileName =
+                    HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strip(scheduleName), ".lpl"));
+                cp5200.Program_SaveFile(FileName);
 
-                Console.Read();
             }
+
+        }
+
+        private object strip(string scheduleName)
+        {
+            scheduleName = scheduleName.Replace(" ", "");
+            scheduleName = scheduleName.Replace("*", "");
+            scheduleName = scheduleName.Replace(".", "");
+            scheduleName = scheduleName.Replace("/", "");
+            scheduleName = scheduleName.Replace("$", "");
+            return scheduleName;
 
         }
     }

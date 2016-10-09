@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace ImageProcessor.CP5200
 {
@@ -17,6 +18,7 @@ namespace ImageProcessor.CP5200
         private readonly ushort _screenHeight;
         private readonly ushort _displayTime;
         private readonly byte _colourMode;
+        private readonly ILogger _logger;
 
         private int _playWindowNumber;
 
@@ -31,6 +33,10 @@ namespace ImageProcessor.CP5200
 
         [DllImport("CP5200.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern int CP5200_Program_AddPlayWindow(IntPtr hobj, ushort x, ushort y, ushort cx, ushort cy);
+
+
+        [DllImport("CP5200.dll", CallingConvention = CallingConvention.StdCall)]
+        public static extern int CP5200_Program_SaveToFile(IntPtr hObj, [MarshalAs(UnmanagedType.LPStr)] string pFileName);
 
         public Cp5200External(ushort width, ushort height, ushort displayTime, byte colourMode)
         {
@@ -49,7 +55,7 @@ namespace ImageProcessor.CP5200
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.InnerException.ToString());
+                _logger.Error(ex, "Program create threw an error");
                 return false;
             }
 
@@ -80,6 +86,22 @@ namespace ImageProcessor.CP5200
         {
             return CP5200_Program_AddPlayWindow(Pointer, 0, 0, _screenWidth, _screenHeight);
         }
+
+        public int Program_SaveFile(string filePathAndName)
+        {
+            try
+            {
+                System.IO.File.Delete(filePathAndName);
+                return CP5200_Program_SaveToFile(Pointer, filePathAndName);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Program save threw error");
+                throw;
+            }
+
+        }
+
     }
 }
 
