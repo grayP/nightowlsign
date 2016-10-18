@@ -29,19 +29,9 @@ namespace nightowlsign.Controllers
            
             CreatePlayBill ip = new CreatePlayBill(svm.signsForSchedule,svm.AllImagesInSchedule);
             ip.GeneratethePlayBillFile(svm.Schedule.Name);
-            
+            svm.loadData();
 
-            //if (svm.IsValid)
-            //{
-            //    ModelState.Clear();
-            //}
-            //else
-            //{
-            //    foreach (var item in svm.ValidationErrors)
-            //    {
-            //        ModelState.AddModelError(item.Key, item.Value);
-            //    }
-            //}
+         
             return View(svm);
         }
     }

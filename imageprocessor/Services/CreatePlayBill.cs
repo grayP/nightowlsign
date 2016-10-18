@@ -21,13 +21,7 @@ namespace ImageProcessor.Services
         private readonly List<ImageSelect> _imagesToSend;
         private readonly SignManager sm = new SignManager();
 
-        //public static extern IntPtr CP5200_Program_Create(ushort width, ushort height, byte colour);
-        //[DllImport("CP5200.dll", CallingConvention = CallingConvention.StdCall)]
-        //public static extern ushort CP5200_Program_SetProperty(IntPtr hObj, ushort nPropertyValue, uint nPropertyId);
-        //[DllImport("CP5200.dll", CallingConvention = CallingConvention.StdCall)]
-        //public static extern int CP5200_Program_AddPicture(IntPtr hObj, int nWinNo,
-        //  [MarshalAs(UnmanagedType.LPStr)] string pPictFile, int nMode, int nEffect, int nSpeed, int nStay,
-        //  int nCompress);
+
 
         public CreatePlayBill(List<SignDto> signsForSchedule, List<ImageSelect> imagesToSend)
         {
@@ -39,35 +33,49 @@ namespace ImageProcessor.Services
         {
             foreach (var signDto in _SignSizesForSchedule)
             {
-               sm.Find(signDto.Id);
-
+                sm.Find(signDto.Id);
             }
         }
         public void GeneratethePlayBillFile(string scheduleName)
         {
             int PlayItemNo = -1;
-          
+
             ushort PeriodToShowImage = 6; //Seconds
             byte colourMode = 0x77;
             foreach (var signSize in _SignSizesForSchedule)
             {
-                ushort screenWidth = (ushort)(signSize.Width);
-                ushort screenHeight = (ushort)(signSize.Height);
+              //  ushort screenWidth = (ushort)(signSize.Width);
+              //  ushort screenHeight = (ushort)(signSize.Height);
+                ushort screenWidth = (ushort)(64);
+                ushort screenHeight = (ushort)(64);
 
-                Cp5200External cp5200 = new Cp5200External(screenWidth, screenHeight, PeriodToShowImage, colourMode);
+                PlayBillFiles cp5200 = new PlayBillFiles(screenWidth, screenHeight, PeriodToShowImage, colourMode);
 
                 if (cp5200.Program_Create())
                 {
-                    cp5200.SetPlayWindowNumber();
-                }
+                   cp5200.AddPlayWindow();
+                     
+               }
 
                 foreach (var image in _imagesToSend)
                 {
-                  PlayItemNo = cp5200.Program_AddPicture(image.ImageUrl, (int)RenderMode.Zoom_to_fit_the_window, 0, 0, PeriodToShowImage, 1);
+                    PlayItemNo = cp5200.Program_AddPicture(image.ImageUrl, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
                 }
-                var FileName =
+                var programFileName =
+                    HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strip(scheduleName), ".lpp"));
+               cp5200.Program_SaveFile(programFileName);
+
+               //Now Create the playBillFile
+                if (cp5200.playBill_Create())
+                {
+                    cp5200.Playbill_SetProperty(0, 1);
+                }
+                var playBillNumber = cp5200.Playbill_AddFile(programFileName);
+                //And now save it
+                var playbillFileName =
                     HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strip(scheduleName), ".lpl"));
-                cp5200.Program_SaveFile(FileName);
+                cp5200.Playbill_SaveToFile(playbillFileName);
+
 
             }
 
