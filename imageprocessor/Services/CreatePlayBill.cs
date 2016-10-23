@@ -58,8 +58,11 @@ namespace ImageProcessor.Services
                 {
                     PlayItemNo = cp5200.Program_AddPicture(image.ImageUrl, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
                 }
-                var programFileName =
-                    HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strip(scheduleName), ".lpp"));
+                var programFileName = GenerateProgramFileName();
+                var playbillFileName = GeneratePlayBillFileName(scheduleName);
+
+
+
                 if (cp5200.Program_SaveFile(programFileName) > 1)
                 {
                     cp5200.DestroyProgram();
@@ -72,14 +75,22 @@ namespace ImageProcessor.Services
                 }
                 if (cp5200.Playbill_AddFile(programFileName) >= 0)
                 {
-                    var playbillFileName =
-                        HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strip(scheduleName), ".lpl"));
                     cp5200.Playbill_SaveToFile(playbillFileName);
-
-                    //And now save it
-                    cp5200.SendFiletoSign(programFileName, playbillFileName);
                 };
+                cp5200.SendFiletoSign(programFileName, playbillFileName);
             }
+
+        }
+
+        private string GeneratePlayBillFileName(string scheduleName)
+        {
+            return HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strip(scheduleName), ".lpl"));
+        }
+
+        private string GenerateProgramFileName()
+        {
+            var strName = String.Format("{0:0000}0000", 1);
+            return HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strName, ".lpb"));
 
         }
 

@@ -56,8 +56,12 @@ namespace ImageProcessor.CP5200
         public static extern ushort CP5200_Playbill_SetProperty(IntPtr hObj, ushort nPropertyValue, uint nPropertyId);
 
 
-        [DllImport(DllPath, CallingConvention = CallingConvention.StdCall)]
-        public static extern int CP5200_Playbill_AddFile(IntPtr hObj, [MarshalAs(UnmanagedType.LPStr)] string pFilename);
+      //  [DllImport(DllPath, CallingConvention = CallingConvention.StdCall)]
+       // public static extern int CP5200_Playbill_AddFile(IntPtr hObj, [MarshalAs(UnmanagedType.LPStr)] string pFilename);
+
+        [DllImport(DllPath, CharSet = CharSet.Auto)]
+        public static extern int CP5200_Playbill_AddFile(IntPtr hObj, IntPtr pFilename);
+
 
         [DllImport(DllPath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.StdCall)]
         public static extern int CP5200_Playbill_SaveToFile(IntPtr hObj,
@@ -186,7 +190,8 @@ namespace ImageProcessor.CP5200
 
         public int Playbill_AddFile(string path)
         {
-            return Cp5200External.CP5200_Playbill_AddFile(PlaybillPointer, path);
+            var intRet= Cp5200External.CP5200_Playbill_AddFile(PlaybillPointer, GetProgramFileName(path));
+            return intRet;
         }
 
         public int Playbill_SaveToFile(string filePathAndName)
@@ -227,7 +232,7 @@ namespace ImageProcessor.CP5200
         {
             try
             {
-                InitComm("192.168.1.222","255.255.255.255","5200");
+            //    InitComm("192.168.1.222","255.255.255.255","5200");
 
                 int uploadCount = 0;
                 if (0 ==
@@ -263,6 +268,11 @@ namespace ImageProcessor.CP5200
         IntPtr GetPlaybillFileName(string fileName)
         {
             return Marshal.StringToHGlobalAnsi(fileName);
+        }
+
+        internal int Program_SaveFile(object programFileName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

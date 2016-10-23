@@ -23,6 +23,23 @@
     }
    <!-- End Hidden form-->
 
+    <div class="row">
+        <div class="col-sm-12">
+            @if (Model.ErrorMessage.Length>0)
+            {
+                <div class="alert alert-danger alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dissmiss="alert">
+                        <span aria-hidden="true">&times</span>
+
+                        <span class="sr-only">Close</span>
+                    </button>
+                    @Html.DisplayFor(m => m.ErrorMessage)
+                </div>
+            }
+        </div>
+    </div>
+
+
     <div class="table-responsive">
         <table class="table table-condensed table-bordered table-striped table-hover">
             <thead>

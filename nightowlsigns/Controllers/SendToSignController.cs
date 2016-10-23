@@ -26,9 +26,17 @@ namespace nightowlsign.Controllers
         public ActionResult Index(SendToSignViewModel svm)
         {
             svm.IsValid = ModelState.IsValid;
-           
-            CreatePlayBill ip = new CreatePlayBill(svm.signsForSchedule,svm.AllImagesInSchedule);
-            ip.GeneratethePlayBillFile(svm.Schedule.Name);
+
+            try
+            {
+                CreatePlayBill ip = new CreatePlayBill(svm.signsForSchedule, svm.AllImagesInSchedule);
+                ip.GeneratethePlayBillFile(svm.Schedule.Name);
+            }
+            catch (Exception ex)
+            {
+                svm.ErrorMessage = ex.InnerException.ToString();
+            }
+            
             svm.loadData();
 
          
