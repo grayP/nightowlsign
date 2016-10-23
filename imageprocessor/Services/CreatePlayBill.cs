@@ -51,7 +51,6 @@ namespace ImageProcessor.Services
                 if (cp5200.Program_Create())
                 {
                     cp5200.AddPlayWindow();
-
                 }
 
                 foreach (var image in _imagesToSend)
@@ -60,8 +59,6 @@ namespace ImageProcessor.Services
                 }
                 var programFileName = GenerateProgramFileName();
                 var playbillFileName = GeneratePlayBillFileName(scheduleName);
-
-
 
                 if (cp5200.Program_SaveFile(programFileName) > 1)
                 {

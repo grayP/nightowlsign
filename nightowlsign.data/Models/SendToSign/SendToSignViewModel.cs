@@ -9,7 +9,7 @@ namespace nightowlsign.data.Models
     {
         public SendToSignViewModel() : base()
         {
-            ErrorMessage = "";
+            DisplayMessage = "";
             Schedule = new data.Schedule();
             AllImagesInSchedule = new List<ImageSelect>();
         }
@@ -20,7 +20,7 @@ namespace nightowlsign.data.Models
         public List<SignDto> signsForSchedule { get; set; }
         public SignParameters signParameter { get; set; }
 
-        public string ErrorMessage { get; set; }
+        public string DisplayMessage { get; set; }
         protected override void Init()
         {
 
