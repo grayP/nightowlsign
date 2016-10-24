@@ -63,7 +63,7 @@ namespace ImageProcessor.Services
 
                 foreach (var image in _imagesToSend)
                 {
-                  PlayItemNo = cp5200.Program_AddPicture(image.ImageUrl, (int)RenderMode.Zoom_to_fit_the_window, 0, 0, PeriodToShowImage, 1);
+                  PlayItemNo = cp5200.Program_AddPicture(image.ImageUrl, (int)RenderMode.Stretch_to_fit_the_window,1, 1, PeriodToShowImage, 1);
                 }
                 var FileName =
                     HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strip(scheduleName), ".lpl"));

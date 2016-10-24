@@ -30,11 +30,8 @@ namespace ImageProcessor.CP5200
         public static extern int CP5200_Program_AddPicture(IntPtr hObj, int nWinNo,
           [MarshalAs(UnmanagedType.LPStr)] string pPictFile, int nMode, int nEffect, int nSpeed, int nStay,
           int nCompress);
-
         [DllImport("CP5200.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern int CP5200_Program_AddPlayWindow(IntPtr hobj, ushort x, ushort y, ushort cx, ushort cy);
-
-
         [DllImport("CP5200.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern int CP5200_Program_SaveToFile(IntPtr hObj, [MarshalAs(UnmanagedType.LPStr)] string pFileName);
 
@@ -58,7 +55,6 @@ namespace ImageProcessor.CP5200
                 _logger.Error(ex, "Program create threw an error");
                 return false;
             }
-
         }
 
         public void SetPlayWindowNumber()
@@ -92,7 +88,8 @@ namespace ImageProcessor.CP5200
             try
             {
                 System.IO.File.Delete(filePathAndName);
-                return CP5200_Program_SaveToFile(Pointer, filePathAndName);
+                var intSave=CP5200_Program_SaveToFile(Pointer, filePathAndName);
+                return intSave;
             }
             catch (Exception ex)
             {

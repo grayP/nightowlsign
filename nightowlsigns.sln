@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageStorage", "nightowlsig
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessor", "imageprocessor\ImageProcessor.csproj", "{150B2F5D-B12E-43AE-8E73-018B30A93918}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessorTests", "ImageProcessorTests\ImageProcessorTests.csproj", "{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{150B2F5D-B12E-43AE-8E73-018B30A93918}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{150B2F5D-B12E-43AE-8E73-018B30A93918}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{150B2F5D-B12E-43AE-8E73-018B30A93918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
