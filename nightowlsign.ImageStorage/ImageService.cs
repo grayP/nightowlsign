@@ -62,7 +62,7 @@ namespace ImageStorage
                 {
                     ContentType = file.ContentType,
                     Caption = oldImage.Caption,
-                    // RegattaID=oldImage.RegattaID,
+                   
                     Thumbnails = oldImage.Thumbnails,
                     Data = fileBytes,
                     Name = file.FileName,

@@ -9,6 +9,7 @@ namespace nightowlsign.data.Models
     {
         public SendToSignViewModel() : base()
         {
+            ErrorMessage = "";
             Schedule = new data.Schedule();
             AllImagesInSchedule = new List<ImageSelect>();
         }
@@ -18,6 +19,8 @@ namespace nightowlsign.data.Models
         public List<ImageSelect> AllImagesInSchedule { get; set; }
         public List<SignDto> signsForSchedule { get; set; }
         public SignParameters signParameter { get; set; }
+
+        public string ErrorMessage { get; set; }
         protected override void Init()
         {
 

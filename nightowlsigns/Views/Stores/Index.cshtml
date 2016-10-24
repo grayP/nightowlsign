@@ -4,8 +4,6 @@
 @{
     ViewBag.Title = "Stores";
 }
-
-
 @using (Html.BeginForm())
 {
     <!-- Start Hidden form -->
@@ -13,9 +11,6 @@
     @Html.HiddenFor(m => m.EventArgument)
     @Html.HiddenFor(m => m.Mode)
     <!-- End Hidden form-->
-
-
-
     <!-- Start Search Area -->
     if (Model.IsSearchVisible)
     {
@@ -93,7 +88,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h1 class="panel-title">
-                    Regatta
+                    Store
                 </h1>
             </div>
             <div class="panel-body">
