@@ -8,6 +8,7 @@ using nightowlsign.data.Models;
 using nightowlsign.data.Models.Signs;
 using System.Web;
 using System.Linq;
+using System.Net;
 
 namespace ImageProcessor.Services
 
@@ -55,7 +56,12 @@ namespace ImageProcessor.Services
 
                 foreach (var image in _imagesToSend)
                 {
-                    PlayItemNo = cp5200.Program_AddPicture(image.ImageUrl, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
+                    string tempFileName = HttpContext.Current.Server.MapPath("/playBillFiles/temp.png");
+                    WebClient webClient = new WebClient();
+                    
+                    webClient.DownloadFile(image.ImageUrl, tempFileName);
+                    PlayItemNo = cp5200.Program_AddPicture(tempFileName, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
+                  //  PlayItemNo = cp5200.Program_AddPicture(image.ImageUrl, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
                 }
                 var programFileName = GenerateProgramFileName();
                 var playbillFileName = GeneratePlayBillFileName(scheduleName);
