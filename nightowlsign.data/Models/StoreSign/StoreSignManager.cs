@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nightowlsign.data;
 
 
 
@@ -59,7 +60,7 @@ namespace nightowlsign.data.Models
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-               StoreSign storeSign = new StoreSign()
+               data.StoreSign storeSign = new data.StoreSign()
                 {
                     id = signSelect.Id,
                     SignId = signSelect.SignId,
@@ -71,7 +72,7 @@ namespace nightowlsign.data.Models
                 };
                 if (signSelect.selected)
                 {
-                    db.Set<StoreSign>().AddOrUpdate(storeSign);
+                    db.Set<data.StoreSign>().AddOrUpdate(storeSign);
                     db.SaveChanges();
                 }
                 else

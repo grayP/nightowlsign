@@ -81,6 +81,7 @@
     <Compile Include="Models\ScheduleSign\ScheduleSignManager.cs" />
     <Compile Include="Models\ScheduleSign\ScheduleSignViewModel.cs" />
     <Compile Include="Models\Signs\SignSelect.cs" />
+    <Compile Include="Models\StoreSignDto\StoreSignDto.cs" />
     <Compile Include="Models\StoreSign\StoreSignManager.cs" />
     <Compile Include="Models\StoreSign\StoreSignViewModel.cs" />
     <Compile Include="Models\Stores\StoreManager.cs" />

@@ -14,12 +14,19 @@
     @Html.HiddenFor(m => m.Mode)
     @Html.HiddenFor(m => m.Schedule.Id)
     @Html.HiddenFor(m => m.Schedule.Name)
-    for (int i = 0; i < Model.signsForSchedule.Count; i++)
+    for (int i = 0; i < Model.SignsForSchedule.Count; i++)
     {
-        @Html.HiddenFor(model => Model.signsForSchedule[i].Id)
-        @Html.HiddenFor(model => Model.signsForSchedule[i].Width)
-        @Html.HiddenFor(model => Model.signsForSchedule[i].Height)
-        @Html.HiddenFor(model => Model.signsForSchedule[i].Model)
+        @Html.HiddenFor(model => Model.SignsForSchedule[i].Id)
+        @Html.HiddenFor(model => Model.SignsForSchedule[i].Width)
+        @Html.HiddenFor(model => Model.SignsForSchedule[i].Height)
+        @Html.HiddenFor(model => Model.SignsForSchedule[i].Model)
+    }
+    for (int i = 0; i < Model.StoresForSchedule.Count; i++)
+    {
+        @Html.HiddenFor(model => Model.StoresForSchedule[i].Id)
+        @Html.HiddenFor(model => Model.StoresForSchedule[i].IPAddress)
+        @Html.HiddenFor(model => Model.StoresForSchedule[i].StoreName)
+        @Html.HiddenFor(model => Model.StoresForSchedule[i].StoreId)
     }
    <!-- End Hidden form-->
 

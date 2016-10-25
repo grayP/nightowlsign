@@ -98,8 +98,7 @@ namespace ImageProcessor.CP5200
         private readonly byte _colourMode;
         private readonly ILogger _logger;
         private int _playWindowNumber;
-        private int TimeOut = 3600;
-        public PlayBillFiles(int width, int height, int displayTime, byte colourMode)
+       public PlayBillFiles(int width, int height, int displayTime, byte colourMode)
         {
             _screenWidth = width;
             _screenHeight = height;
@@ -190,8 +189,8 @@ namespace ImageProcessor.CP5200
 
         public int Playbill_AddFile(string path)
         {
-            var intRet= Cp5200External.CP5200_Playbill_AddFile(PlaybillPointer, GetProgramFileName(path));
-            return intRet;
+          return Cp5200External.CP5200_Playbill_AddFile(PlaybillPointer, Marshal.StringToHGlobalAnsi(path));
+
         }
 
         public int Playbill_SaveToFile(string filePathAndName)
@@ -212,68 +211,6 @@ namespace ImageProcessor.CP5200
         {
             Cp5200External.CP5200_Program_Destroy(ProgramPointer);
         }
-
-        private void InitComm(string ipAddress, string idCode, string port)
-        {
-            try
-            {
-                uint dwIPAddr = GetIP(ipAddress);
-                uint dwIDCode = GetIP(idCode);
-                int nIPPort = Convert.ToInt32(port);
-                if (dwIPAddr != 0 && dwIDCode != 0)
-                    Cp5200External.CP5200_Net_Init(dwIPAddr, nIPPort, dwIDCode, TimeOut);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-        public void SendFiletoSign(string ProgramFileName, string PlayBillFilename)
-        {
-            try
-            {
-            //    InitComm("192.168.1.222","255.255.255.255","5200");
-
-                int uploadCount = 0;
-                if (0 ==
-                    Cp5200External.CP5200_Net_UploadFile(Convert.ToByte(1), GetProgramFileName(ProgramFileName),
-                        GetProgramFileName(ProgramFileName)))
-                    uploadCount++;
-
-                if (0 ==
-                    Cp5200External.CP5200_Net_UploadFile(Convert.ToByte(1), GetPlaybillFileName(PlayBillFilename),
-                        GetPlaybillFileName(PlayBillFilename)))
-                    uploadCount++;
-
-                if (uploadCount > 0)
-                    Cp5200External.CP5200_Net_RestartApp(Convert.ToByte(1));
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-            }
-        }
-        private uint GetIP(string strIp)
-        {
-            System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse(strIp);
-            uint lIp = (uint)ipaddress.Address;
-            lIp = ((lIp & 0xFF000000) >> 24) + ((lIp & 0x00FF0000) >> 8) + ((lIp & 0x0000FF00) << 8) + ((lIp & 0x000000FF) << 24);
-            return (lIp);
-        }
-        IntPtr GetProgramFileName(string fileName)
-        {
-            return Marshal.StringToHGlobalAnsi(fileName);
-        }
-
-        IntPtr GetPlaybillFileName(string fileName)
-        {
-            return Marshal.StringToHGlobalAnsi(fileName);
-        }
-
-        internal int Program_SaveFile(object programFileName)
-        {
-            throw new NotImplementedException();
-        }
-    }
+   }
 }
 

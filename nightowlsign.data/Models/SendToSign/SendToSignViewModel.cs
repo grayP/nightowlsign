@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using nightowlsign.data.Models.Signs;
+using nightowlsign.data.Models.StoreSignDto;
 
 
 namespace nightowlsign.data.Models
@@ -17,8 +18,9 @@ namespace nightowlsign.data.Models
 
         public data.Schedule Schedule { get; set; }
         public List<ImageSelect> AllImagesInSchedule { get; set; }
-        public List<SignDto> signsForSchedule { get; set; }
-        public SignParameters signParameter { get; set; }
+        public List<SignDto> SignsForSchedule { get; set; }
+        public List<StoreSignDTO> StoresForSchedule { get; set; }
+        public SignParameters SignParameter { get; set; }
 
         public string DisplayMessage { get; set; }
         protected override void Init()
@@ -39,25 +41,10 @@ namespace nightowlsign.data.Models
 
         protected override void Get()
         {
-
             SendToSignManager sm = new SendToSignManager();
-         //   schedulestore = sm.Get(Schedule);
-           signsForSchedule = sm.GetSignsForSchedule(Schedule.Id);
-           AllImagesInSchedule = sm.GetImagesForThisSchedule(Schedule.Id);
-            //foreach (ImageSelect imageSelect in AllImagesInSchedule)
-            //{
-            //    imageSelect.ScheduleId = Schedule.Id;
-
-            //    ScheduleImage selected = sm.GetValues(imageSelect);
-            //    if (selected != null)
-            //    {
-            //        imageSelect.Selected = true;
-            //        imageSelect.Id = selected.Id;
-            //        imageSelect.ImageId = selected.ImageID ?? 0;
-            //    }
-
-            //}
-
+            SignsForSchedule = sm.GetSignsForSchedule(Schedule.Id);
+            AllImagesInSchedule = sm.GetImagesForThisSchedule(Schedule.Id);
+            StoresForSchedule = sm.GetStoresWithThisSign(Schedule.Id);
         }
 
     }

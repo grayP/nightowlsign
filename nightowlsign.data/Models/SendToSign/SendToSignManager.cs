@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using nightowlsign.data;
 using nightowlsign.data.Models.Signs;
+using nightowlsign.data.Models.StoreSignDto;
 
 
 namespace nightowlsign.data.Models
@@ -64,6 +65,23 @@ namespace nightowlsign.data.Models
                                  Width = s.Width ?? 0,
                                  Height = s.Height ?? 0,
                                  Model = s.Model
+                             });
+                return query.ToList();
+            }
+        }
+
+        internal List<StoreSignDTO> GetStoresWithThisSign(int scheduleId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                var query = (from ss in db.ScheduleSigns.Where(ss => ss.ScheduleID == scheduleId)
+                             join s in db.StoreSigns on ss.SignId equals s.SignId
+                             join stores in db.Store on s.StoreId equals stores.id
+                             select new StoreSignDTO()
+                             {
+                                 StoreId = s.StoreId ?? 0,
+                                 StoreName=stores.Name,
+                                 IPAddress = s.IPAddress
                              });
                 return query.ToList();
             }

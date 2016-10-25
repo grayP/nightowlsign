@@ -13,15 +13,9 @@ namespace nightowlsign.data.Models.Signs
             public SignManager()
             {
                 ValidationErrors = new List<KeyValuePair<string, string>>();
-
- 
             }
             //Properties
             public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
-
-
-
-
 
             public List<Sign> Get(Sign Entity)
             {
@@ -35,8 +29,6 @@ namespace nightowlsign.data.Models.Signs
                 {
                     ret = ret.FindAll(p => p.Model.ToLower().StartsWith(Entity.Model));
                 }
-
-
                 return ret;
             }
 
@@ -48,7 +40,6 @@ namespace nightowlsign.data.Models.Signs
                     ret = db.Signs.Find(signID);
                 }
                 return ret;
-
             }
 
             public bool Validate(Sign entity)
@@ -64,7 +55,6 @@ namespace nightowlsign.data.Models.Signs
 
                 }
                 return (ValidationErrors.Count == 0);
-
             }
 
 
