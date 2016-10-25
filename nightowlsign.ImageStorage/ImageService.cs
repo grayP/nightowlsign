@@ -18,18 +18,12 @@ namespace ImageStorage
         private readonly string _imageRootPath;
         private readonly string _containerName;
         private readonly string _blobStorageConnectionString;
-        private DateTime imageDate;
+        private DateTime _imageDate;
         private static Regex r = new Regex(":");
 
 
         public ImageService()
         {
-
-            // string connstring = ConfigurationManager.AppSettings["imageStorage"].ToString();
-            // string ContainerName = ConfigurationManager.AppSettings["ContainerName"].ToString();
-            //  string BlobName = ConfigurationManager.AppSettings["BlobName"].ToString();
-
-
             _imageRootPath = ConfigurationManager.AppSettings["ImageRootPath"];
             _containerName = ConfigurationManager.AppSettings["ImagesContainer"];
             _blobStorageConnectionString = ConfigurationManager.ConnectionStrings["BlobStorageConnectionString"].ConnectionString;
@@ -48,11 +42,11 @@ namespace ImageStorage
                 {
                     PropertyItem propItem = _image.GetPropertyItem(36867);
                     string dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
-                    imageDate = DateTime.Parse(dateTaken);
+                    _imageDate = DateTime.Parse(dateTaken);
                  }
                 catch (Exception)
                 {
-                    imageDate = DateTime.Now;
+                    _imageDate = DateTime.Now;
                 }
                 CreateThumbnails(_image, oldImage);
 
@@ -69,7 +63,7 @@ namespace ImageStorage
                     Url = String.Format("{0}/{1}",
                     _imageRootPath,
                     file.FileName.ToString()),
-                    DateTaken = imageDate,
+                    DateTaken = _imageDate,
                     SignId = oldImage.SignId
 
                 };
@@ -79,7 +73,6 @@ namespace ImageStorage
 
         private void CreateThumbnails(Image image, UploadedImage oldImage)
         {
-           
             for (int i = 1; i <= 3; i +=1)
             {
                 Thumbnail thumb = new Thumbnail()
@@ -89,10 +82,6 @@ namespace ImageStorage
                 };
                 oldImage.Thumbnails.Add(thumb);
             }
-
-
-
-
         }
 
         public static byte[] ImageToByte(Image img)
@@ -128,9 +117,6 @@ namespace ImageStorage
 
             return destImage;
         }
-
-
-
 
 
         public async Task AddImageToBlobStorageAsync(UploadedImage image)
@@ -187,14 +173,10 @@ namespace ImageStorage
                     Console.WriteLine("\t{0}", blobItem.StorageUri.PrimaryUri);
                 }
                 Console.WriteLine();
-
                 //Get the continuation token.
                 continuationToken = resultSegment.ContinuationToken;
             }
             while (continuationToken != null);
         }
-
-
-
     }
 }
