@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using nightowlsign.data;
 
 
-
-
 namespace nightowlsign.data.Models
 {
     public class StoreSignManager
@@ -38,8 +36,9 @@ namespace nightowlsign.data.Models
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                var query = (from s in db.Signs orderby s.Model
-                             select new SignSelect() {SignId = s.id, Model= s.Model, StoreId = storeId});
+                var query = (from s in db.Signs
+                             orderby s.Model
+                             select new SignSelect() { SignId = s.id, Model = s.Model, StoreId = storeId });
                 return query.ToList();
             }
         }
@@ -60,15 +59,16 @@ namespace nightowlsign.data.Models
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-               data.StoreSign storeSign = new data.StoreSign()
+                data.StoreSign storeSign = new data.StoreSign()
                 {
                     id = signSelect.Id,
                     SignId = signSelect.SignId,
                     StoreId = store.id,
                     DateUpdated = DateTime.Now,
                     InstallDate = DateTime.Now,
-                    IPAddress = signSelect.IpAddress
-
+                    IPAddress = signSelect.IpAddress,
+                    SubMask = signSelect.SubMask,
+                    Port = signSelect.Port
                 };
                 if (signSelect.selected)
                 {
@@ -77,16 +77,15 @@ namespace nightowlsign.data.Models
                 }
                 else
                 {
-                        List<StoreSign> storeSigns =
-                        db.StoreSigns.Where(
-                            x => x.SignId.Value == storeSign.SignId.Value && x.StoreId == storeSign.StoreId).ToList();
+                    List<StoreSign> storeSigns =
+                    db.StoreSigns.Where(
+                        x => x.SignId.Value == storeSign.SignId.Value && x.StoreId == storeSign.StoreId).ToList();
                     foreach (StoreSign sign in storeSigns)
                     {
                         db.StoreSigns.Attach(sign);
                         db.StoreSigns.Remove(sign);
                         db.SaveChanges();
                     }
-                   
                 }
             }
         }
@@ -121,8 +120,6 @@ namespace nightowlsign.data.Models
             }
             return (storeSign != null) ? storeSign.IPAddress : "";
         }
-
-
     }
 
 }

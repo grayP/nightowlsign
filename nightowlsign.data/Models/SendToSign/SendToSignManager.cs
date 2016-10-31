@@ -80,8 +80,10 @@ namespace nightowlsign.data.Models
                              select new StoreSignDTO()
                              {
                                  StoreId = s.StoreId ?? 0,
-                                 StoreName=stores.Name,
-                                 IPAddress = s.IPAddress
+                                 StoreName = stores.Name,
+                                 IPAddress = s.IPAddress,
+                                 SubMask = s.SubMask,
+                                 Port = s.Port
                              });
                 return query.ToList();
             }

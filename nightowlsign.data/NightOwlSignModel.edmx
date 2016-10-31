@@ -88,6 +88,8 @@
           <Property Name="DateUpdated" Type="datetime" />
           <Property Name="UpdatedBy" Type="nchar" MaxLength="10" />
           <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
+          <Property Name="SubMask" Type="varchar" MaxLength="20" />
+          <Property Name="Port" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
@@ -150,6 +152,8 @@
           <Property Name="DateUpdated" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="IPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SubMask" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Port" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -234,6 +238,8 @@
           <EntitySetMapping Name="StoreSigns">
             <EntityTypeMapping TypeName="Models.StoreSign">
               <MappingFragment StoreEntitySet="StoreSign">
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="SubMask" ColumnName="SubMask" />
                 <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />

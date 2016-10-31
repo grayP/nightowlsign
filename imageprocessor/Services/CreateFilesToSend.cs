@@ -44,10 +44,10 @@ namespace ImageProcessor.Services
             ProgramFiles = new List<string>();
             foreach (var signSize in _signSizesForSchedule)
             {
-                //  ushort screenWidth = (ushort)(signSize.Width);
-                //  ushort screenHeight = (ushort)(signSize.Height);
-                var screenWidth = 64;
-                var screenHeight = 64;
+                ushort screenWidth = (ushort)(signSize.Width);
+                ushort screenHeight = (ushort)(signSize.Height);
+                //var screenWidth = 64;
+                //var screenHeight = 64;
 
                 PlayBillFiles cp5200 = new PlayBillFiles(screenWidth, screenHeight, PeriodToShowImage, colourMode);
             
