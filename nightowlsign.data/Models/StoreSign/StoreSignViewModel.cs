@@ -9,9 +9,13 @@ namespace nightowlsign.data.Models
 {
     public class StoreSignViewModel : BaseModel.ViewModelBase
     {
-        public StoreSignViewModel() : base()
+        public StoreSignViewModel(int id, string storeName) : base()
         {
-            store = new Store();
+            store = new Store
+            {
+                id = id,
+                Name = storeName
+            };
             AllSigns = new List<SignSelect>();
         }
 
