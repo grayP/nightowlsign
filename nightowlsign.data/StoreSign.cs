@@ -21,5 +21,7 @@ namespace nightowlsign.data
         public Nullable<System.DateTime> DateUpdated { get; set; }
         public string UpdatedBy { get; set; }
         public string IPAddress { get; set; }
+        public string SubMask { get; set; }
+        public string Port { get; set; }
     }
 }

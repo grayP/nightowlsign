@@ -1,6 +1,5 @@
 ﻿@model nightowlsign.data.Models.Schedule.ScheduleViewModel
-
-
+@using Kendo.Mvc.UI
 @{
     ViewBag.Title = "Schedules";
 }
@@ -114,15 +113,15 @@
                 </div>
 
                 <div class="form-group input-group-sm">
-                    @*@Html.LabelFor(m => m.Entity.StartDate, "Start Date")
-                    @Html.Kendo().DatePickerFor(m => m.Entity.StartDate).Format("d/MM/yyyy").HtmlAttributes(new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Entity.StartDate)*@
+                    @Html.LabelFor(m => m.Entity.StartDate, "Start Date")
+                    @Html.TextBoxFor(m => m.Entity.StartDate, new { @class = "form-control datepicker", placeholder = "Enter start date here..." })
+                    @Html.ValidationMessageFor(m => m.Entity.StartDate)
 
                 </div>
                 <div class="form-group input-group-sm">
-                    @*@Html.LabelFor(m => m.Entity.EndDate, "End Date")
-                    @Html.Kendo().DatePickerFor(m => m.Entity.EndDate).Format("d/MM/yyyy").HtmlAttributes(new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Entity.EndDate)*@
+                    @Html.LabelFor(m => m.Entity.EndDate, "End Date")
+                    @Html.TextBoxFor(m => m.Entity.EndDate, new { @class = "form-control datepicker", placeholder = "Enter end date here..." })
+                   @Html.ValidationMessageFor(m => m.Entity.EndDate)
                 </div>
 
             </div>
@@ -141,5 +140,10 @@
         </div>
     }
     <!-- End Detail Area-->
+    <script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+    </script>
 }
 

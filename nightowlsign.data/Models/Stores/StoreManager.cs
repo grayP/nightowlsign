@@ -12,7 +12,6 @@ namespace nightowlsign.data.Models.Stores
         public StoreManager()
         {
             ValidationErrors = new List<KeyValuePair<string, string>>();
-
         }
         //Properties
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }

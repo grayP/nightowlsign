@@ -26,7 +26,7 @@ namespace ImageProcessor.Services
             string displayMessage=string.Empty;
             foreach (var storeSign in StoresForSchedule)
             {
-                displayMessage=string.Format(InitComm(storeSign.IPAddress, "255.255.255.0", "5200"), Environment.NewLine);
+                displayMessage=string.Format(InitComm(storeSign.IPAddress, storeSign.SubMask, storeSign.Port), Environment.NewLine);
                 displayMessage +=string.Format(SendFiletoSign(),Environment.NewLine);
             }
             return displayMessage;

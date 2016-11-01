@@ -42,7 +42,6 @@ namespace nightowlsign.data.Models
 
         protected override void Get()
         {
-
             StoreSignManager sm = new StoreSignManager();
             storesign = sm.Get(store);
             AllSigns = sm.GetAllSigns(store.id);
@@ -54,9 +53,9 @@ namespace nightowlsign.data.Models
                     ss.selected = true;
                     ss.Id = selected.id;
                     ss.IpAddress = selected.IPAddress;
+                    ss.SubMask = selected.SubMask;
+                    ss.Port = selected.Port;
                 }
-                //ss.selected = sm.IsSelected(ss.SignId, store.id);
-                //ss.IpAddress = sm.GetIpAddress(ss.SignId, store.id);
             }
         }
 

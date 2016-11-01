@@ -15,6 +15,8 @@ namespace nightowlsign.data.Models
         public int? SignId { get; set; }
         public string Model { get; set; }
         public string IpAddress { get; set; }
+        public string SubMask { get; set; }
+        public string Port { get; set; }
         public int? ScheduleId { get; set; }
         [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal? AspectRatio { get; set; }
