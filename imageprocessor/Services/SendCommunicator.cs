@@ -70,8 +70,12 @@ namespace ImageProcessor.Services
                 uint dwIDCode = GetIP(idCode);
                 int nIPPort = Convert.ToInt32(port);
                 if (dwIPAddr != 0 && dwIDCode != 0)
-                    Cp5200External.CP5200_Net_Init(dwIPAddr, nIPPort, dwIDCode, TimeOut);
+                {
+                   var responseNumber= Cp5200External.CP5200_Net_Init(dwIPAddr, nIPPort, dwIDCode, TimeOut);
+                if (responseNumber==0)
                 return string.Format("Communication established with {0} ", ipAddress);
+               }
+                return string.Format("Communication failed with Sign ");
             }
             catch (Exception ex)
             {
