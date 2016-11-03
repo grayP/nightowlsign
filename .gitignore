@@ -244,6 +244,7 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /nightowlsign/
-.lbp
-.lpp
-.lpl
+*.lbp
+*.lpp
+*.lpl
+*.jpg
