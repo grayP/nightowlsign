@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace nightowlsign.data.Models.Schedule
+{
+    public class ScheduleViewModel : BaseModel.ViewModelBase
+    {
+
+        public ScheduleViewModel() : base()
+        {
+
+        }
+        public List<data.Schedule> Schedules { get; set; }
+        public data.Schedule SearchEntity { get; set; }
+        public data.Schedule Entity { get; set; }
+
+        protected override void Init()
+        {
+            Schedules = new List<data.Schedule>();
+            SearchEntity = new data.Schedule();
+            Entity = new data.Schedule();
+            base.Init();
+        }
+        public override void HandleRequest()
+        {
+            base.HandleRequest();
+        }
+        protected override void ResetSearch()
+        {
+            SearchEntity = new data.Schedule();
+        }
+
+        protected override void Get()
+        {
+            ScheduleManager sm = new ScheduleManager();
+            Schedules = sm.Get(SearchEntity);
+        }
+
+        protected override void Edit()
+        {
+            ScheduleManager sm = new ScheduleManager();
+            Entity = sm.Find(Convert.ToInt32(EventArgument));
+            base.Edit();
+        }
+
+        protected override void Add()
+        {
+            IsValid = true;
+            Entity = new data.Schedule();
+            base.Add();
+        }
+        protected override void Save()
+        {
+            ScheduleManager sm = new ScheduleManager();
+            if (Mode == "Add")
+            {
+                sm.Insert(Entity);
+            }
+            else
+            {
+                sm.Update(Entity);
+            }
+            ValidationErrors = sm.ValidationErrors;
+            base.Save();
+        }
+
+        protected override void Delete()
+        {
+            ScheduleManager sm = new ScheduleManager();
+            Entity = sm.Find(Convert.ToInt32(EventArgument));
+            sm.Delete(Entity);
+            Get();
+            base.Delete();
+        }
+    }
+}

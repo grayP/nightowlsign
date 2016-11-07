@@ -1,0 +1,17 @@
+﻿@model nightowlsign.data.Models.SignSelect
+                <tr>
+                    <td class="centrealign">
+                        @Html.CheckBoxFor(model => model.selected)
+                    </td>
+                    <td class="centrealign">
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.Model)
+                        @Html.HiddenFor(model => model.ScheduleId)
+                        @Html.HiddenFor(model => model.SignId)
+                        @Html.DisplayFor(model => model.Model)
+                    </td>
+                    <td>
+                      @Html.DisplayFor(model=>model.AspectRatio)
+                    </td>
+                  
+                </tr>

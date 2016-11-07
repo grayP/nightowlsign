@@ -1,0 +1,15 @@
+﻿@model nightowlsign.data.Models.StoreSelect
+
+
+    <tr>
+            <td class="centrealign">
+                 @Html.CheckBoxFor(m => m.Selected)
+            </td>
+            <td>
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m=>m.StoreId)
+                @Html.HiddenFor(m => m.ScheduleId)
+                @Html.HiddenFor(m => m.Name)
+                @Html.DisplayFor(m => m.Name)
+            </td>
+        </tr>

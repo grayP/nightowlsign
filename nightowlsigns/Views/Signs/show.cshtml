@@ -1,0 +1,46 @@
+﻿@model nightowlsign.data.Models.Signs.SignViewModel
+
+@{.
+    ViewBag.Title = "Signs";
+}
+
+
+<!-- Start List Area  -->
+@if (Model.IsListAreaVisible)
+{
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th align="right">Action</th>
+                    <th>Height</th>
+                    <th>Width</th>
+                    <th>Ip Address</th>
+                    <th>Install Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Signs)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(@item.Model, "Index", "Display", new { Id = item.id, Model = item.Model }, null)
+                        </td>
+                        <td align="right">
+                        @*//    <a href="@Url.Action("show", "Image",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
+                            <a href="@Url.Action("show", "Document",new { storeId = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>*@
+
+                        </td>
+                      
+                        <td>@item.Height</td>
+                        <td>@item.Width</td>
+                        <td>@item.IPAddress</td>
+                        <td>@item.InstallDate.Value.ToString("dd MMM yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+<!-- End List Area-->

@@ -1,0 +1,294 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign List </title>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+
+
+
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+
+    <link href="/Content/kendo/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/kendo/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/kendo/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/kendo/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/kendo/kendo.dataviz.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/kendo/jquery.min.js"></script>
+    <script src="/Scripts/kendo/jszip.min.js"></script>
+    <script src="/Scripts/kendo/kendo.all.min.js"></script>
+    <script src="/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+    <script src="/Scripts/kendo.modernizr.custom.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-inverse navbar-fixed-top cbp-af-header" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand">
+                        <img src="/Content/images/graphic.png" />
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/Image">Images</a></li>
+                        <li><a href="/Schedules">Schedules</a></li>
+                        <li><a href="/Stores">Stores</a></li>
+                        <li><a href="/Signs">Signs</a></li>
+
+
+                    </ul>
+                    <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
+                        <input name="__RequestVerificationToken" type="hidden" value="yNFAKWE8CDN-5ZiWVbXMS57EYSYaTmE4OHQiCne4EvzkAM1a1g-EF6vUOWaUtMobuFvQ1JSR8Q8AzaxbVfa9BZh5kDfF1PR8Mw5teQZhSLtpRZQVFdN278pKjg-IbuW2raEZ4MslRGK9u6XWs-6i_Q2" />    <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="/Manage" title="Manage">Hello gray.pritchett@optusnet.com.au!</a>
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="body-content">
+            <section class="row">
+                <div class="fill-screen fixed-attachment">
+                    <h2>Sign List - Adelaide St</h2>
+                    <form action="/StoreSign" encType="multipart/form-data" method="post" name="myform">
+                        <!-- Start Hidden form -->
+                        <input id="EventCommand" name="EventCommand" type="hidden" value="list" /><input id="EventArgument" name="EventArgument" type="hidden" value="" /><input id="Mode" name="Mode" type="hidden" value="list" /><input data-val="true" data-val-number="The field id must be a number." data-val-required="The id field is required." id="store_id" name="store.id" type="hidden" value="1" /><input id="store_Name" name="store.Name" type="hidden" value="Adelaide St" />    <!-- End Hidden form-->
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="centrealign">Select</th>
+                                        <th>Sign</th>
+                                        <th>IpAddress</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_0__selected" name="AllSigns[0].selected" type="checkbox" value="true" /><input name="AllSigns[0].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_0__Id" name="AllSigns[0].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_0__Model" name="AllSigns[0].Model" type="hidden" value="224x32" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_0__StoreId" name="AllSigns[0].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_0__SignId" name="AllSigns[0].SignId" type="hidden" value="3" />
+                                            224x32
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_0__IpAddress" name="AllSigns[0].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input checked="checked" data-val="true" data-val-required="The selected field is required." id="AllSigns_1__selected" name="AllSigns[1].selected" type="checkbox" value="true" /><input name="AllSigns[1].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_1__Id" name="AllSigns[1].Id" type="hidden" value="32" />
+                                            <input id="AllSigns_1__Model" name="AllSigns[1].Model" type="hidden" value="320x96" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_1__StoreId" name="AllSigns[1].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_1__SignId" name="AllSigns[1].SignId" type="hidden" value="4" />
+                                            320x96
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_1__IpAddress" name="AllSigns[1].IpAddress" type="text" value="124.56.78.910" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_2__selected" name="AllSigns[2].selected" type="checkbox" value="true" /><input name="AllSigns[2].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_2__Id" name="AllSigns[2].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_2__Model" name="AllSigns[2].Model" type="hidden" value="224x64" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_2__StoreId" name="AllSigns[2].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_2__SignId" name="AllSigns[2].SignId" type="hidden" value="5" />
+                                            224x64
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_2__IpAddress" name="AllSigns[2].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_3__selected" name="AllSigns[3].selected" type="checkbox" value="true" /><input name="AllSigns[3].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_3__Id" name="AllSigns[3].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_3__Model" name="AllSigns[3].Model" type="hidden" value="208x144" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_3__StoreId" name="AllSigns[3].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_3__SignId" name="AllSigns[3].SignId" type="hidden" value="6" />
+                                            208x144
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_3__IpAddress" name="AllSigns[3].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_4__selected" name="AllSigns[4].selected" type="checkbox" value="true" /><input name="AllSigns[4].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_4__Id" name="AllSigns[4].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_4__Model" name="AllSigns[4].Model" type="hidden" value="208x244" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_4__StoreId" name="AllSigns[4].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_4__SignId" name="AllSigns[4].SignId" type="hidden" value="7" />
+                                            208x244
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_4__IpAddress" name="AllSigns[4].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_5__selected" name="AllSigns[5].selected" type="checkbox" value="true" /><input name="AllSigns[5].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_5__Id" name="AllSigns[5].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_5__Model" name="AllSigns[5].Model" type="hidden" value="244x96" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_5__StoreId" name="AllSigns[5].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_5__SignId" name="AllSigns[5].SignId" type="hidden" value="8" />
+                                            244x96
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_5__IpAddress" name="AllSigns[5].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_6__selected" name="AllSigns[6].selected" type="checkbox" value="true" /><input name="AllSigns[6].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_6__Id" name="AllSigns[6].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_6__Model" name="AllSigns[6].Model" type="hidden" value="544x96" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_6__StoreId" name="AllSigns[6].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_6__SignId" name="AllSigns[6].SignId" type="hidden" value="9" />
+                                            544x96
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_6__IpAddress" name="AllSigns[6].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_7__selected" name="AllSigns[7].selected" type="checkbox" value="true" /><input name="AllSigns[7].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_7__Id" name="AllSigns[7].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_7__Model" name="AllSigns[7].Model" type="hidden" value="228x112" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_7__StoreId" name="AllSigns[7].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_7__SignId" name="AllSigns[7].SignId" type="hidden" value="10" />
+                                            228x112
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_7__IpAddress" name="AllSigns[7].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_8__selected" name="AllSigns[8].selected" type="checkbox" value="true" /><input name="AllSigns[8].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_8__Id" name="AllSigns[8].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_8__Model" name="AllSigns[8].Model" type="hidden" value="240x144" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_8__StoreId" name="AllSigns[8].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_8__SignId" name="AllSigns[8].SignId" type="hidden" value="11" />
+                                            240x144
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_8__IpAddress" name="AllSigns[8].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_9__selected" name="AllSigns[9].selected" type="checkbox" value="true" /><input name="AllSigns[9].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_9__Id" name="AllSigns[9].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_9__Model" name="AllSigns[9].Model" type="hidden" value="192x96" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_9__StoreId" name="AllSigns[9].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_9__SignId" name="AllSigns[9].SignId" type="hidden" value="12" />
+                                            192x96
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_9__IpAddress" name="AllSigns[9].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <input data-val="true" data-val-required="The selected field is required." id="AllSigns_10__selected" name="AllSigns[10].selected" type="checkbox" value="true" /><input name="AllSigns[10].selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllSigns_10__Id" name="AllSigns[10].Id" type="hidden" value="0" />
+                                            <input id="AllSigns_10__Model" name="AllSigns[10].Model" type="hidden" value="432x112" />
+                                            <input data-val="true" data-val-number="The field StoreId must be a number." id="AllSigns_10__StoreId" name="AllSigns[10].StoreId" type="hidden" value="1" />
+                                            <input data-val="true" data-val-number="The field SignId must be a number." id="AllSigns_10__SignId" name="AllSigns[10].SignId" type="hidden" value="13" />
+                                            432x112
+                                        </td>
+                                        <td>
+                                            <input id="AllSigns_10__IpAddress" name="AllSigns[10].IpAddress" type="text" value="" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" name="operation" class="btn btn-primary" id="btnSave">
+                                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
+                                </button>
+                                <a href="/Stores" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
+                                </a>
+                            </div>
+                        </div>
+                        <!-- End Detail Area-->
+                    </form>
+
+                </div>
+            </section>
+
+
+        </div>
+
+
+
+
+    </div>
+    <footer id="footer">
+        <p>&copy; 2016 - Night Owl Sign System</p>
+    </footer>
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/respond.js"></script>
+
+    <script src="/Scripts/custom.js"></script>
+
+
+
+
+
+
+ 
+</body>
+</html>

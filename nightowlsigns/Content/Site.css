@@ -1,0 +1,184 @@
+﻿
+html { 
+/*background: url(/Content/images/nightowl_back.jpg) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+background-color: transparent;*/ 
+}
+
+
+body {
+    background-color: transparent; 
+    padding-top: 80px;
+    padding-bottom: 80px;
+   
+    height:100%;
+
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+   background-color: transparent; 
+   padding-left: 30px;
+   padding-right: 30px;
+}
+
+
+.fill-screen{
+   background-size: cover;
+   background-position:center;
+}
+.content-filler{
+
+}
+
+.fixed-attachment{
+        background-attachment:fixed;
+
+}
+
+/* Navbar */
+.navbar {
+     padding: 5px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+
+}
+
+
+
+
+.navbar-brand
+{
+     padding:1px 1px 1px 1px;
+    
+}
+
+
+.navbar-header img
+{
+    width:100px;
+    padding-bottom:2px;
+    padding-top:2px;
+    padding-right:1px;
+   
+}
+
+.cbp-af-header-shrink
+{
+    padding:2px;
+    opacity:.9;
+}
+/* Tables */
+.rightalign {
+    text-align: right;
+}
+.centrealign {
+    text-align: center;
+}
+/* left column on layout page */
+.leftaside      {}
+
+
+/* right column on front page*/
+.rightaside a {
+    padding: 50px;
+           color:white;
+
+}
+.rightaside .glyphicon {
+    font-size:50px;
+
+}
+
+
+
+.quotation_div {
+   
+    display: table;
+    height:500px;
+    background-size: 100% auto;
+}
+
+.quotation_div .overlay {
+    display: table-cell;
+    vertical-align: middle;
+   
+}
+  .overlay p {
+    text-align: center;
+    color: white;
+    font-family:'Times New Roman';
+    font-size: 300%;
+    font-weight:100;
+    line-height: 3;
+    padding: 0 10%;
+    opacity: .6;
+   
+}
+
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color:#030324 ;
+    padding: 10px;
+    color: #999999;
+
+}
+
+.navbar 
+{
+  background-color:#030324
+}
+table {
+        background-color: white; 
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.pdsa-action-button-column{
+    width:4em;
+    text-align:center;
+}
+
+#fotoImg {
+	width: 98%;		
+}
+
+div.desc{
+    background-color: #000;
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    opacity: 0.3;
+    position: relative;
+    right:0;
+    filter: alpha(opacity=20);
+    padding: 5px;
+}
+
+.fix{
+    width: 100%;
+    padding: 0px;
+}
+/*//Location Page*/ 
+
+.labels{
+    opacity: .6;
+}
