@@ -13,9 +13,7 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Index(int storeId, string storeName)
         {
-            StoreSignViewModel ssvm = new StoreSignViewModel();
-            ssvm.store.id = storeId;
-            ssvm.store.Name = storeName;
+            StoreSignViewModel ssvm = new StoreSignViewModel(storeId, storeName);
             ssvm.loadData();
             return View(ssvm);
         }

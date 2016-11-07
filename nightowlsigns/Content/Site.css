@@ -48,14 +48,10 @@ body {
 }
 
 
-
-
 .navbar-brand
 {
      padding:1px 1px 1px 1px;
-    
 }
-
 
 .navbar-header img
 {
@@ -63,7 +59,6 @@ body {
     padding-bottom:2px;
     padding-top:2px;
     padding-right:1px;
-   
 }
 
 .cbp-af-header-shrink
@@ -93,8 +88,6 @@ body {
 
 }
 
-
-
 .quotation_div {
    
     display: table;
@@ -119,7 +112,6 @@ body {
    
 }
 
-
 #footer {
     position: fixed;
     bottom: 0;
@@ -127,7 +119,6 @@ body {
     background-color:#030324 ;
     padding: 10px;
     color: #999999;
-
 }
 
 .navbar 
@@ -181,4 +172,15 @@ div.desc{
 
 .labels{
     opacity: .6;
+}
+.panel-primary {
+     border-color:    #030324;
+}
+.panel-primary > .panel-heading {
+    background-color: #030324;
+     border-color:    #030324;
+}
+.btn-primary {
+    background-color: #030324;   
+     border-color:    #030324;
 }

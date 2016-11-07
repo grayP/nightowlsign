@@ -36,11 +36,11 @@ namespace ImageStorage
             {
                 byte[] fileBytes = new byte[file.ContentLength];
                 await file.InputStream.ReadAsync(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-                Image _image = Image.FromStream(file.InputStream);
+                Image image = Image.FromStream(file.InputStream);
 
                 try
                 {
-                    PropertyItem propItem = _image.GetPropertyItem(36867);
+                    PropertyItem propItem = image.GetPropertyItem(36867);
                     string dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
                     _imageDate = DateTime.Parse(dateTaken);
                  }
@@ -48,7 +48,7 @@ namespace ImageStorage
                 {
                     _imageDate = DateTime.Now;
                 }
-                CreateThumbnails(_image, oldImage);
+                CreateThumbnails(image, oldImage);
 
 
 
@@ -56,13 +56,12 @@ namespace ImageStorage
                 {
                     ContentType = file.ContentType,
                     Caption = oldImage.Caption,
-                   
                     Thumbnails = oldImage.Thumbnails,
                     Data = fileBytes,
                     Name = file.FileName,
-                    Url = String.Format("{0}/{1}",
+                    Url = string.Format("{0}/{1}",
                     _imageRootPath,
-                    file.FileName.ToString()),
+                    file.FileName),
                     DateTaken = _imageDate,
                     SignId = oldImage.SignId
 
@@ -71,11 +70,11 @@ namespace ImageStorage
             return null;
         }
 
-        private void CreateThumbnails(Image image, UploadedImage oldImage)
+        private static void CreateThumbnails(Image image, UploadedImage oldImage)
         {
             for (int i = 1; i <= 3; i +=1)
             {
-                Thumbnail thumb = new Thumbnail()
+                var thumb = new Thumbnail()
                 {
                     bitmap = ResizeImage(image, oldImage.SignHeight*i, oldImage.SignWidth * i),
                     Height = i
