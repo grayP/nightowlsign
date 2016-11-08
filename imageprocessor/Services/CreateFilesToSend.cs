@@ -22,6 +22,8 @@ namespace ImageProcessor.Services
         private readonly List<ImageSelect> _imagesToSend;
         private readonly SignManager sm = new SignManager();
 
+        public string DebugString { get; set; }
+
         public CreateFilesToSend(List<SignDto> signsForSchedule, List<ImageSelect> imagesToSend)
         {
             _signSizesForSchedule = signsForSchedule;
@@ -50,28 +52,32 @@ namespace ImageProcessor.Services
                 //var screenHeight = 64;
 
                 PlayBillFiles cp5200 = new PlayBillFiles(screenWidth, screenHeight, PeriodToShowImage, colourMode);
-            
+
                 if (cp5200.playBill_Create())
                 {
                     cp5200.Playbill_SetProperty(0, 1);
                     var counter = 1;
-                   
+
                     foreach (var image in _imagesToSend)
                     {
                         var sCounter = string.Format("{0:0000}0000", counter);
                         if (cp5200.Program_Create())
                         {
-                            cp5200.AddPlayWindow();
-
-                            var tempFileName = GenerateImageFileName(sCounter, image);
-                            PlayItemNo = cp5200.Program_AddPicture(tempFileName, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
-                            var programFileName = GenerateProgramFileName(sCounter);
-                            ProgramFiles.Add(programFileName);
-                            if (cp5200.Program_SaveFile(programFileName) > 1)
+                            if (cp5200.AddPlayWindow() >= 0)
                             {
-                                cp5200.DestroyProgram();
+                                var tempFileName = GenerateImageFileName(sCounter, image);
+                                PlayItemNo = cp5200.Program_AddPicture(tempFileName, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
+                                DebugString += string.Format("PlayItemNumber: {0}, TempFileName {1} {2}", PlayItemNo, tempFileName, Environment.NewLine);
+                                var programFileName = GenerateProgramFileName(sCounter);
+                                ProgramFiles.Add(programFileName);
+                                if (cp5200.Program_SaveFile(programFileName) > 1)
+                                {
+                                    cp5200.DestroyProgram();
+                                };
+                                cp5200.Playbill_AddFile(programFileName);
                             };
-                            cp5200.Playbill_AddFile(programFileName);
+
+
                         }
                         counter += 1;
                         //Now Create the playBillFile
@@ -81,10 +87,10 @@ namespace ImageProcessor.Services
             }
         }
 
-       
+
         private string GenerateImageFileName(string sCounter, ImageSelect image)
         {
-            string tempFileName = HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/images/", sCounter, ".jpg"));
+            string tempFileName = HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/images/", sCounter, ".jpg"));
             System.IO.File.Delete(tempFileName);
             WebClient webClient = new WebClient();
             webClient.DownloadFile(image.ImageUrl, tempFileName);
@@ -93,12 +99,12 @@ namespace ImageProcessor.Services
 
         private string GeneratePlayBillFileName(string scheduleName)
         {
-            return HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", strip(scheduleName), ".lpp"));
+            return HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/", strip(scheduleName), ".lpp"));
         }
 
         private string GenerateProgramFileName(string sCounter)
         {
-            var fileAndPath = HttpContext.Current.Server.MapPath(string.Concat("/playBillFiles/", sCounter, ".lpb"));
+            var fileAndPath = HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/", sCounter, ".lpb"));
             System.IO.File.Delete(fileAndPath);
             return fileAndPath;
         }

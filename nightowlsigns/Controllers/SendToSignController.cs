@@ -33,6 +33,8 @@ namespace nightowlsign.Controllers
 
                 SendCommunicator sendCommunicator = new SendCommunicator(createFilesToSend.ProgramFiles, createFilesToSend.PlaybillFileName);
                 svm.DisplayMessage += sendCommunicator.SendFiletoSign(svm.StoresForSchedule);
+
+                svm.DebugMessage = createFilesToSend.DebugString;
             }
             catch (Exception ex)
             {

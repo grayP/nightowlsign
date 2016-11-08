@@ -23,6 +23,7 @@ namespace nightowlsign.data.Models
         public SignParameters SignParameter { get; set; }
 
         public string DisplayMessage { get; set; }
+        public string DebugMessage { get; set; }
         protected override void Init()
         {
 

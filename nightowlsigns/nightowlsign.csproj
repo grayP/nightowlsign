@@ -831,9 +831,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="playBillFiles\images\00010000.jpg" />
-    <Content Include="playBillFiles\images\00020000.jpg" />
-    <Content Include="playBillFiles\images\00030000.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -864,11 +861,6 @@
     <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css.map" />
     <Content Include="bin\CP5200.lib" />
-    <Content Include="playBillFiles\00010000.lpb" />
-    <Content Include="playBillFiles\00020000.lpb" />
-    <Content Include="playBillFiles\00030000.lpb" />
-    <Content Include="playBillFiles\320x96-Dreamworld_schweppes.lpl" />
-    <Content Include="playBillFiles\320x96-Dreamworld_schweppes.lpp" />
     <None Include="Properties\PublishProfiles\nightowlsign.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custom.js" />
@@ -1287,6 +1279,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="playBillFiles\images\" />
     <Folder Include="Scripts\kendo\2015.3.1111\" />
   </ItemGroup>
   <PropertyGroup>

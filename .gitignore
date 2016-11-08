@@ -243,7 +243,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-/nightowlsign/
+
+# playbill files 
 *.lbp
 *.lpp
 *.lpl
