@@ -38,7 +38,7 @@ namespace nightowlsign.Controllers
             }
             catch (Exception ex)
             {
-                svm.DisplayMessage = ex.InnerException.ToString();
+                svm.DisplayMessage = ex.ToString();
             }
              svm.loadData();
          

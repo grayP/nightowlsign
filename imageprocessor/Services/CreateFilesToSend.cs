@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.IO;
 using ImageProcessor.CP5200;
 using ImageProcessor.Enums;
 using nightowlsign.data;
@@ -58,17 +58,31 @@ namespace ImageProcessor.Services
                     cp5200.Playbill_SetProperty(0, 1);
                     var counter = 1;
 
+                    //Now Create the playBillFile
+
                     foreach (var image in _imagesToSend)
                     {
                         var sCounter = string.Format("{0:0000}0000", counter);
+                        var tempFileName = GenerateImageFileName(sCounter, image);
+                        counter += 1;
+                        image.Dispose();
+                    }
+                    
+                    counter = 0;
+                    foreach (string f in Directory.GetFiles(HttpContext.Current.Server.MapPath("~/PlayBillFiles/Images/")))
+                    {
+                        var sCounter = string.Format("{0:0000}0000", counter);
+
                         if (cp5200.Program_Create())
                         {
                             if (cp5200.AddPlayWindow() >= 0)
                             {
-                                var tempFileName = GenerateImageFileName(sCounter, image);
-                                
-                                PlayItemNo = cp5200.Program_AddPicture(tempFileName, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
-                                DebugString += string.Format("{0}Play Item Number: {1}, TempFileName  {2}", Environment.NewLine, PlayItemNo, tempFileName);
+                                // var tempFileName = GenerateImageFileName(sCounter, image);
+
+                                PlayItemNo = cp5200.Program_AddPicture(f, (int)RenderMode.Stretch_to_fit_the_window, 0,
+                                    0, PeriodToShowImage, 0);
+                                DebugString += string.Format("{0}Play Item Number: {1}, Temp File Name  {2}",
+                                    Environment.NewLine, PlayItemNo, f);
                                 var programFileName = GenerateProgramFileName(sCounter);
                                 ProgramFiles.Add(programFileName);
                                 if (cp5200.Program_SaveFile(programFileName) > 1)
@@ -78,15 +92,15 @@ namespace ImageProcessor.Services
                                 cp5200.Playbill_AddFile(programFileName);
                             };
 
-
                         }
                         counter += 1;
-                        //Now Create the playBillFile
                     }
-                    cp5200.Playbill_SaveToFile(PlaybillFileName);
+               
                 }
+                cp5200.Playbill_SaveToFile(PlaybillFileName);
             }
         }
+
 
 
         private string GenerateImageFileName(string sCounter, ImageSelect image)
@@ -97,8 +111,8 @@ namespace ImageProcessor.Services
             {
                 webClient.DownloadFile(image.ImageUrl, tempFileName);
             }
-           
-           return tempFileName;
+
+            return tempFileName;
         }
 
         private string GeneratePlayBillFileName(string scheduleName)
