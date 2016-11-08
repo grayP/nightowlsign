@@ -124,10 +124,7 @@ namespace ImageProcessor.Services
                 HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/images/", sCounter, ".jpg"));
             try
             {
-                using (Stream stream = new FileStream(tempFileName, FileMode.Open))
-                {
-                    // File/Stream manipulating code here
-                }
+               
                 System.IO.File.Delete(tempFileName);
                 System.Threading.Thread.Sleep(1000);
                 using (WebClient webClient = new WebClient())
