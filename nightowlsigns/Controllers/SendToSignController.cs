@@ -29,6 +29,7 @@ namespace nightowlsign.Controllers
             try
             {
                 CreateFilesToSend createFilesToSend = new CreateFilesToSend(svm.SignsForSchedule, svm.AllImagesInSchedule);
+                createFilesToSend.DeleteOldImages();
                 createFilesToSend.WriteImagesToDisk();
                 createFilesToSend.GeneratetheProgramFiles(svm.Schedule.Name);
                 createFilesToSend.GeneratethePlayBillFile(svm.Schedule.Name);

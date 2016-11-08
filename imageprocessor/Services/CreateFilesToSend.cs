@@ -9,6 +9,7 @@ using nightowlsign.data.Models.Signs;
 using System.Web;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 
 namespace ImageProcessor.Services
 
@@ -33,6 +34,17 @@ namespace ImageProcessor.Services
             _imagesToSend = imagesToSend;
         }
 
+        public void DeleteOldImages()
+        {
+            foreach (
+                string fileName in Directory.GetFiles(HttpContext.Current.Server.MapPath(ImageDirectory), "*.jpg"))
+            {
+                System.IO.File.Delete(fileName);
+            }
+
+
+        }
+
         public void PopulateSignList()
         {
             foreach (var signDto in _signSizesForSchedule)
@@ -41,12 +53,20 @@ namespace ImageProcessor.Services
             }
         }
 
+        public int GenerateRandomNo()
+        {
+            int _min = 1000;
+            int _max = 9999;
+            Random _rdm = new Random();
+            return _rdm.Next(_min, _max);
+        }
+
         public void WriteImagesToDisk()
         {
             var counter = 1;
             foreach (var image in _imagesToSend)
             {
-                var tempFileName = GenerateImageFileName(string.Format("{0:0000}0000", counter), image);
+                var tempFileName = GenerateImageFileName(string.Format("{0:0000}0000", GenerateRandomNo()), image);
                 counter += 1;
                 image.Dispose();
             }
@@ -71,11 +91,18 @@ namespace ImageProcessor.Services
                     var programPointer = cp5200.Program_Create();
                     if (programPointer.ToInt32() > 0)
                     {
-                        if (cp5200.AddPlayWindow(programPointer) >= 0)
+                        var windowNo = cp5200.AddPlayWindow(programPointer);
+                        if (windowNo >= 0)
                         {
-                            PlayItemNo = cp5200.Program_AddPicture(programPointer, fileName,
-                                (int)RenderMode.Stretch_to_fit_the_window, 0,
-                                0, PeriodToShowImage, 0);
+                            //PlayItemNo = cp5200.Program_AddPicture(programPointer, fileName,
+                            //    (int)RenderMode.Stretch_to_fit_the_window, 0,
+                            //    0, PeriodToShowImage, 0);
+
+                            PlayItemNo = cp5200.Program_Add_Image(programPointer, windowNo,
+                                Marshal.StringToHGlobalAnsi(fileName), (int) RenderMode.Stretch_to_fit_the_window,
+                                0xFFFF, 100, PeriodToShowImage, 0);
+                                 
+
 
                             DebugString += string.Format("{0}Play Item Number: {1}, Temp File Name  {2}",
                                 Environment.NewLine, PlayItemNo, fileName);
@@ -125,8 +152,8 @@ namespace ImageProcessor.Services
             try
             {
                
-                System.IO.File.Delete(tempFileName);
-                System.Threading.Thread.Sleep(1000);
+               // System.IO.File.Delete(tempFileName);
+               // System.Threading.Thread.Sleep(1000);
                 using (WebClient webClient = new WebClient())
                 {
                     webClient.DownloadFile(image.ImageUrl, tempFileName);

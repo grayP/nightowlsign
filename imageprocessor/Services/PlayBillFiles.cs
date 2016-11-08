@@ -48,7 +48,6 @@ namespace ImageProcessor.Services
             {
                 _playWindowNumber = Program_AddPlayWindow(programPointer);
                 return _playWindowNumber;
-
             }
             return -1;
         }
@@ -73,6 +72,14 @@ namespace ImageProcessor.Services
         {
             return Cp5200External.CP5200_Program_AddPicture(programPointer, _playWindowNumber, path, mode, effect, speed, stayTime, compress);
         }
+
+        public int Program_Add_Image(IntPtr programPointer, int windowNo, IntPtr picturePointer, int nMode, int nEffect, int nSpeed, int nStay, int nCompress)
+        {
+            return Cp5200External.CP5200_Program_AddPicture(programPointer, windowNo, picturePointer, nMode, nEffect,
+                nSpeed, nStay, nCompress);
+        }
+
+
         public int Program_SaveFile(IntPtr programPointer, string filePathAndName)
         {
             System.IO.File.Delete(filePathAndName);

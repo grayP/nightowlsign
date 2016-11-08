@@ -34,6 +34,10 @@ namespace ImageProcessor.CP5200
             [MarshalAs(UnmanagedType.LPStr)] string pPictFile, int nMode, int nEffect, int nSpeed, int nStay,
             int nCompress);
 
+        [DllImport(DllPath, CharSet = CharSet.Auto)]
+        public static extern int CP5200_Program_AddPicture(IntPtr hObj, int nWinNo, IntPtr pPictFile, int nMode, int nEffect, int nSpeed, int nStay, int nCompress);
+
+
         [DllImport(DllPath, CallingConvention = CallingConvention.StdCall)]
         public static extern int CP5200_Program_AddPlayWindow(IntPtr hobj, int x, int y, int cx, int cy);
 
