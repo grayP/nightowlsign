@@ -25,6 +25,8 @@
     {
         @Html.HiddenFor(model => Model.StoresForSchedule[i].Id)
         @Html.HiddenFor(model => Model.StoresForSchedule[i].IPAddress)
+        @Html.HiddenFor(model => Model.StoresForSchedule[i].SubMask)
+        @Html.HiddenFor(model => Model.StoresForSchedule[i].Port)
         @Html.HiddenFor(model => Model.StoresForSchedule[i].StoreName)
         @Html.HiddenFor(model => Model.StoresForSchedule[i].StoreId)
     }
