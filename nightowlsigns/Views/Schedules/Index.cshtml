@@ -114,13 +114,13 @@
 
                 <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.StartDate, "Start Date")
-                    @Html.TextBoxFor(m => m.Entity.StartDate, new { @class = "form-control datepicker", placeholder = "Enter start date here..." })
+                    @Html.TextBoxFor(m => m.Entity.StartDate, "{0:dd MMM yyyy}", new { @class = "form-control datepicker", placeholder = "Enter start date here..." })
                     @Html.ValidationMessageFor(m => m.Entity.StartDate)
 
                 </div>
                 <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.EndDate, "End Date")
-                    @Html.TextBoxFor(m => m.Entity.EndDate, new { @class = "form-control datepicker", placeholder = "Enter end date here..." })
+                    @Html.TextBoxFor(m => m.Entity.EndDate, "{0:dd MM yyyy}", new { @class = "form-control datepicker", placeholder = "Enter end date here..." })
                    @Html.ValidationMessageFor(m => m.Entity.EndDate)
                 </div>
 
@@ -142,7 +142,7 @@
     <!-- End Detail Area-->
     <script type="text/javascript">
     $(function () { // will trigger when the document is ready
-       $('.datepicker').datepicker(); //Initialise any date pickers
+        $('.datepicker').datepicker({format: 'dd MMM yyyy'}); //Initialise any date pickers
     });
     </script>
 }
