@@ -831,6 +831,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="playBillFiles\HtmlPage1.html" />
+    <Content Include="playBillFiles\images\HtmlPage1.html" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1279,7 +1281,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="playBillFiles\images\" />
     <Folder Include="Scripts\kendo\2015.3.1111\" />
   </ItemGroup>
   <PropertyGroup>

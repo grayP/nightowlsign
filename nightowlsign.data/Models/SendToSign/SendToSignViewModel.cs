@@ -11,6 +11,7 @@ namespace nightowlsign.data.Models
         public SendToSignViewModel() : base()
         {
             DisplayMessage = "";
+            DebugMessage = "";
             Schedule = new data.Schedule();
             AllImagesInSchedule = new List<ImageSelect>();
         }
@@ -47,6 +48,5 @@ namespace nightowlsign.data.Models
             AllImagesInSchedule = sm.GetImagesForThisSchedule(Schedule.Id);
             StoresForSchedule = sm.GetStoresWithThisSign(Schedule.Id);
         }
-
     }
 }
