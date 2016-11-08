@@ -66,8 +66,9 @@ namespace ImageProcessor.Services
                             if (cp5200.AddPlayWindow() >= 0)
                             {
                                 var tempFileName = GenerateImageFileName(sCounter, image);
+                                
                                 PlayItemNo = cp5200.Program_AddPicture(tempFileName, (int)RenderMode.Stretch_to_fit_the_window, 0, 0, PeriodToShowImage, 0);
-                                DebugString += string.Format("PlayItemNumber: {0}, TempFileName {1} {2}", PlayItemNo, tempFileName, Environment.NewLine);
+                                DebugString += string.Format("{0}Play Item Number: {1}, TempFileName  {2}", Environment.NewLine, PlayItemNo, tempFileName);
                                 var programFileName = GenerateProgramFileName(sCounter);
                                 ProgramFiles.Add(programFileName);
                                 if (cp5200.Program_SaveFile(programFileName) > 1)
@@ -92,9 +93,12 @@ namespace ImageProcessor.Services
         {
             string tempFileName = HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/images/", sCounter, ".jpg"));
             System.IO.File.Delete(tempFileName);
-            WebClient webClient = new WebClient();
-            webClient.DownloadFile(image.ImageUrl, tempFileName);
-            return tempFileName;
+            using (WebClient webClient = new WebClient())
+            {
+                webClient.DownloadFile(image.ImageUrl, tempFileName);
+            }
+           
+           return tempFileName;
         }
 
         private string GeneratePlayBillFileName(string scheduleName)
