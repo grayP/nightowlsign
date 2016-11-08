@@ -15,6 +15,9 @@ namespace ImageProcessor.Services
 {
     public class CreateFilesToSend
     {
+        private PlayBillFiles cp5200;
+        private const string ImageDirectory = "~/playBillFiles/Images/";
+        private const string ProgramFileDirectory = "~/playBillFiles/";
         public List<string> ProgramFiles { get; set; }
         public string PlaybillFileName { get; set; }
 
@@ -37,9 +40,20 @@ namespace ImageProcessor.Services
                 sm.Find(signDto.Id);
             }
         }
-        public void GeneratethePlayBillFile(string scheduleName)
+
+        public void WriteImagesToDisk()
         {
-            PlaybillFileName = GeneratePlayBillFileName(scheduleName);
+            var counter = 1;
+            foreach (var image in _imagesToSend)
+            {
+                var tempFileName = GenerateImageFileName(string.Format("{0:0000}0000", counter), image);
+                counter += 1;
+                image.Dispose();
+            }
+        }
+
+        public void GeneratetheProgramFiles(string scheduleName)
+        {
             var PlayItemNo = -1;
             var PeriodToShowImage = 0xA; //Seconds
             byte colourMode = 0x77;
@@ -48,76 +62,91 @@ namespace ImageProcessor.Services
             {
                 ushort screenWidth = (ushort)(signSize.Width);
                 ushort screenHeight = (ushort)(signSize.Height);
-                //var screenWidth = 64;
-                //var screenHeight = 64;
+                cp5200 = new PlayBillFiles(screenWidth, screenHeight, PeriodToShowImage, colourMode);
 
-                PlayBillFiles cp5200 = new PlayBillFiles(screenWidth, screenHeight, PeriodToShowImage, colourMode);
-
-                if (cp5200.playBill_Create())
+                var counter = 1;
+                foreach (
+                    string fileName in Directory.GetFiles(HttpContext.Current.Server.MapPath(ImageDirectory), "*.jpg"))
                 {
-                    cp5200.Playbill_SetProperty(0, 1);
-                    var counter = 1;
-
-                    //Now Create the playBillFile
-
-                    foreach (var image in _imagesToSend)
+                    var programPointer = cp5200.Program_Create();
+                    if (programPointer.ToInt32() > 0)
                     {
-                        var sCounter = string.Format("{0:0000}0000", counter);
-                        var tempFileName = GenerateImageFileName(sCounter, image);
-                        counter += 1;
-                        image.Dispose();
-                    }
-                    
-                    counter = 0;
-                    foreach (string f in Directory.GetFiles(HttpContext.Current.Server.MapPath("~/PlayBillFiles/Images/")))
-                    {
-                        var sCounter = string.Format("{0:0000}0000", counter);
-
-                        if (cp5200.Program_Create())
+                        if (cp5200.AddPlayWindow(programPointer) >= 0)
                         {
-                            if (cp5200.AddPlayWindow() >= 0)
+                            PlayItemNo = cp5200.Program_AddPicture(programPointer, fileName,
+                                (int)RenderMode.Stretch_to_fit_the_window, 0,
+                                0, PeriodToShowImage, 0);
+
+                            DebugString += string.Format("{0}Play Item Number: {1}, Temp File Name  {2}",
+                                Environment.NewLine, PlayItemNo, fileName);
+
+                            //  var programFileName = GenerateProgramFileName(string.Format("{0:0000}0000", counter));
+                            // ProgramFiles.Add(programFileName);
+                            if (
+                                cp5200.Program_SaveFile(programPointer,
+                                    GenerateProgramFileName(string.Format("{0:0000}0000", counter))) > 1)
                             {
-                                // var tempFileName = GenerateImageFileName(sCounter, image);
-
-                                PlayItemNo = cp5200.Program_AddPicture(f, (int)RenderMode.Stretch_to_fit_the_window, 0,
-                                    0, PeriodToShowImage, 0);
-                                DebugString += string.Format("{0}Play Item Number: {1}, Temp File Name  {2}",
-                                    Environment.NewLine, PlayItemNo, f);
-                                var programFileName = GenerateProgramFileName(sCounter);
-                                ProgramFiles.Add(programFileName);
-                                if (cp5200.Program_SaveFile(programFileName) > 1)
-                                {
-                                    cp5200.DestroyProgram();
-                                };
-                                cp5200.Playbill_AddFile(programFileName);
-                            };
-
+                                cp5200.DestroyProgram(programPointer);
+                            }
+                            ;
+                            //     cp5200.Playbill_AddFile(programFileName);
                         }
-                        counter += 1;
+                        ;
+
                     }
-               
+                    counter += 1;
                 }
-                cp5200.Playbill_SaveToFile(PlaybillFileName);
+
             }
         }
 
+        public void GeneratethePlayBillFile(string scheduleName)
+        {
+            var playBillPointer = cp5200.playBill_Create();
 
+            if (playBillPointer.ToInt32() > 0)
+            {
+                if (playBillPointer.ToInt32() > 0)
+                    cp5200.Playbill_SetProperty(playBillPointer, 0, 1);
+                foreach (
+                    string programFileName in
+                    Directory.GetFiles(HttpContext.Current.Server.MapPath(ProgramFileDirectory), "*.lpb"))
+                {
+                    cp5200.Playbill_AddFile(playBillPointer, programFileName);
+                }
+                cp5200.Playbill_SaveToFile(playBillPointer, GeneratePlayBillFileName(scheduleName));
+            }
+        }
 
         private string GenerateImageFileName(string sCounter, ImageSelect image)
         {
-            string tempFileName = HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/images/", sCounter, ".jpg"));
-            System.IO.File.Delete(tempFileName);
-            using (WebClient webClient = new WebClient())
+            string tempFileName =
+                HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/images/", sCounter, ".jpg"));
+            try
             {
-                webClient.DownloadFile(image.ImageUrl, tempFileName);
+                using (Stream stream = new FileStream(tempFileName, FileMode.Open))
+                {
+                    // File/Stream manipulating code here
+                }
+                System.IO.File.Delete(tempFileName);
+                System.Threading.Thread.Sleep(1000);
+                using (WebClient webClient = new WebClient())
+                {
+                    webClient.DownloadFile(image.ImageUrl, tempFileName);
+                }
+                return tempFileName;
             }
-
-            return tempFileName;
+            catch (Exception ex)
+            {
+                return ex.InnerException.ToString();
+                //check here why it failed and ask user to retry if the file is in use.
+            }
         }
 
         private string GeneratePlayBillFileName(string scheduleName)
         {
-            return HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/", strip(scheduleName), ".lpp"));
+            return PlaybillFileName = HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/", strip(scheduleName), ".lpp"));
+            //return HttpContext.Current.Server.MapPath(string.Concat("~/playBillFiles/", strip(scheduleName), ".lpp"));
         }
 
         private string GenerateProgramFileName(string sCounter)
@@ -135,6 +164,8 @@ namespace ImageProcessor.Services
               .ToArray());
             return invalidCharsRemoved;
         }
+
+
     }
 }
 

@@ -29,9 +29,11 @@ namespace nightowlsign.Controllers
             try
             {
                 CreateFilesToSend createFilesToSend = new CreateFilesToSend(svm.SignsForSchedule, svm.AllImagesInSchedule);
+                createFilesToSend.WriteImagesToDisk();
+                createFilesToSend.GeneratetheProgramFiles(svm.Schedule.Name);
                 createFilesToSend.GeneratethePlayBillFile(svm.Schedule.Name);
 
-                SendCommunicator sendCommunicator = new SendCommunicator(createFilesToSend.ProgramFiles, createFilesToSend.PlaybillFileName);
+                SendCommunicator sendCommunicator = new SendCommunicator(createFilesToSend.PlaybillFileName);
                 svm.DisplayMessage += sendCommunicator.SendFiletoSign(svm.StoresForSchedule);
 
                 svm.DebugMessage = createFilesToSend.DebugString;

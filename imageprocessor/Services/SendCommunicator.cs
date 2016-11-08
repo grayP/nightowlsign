@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using nightowlsign.data.Models.Signs;
 using nightowlsign.data.Models.StoreSignDto;
+using System.IO;
+using System.Web;
 
 namespace ImageProcessor.Services
 {
@@ -14,20 +16,20 @@ namespace ImageProcessor.Services
     {
         private int TimeOut = 3600;
         public string _playbillFile { get; set; }
-        public List<string> ProgramFiles { get; set; }
+        private const string ProgramFileDirectory = "~/playBillFiles/";
 
-        public SendCommunicator(List<string> ProgramFiles, string PlaybillFile)
+        public SendCommunicator( string PlaybillFile)
         {
-            this.ProgramFiles = ProgramFiles;
+           // this.ProgramFiles = ProgramFiles;
             this._playbillFile = PlaybillFile;
         }
         public string SendFiletoSign(List<StoreSignDTO> StoresForSchedule)
         {
-            string displayMessage=string.Empty;
+            string displayMessage = string.Empty;
             foreach (var storeSign in StoresForSchedule)
             {
-                displayMessage=string.Format(InitComm(storeSign.IPAddress, storeSign.SubMask, storeSign.Port), Environment.NewLine);
-                displayMessage +=string.Format(SendFiletoSign(),Environment.NewLine);
+                displayMessage = string.Format(InitComm(storeSign.IPAddress, storeSign.SubMask, storeSign.Port), Environment.NewLine);
+                displayMessage += string.Format(SendFiletoSign(), Environment.NewLine);
             }
             return displayMessage;
         }
@@ -36,7 +38,9 @@ namespace ImageProcessor.Services
             try
             {
                 int uploadCount = 0;
-                foreach (var programFileName in ProgramFiles)
+                foreach (
+                    string programFileName in
+                    Directory.GetFiles(HttpContext.Current.Server.MapPath(ProgramFileDirectory), "*.lpb"))
                 {
                     if (0 ==
                       Cp5200External.CP5200_Net_UploadFile(Convert.ToByte(1), GetPointerFromFileName(programFileName),
@@ -49,10 +53,12 @@ namespace ImageProcessor.Services
                         GetPointerFromFileName(_playbillFile)))
                     uploadCount++;
 
+                int restartSuccess = -1;
                 if (uploadCount > 0)
-                    Cp5200External.CP5200_Net_RestartApp(Convert.ToByte(1));
-
-                return string.Format("Successfully uploaded {0} files{1}", uploadCount, Environment.NewLine);
+                {
+                    restartSuccess = Cp5200External.CP5200_Net_RestartApp(Convert.ToByte(1));
+                }
+                return string.Format("Successfully uploaded {0} files and Restarted:{1} {2}", uploadCount, restartSuccess, Environment.NewLine);
             }
             catch (Exception ex)
             {
@@ -60,7 +66,7 @@ namespace ImageProcessor.Services
             }
         }
 
- 
+
 
         public string InitComm(string ipAddress, string idCode, string port)
         {
@@ -71,10 +77,10 @@ namespace ImageProcessor.Services
                 int nIPPort = Convert.ToInt32(port);
                 if (dwIPAddr != 0 && dwIDCode != 0)
                 {
-                   var responseNumber= Cp5200External.CP5200_Net_Init(dwIPAddr, nIPPort, dwIDCode, TimeOut);
-                if (responseNumber==0)
-                return string.Format("Communication established with {0} ", ipAddress);
-               }
+                    var responseNumber = Cp5200External.CP5200_Net_Init(dwIPAddr, nIPPort, dwIDCode, TimeOut);
+                    if (responseNumber == 0)
+                        return string.Format("Communication established with {0} ", ipAddress);
+                }
                 return string.Format("Communication failed with Sign ");
             }
             catch (Exception ex)
