@@ -18,11 +18,25 @@ namespace ImageProcessor.Services
         public string _playbillFile { get; set; }
         private const string ProgramFileDirectory = "~/playBillFiles/";
 
-        public SendCommunicator( string PlaybillFile)
+        public SendCommunicator(string PlaybillFile)
         {
-           // this.ProgramFiles = ProgramFiles;
+            // this.ProgramFiles = ProgramFiles;
             this._playbillFile = PlaybillFile;
         }
+        public SendCommunicator()
+        {
+             this._playbillFile = FindPlaybillFile();
+        }
+
+        private string FindPlaybillFile()
+        {
+            DirectoryInfo di = new DirectoryInfo(HttpContext.Current.Server.MapPath(ProgramFileDirectory));
+            var lppFile = di.EnumerateFiles().Select(f => f.Name)
+                      .FirstOrDefault(f=>f.Contains(".lpp"));
+            return string.Concat(HttpContext.Current.Server.MapPath(ProgramFileDirectory),lppFile);
+
+        }
+
         public string SendFiletoSign(List<StoreSignDTO> StoresForSchedule)
         {
             string displayMessage = string.Empty;

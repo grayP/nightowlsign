@@ -66,8 +66,11 @@
     <div class="row">
         <div class="col-sm-12">
             <button type="submit" name="operation" class="btn btn-primary" id="btnSave">
-                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Send
+                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;Create & Send
             </button>
+            <a href="@Url.Action("Index", "SendToSign", new { scheduleId=Model.Schedule.Id, scheduleName=Model.Schedule.Name , @phase="resend"})" class="btn btn-primary">
+                <i class="glyphicon glyphicon-repeat"></i>&nbsp;Resend
+            </a>
             <a href="@Url.Action("Index", "Schedules")" class="btn btn-primary">
                 <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
             </a>

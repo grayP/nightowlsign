@@ -245,7 +245,5 @@ ModelManifest.xml
 .fake/
 
 # playbill files 
-*.lbp
-*.lpp
 *.lpl
 *.jpg
