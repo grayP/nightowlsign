@@ -11,19 +11,12 @@ namespace nightowlsign.Controllers
     public class SendToSignController : Controller
     {
         [Authorize(Roles = "Admin")]
-        public ActionResult Index(int scheduleId, string scheduleName, string phase)
+        public ActionResult Index(int scheduleId, string scheduleName)
         {
             SendToSignViewModel ssvm = new SendToSignViewModel();
             ssvm.Schedule.Id = scheduleId;
             ssvm.Schedule.Name = scheduleName;
             ssvm.loadData();
-
-            if (phase == "resend")
-            {
-                SendCommunicator sendCommunicator = new SendCommunicator();
-                ssvm.DisplayMessage += sendCommunicator.SendFiletoSign(ssvm.StoresForSchedule);
-            }
-
             return View(ssvm);
         }
 
@@ -35,15 +28,11 @@ namespace nightowlsign.Controllers
             svm.IsValid = ModelState.IsValid;
             try
             {
-                CreateFilesToSend createFilesToSend = new CreateFilesToSend(svm.SignsForSchedule, svm.AllImagesInSchedule);
-                createFilesToSend.DeleteOldImages();
-                createFilesToSend.WriteImagesToDisk();
-                createFilesToSend.GeneratetheProgramFiles(svm.Schedule.Name);
-                createFilesToSend.GeneratethePlayBillFile(svm.Schedule.Name);
+                CreateFilesToSend createFilesToSend = new CreateFilesToSend(svm.SignsForSchedule, svm.AllImagesInSchedule, svm.Schedule.Name);
+                var playBillFileName = createFilesToSend.PlaybillFileName;
+                SendCommunicator sendCommunicator = new SendCommunicator();
 
-                SendCommunicator sendCommunicator = new SendCommunicator(createFilesToSend.PlaybillFileName);
                 svm.DisplayMessage += sendCommunicator.SendFiletoSign(svm.StoresForSchedule);
-
                 svm.DebugMessage = createFilesToSend.DebugString;
             }
             catch (Exception ex)
@@ -55,28 +44,24 @@ namespace nightowlsign.Controllers
             return View(svm);
         }
 
-        [HttpPost]
         [Authorize(Roles = "Admin")]
-        public ActionResult Resend(SendToSignViewModel svm)
+        public ActionResult Resend(int scheduleId, string scheduleName)
         {
-            svm.IsValid = ModelState.IsValid;
+            SendToSignViewModel ssvm = new SendToSignViewModel();
+            ssvm.Schedule.Id = scheduleId;
+            ssvm.Schedule.Name = scheduleName;
+            ssvm.loadData();
             try
             {
-                CreateFilesToSend createFilesToSend = new CreateFilesToSend(svm.SignsForSchedule, svm.AllImagesInSchedule);
-                createFilesToSend.GeneratethePlayBillFile(svm.Schedule.Name);
-
-                SendCommunicator sendCommunicator = new SendCommunicator(createFilesToSend.PlaybillFileName);
-                svm.DisplayMessage += sendCommunicator.SendFiletoSign(svm.StoresForSchedule);
-
-                svm.DebugMessage = createFilesToSend.DebugString;
+                SendCommunicator sendCommunicator = new SendCommunicator();
+                ssvm.DisplayMessage += sendCommunicator.SendFiletoSign(ssvm.StoresForSchedule);
             }
             catch (Exception ex)
             {
-                svm.DisplayMessage = ex.ToString();
+                ssvm.DisplayMessage = ex.ToString();
             }
-            svm.loadData();
-
-            return View(svm);
+ 
+            return View("Index",ssvm);
         }
     }
 }

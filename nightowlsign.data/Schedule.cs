@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace nightowlsign.data
 {
     using System;
@@ -18,8 +16,18 @@ namespace nightowlsign.data
     {
         public int Id { get; set; }
         public string Name { get; set; }
-       public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<bool> Valid { get; set; }
+        public Nullable<bool> Monday { get; set; }
+        public Nullable<bool> Tuesday { get; set; }
+        public Nullable<bool> Wednesday { get; set; }
+        public Nullable<bool> Thursday { get; set; }
+        public Nullable<bool> Friday { get; set; }
+        public Nullable<bool> Saturday { get; set; }
+        public Nullable<bool> Sunday { get; set; }
+        public Nullable<System.TimeSpan> StartTime { get; set; }
+        public Nullable<System.TimeSpan> EndTime { get; set; }
+        public Nullable<bool> DefaultPlayList { get; set; }
     }
 }

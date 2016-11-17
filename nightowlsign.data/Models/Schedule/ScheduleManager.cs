@@ -48,7 +48,7 @@ namespace nightowlsign.data.Models.Schedule
             {
                 if (entity.Name.ToLower() == entity.Name)
                 {
-                    ValidationErrors.Add(new KeyValuePair<string, string>("Schedule Name", "Schedule Name cannot be all lower case"));
+                   // ValidationErrors.Add(new KeyValuePair<string, string>("Schedule Name", "Schedule Name cannot be all lower case"));
                 }
             }
             return (ValidationErrors.Count == 0);
@@ -69,6 +69,16 @@ namespace nightowlsign.data.Models.Schedule
                         modifiedStore.Property(e => e.Name).IsModified = true;
                         modifiedStore.Property(e => e.StartDate).IsModified = true;
                         modifiedStore.Property(e => e.EndDate).IsModified = true;
+                        modifiedStore.Property(e => e.Monday).IsModified = true;
+                        modifiedStore.Property(e => e.Tuesday).IsModified = true;
+                        modifiedStore.Property(e => e.Wednesday).IsModified = true;
+                        modifiedStore.Property(e => e.Thursday).IsModified = true;
+                        modifiedStore.Property(e => e.Friday).IsModified = true;
+                        modifiedStore.Property(e => e.Saturday).IsModified = true;
+                        modifiedStore.Property(e => e.Sunday).IsModified = true;
+                        modifiedStore.Property(e => e.DefaultPlayList).IsModified = true;
+                        modifiedStore.Property(e => e.StartTime).IsModified = true;
+                        modifiedStore.Property(e => e.EndTime).IsModified = true;
                         modifiedStore.Property(e => e.Valid).IsModified = true;
 
                         db.SaveChanges();
@@ -99,6 +109,16 @@ namespace nightowlsign.data.Models.Schedule
                             Name = entity.Name,
                             StartDate = entity.StartDate,
                             EndDate = entity.EndDate,
+                            Monday = entity.Monday,
+                            Tuesday = entity.Tuesday,
+                            Wednesday = entity.Wednesday,
+                            Thursday = entity.Thursday,
+                            Friday = entity.Friday,
+                            Saturday = entity.Saturday,
+                            Sunday = entity.Sunday,
+                            DefaultPlayList = entity.DefaultPlayList,
+                            StartTime = entity.StartTime,
+                            EndTime = entity.EndTime,
                             Valid = entity.Valid
                         };
 

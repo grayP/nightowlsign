@@ -1,5 +1,6 @@
-﻿@model nightowlsign.data.Models.Schedule.ScheduleViewModel
-@using Kendo.Mvc.UI
+﻿
+@model nightowlsign.data.Models.Schedule.ScheduleViewModel
+
 @{
     ViewBag.Title = "Schedules";
 }
@@ -121,8 +122,10 @@
                 <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.EndDate, "End Date")
                     @Html.TextBoxFor(m => m.Entity.EndDate, "{0:dd MM yyyy}", new { @class = "form-control datepicker", placeholder = "Enter end date here..." })
-                   @Html.ValidationMessageFor(m => m.Entity.EndDate)
+                    @Html.ValidationMessageFor(m => m.Entity.EndDate)
                 </div>
+               
+              
 
             </div>
             <div class="panel-footer">

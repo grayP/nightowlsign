@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using nightowlsign.data.Models.Signs;
 using nightowlsign.data.Models.StoreSignDto;
 using System.IO;
 using System.Web;
@@ -15,17 +12,17 @@ namespace ImageProcessor.Services
     public class SendCommunicator
     {
         private int TimeOut = 3600;
-        public string _playbillFile { get; set; }
+        //public string _playbillFile { get; set; }
         private const string ProgramFileDirectory = "~/playBillFiles/";
 
-        public SendCommunicator(string PlaybillFile)
-        {
-            // this.ProgramFiles = ProgramFiles;
-            this._playbillFile = PlaybillFile;
-        }
+        //public SendCommunicator(string PlaybillFile)
+        //{
+        //    // this.ProgramFiles = ProgramFiles;
+        //    this._playbillFile = PlaybillFile;
+        //}
         public SendCommunicator()
         {
-             this._playbillFile = FindPlaybillFile();
+           //  this._playbillFile = FindPlaybillFile();
         }
 
         private string FindPlaybillFile()
@@ -63,8 +60,8 @@ namespace ImageProcessor.Services
                 }
 
                 if (0 ==
-                    Cp5200External.CP5200_Net_UploadFile(Convert.ToByte(1), GetPointerFromFileName(_playbillFile),
-                        GetPointerFromFileName(_playbillFile)))
+                    Cp5200External.CP5200_Net_UploadFile(Convert.ToByte(1), GetPointerFromFileName(FindPlaybillFile()),
+                        GetPointerFromFileName(FindPlaybillFile())))
                     uploadCount++;
 
                 int restartSuccess = -1;
