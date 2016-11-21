@@ -107,8 +107,8 @@ namespace nightowlsign.data.Models.Schedule
                         data.Schedule newSchedule = new data.Schedule()
                         {
                             Name = entity.Name,
-                            StartDate = entity.StartDate,
-                            EndDate = entity.EndDate,
+                            StartDate = entity.StartDate ?? DateTime.Now,
+                            EndDate = entity.EndDate ?? DateTime.Now.AddMonths(3),
                             Monday = entity.Monday,
                             Tuesday = entity.Tuesday,
                             Wednesday = entity.Wednesday,

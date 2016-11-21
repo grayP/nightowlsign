@@ -65,6 +65,9 @@
     <Compile Include="Image.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ImagesAndSign.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MetaData\MetaData.cs" />
     <Compile Include="Models\Image\ImageManager.cs" />
     <Compile Include="Models\Image\ImageViewModel.cs" />

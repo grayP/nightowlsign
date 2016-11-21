@@ -19,8 +19,8 @@ namespace nightowlsign.data.Models.Images
         }
 
         //Properties--------------
-        public List<Image> Images { get; set; }
-        public Image SearchEntity { get; set; }
+        public List<ImagesAndSign> Images { get; set; }
+        public ImagesAndSign SearchEntity { get; set; }
         public Image Entity { get; set; }
         public HttpPostedFileBase file { get; set; }
 
@@ -56,8 +56,8 @@ namespace nightowlsign.data.Models.Images
         //---------------------------------------------------------------
         protected override void Init()
         {
-            Images = new List<Image>();
-            SearchEntity = new Image();
+            Images = new List<ImagesAndSign>();
+            SearchEntity = new ImagesAndSign();
             Entity = new Image();
             Entity.DateTaken = DateTime.Now;
 
@@ -97,7 +97,7 @@ namespace nightowlsign.data.Models.Images
 
         protected override void ResetSearch()
         {
-            SearchEntity = new Image();
+            SearchEntity = new ImagesAndSign();
         }
 
         protected override void Get()

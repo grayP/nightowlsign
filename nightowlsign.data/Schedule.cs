@@ -19,15 +19,15 @@ namespace nightowlsign.data
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<bool> Valid { get; set; }
-        public Nullable<bool> Monday { get; set; }
-        public Nullable<bool> Tuesday { get; set; }
-        public Nullable<bool> Wednesday { get; set; }
-        public Nullable<bool> Thursday { get; set; }
-        public Nullable<bool> Friday { get; set; }
-        public Nullable<bool> Saturday { get; set; }
-        public Nullable<bool> Sunday { get; set; }
+        public bool Monday { get; set; }
+        public bool Tuesday { get; set; }
+        public bool Wednesday { get; set; }
+        public bool Thursday { get; set; }
+        public bool Friday { get; set; }
+        public bool Saturday { get; set; }
+        public bool Sunday { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
-        public Nullable<bool> DefaultPlayList { get; set; }
+        public bool DefaultPlayList { get; set; }
     }
 }

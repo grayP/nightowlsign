@@ -17,26 +17,37 @@
             </div>
 
         </div>
-        @foreach (var item in Model.Images)
-        {
-
-            string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
-            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-
-                <a class="thumbnail" href="@item.ImageURL">
-                    <img class="img-responsive myThumbnail" src="@imageSrc" style="height: auto;" alt="@item.Caption">
-                </a>
-                <div class="desc">
-                    <div class="desc_content">@item.Caption</div>
-
-                    <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
-                    <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
-                </div>
-            </div>
-        }
     </div>
+        <ul class="list-group">
+
+
+            @foreach (var item in Model.Images)
+                {
+
+                    string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
+                    string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                <li>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="panel-info">
+                                <div class="desc_content">@item.Caption</div>
+
+                                <div class="desc_content">@item.Model</div>
+
+                               <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+
+                            </div>
+                            <div class="panel-image">
+                                <a class="thumbnail" href="@item.ImageURL">
+                                    <img class="img-responsive myThumbnail" src="@imageSrc" style="height: auto;" alt="@item.Caption">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
 }
 <!-- End List Area-->
 @using (Html.BeginForm("Index", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -49,7 +60,7 @@
 
     if (Model.IsDetailVisible)
     {
-       <div class="panel panel-primary">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h1 class="panel-title">
                     Images
@@ -74,7 +85,7 @@
                 </div>
                 <!-- End message Area-->
                 @if (@Model.CommandString != "save")
-                    {
+                {
                     <div class="form-group">
                         <input capture="camera" accept="image/*" id="cameraInput" type="file" name="file" style="max-width: 800px; width: 500px;" class="btn btn-primary" />
                     </div>
@@ -90,11 +101,11 @@
                     @Html.TextBoxFor(m => m.imageToUpload.Caption, new { @class = "form-control", style = "max-width:500px;" })
                 </div>
                 <div class="form-group">
-                        @Html.LabelFor(m => m.imageToUpload.SignId, "Sign")
-                        @Html.DropDownListFor(m => m.imageToUpload.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
+                    @Html.LabelFor(m => m.imageToUpload.SignId, "Sign")
+                    @Html.DropDownListFor(m => m.imageToUpload.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
 
                 </div>
-           </div>
+            </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-12">

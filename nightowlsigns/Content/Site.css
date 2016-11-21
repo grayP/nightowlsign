@@ -88,6 +88,20 @@ body {
 
 }
 
+/* Imges screen */
+.list-group li {
+    list-style: none !important;
+}
+.panel-info, .panel-rating {
+    float: left !important;
+    margin: 0 10px !important;
+}
+
+.panel-image {
+    float: right !important;
+    margin: 0 10px !important;
+}
+
 .quotation_div {
    
     display: table;

@@ -19,12 +19,12 @@ namespace nightowlsign.data.Models.Images
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
 
 
-        public List<Image> Get(Image Entity)
+        public List<ImagesAndSign> Get(ImagesAndSign Entity)
         {
-            List<Image> ret = new List<Image>();
+            List<ImagesAndSign> ret = new List<ImagesAndSign>();
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.Images.OrderBy(x => x.DateTaken.Value).ToList<Image>();
+                ret = db.ImagesAndSigns.OrderBy(x => x.DateTaken.Value).ToList<ImagesAndSign>();
             }
             if (!string.IsNullOrEmpty(Entity.Caption))
             {
