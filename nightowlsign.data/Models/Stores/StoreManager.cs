@@ -16,15 +16,15 @@ namespace nightowlsign.data.Models.Stores
         //Properties
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
 
-        public List<Store> Get(Store Entity)
+        public List<LastInstalledSchedule> Get(Store Entity)
         {
-            List<Store> ret = new List<Store>();
+            List<LastInstalledSchedule> ret = new List<LastInstalledSchedule>();
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.Store.OrderBy(x => x.id).ToList<Store>();
+                ret = db.LastInstalledSchedules.OrderBy(x => x.Name).ToList<LastInstalledSchedule>();
 
             }
-
+ 
             if (!string.IsNullOrEmpty(Entity.Name))
             {
                 ret = ret.FindAll(p => p.Name.ToLower().StartsWith(Entity.Name));

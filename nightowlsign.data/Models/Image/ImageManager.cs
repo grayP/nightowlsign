@@ -24,7 +24,7 @@ namespace nightowlsign.data.Models.Images
             List<ImagesAndSign> ret = new List<ImagesAndSign>();
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.ImagesAndSigns.OrderBy(x => x.DateTaken.Value).ToList<ImagesAndSign>();
+                ret = db.ImagesAndSigns.OrderBy(x=>x.Model).ThenBy(x => x.Caption).ToList<ImagesAndSign>();
             }
             if (!string.IsNullOrEmpty(Entity.Caption))
             {

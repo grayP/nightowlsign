@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="Models.ScheduleImage" Width="1.5" PointX="8" PointY="4.75" />
         <EntityTypeShape EntityType="Models.ScheduleSign" Width="1.5" PointX="3.375" PointY="7.75" />
         <EntityTypeShape EntityType="Models.ImagesAndSign" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Models.LastInstalledSchedule" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

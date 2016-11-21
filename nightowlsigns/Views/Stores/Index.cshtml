@@ -51,14 +51,15 @@
                         <th class="pdsa-action-button-column">Edit</th>
                         <th>Name</th>
                         <th class="centrealign">Sign</th>
-                        <th>Address</th>
+                        <th>Schedule</th>
+                        <th>Installed Date</th>
                         <th>Manager</th>
                         <th>Phone</th>
                         <th class="pdsa-action-button-column">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Stores)
+                    @foreach (var item in Model.StoreSchedules)
                     {
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
@@ -67,12 +68,13 @@
                                 @*@Html.ActionLink(@item.Name, "show", "Stores", new {id = item.id, Name = item.Name}, null)*@
                             </td>
                             <td class="centrealign">
-                                <a href="@Url.Action("Index", "StoreSign", new {storeId = item.id, storeName = item.Name})" class="btn btn-sm btn-default" alt="Sign List" data-toggle="tooltip" title="What sort of sign(s) does this store have?" ><i class="fa fa-television" aria-hidden="true"></i></a>
- </td>
-                            <td>@item.Address @item.Suburb</td>
+                                <a href="@Url.Action("Index", "StoreSign", new {storeId = item.id, storeName = item.Name})" class="btn btn-sm btn-default" alt="Sign List" data-toggle="tooltip" title="What sort of sign(s) does this store have?"><i class="fa fa-television" aria-hidden="true"></i></a>
+                            </td>
+                            <td>@item.ScheduleName</td>
+                            <td>@string.Format("{0:dd MMM yy}", item.LastInstalled)</td>
                             <td>@item.Manager</td>
                             <td>@item.Phone</td>
-                            
+
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }
@@ -124,7 +126,7 @@
                     @Html.TextBoxFor(m => m.Entity.Suburb, new { @class = "form-control" })
                 </div>
 
-  
+
                 <div class="form-group">
                     @Html.LabelFor(m => m.Entity.Manager, "Manager")
                     @Html.TextBoxFor(m => m.Entity.Manager, new { @class = "form-control" })

@@ -2,6 +2,7 @@
 using nightowlsign.data.Models.Images;
 
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Web.Mvc;
 
 
@@ -54,6 +55,7 @@ namespace nightowlsign.Controllers
             if (iVm.IsValid)
             {
                 ModelState.Clear();
+     
             }
             else
             {

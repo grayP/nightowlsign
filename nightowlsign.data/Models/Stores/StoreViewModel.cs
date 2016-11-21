@@ -13,6 +13,7 @@ namespace nightowlsign.data.Models.Stores
         {
         }
         public List<Store> Stores { get; set; }
+        public List<LastInstalledSchedule> StoreSchedules { get; set; }
         public Store SearchEntity { get; set; }
         public Store Entity { get; set; }
 
@@ -34,7 +35,8 @@ namespace nightowlsign.data.Models.Stores
         protected override void Get()
         {
             StoreManager sm = new StoreManager();
-            Stores = sm.Get(SearchEntity);
+            StoreSchedules = sm.Get(SearchEntity);
+
         }
         protected override void Edit()
         {

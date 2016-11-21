@@ -165,6 +165,8 @@ namespace nightowlsign.data.Models.Images
                 {
                     Mode = "List";
                     Message = "Image successfully added";
+                    base.HandleRequest();
+                    Get();
                 }
                 else
                 {
