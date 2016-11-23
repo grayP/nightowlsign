@@ -82,8 +82,8 @@
                                 <a href="@Url.Action("Index", "ScheduleImage",new {scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Images to apply to the schedule." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="glyphicon glyphicon-camera"></i></a>
                                 <a href="@Url.Action("Index", "SendToSign",new {scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Create PlayBil file and send Images down to Sign." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="fa fa-upload" aria-hidden="true"></i></a>
                             </td>
-                            <td>@item.StartDate.Value.ToString("dd/MM/yy")  </td>
-                            <td>@item.EndDate.Value.ToString("dd/MM/yy")</td>
+                            <td>@string.Format("{0:dd/MM/yy}",item.StartDate)  </td>
+                            <td>@string.Format("{0:dd/MM/yy}",item.EndDate)</td>
                             <td class="centrealign">@Html.CheckBoxFor(model => dDefault, new { @disabled = "disabled" })</td>
                             <td>
                                 @Html.CheckBoxFor(model => Sunday, new { @disabled = "disabled" })
@@ -137,20 +137,20 @@
 
                 <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.StartDate, "Start Date")
-                    @Html.TextBoxFor(m => m.Entity.StartDate, "{0:dd MMM yyyy}", new { @class = "form-control datepicker", placeholder = "Enter start date here..." })
+                    @Html.TextBoxFor(m => m.Entity.StartDate, "{0:dd/MM/yy}", new { @class = "form-control datepicker", placeholder = "Enter start date here..." })
                     @Html.ValidationMessageFor(m => m.Entity.StartDate)
 
                 </div>
                 <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.EndDate, "End Date")
-                    @Html.TextBoxFor(m => m.Entity.EndDate, "{0:dd MMM yyyy}", new { @class = "form-control datepicker", placeholder = "Enter end date here..." })
+                    @Html.TextBoxFor(m => m.Entity.EndDate, "{0:dd/MM/yy}", new { @class = "form-control datepicker", placeholder = "Enter end date here..." })
                     @Html.ValidationMessageFor(m => m.Entity.EndDate)
                 </div>
 
                 <div class="form-group input-group-sm">
-                    @Html.LabelFor(m => m.Entity.DefaultPlayList, "Default")
+                    @Html.LabelFor(m => m.Entity.DefaultPlayList, "Default" )
                     @Html.CheckBoxFor(m => m.Entity.DefaultPlayList, htmlAttributes: new { @checked = true })
-
+                    <label class="tip">Is this the default playlist? </label>
                 </div>
 
                 <div class="form-group input-group-sm">
@@ -222,7 +222,11 @@
     <!-- End Detail Area-->
     <script type="text/javascript">
         $(function () { // will trigger when the document is ready
-            $('.datepicker').datepicker({ format: 'dd MMM yyyy' }); //Initialise any date pickers
+            $('.datepicker').datepicker({
+                format: 'dd MM yyyy'
+            }).on('changeDate', function (e) {
+                $(this).datepicker('hide');
+            });
         });
     </script>
 }

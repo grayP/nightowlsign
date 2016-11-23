@@ -9,7 +9,7 @@ namespace nightowlsign.Controllers
 {
     public class StoreSignController : Controller
     {
-        // GET: RegattaCrew
+        // GET:
         [Authorize(Roles = "Admin")]
         public ActionResult Index(int storeId, string storeName)
         {
@@ -24,7 +24,7 @@ namespace nightowlsign.Controllers
         public ActionResult Index(StoreSignViewModel model)
         {
             StoreSignManager rcm = new StoreSignManager();
-            List<SignSelect> signselects = model.AllSigns;
+            IEnumerable<SignSelect> signselects = model.AllSigns;
 
             foreach (SignSelect signSelect in signselects)
             {

@@ -1,6 +1,6 @@
 ﻿ @model nightowlsign.data.Models.Schedule.ScheduleViewModel
 
-@{.
+@{
     ViewBag.Title = "Schedules";
 }
 
@@ -34,8 +34,8 @@
 
                         </td>
                       
-                        <td>@item.StartDate.Value.ToString("dd-MMMM-yyyy")</td>
-                        <td>@item.EndDate.Value.ToString("dd MMM yyyy")</td>
+                        <td>@item.StartDate.Value.ToString("dd-mmm-yyyy")</td>
+                        <td>@item.EndDate.Value.ToString("dd-mmm-yyyy")</td>
                         <td>@item.Valid</td>
                        
                     </tr>

@@ -25,7 +25,7 @@ namespace nightowlsign.Controllers
             return View(svm);
         }
         [Authorize(Roles = "Admin")]
-        public ActionResult show()
+        public ActionResult show(int Id)
         {
             SignViewModel svm = new SignViewModel();
             svm.HandleRequest();

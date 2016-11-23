@@ -18,36 +18,33 @@
 
         </div>
     </div>
-        <ul class="list-group">
+    <ul class="list-group">
 
 
-            @foreach (var item in Model.Images)
+        @foreach (var item in Model.Images)
                 {
 
                     string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
                     string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-                <li>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="panel-info">
-                                <div class="desc_content">@item.Caption</div>
-
-                                <div class="desc_content">@item.Model</div>
-
-                               <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
-
-                            </div>
-                            <div class="panel-image">
-                                <a class="thumbnail" href="@item.ImageURL">
-                                    <img class="img-responsive myThumbnail" src="@imageSrc" style="height: auto;" alt="@item.Caption">
-                                </a>
-                            </div>
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="panel-info">
+                            <div class="desc_content">Title: @item.Caption</div>
+                            <div class="desc_content">Sign: @item.Model</div>
+                            <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div>
+                        <div class="panel-image">
+                            <a class="thumbnail" href="@item.ImageURL">
+                                <img class="img-responsive myThumbnail" src="@imageSrc" style="height:80px;" alt="@item.Caption">
+                            </a>
                         </div>
                     </div>
-                </li>
-            }
-        </ul>
+                </div>
+            </li>
+        }
+    </ul>
 }
 <!-- End List Area-->
 @using (Html.BeginForm("Index", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))

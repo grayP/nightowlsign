@@ -9,6 +9,10 @@ namespace nightowlsign.data.Models
 {
     public class StoreSignViewModel : BaseModel.ViewModelBase
     {
+        public StoreSignViewModel()
+        {
+            
+        }
         public StoreSignViewModel(int id, string storeName) : base()
         {
             store = new Store
@@ -21,8 +25,8 @@ namespace nightowlsign.data.Models
 
 
         public Store store { get; set; }
-        public List<SignSelect> AllSigns { get; set; }
-        public List<int?> storesign { get; set; }
+        public IEnumerable<SignSelect> AllSigns { get; set; }
+        public IEnumerable<int?> storesign { get; set; }
 
         protected override void Init()
         {

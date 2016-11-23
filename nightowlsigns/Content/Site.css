@@ -18,6 +18,10 @@ body {
 
 }
 
+label .tip {
+    opacity: 0.6; /* Real browsers */
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
    background-color: transparent; 
@@ -92,6 +96,10 @@ body {
 .list-group li {
     list-style: none !important;
 }
+.panel-body {
+    padding: 7px !important;
+}
+
 .panel-info, .panel-rating {
     float: left !important;
     margin: 0 10px !important;
@@ -99,7 +107,7 @@ body {
 
 .panel-image {
     float: right !important;
-    margin: 0 10px !important;
+    margin: 0 7px !important;
 }
 
 .quotation_div {

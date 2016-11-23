@@ -59,12 +59,11 @@
                     {
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
-                            <td>
-                                @Html.ActionLink(@item.Model, "Index", "Display", new { id = item.id, Model = item.Model }, null)
-                            </td>
+                            <td>@item.Model</td>
+                            @*@Html.ActionLink(@item.Model, "show", "Signs", new {id = item.id, Model = item.Model}, null)*@
+                            @*</td>*@
                             <td>@item.Height</td>
                             <td>@item.Width</td>
-
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }
@@ -116,17 +115,6 @@
                     @Html.LabelFor(m => m.Entity.Width, "Width")
                     @Html.TextBoxFor(m => m.Entity.Width, new { @class = "form-control" })
                 </div>
-
-                @*<div class="form-group">
-                         @Html.LabelFor(m => m.Entity.InstallDate, "Install Date")
-                         @Html.Kendo().DatePickerFor(m => m.Entity.InstallDate).Format("d/MM/yyyy").HtmlAttributes(new { @class = "form-control" })
-                         @Html.TextBoxFor(m => m.Entity.InstallDate, new { @class = "form-control" })
-                    @*</div>
-
-                     <div class="form-group">
-                         @Html.LabelFor(m => m.Entity.IPAddress, "Ip Address")
-                         @Html.TextBoxFor(m => m.Entity.IPAddress, new { @class = "form-control" })
-                     </div>*@
 
             </div>
             <div class="panel-footer">
