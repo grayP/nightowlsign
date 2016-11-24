@@ -550,6 +550,7 @@
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\clockpicker.css" />
     <Content Include="Content\images\graphic.png" />
     <Content Include="Content\images\nightowl_back.jpg" />
     <Content Include="Content\images\night_owl.gif" />
@@ -557,6 +558,7 @@
     <AdditionalFiles Include="EmbeddedResource\CP5200.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
+    <Content Include="Content\standalone.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -581,6 +583,7 @@
     <Content Include="playBillFiles\TestImages.lpp" />
     <None Include="Properties\PublishProfiles\nightowlsign.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\clockpicker.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

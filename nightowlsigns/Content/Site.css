@@ -77,6 +77,9 @@ label .tip {
 .centrealign {
     text-align: center;
 }
+.clockpicker {
+
+}
 /* left column on layout page */
 .leftaside      {}
 
@@ -89,7 +92,6 @@ label .tip {
 }
 .rightaside .glyphicon {
     font-size:50px;
-
 }
 
 /* Imges screen */
@@ -133,6 +135,7 @@ label .tip {
     opacity: .6;
    
 }
+
 
 #footer {
     position: fixed;

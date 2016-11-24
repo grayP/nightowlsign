@@ -26,12 +26,15 @@ namespace nightowlsign
         "~/Scripts/bootstrap.js",
         "~/Scripts/DatePickerReady.js",
         "~/Scripts/bootstrap-datepicker.js",
+        "~/Scripts/clockpicker.js",
         "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
         "~/Content/bootstrap.css",
         "~/Content/bootstrap-datepicker3.css",
-        "~/Content/site.css"));
+        "~/Content/site.css",
+        "~/Content/clockpicker.css",
+        "~/Content/standalone.css"));
         }
     }
 }
