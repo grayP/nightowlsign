@@ -28,29 +28,35 @@ namespace nightowlsign.data.Models.Images
 
         public string CommandString { get; set; }
         public string Message { get; set; }
-        public int? searchSignID { get; set; }
+        public int? SearchSignID { get; set; }
         public IList<SignSelect> SignList
         {
             get
             {
                 using (nightowlsign_Entities db = new nightowlsign_Entities())
                 {
-                    var selectList = (from item in
-                                       db.Signs.OrderBy(x => x.Model)
-                                      select new SignSelect()
-                                      {
-                                          SignId = item.id,
-                                          Model = item.Model
-                                      }).ToList();
+                    var selectList = new List<SignSelect>()
+                    {
+                        new SignSelect
+                        {
+                            Id = 0,
+                            Model = "Show All"
+                        }
+                    };
+                  
+                    selectList.AddRange(from item in
+                                      db.Signs.OrderBy(x => x.Model)
+                                        select new SignSelect()
+                                        {
+                                            SignId = item.id,
+                                            Model = item.Model
+                                        });
 
                     return selectList;
                 }
-
             }
-            set { }
+          
         }
-
-
 
 
         //---------------------------------------------------------------
@@ -60,7 +66,6 @@ namespace nightowlsign.data.Models.Images
             SearchEntity = new ImagesAndSign();
             Entity = new Image();
             Entity.DateTaken = DateTime.Now;
-
 
             imageToUpload = new UploadedImage();
 
@@ -104,6 +109,7 @@ namespace nightowlsign.data.Models.Images
         {
             ImageManager cmm = new ImageManager();
             SearchEntity.Caption = SearchEntity.Caption;
+            SearchEntity.SignSize = SearchSignID;
             Images = cmm.Get(SearchEntity);
         }
 
@@ -151,7 +157,7 @@ namespace nightowlsign.data.Models.Images
             {
                 ImageService _imageService = new ImageService();
 
-                if (imageToUpload.SignId >0)
+                if (imageToUpload.SignId > 0)
                 {
                     var sign = signManager.Find(imageToUpload.SignId);
                     imageToUpload.SignHeight = sign.Height ?? 96;

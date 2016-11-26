@@ -969,6 +969,7 @@
     <Content Include="Views\SendToSign\Index.cshtml" />
     <Content Include="Views\SendToSign\EditorTemplates\ImageSelect.cshtml" />
     <Content Include="Views\SendToSign\Resend.cshtml" />
+    <Content Include="Views\Schedules\EditorTemplates\TimeSelect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

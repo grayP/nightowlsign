@@ -116,14 +116,14 @@
                     <div class="col-sm-12">
                         @if (!Model.IsValid)
                         {
-                        <div class="alert alert-danger alert-dismissable" role="alert">
-                            <button type="button" class="close" data-dissmiss="alert">
-                                <span aria-hidden="true">&times</span>
+                            <div class="alert alert-danger alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dissmiss="alert">
+                                    <span aria-hidden="true">&times</span>
 
-                                <span class="sr-only">Close</span>
-                            </button>
-                            @Html.ValidationSummary(false)
-                        </div>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                @Html.ValidationSummary(false)
+                            </div>
                         }
                     </div>
                 </div>
@@ -151,75 +151,90 @@
                     @Html.CheckBoxFor(m => m.Entity.DefaultPlayList, htmlAttributes: new { @checked = true, tooltip = "" })
                     <label class="tip">Is this the default playlist? </label>
                 </div>
-
-                <div class="form-group input-group-sm">
-                    <table>
-                        <tr>
-                            <td>
-                                @Html.LabelFor(m => m.Entity.Sunday, "S")
-                            </td>
-                            <td>
-                                @Html.LabelFor(m => m.Entity.Monday, "M")
-                            </td>
-                            <td>
-                                @Html.LabelFor(m => m.Entity.Tuesday, "T")
-                            </td>
-                            <td>
-                                @Html.LabelFor(m => m.Entity.Wednesday, "W")
-                            </td>
-                            <td>
-                                @Html.LabelFor(m => m.Entity.Thursday, "T")
-                            </td>
-                            <td>
-                                @Html.LabelFor(m => m.Entity.Friday, "F")
-                            </td>
-                            <td>
-                                @Html.LabelFor(m => m.Entity.Saturday, "S")
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Entity.Sunday, htmlAttributes: new { @checked = false })
-                            </td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Entity.Monday, htmlAttributes: new { @checked = false })
-                            </td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Entity.Tuesday, htmlAttributes: new { @checked = false })
-                            </td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Entity.Wednesday, htmlAttributes: new { @checked = false })
-                            </td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Entity.Thursday, htmlAttributes: new { @checked = false })
-                            </td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Entity.Friday, htmlAttributes: new { @checked = false })
-                            </td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Entity.Saturday, htmlAttributes: new { @checked = false })
-                            </td>
-                        </tr>
-                    </table>
+                <div class="row">
+                    <div class="col-sm-3 col-xs-4">
+                        <div class="form-group input-group-sm">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.Entity.Sunday, "S")
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(m => m.Entity.Monday, "M")
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(m => m.Entity.Tuesday, "T")
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(m => m.Entity.Wednesday, "W")
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(m => m.Entity.Thursday, "T")
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(m => m.Entity.Friday, "F")
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(m => m.Entity.Saturday, "S")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.Entity.Sunday, htmlAttributes: new { @checked = false })
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.Entity.Monday, htmlAttributes: new { @checked = false })
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.Entity.Tuesday, htmlAttributes: new { @checked = false })
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.Entity.Wednesday, htmlAttributes: new { @checked = false })
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.Entity.Thursday, htmlAttributes: new { @checked = false })
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.Entity.Friday, htmlAttributes: new { @checked = false })
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(m => m.Entity.Saturday, htmlAttributes: new { @checked = false })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group input-group-sm clockpicker" data-placement="top" data-align="top" data-autoclose="true">
-                    @{DateTime? startTimeValue = DateTime.Today + @Model.Entity.StartTime;}
-                    @Html.LabelFor(model => model.Entity.StartTime, "Start Time")
-                    @Html.TextBoxFor(model => startTimeValue, "{0:HH:mm}", new { @class = "form-control", @value = "10:00", placeholder = "Start time", Title = "Time for playlist to start each day" })
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </span>
+                <div class="row">
+                    <div class="col-sm-3 col-xs-4">
+                        <div class="form-group">
+                             @Html.LabelFor(model => model.Entity.StartTime, "Start Time")
+                            <div class="input-group clockpicker" data-placement="right" data-align="bottom" data-autoclose="true">
+                                @Html.TextBoxFor(m => m.Entity.StartTime,  new { @class = "form-control", placeholder = "Start time" })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="input-group-sm clockpicker" data-placement="top" data-align="top" data-autoclose="true">
-                    @{DateTime? endTimeValue = DateTime.Today + @Model.Entity.EndTime;}
-                    @Html.LabelFor(model => model.Entity.EndTime, "End Time")
-                    @Html.TextBoxFor(m => endTimeValue, "{0:HH:mm}", new { @class = "form-control", @value = "10:00", placeholder = "End time" })
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </span>
+                <div class="row">
+                    <div class="col-sm-3 col-xs-4">
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.Entity.EndTime, "End Time")
+                            <div class="input-group clockpicker" data-placement="right" data-align="bottom" data-autoclose="true">
+                                @Html.TextBoxFor(m => m.Entity.EndTime, new {@class = "form-control", placeholder = "End time"})
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-12">
@@ -233,20 +248,20 @@
                 </div>
             </div>
         </div>
-                        }
+                                }
     <!-- End Detail Area-->
-                        <script type="text/javascript">
-                            $(function () { // will trigger when the document is ready
-                                $(document).tooltip();
+                                <script type="text/javascript">
+                                    $(function () { // will trigger when the document is ready
+                                        $(document).tooltip();
 
-                                $('.clockpicker').clockpicker();
+                                        $('.clockpicker').clockpicker();
 
-                                $('.datepicker').datepicker({
-                                    format: 'dd MM yyyy',
-                                    shortYearCutoff: 99
-                                }).on('changeDate', function (e) {
-                                    $(this).datepicker('hide');
-                                });
-                            });
-                        </script>
-                        }
+                                        $('.datepicker').datepicker({
+                                            format: 'dd MM yyyy',
+                                            shortYearCutoff: 99
+                                        }).on('changeDate', function (e) {
+                                            $(this).datepicker('hide');
+                                        });
+                                    });
+                                </script>
+                                }

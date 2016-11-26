@@ -30,6 +30,11 @@ namespace nightowlsign.data.Models.Images
             {
                 ret = ret.FindAll(p => p.Caption.ToLower().StartsWith(Entity.Caption));
             }
+            if (Entity.SignSize>0)
+            {
+                ret = ret.FindAll(p => p.SignSize.Equals(Entity.SignSize));
+            }
+
             return ret;
         }
 

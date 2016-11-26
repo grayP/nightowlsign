@@ -7,20 +7,25 @@
 @if (Model.IsListAreaVisible)
 {
     <div class="row">
-        <div class="col-lg-12">
-
+        <div class="col-lg-6 col-sm-6">
             <div class="alert">
                 @Model.Message
-                <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add" data-pdsa-val="@Model.searchSignID">
+                <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add" data-pdsa-val="@Model.SearchSignID">
                     <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add image to image gallery
                 </button>
             </div>
-
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            @using (Html.BeginForm("Show", "Image", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.imageToUpload.SignId, "Enter Sign Size to filter images")
+                    @Html.DropDownListFor(m => m.SearchSignID, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.SearchSignID)), new { onchange = "this.form.submit();", @class = "form-control" })
+                </div>
+            }
         </div>
     </div>
     <ul class="list-group">
-
-
         @foreach (var item in Model.Images)
                 {
 

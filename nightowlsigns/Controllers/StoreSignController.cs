@@ -31,9 +31,6 @@ namespace nightowlsign.Controllers
                 rcm.UpdateSignList(signSelect, model.store);
             }
             return RedirectToAction("Index", "Stores");
-
         }
-
-
     }
 }

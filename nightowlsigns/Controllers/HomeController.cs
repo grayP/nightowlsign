@@ -13,5 +13,10 @@ namespace nightowlsign.Controllers
             return RedirectToAction("index","Stores");
            // return View(svm);
         }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

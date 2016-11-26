@@ -34,7 +34,8 @@ namespace nightowlsign
         "~/Content/bootstrap-datepicker3.css",
         "~/Content/site.css",
         "~/Content/clockpicker.css",
-        "~/Content/standalone.css"));
+        "~/Content/standalone.css"
+      ));
         }
     }
 }
