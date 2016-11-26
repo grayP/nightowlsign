@@ -258,7 +258,8 @@
 
                                         $('.datepicker').datepicker({
                                             format: 'dd MM yyyy',
-                                            shortYearCutoff: 99
+                                            shortYearCutoff: 99,
+                                            orientation: "bottom"
                                         }).on('changeDate', function (e) {
                                             $(this).datepicker('hide');
                                         });
