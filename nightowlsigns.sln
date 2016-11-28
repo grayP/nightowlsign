@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nightowlsign", "nightowlsigns\nightowlsign.csproj", "{971C05C5-6D62-4424-9411-7DE2CBEBC2B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{FFFA2B26-470D-4915-9561-FA62E8A608F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{5F0C7F9A-DBA8-45FD-8BBB-EB41BFEAF9A7}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1 = PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{8F71084D-AA21-4B5C-AFEC-400773B0E2F2}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Templates\nightowlsigns.json = PublishScripts\Templates\nightowlsigns.json
+		PublishScripts\Templates\nightowlsigns.param.dev.json = PublishScripts\Templates\nightowlsigns.param.dev.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "basemodel", "basemodel\basemodel.csproj", "{CE5565BE-0F62-4D0D-911B-BE540AF7D2A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nightowlsign.data", "nightowlsign.data\nightowlsign.data.csproj", "{E006FAC5-FA56-4A62-921C-2E0CC550AE5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageStorage", "nightowlsign.ImageStorage\ImageStorage.csproj", "{A31B574D-0BEB-4B15-B608-271FF545D81E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessor", "imageprocessor\ImageProcessor.csproj", "{150B2F5D-B12E-43AE-8E73-018B30A93918}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessorTests", "ImageProcessorTests\ImageProcessorTests.csproj", "{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{971C05C5-6D62-4424-9411-7DE2CBEBC2B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971C05C5-6D62-4424-9411-7DE2CBEBC2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971C05C5-6D62-4424-9411-7DE2CBEBC2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971C05C5-6D62-4424-9411-7DE2CBEBC2B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5565BE-0F62-4D0D-911B-BE540AF7D2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5565BE-0F62-4D0D-911B-BE540AF7D2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE5565BE-0F62-4D0D-911B-BE540AF7D2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5565BE-0F62-4D0D-911B-BE540AF7D2A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E006FAC5-FA56-4A62-921C-2E0CC550AE5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E006FAC5-FA56-4A62-921C-2E0CC550AE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E006FAC5-FA56-4A62-921C-2E0CC550AE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E006FAC5-FA56-4A62-921C-2E0CC550AE5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A31B574D-0BEB-4B15-B608-271FF545D81E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A31B574D-0BEB-4B15-B608-271FF545D81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A31B574D-0BEB-4B15-B608-271FF545D81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A31B574D-0BEB-4B15-B608-271FF545D81E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{150B2F5D-B12E-43AE-8E73-018B30A93918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{150B2F5D-B12E-43AE-8E73-018B30A93918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{150B2F5D-B12E-43AE-8E73-018B30A93918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{150B2F5D-B12E-43AE-8E73-018B30A93918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327D6A47-5F66-4F5B-B5A6-02355AE27B5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F0C7F9A-DBA8-45FD-8BBB-EB41BFEAF9A7} = {FFFA2B26-470D-4915-9561-FA62E8A608F5}
+		{8F71084D-AA21-4B5C-AFEC-400773B0E2F2} = {FFFA2B26-470D-4915-9561-FA62E8A608F5}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,47 @@
+﻿ @model nightowlsign.data.Models.Schedule.ScheduleViewModel
+
+@{
+    ViewBag.Title = "Schedules";
+}
+
+
+<!-- Start List Area  -->
+@if (Model.IsListAreaVisible)
+{
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Schedule</th>
+                    <th align="right">Action</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Valid</th>
+                   
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Schedules)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(@item.Name, "Index", "Schedules", new { Id = item.Id, Model = item.Name }, null)
+                        </td>
+                        <td align="right">
+                          <a href="@Url.Action("show", "Image",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Images for this Schedule"><i class="glyphicon glyphicon-camera"></i></a>
+                            <a href="@Url.Action("show", "Stores",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
+
+                        </td>
+                      
+                        <td>@item.StartDate.Value.ToString("dd-mmm-yyyy")</td>
+                        <td>@item.EndDate.Value.ToString("dd-mmm-yyyy")</td>
+                        <td>@item.Valid</td>
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+<!-- End List Area-->

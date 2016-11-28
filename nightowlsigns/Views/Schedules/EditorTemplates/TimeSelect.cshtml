@@ -1,0 +1,14 @@
+﻿
+
+
+
+@model nightowlsign.data.Models.ScheduleImageViewModel
+
+@Html.LabelFor(model => model.Schedule.StartTime, "Start Time")
+
+<div class="input-group clockpicker" data-placement="right" data-align="bottom" data-autoclose="true">
+    @Html.TextBoxFor(m => DateTime.Today + m.Schedule.StartTime, "{0:HH:mm}", new { @class = "form-control", placeholder = "Start Time" })
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+</div>

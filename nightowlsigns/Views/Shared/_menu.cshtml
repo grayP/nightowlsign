@@ -1,0 +1,15 @@
+﻿@if (User.IsInRole("Admin"))
+{
+                    <li>@Html.ActionLink("Home", "Index", "Stores")</li>
+                    <li>@Html.ActionLink("Images", "Index", "Image")</li>
+                    <li>@Html.ActionLink("Playlists", "Index", "Schedules")</li>
+                    @*<li>@Html.ActionLink("Stores", "Index", "Stores")</li>*@
+                    <li>@Html.ActionLink("Signs", "Index", "Signs")</li>
+
+}
+else
+{
+
+                   <li>@Html.ActionLink("Home", "Index", "Stores")</li>
+
+}

@@ -1,0 +1,54 @@
+﻿@model nightowlsign.data.Models.ScheduleSignViewModel
+
+@{
+    ViewBag.Title = "Sign List";
+}
+
+<h2>Sign List - @Model.schedule.Name</h2>
+
+@using (Html.BeginForm("Index", "ScheduleSign", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
+{
+    <!-- Start Hidden form -->
+    @Html.HiddenFor(m => m.EventCommand)
+    @Html.HiddenFor(m => m.EventArgument)
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.schedule.Id)
+    @Html.HiddenFor(m => m.schedule.Name)
+    <!-- End Hidden form-->
+
+   
+            <div class="table-responsive">
+                <table class="table table-condensed table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th class="centrealign">Select</th>
+                            <th class="centrealign">Sign</th>
+                            <th class="centrealign">Aspect Ratio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.EditorFor(model => model.AllSigns)
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="submit" name="operation" class="btn btn-primary" id="btnSave">
+                        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
+                    </button>
+                    <a href="@Url.Action("Index", "Schedules")" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- End Detail Area-->
+            }
+
+            @section scripts
+{
+
+
+            }

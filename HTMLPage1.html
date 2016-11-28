@@ -1,0 +1,597 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store List </title>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+
+
+
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+
+    <link href="/Content/kendo/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/kendo/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/kendo/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/kendo/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/kendo/kendo.dataviz.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/kendo/jquery.min.js"></script>
+    <script src="/Scripts/kendo/jszip.min.js"></script>
+    <script src="/Scripts/kendo/kendo.all.min.js"></script>
+    <script src="/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+    <script src="/Scripts/kendo.modernizr.custom.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-inverse navbar-fixed-top cbp-af-header" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand">
+                        <img src="/Content/images/graphic.png" />
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/Image">Images</a></li>
+                        <li><a href="/Schedules">Schedules</a></li>
+                        <li><a href="/Stores">Stores</a></li>
+                        <li><a href="/Signs">Signs</a></li>
+
+
+                    </ul>
+                    <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
+                        <input name="__RequestVerificationToken" type="hidden" value="Jz7LNpS6Jyqj-BfSgRZXUcqAV1cMy0cNnYgZaYeUovgbdDdFkhQN9oIOcVQyB2eu87zjo1qTAX6bAVEH4HH1USSH9uoLJTjCKtZt0lQDQGMJEcBgfitKdu4alPlwYIwTWI_oT4CcDiwJ3t5VUDb6xw2" />    <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="/Manage" title="Manage">Hello gray.pritchett@optusnet.com.au!</a>
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="body-content">
+            <section class="row">
+                <div class="fill-screen fixed-attachment">
+                    <h2>Store List - Default Schedule</h2>
+
+                    <form action="/ScheduleStore" encType="multipart/form-data" method="post" name="myform">
+                        <!-- Start Hidden form -->
+                        <input id="EventCommand" name="EventCommand" type="hidden" value="list" /><input id="EventArgument" name="EventArgument" type="hidden" value="" /><input id="Mode" name="Mode" type="hidden" value="list" /><input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="Schedule_Id" name="Schedule.Id" type="hidden" value="1" /><input id="Schedule_Name" name="Schedule.Name" type="hidden" value="Default Schedule" />    <!-- End Hidden form-->
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="centrealign">Select</th>
+                                        <th>Store</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_0__Selected" name="AllStores[0].Selected" type="checkbox" value="true" /><input name="AllStores[0].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_0__Id" name="AllStores[0].Id" type="hidden" value="1" />
+                                            <input id="AllStores_0__Name" name="AllStores[0].Name" type="hidden" value="Adelaide St" />
+                                            Adelaide St
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_1__Selected" name="AllStores[1].Selected" type="checkbox" value="true" /><input name="AllStores[1].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_1__Id" name="AllStores[1].Id" type="hidden" value="2" />
+                                            <input id="AllStores_1__Name" name="AllStores[1].Name" type="hidden" value="Airlie Beach" />
+                                            Airlie Beach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_2__Selected" name="AllStores[2].Selected" type="checkbox" value="true" /><input name="AllStores[2].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_2__Id" name="AllStores[2].Id" type="hidden" value="3" />
+                                            <input id="AllStores_2__Name" name="AllStores[2].Name" type="hidden" value="Albert St" />
+                                            Albert St
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_3__Selected" name="AllStores[3].Selected" type="checkbox" value="true" /><input name="AllStores[3].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_3__Id" name="AllStores[3].Id" type="hidden" value="4" />
+                                            <input id="AllStores_3__Name" name="AllStores[3].Name" type="hidden" value="Bundaberg" />
+                                            Bundaberg
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_4__Selected" name="AllStores[4].Selected" type="checkbox" value="true" /><input name="AllStores[4].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_4__Id" name="AllStores[4].Id" type="hidden" value="5" />
+                                            <input id="AllStores_4__Name" name="AllStores[4].Name" type="hidden" value="Byron Bay" />
+                                            Byron Bay
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_5__Selected" name="AllStores[5].Selected" type="checkbox" value="true" /><input name="AllStores[5].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_5__Id" name="AllStores[5].Id" type="hidden" value="6" />
+                                            <input id="AllStores_5__Name" name="AllStores[5].Name" type="hidden" value="Cairns Earlville" />
+                                            Cairns Earlville
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_6__Selected" name="AllStores[6].Selected" type="checkbox" value="true" /><input name="AllStores[6].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_6__Id" name="AllStores[6].Id" type="hidden" value="7" />
+                                            <input id="AllStores_6__Name" name="AllStores[6].Name" type="hidden" value="Cairns Esplanade" />
+                                            Cairns Esplanade
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_7__Selected" name="AllStores[7].Selected" type="checkbox" value="true" /><input name="AllStores[7].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_7__Id" name="AllStores[7].Id" type="hidden" value="8" />
+                                            <input id="AllStores_7__Name" name="AllStores[7].Name" type="hidden" value="Cairns Sheridan" />
+                                            Cairns Sheridan
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_8__Selected" name="AllStores[8].Selected" type="checkbox" value="true" /><input name="AllStores[8].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_8__Id" name="AllStores[8].Id" type="hidden" value="9" />
+                                            <input id="AllStores_8__Name" name="AllStores[8].Name" type="hidden" value="Cairns Shield" />
+                                            Cairns Shield
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_9__Selected" name="AllStores[9].Selected" type="checkbox" value="true" /><input name="AllStores[9].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_9__Id" name="AllStores[9].Id" type="hidden" value="10" />
+                                            <input id="AllStores_9__Name" name="AllStores[9].Name" type="hidden" value="Cairns Spence" />
+                                            Cairns Spence
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_10__Selected" name="AllStores[10].Selected" type="checkbox" value="true" /><input name="AllStores[10].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_10__Id" name="AllStores[10].Id" type="hidden" value="11" />
+                                            <input id="AllStores_10__Name" name="AllStores[10].Name" type="hidden" value="Cairns Reservoir" />
+                                            Cairns Reservoir
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_11__Selected" name="AllStores[11].Selected" type="checkbox" value="true" /><input name="AllStores[11].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_11__Id" name="AllStores[11].Id" type="hidden" value="12" />
+                                            <input id="AllStores_11__Name" name="AllStores[11].Name" type="hidden" value="Cairns Trinity Beach" />
+                                            Cairns Trinity Beach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_12__Selected" name="AllStores[12].Selected" type="checkbox" value="true" /><input name="AllStores[12].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_12__Id" name="AllStores[12].Id" type="hidden" value="13" />
+                                            <input id="AllStores_12__Name" name="AllStores[12].Name" type="hidden" value="Calamvale" />
+                                            Calamvale
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_13__Selected" name="AllStores[13].Selected" type="checkbox" value="true" /><input name="AllStores[13].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_13__Id" name="AllStores[13].Id" type="hidden" value="14" />
+                                            <input id="AllStores_13__Name" name="AllStores[13].Name" type="hidden" value="Caloundra" />
+                                            Caloundra
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_14__Selected" name="AllStores[14].Selected" type="checkbox" value="true" /><input name="AllStores[14].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_14__Id" name="AllStores[14].Id" type="hidden" value="15" />
+                                            <input id="AllStores_14__Name" name="AllStores[14].Name" type="hidden" value="Chermside" />
+                                            Chermside
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_15__Selected" name="AllStores[15].Selected" type="checkbox" value="true" /><input name="AllStores[15].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_15__Id" name="AllStores[15].Id" type="hidden" value="16" />
+                                            <input id="AllStores_15__Name" name="AllStores[15].Name" type="hidden" value="Clayfield" />
+                                            Clayfield
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_16__Selected" name="AllStores[16].Selected" type="checkbox" value="true" /><input name="AllStores[16].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_16__Id" name="AllStores[16].Id" type="hidden" value="17" />
+                                            <input id="AllStores_16__Name" name="AllStores[16].Name" type="hidden" value="Enoggera" />
+                                            Enoggera
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_17__Selected" name="AllStores[17].Selected" type="checkbox" value="true" /><input name="AllStores[17].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_17__Id" name="AllStores[17].Id" type="hidden" value="18" />
+                                            <input id="AllStores_17__Name" name="AllStores[17].Name" type="hidden" value="Forest Lake" />
+                                            Forest Lake
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_18__Selected" name="AllStores[18].Selected" type="checkbox" value="true" /><input name="AllStores[18].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_18__Id" name="AllStores[18].Id" type="hidden" value="19" />
+                                            <input id="AllStores_18__Name" name="AllStores[18].Name" type="hidden" value="Hervey Bay" />
+                                            Hervey Bay
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_19__Selected" name="AllStores[19].Selected" type="checkbox" value="true" /><input name="AllStores[19].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_19__Id" name="AllStores[19].Id" type="hidden" value="20" />
+                                            <input id="AllStores_19__Name" name="AllStores[19].Name" type="hidden" value="Highgate Hill" />
+                                            Highgate Hill
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_20__Selected" name="AllStores[20].Selected" type="checkbox" value="true" /><input name="AllStores[20].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_20__Id" name="AllStores[20].Id" type="hidden" value="21" />
+                                            <input id="AllStores_20__Name" name="AllStores[20].Name" type="hidden" value="Indooroopilly" />
+                                            Indooroopilly
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_21__Selected" name="AllStores[21].Selected" type="checkbox" value="true" /><input name="AllStores[21].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_21__Id" name="AllStores[21].Id" type="hidden" value="22" />
+                                            <input id="AllStores_21__Name" name="AllStores[21].Name" type="hidden" value="Kangaroo Point" />
+                                            Kangaroo Point
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_22__Selected" name="AllStores[22].Selected" type="checkbox" value="true" /><input name="AllStores[22].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_22__Id" name="AllStores[22].Id" type="hidden" value="23" />
+                                            <input id="AllStores_22__Name" name="AllStores[22].Name" type="hidden" value="Lismore" />
+                                            Lismore
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_23__Selected" name="AllStores[23].Selected" type="checkbox" value="true" /><input name="AllStores[23].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_23__Id" name="AllStores[23].Id" type="hidden" value="24" />
+                                            <input id="AllStores_23__Name" name="AllStores[23].Name" type="hidden" value="Little Mountain" />
+                                            Little Mountain
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_24__Selected" name="AllStores[24].Selected" type="checkbox" value="true" /><input name="AllStores[24].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_24__Id" name="AllStores[24].Id" type="hidden" value="25" />
+                                            <input id="AllStores_24__Name" name="AllStores[24].Name" type="hidden" value="Mackay Greenfields" />
+                                            Mackay Greenfields
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_25__Selected" name="AllStores[25].Selected" type="checkbox" value="true" /><input name="AllStores[25].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_25__Id" name="AllStores[25].Id" type="hidden" value="26" />
+                                            <input id="AllStores_25__Name" name="AllStores[25].Name" type="hidden" value="Mackay Slade Point" />
+                                            Mackay Slade Point
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_26__Selected" name="AllStores[26].Selected" type="checkbox" value="true" /><input name="AllStores[26].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_26__Id" name="AllStores[26].Id" type="hidden" value="27" />
+                                            <input id="AllStores_26__Name" name="AllStores[26].Name" type="hidden" value="Mackay Victoria St" />
+                                            Mackay Victoria St
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_27__Selected" name="AllStores[27].Selected" type="checkbox" value="true" /><input name="AllStores[27].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_27__Id" name="AllStores[27].Id" type="hidden" value="28" />
+                                            <input id="AllStores_27__Name" name="AllStores[27].Name" type="hidden" value="Mermaid Beach" />
+                                            Mermaid Beach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_28__Selected" name="AllStores[28].Selected" type="checkbox" value="true" /><input name="AllStores[28].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_28__Id" name="AllStores[28].Id" type="hidden" value="29" />
+                                            <input id="AllStores_28__Name" name="AllStores[28].Name" type="hidden" value="Mooloolaba" />
+                                            Mooloolaba
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_29__Selected" name="AllStores[29].Selected" type="checkbox" value="true" /><input name="AllStores[29].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_29__Id" name="AllStores[29].Id" type="hidden" value="30" />
+                                            <input id="AllStores_29__Name" name="AllStores[29].Name" type="hidden" value="New Farm" />
+                                            New Farm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_30__Selected" name="AllStores[30].Selected" type="checkbox" value="true" /><input name="AllStores[30].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_30__Id" name="AllStores[30].Id" type="hidden" value="31" />
+                                            <input id="AllStores_30__Name" name="AllStores[30].Name" type="hidden" value="North Lakes" />
+                                            North Lakes
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_31__Selected" name="AllStores[31].Selected" type="checkbox" value="true" /><input name="AllStores[31].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_31__Id" name="AllStores[31].Id" type="hidden" value="32" />
+                                            <input id="AllStores_31__Name" name="AllStores[31].Name" type="hidden" value="Robina" />
+                                            Robina
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_32__Selected" name="AllStores[32].Selected" type="checkbox" value="true" /><input name="AllStores[32].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_32__Id" name="AllStores[32].Id" type="hidden" value="33" />
+                                            <input id="AllStores_32__Name" name="AllStores[32].Name" type="hidden" value="Shute Harbour" />
+                                            Shute Harbour
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_33__Selected" name="AllStores[33].Selected" type="checkbox" value="true" /><input name="AllStores[33].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_33__Id" name="AllStores[33].Id" type="hidden" value="34" />
+                                            <input id="AllStores_33__Name" name="AllStores[33].Name" type="hidden" value="Southport" />
+                                            Southport
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_34__Selected" name="AllStores[34].Selected" type="checkbox" value="true" /><input name="AllStores[34].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_34__Id" name="AllStores[34].Id" type="hidden" value="35" />
+                                            <input id="AllStores_34__Name" name="AllStores[34].Name" type="hidden" value="Springfield" />
+                                            Springfield
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_35__Selected" name="AllStores[35].Selected" type="checkbox" value="true" /><input name="AllStores[35].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_35__Id" name="AllStores[35].Id" type="hidden" value="36" />
+                                            <input id="AllStores_35__Name" name="AllStores[35].Name" type="hidden" value="Stones Corner" />
+                                            Stones Corner
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_36__Selected" name="AllStores[36].Selected" type="checkbox" value="true" /><input name="AllStores[36].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_36__Id" name="AllStores[36].Id" type="hidden" value="37" />
+                                            <input id="AllStores_36__Name" name="AllStores[36].Name" type="hidden" value="Surfers Paradise" />
+                                            Surfers Paradise
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_37__Selected" name="AllStores[37].Selected" type="checkbox" value="true" /><input name="AllStores[37].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_37__Id" name="AllStores[37].Id" type="hidden" value="38" />
+                                            <input id="AllStores_37__Name" name="AllStores[37].Name" type="hidden" value="Taringa" />
+                                            Taringa
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_38__Selected" name="AllStores[38].Selected" type="checkbox" value="true" /><input name="AllStores[38].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_38__Id" name="AllStores[38].Id" type="hidden" value="39" />
+                                            <input id="AllStores_38__Name" name="AllStores[38].Name" type="hidden" value="Torquay" />
+                                            Torquay
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_39__Selected" name="AllStores[39].Selected" type="checkbox" value="true" /><input name="AllStores[39].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_39__Id" name="AllStores[39].Id" type="hidden" value="40" />
+                                            <input id="AllStores_39__Name" name="AllStores[39].Name" type="hidden" value="Townsville Charles St" />
+                                            Townsville Charles St
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_40__Selected" name="AllStores[40].Selected" type="checkbox" value="true" /><input name="AllStores[40].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_40__Id" name="AllStores[40].Id" type="hidden" value="41" />
+                                            <input id="AllStores_40__Name" name="AllStores[40].Name" type="hidden" value="Townsville Flinders St" />
+                                            Townsville Flinders St
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_41__Selected" name="AllStores[41].Selected" type="checkbox" value="true" /><input name="AllStores[41].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_41__Id" name="AllStores[41].Id" type="hidden" value="42" />
+                                            <input id="AllStores_41__Name" name="AllStores[41].Name" type="hidden" value="Townsville Nathan St" />
+                                            Townsville Nathan St
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_42__Selected" name="AllStores[42].Selected" type="checkbox" value="true" /><input name="AllStores[42].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_42__Id" name="AllStores[42].Id" type="hidden" value="43" />
+                                            <input id="AllStores_42__Name" name="AllStores[42].Name" type="hidden" value="Virginia" />
+                                            Virginia
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_43__Selected" name="AllStores[43].Selected" type="checkbox" value="true" /><input name="AllStores[43].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_43__Id" name="AllStores[43].Id" type="hidden" value="44" />
+                                            <input id="AllStores_43__Name" name="AllStores[43].Name" type="hidden" value="West End" />
+                                            West End
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_44__Selected" name="AllStores[44].Selected" type="checkbox" value="true" /><input name="AllStores[44].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_44__Id" name="AllStores[44].Id" type="hidden" value="45" />
+                                            <input id="AllStores_44__Name" name="AllStores[44].Name" type="hidden" value="Windsor" />
+                                            Windsor
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="centrealign">
+                                            <input data-val="true" data-val-required="The Selected field is required." id="AllStores_45__Selected" name="AllStores[45].Selected" type="checkbox" value="true" /><input name="AllStores[45].Selected" type="hidden" value="false" />
+                                        </td>
+                                        <td>
+                                            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="AllStores_45__Id" name="AllStores[45].Id" type="hidden" value="46" />
+                                            <input id="AllStores_45__Name" name="AllStores[45].Name" type="hidden" value="Yeronga" />
+                                            Yeronga
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" name="operation" class="btn btn-primary" id="btnSave">
+                                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
+                                </button>
+                                <a href="/Schedules" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
+                                </a>
+                            </div>
+                        </div>
+                        <!-- End Detail Area-->
+                    </form>
+
+                </div>
+            </section>
+
+
+        </div>
+
+
+
+
+    </div>
+    <footer id="footer">
+        <p>&copy; 2016 - Night Owl Sign System</p>
+    </footer>
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/respond.js"></script>
+
+    <script src="/Scripts/custom.js"></script>
+
+
+
+
+
+
+    <!-- Visual Studio Browser Link -->
+    <script type="application/json" id="__browserLink_initializationData">
+        {"appName":"Chrome","requestId":"efa8e818cf0447668fbf876906f3c476"}
+    </script>
+    <script type="text/javascript" src="http://localhost:52085/6300bb7f96b74c40b34fd8e3310658d0/browserLink" async="async"></script>
+    <!-- End Browser Link -->
+
+</body>
+</html>

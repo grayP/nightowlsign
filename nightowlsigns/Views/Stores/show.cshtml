@@ -1,0 +1,47 @@
+﻿@model nightowlsign.data.Models.Stores.StoreViewModel
+
+@{
+    ViewBag.Title = "Stores";
+}
+
+
+<!-- Start List Area  -->
+@if (Model.IsListAreaVisible)
+{
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Store</th>
+                    <th align="right">Action</th>
+                    <th>Address</th>
+                    <th>Suburb</th>
+                    <th>Manager</th>
+                    <th>Phone</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Stores)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(@item.Name, "Index", "Stores", new { Id = item.id, Name = item.Name }, null)
+                        </td>
+                        <td align="right">
+                        @*//    <a href="@Url.Action("show", "Image",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Photos of this regatta"><i class="glyphicon glyphicon-camera"></i></a>
+                            <a href="@Url.Action("show", "Document",new { storeId = item.Id, DocumentType="log" })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>*@
+
+                        </td>
+                      
+                        <td>@item.Address</td>
+                        <td>@item.Suburb</td>
+                        <td>@item.Manager</td>
+                        <td>@item.Phone</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+<!-- End List Area-->

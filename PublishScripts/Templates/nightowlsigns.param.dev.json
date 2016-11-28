@@ -1,0 +1,29 @@
+{
+  "siteName": {
+    "value": "nightowlsign"
+  },
+  "hostingPlanName": {
+    "value": "identity"
+  },
+  "siteLocation": {
+    "value": "Australia East"
+  },
+  "sku": {
+    "value": "Free"
+  },
+  "workerSize": {
+    "value": "0"
+  },
+  "siteMode": {
+    "value": "Limited"
+  },
+  "computeMode": {
+    "value": "0"
+  },
+  "subscriptionId": {
+    "value": "dba99628-bc95-4e57-bb89-72417900b81e"
+  },
+  "resourceGroup": {
+    "value": "identity"
+  }
+}
