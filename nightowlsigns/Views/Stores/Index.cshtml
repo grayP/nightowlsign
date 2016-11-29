@@ -111,39 +111,43 @@
                     </div>
                 </div>
                 <!-- End message Area-->
-                <div class="form-group">
-                    @Html.HiddenFor(m => m.Entity.id)
-                    @Html.LabelFor(m => m.Entity.Name, "Store")
-                    @Html.TextBoxFor(m => m.Entity.Name, new { @class = "form-control" })
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Address, "Address")
-                    @Html.TextBoxFor(m => m.Entity.Address, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Suburb, "Suburb")
-                    @Html.TextBoxFor(m => m.Entity.Suburb, new { @class = "form-control" })
-                </div>
+                <div class="col-sm-6 col-xs-12">
 
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Manager, "Manager")
-                    @Html.TextBoxFor(m => m.Entity.Manager, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Phone, "Phone")
-                    @Html.TextBoxFor(m => m.Entity.Phone, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Latitude, "Latitude")
-                    @Html.TextBoxFor(m => m.Entity.Latitude, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Entity.Longitude, "Longitude")
-                    @Html.TextBoxFor(m => m.Entity.Longitude, new { @class = "form-control" })
-                </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(m => m.Entity.id)
+                        @Html.LabelFor(m => m.Entity.Name, "Store")
+                        @Html.TextBoxFor(m => m.Entity.Name, new { @class = "form-control" })
+                    </div>
 
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.Address, "Address")
+                        @Html.TextBoxFor(m => m.Entity.Address, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.Suburb, "Suburb")
+                        @Html.TextBoxFor(m => m.Entity.Suburb, new { @class = "form-control" })
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.Manager, "Manager")
+                        @Html.TextBoxFor(m => m.Entity.Manager, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.Phone, "Phone")
+                        @Html.TextBoxFor(m => m.Entity.Phone, new { @class = "form-control" })
+                    </div>
+                    @*<div class="form-group">
+                        @Html.LabelFor(m => m.Entity.Latitude, "Latitude")
+                        @Html.TextBoxFor(m => m.Entity.Latitude, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.Longitude, "Longitude")
+                        @Html.TextBoxFor(m => m.Entity.Longitude, new { @class = "form-control" })
+                    </div>*@
+
+                </div>
             </div>
             <div class="panel-footer">
                 <div class="row">
