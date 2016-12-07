@@ -12,7 +12,7 @@ namespace nightowlsign.data
     using System;
     using System.Collections.Generic;
     
-    public partial class Store
+    public partial class StoreAndSign
     {
         public int id { get; set; }
         public string Name { get; set; }
@@ -27,5 +27,6 @@ namespace nightowlsign.data
         public string IpAddress { get; set; }
         public string SubMask { get; set; }
         public string Port { get; set; }
+        public string Model { get; set; }
     }
 }

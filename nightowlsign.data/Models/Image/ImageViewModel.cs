@@ -29,15 +29,15 @@ namespace nightowlsign.data.Models.Images
         public string CommandString { get; set; }
         public string Message { get; set; }
         public int? SearchSignID { get; set; }
-        public IList<SignSelect> SignList
+        public IList<SelectListItem> SignList
         {
             get
             {
                 using (nightowlsign_Entities db = new nightowlsign_Entities())
                 {
-                    var selectList = new List<SignSelect>()
+                    var selectList = new List<SelectListItem>()
                     {
-                        new SignSelect
+                        new SelectListItem
                         {
                             Id = 0,
                             Model = "Show All"
@@ -46,7 +46,7 @@ namespace nightowlsign.data.Models.Images
                   
                     selectList.AddRange(from item in
                                       db.Signs.OrderBy(x => x.Model)
-                                        select new SignSelect()
+                                        select new SelectListItem()
                                         {
                                             SignId = item.id,
                                             Model = item.Model

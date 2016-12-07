@@ -22,5 +22,7 @@ namespace nightowlsign.data
         public Nullable<System.DateTime> DateTaken { get; set; }
         public Nullable<int> SignSize { get; set; }
         public string Model { get; set; }
+        public Nullable<int> Width { get; set; }
+        public Nullable<int> Height { get; set; }
     }
 }

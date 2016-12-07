@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace nightowlsign.data.Models
 {
-    public class SignSelect
+    public class SelectListItem
     {
         public bool selected { get; set; }
         public int Id { get; set; }

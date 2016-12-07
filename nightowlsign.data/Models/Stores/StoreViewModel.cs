@@ -13,9 +13,27 @@ namespace nightowlsign.data.Models.Stores
         {
         }
         public List<Store> Stores { get; set; }
-        public List<LastInstalledSchedule> StoreSchedules { get; set; }
+        public List<StoreAndSign> StoresAndSigns { get; set; }
         public Store SearchEntity { get; set; }
         public Store Entity { get; set; }
+        public IEnumerable<SelectListItem> SignList
+        {
+            get
+            {
+                using (nightowlsign_Entities db = new nightowlsign_Entities())
+                {
+                  var  selectList=(from item in
+                                      db.Signs.OrderBy(x => x.Model)
+                                        select new SelectListItem()
+                                        {
+                                            SignId = item.id,
+                                            Model = item.Model
+                                        }).ToList();
+                    return selectList;
+                }
+            }
+        }
+
 
         protected override void Init()
         {
@@ -35,7 +53,7 @@ namespace nightowlsign.data.Models.Stores
         protected override void Get()
         {
             StoreManager sm = new StoreManager();
-            StoreSchedules = sm.Get(SearchEntity);
+            StoresAndSigns = sm.Get(SearchEntity);
 
         }
         protected override void Edit()

@@ -24,9 +24,9 @@ namespace nightowlsign.Controllers
         public ActionResult Index(StoreSignViewModel model)
         {
             StoreSignManager rcm = new StoreSignManager();
-            IEnumerable<SignSelect> signselects = model.AllSigns;
+            IEnumerable<data.Models.SelectListItem> signselects = model.AllSigns;
 
-            foreach (SignSelect signSelect in signselects)
+            foreach (data.Models.SelectListItem signSelect in signselects)
             {
                 rcm.UpdateSignList(signSelect, model.store);
             }

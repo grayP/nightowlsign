@@ -135,6 +135,27 @@ warning 6002: The table/view 'nightowlsign.dbo.LastInstalledSchedule' does not h
           <Property Name="ScheduleName" Type="nvarchar" MaxLength="255" />
           <Property Name="LastInstalled" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StoreAndSign">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Suburb" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="10" />
+          <Property Name="Latitude" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="Longitude" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="SignId" Type="int" />
+          <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubMask" Type="nvarchar" MaxLength="50" />
+          <Property Name="Port" Type="nvarchar" MaxLength="10" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
@@ -168,6 +189,24 @@ warning 6002: The table/view 'nightowlsign.dbo.LastInstalledSchedule' does not h
     [LastInstalledSchedule].[LastInstalled] AS [LastInstalled]
     FROM [dbo].[LastInstalledSchedule] AS [LastInstalledSchedule]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="StoreAndSign" EntityType="Self.StoreAndSign" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StoreAndSign].[id] AS [id], 
+    [StoreAndSign].[Name] AS [Name], 
+    [StoreAndSign].[Address] AS [Address], 
+    [StoreAndSign].[Suburb] AS [Suburb], 
+    [StoreAndSign].[State] AS [State], 
+    [StoreAndSign].[Latitude] AS [Latitude], 
+    [StoreAndSign].[Longitude] AS [Longitude], 
+    [StoreAndSign].[Manager] AS [Manager], 
+    [StoreAndSign].[Phone] AS [Phone], 
+    [StoreAndSign].[SignId] AS [SignId], 
+    [StoreAndSign].[IpAddress] AS [IpAddress], 
+    [StoreAndSign].[SubMask] AS [SubMask], 
+    [StoreAndSign].[Port] AS [Port], 
+    [StoreAndSign].[Model] AS [Model]
+    FROM [dbo].[StoreAndSign] AS [StoreAndSign]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -196,6 +235,7 @@ warning 6002: The table/view 'nightowlsign.dbo.LastInstalledSchedule' does not h
           <EntitySet Name="ScheduleSigns" EntityType="Models.ScheduleSign" />
           <EntitySet Name="ImagesAndSigns" EntityType="Models.ImagesAndSign" />
           <EntitySet Name="LastInstalledSchedules" EntityType="Models.LastInstalledSchedule" />
+          <EntitySet Name="StoreAndSigns" EntityType="Models.StoreAndSign" />
         </EntityContainer>
         <EntityType Name="Store">
           <Key>
@@ -310,6 +350,25 @@ warning 6002: The table/view 'nightowlsign.dbo.LastInstalledSchedule' does not h
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ScheduleName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastInstalled" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="StoreAndSign">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="Longitude" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SignId" Type="Int32" />
+          <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubMask" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Port" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -448,6 +507,26 @@ warning 6002: The table/view 'nightowlsign.dbo.LastInstalledSchedule' does not h
                 <ScalarProperty Name="ScheduleName" ColumnName="ScheduleName" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreAndSigns">
+            <EntityTypeMapping TypeName="Models.StoreAndSign">
+              <MappingFragment StoreEntitySet="StoreAndSign">
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="SubMask" ColumnName="SubMask" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="SignId" ColumnName="SignId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

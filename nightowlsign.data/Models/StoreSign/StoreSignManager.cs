@@ -32,13 +32,13 @@ namespace nightowlsign.data.Models
 
         }
 
-        public List<SignSelect> GetAllSigns(int storeId)
+        public List<SelectListItem> GetAllSigns(int storeId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
                 var query = (from s in db.Signs
                              orderby s.Model
-                             select new SignSelect() { SignId = s.id, Model = s.Model, StoreId = storeId });
+                             select new SelectListItem() { SignId = s.id, Model = s.Model, StoreId = storeId });
                 return query.ToList();
             }
         }
@@ -55,7 +55,7 @@ namespace nightowlsign.data.Models
 
         }
 
-        public void UpdateSignList(SignSelect signSelect, Store store)
+        public void UpdateSignList(SelectListItem signSelect, Store store)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
@@ -100,7 +100,7 @@ namespace nightowlsign.data.Models
             return ret;
         }
 
-        internal StoreSign GetValues(SignSelect signSelect)
+        internal StoreSign GetValues(SelectListItem signSelect)
         {
             StoreSign storeSign = null;
             using (nightowlsign_Entities db = new nightowlsign_Entities())

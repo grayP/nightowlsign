@@ -20,12 +20,12 @@ namespace nightowlsign.data.Models
                 id = id,
                 Name = storeName
             };
-            AllSigns = new List<SignSelect>();
+            AllSigns = new List<SelectListItem>();
         }
 
 
         public Store store { get; set; }
-        public IEnumerable<SignSelect> AllSigns { get; set; }
+        public IEnumerable<SelectListItem> AllSigns { get; set; }
         public IEnumerable<int?> storesign { get; set; }
 
         protected override void Init()
@@ -49,7 +49,7 @@ namespace nightowlsign.data.Models
             StoreSignManager sm = new StoreSignManager();
             storesign = sm.Get(store);
             AllSigns = sm.GetAllSigns(store.id);
-            foreach (SignSelect ss in AllSigns )
+            foreach (SelectListItem ss in AllSigns )
             {
                StoreSign selected=sm.GetValues(ss);
                 if (selected != null)

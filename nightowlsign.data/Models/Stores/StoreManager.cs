@@ -16,20 +16,17 @@ namespace nightowlsign.data.Models.Stores
         //Properties
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
 
-        public List<LastInstalledSchedule> Get(Store Entity)
+        public List<StoreAndSign> Get(Store Entity)
         {
-            List<LastInstalledSchedule> ret = new List<LastInstalledSchedule>();
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.LastInstalledSchedules.OrderBy(x => x.Name).ToList<LastInstalledSchedule>();
-
+                var ret = db.StoreAndSigns.OrderBy(x => x.Name).ToList<StoreAndSign>();
+                if (!string.IsNullOrEmpty(Entity.Name))
+                {
+                   ret= ret.FindAll(p => p.Name.ToLower().StartsWith(Entity.Name));
+                }
+                return ret;
             }
- 
-            if (!string.IsNullOrEmpty(Entity.Name))
-            {
-                ret = ret.FindAll(p => p.Name.ToLower().StartsWith(Entity.Name));
-            }
-            return ret;
         }
 
         public Store Find(int storeId)
@@ -74,9 +71,10 @@ namespace nightowlsign.data.Models.Stores
                         modifiedStore.Property(e => e.State).IsModified = true;
                         modifiedStore.Property(e => e.Manager).IsModified = true;
                         modifiedStore.Property(e => e.Phone).IsModified = true;
-                        modifiedStore.Property(e => e.Latitude).IsModified = true;
-                        modifiedStore.Property(e => e.Longitude).IsModified = true;
-
+                        modifiedStore.Property(e => e.SignId).IsModified = true;
+                        modifiedStore.Property(e => e.IpAddress).IsModified = true;
+                        modifiedStore.Property(e => e.SubMask).IsModified = true;
+                        modifiedStore.Property(e => e.Port).IsModified = true;
                         db.SaveChanges();
                         ret = true;
                     }
@@ -107,9 +105,11 @@ namespace nightowlsign.data.Models.Stores
                             Suburb = entity.Suburb,
                             State = entity.State,
                             Manager = entity.Manager,
-                            Phone = entity.Phone ,
-                            Latitude = entity.Latitude,
-                            Longitude = entity.Longitude
+                            Phone = entity.Phone,
+                            SignId = entity.SignId,
+                            IpAddress = entity.IpAddress,
+                            SubMask = entity.SubMask,
+                            Port = entity.Port
                         };
 
                         db.Store.Add(newStore);

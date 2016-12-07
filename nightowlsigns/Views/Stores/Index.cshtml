@@ -1,6 +1,5 @@
-﻿@model nightowlsign.data.Models.Stores.StoreViewModel
-
-
+﻿@using System.Web.UI.WebControls
+@model nightowlsign.data.Models.Stores.StoreViewModel
 @{
     ViewBag.Title = "Stores";
 }
@@ -52,26 +51,25 @@
                         <th>Name</th>
                         <th class="centrealign">Sign</th>
                         <th>Playlist</th>
-                        <th>Last Updated</th>
+                        @*<th>Last Updated</th>*@
                         <th>Manager</th>
                         <th>Phone</th>
                         <th class="pdsa-action-button-column">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.StoreSchedules)
+                    @foreach (var item in Model.StoresAndSigns)
                     {
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td>
                                 @item.Name
-                                @*@Html.ActionLink(@item.Name, "show", "Stores", new {id = item.id, Name = item.Name}, null)*@
                             </td>
                             <td class="centrealign">
-                                <a href="@Url.Action("Index", "StoreSign", new {storeId = item.id, storeName = item.Name})" class="btn btn-sm btn-default" alt="Sign List" data-toggle="tooltip" title="What sort of sign(s) does this store have?"><i class="fa fa-television" aria-hidden="true"></i></a>
+                                @item.Model
                             </td>
-                            <td>@item.ScheduleName</td>
-                            <td>@string.Format("{0:dd MMM yy}", item.LastInstalled)</td>
+                            <td>@item.Phone</td>
+                            @*<td>@string.Format("{0:dd MMM yy}", item.LastInstalled)</td>*@
                             <td>@item.Manager</td>
                             <td>@item.Phone</td>
 
@@ -137,10 +135,23 @@
                 </div>
                 <div class="col-sm-6 col-xs-12">
                     <div class="form-group">
-
-                       
+                        @Html.LabelFor(m => m.Entity.SignId, "Sign Size")
+                        @Html.DropDownListFor(m => m.Entity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.Entity.SignId)), new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.IpAddress, "IP Address")
+                        @Html.TextBoxFor(m => m.Entity.IpAddress, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.SubMask, "Sub Mask")
+                        @Html.TextBoxFor(m => m.Entity.SubMask, new { @class = "form-control", PlaceHolder = "255.255.255.255" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.Port, "Port No")
+                        @Html.TextBoxFor(m => m.Entity.Port, new { @class = "form-control", PlaceHolder = "5200" })
                     </div>
                 </div>
+            </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-12">

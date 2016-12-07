@@ -12,12 +12,12 @@ namespace nightowlsign.data.Models
         public ScheduleSignViewModel() : base()
         {
             schedule = new data.Schedule();
-            AllSigns = new List<SignSelect>();
+            AllSigns = new List<SelectListItem>();
         }
 
 
         public data.Schedule schedule  { get; set; }
-        public List<SignSelect> AllSigns { get; set; }
+        public List<SelectListItem> AllSigns { get; set; }
         public List<int?> schedulesign { get; set; }
 
         protected override void Init()
@@ -42,7 +42,7 @@ namespace nightowlsign.data.Models
             ScheduleSignManager sm = new ScheduleSignManager();
             schedulesign = sm.Get(schedule);
             AllSigns = sm.GetAllSigns(schedule.Id);
-            foreach (SignSelect ss in AllSigns )
+            foreach (SelectListItem ss in AllSigns )
             {
                 ss.ScheduleId = schedule.Id;
                
