@@ -16,7 +16,23 @@ namespace nightowlsign.data.Models.Schedule
         public List<data.Schedule> Schedules { get; set; }
         public data.Schedule SearchEntity { get; set; }
         public data.Schedule Entity { get; set; }
-
+        public IEnumerable<SelectListItem> SignList
+        {
+            get
+            {
+                using (nightowlsign_Entities db = new nightowlsign_Entities())
+                {
+                    var selectList = (from item in
+                                         db.Signs.OrderBy(x => x.Model)
+                                      select new SelectListItem()
+                                      {
+                                          SignId = item.id,
+                                          Model = item.Model
+                                      }).ToList();
+                    return selectList;
+                }
+            }
+        }
         protected override void Init()
         {
             Schedules = new List<data.Schedule>();

@@ -22,7 +22,10 @@ namespace nightowlsign.data.Models.Schedule
             {
                 ret = db.Schedules.OrderBy(x => x.Id).ToList<data.Schedule>();
             }
-
+            if (Entity.SignId>0)
+            {
+                ret = ret.FindAll(p => p.SignId.Equals(Entity.SignId));
+            }
             if (!string.IsNullOrEmpty(Entity.Name))
             {
                 ret = ret.FindAll(p => p.Name.ToLower().StartsWith(Entity.Name));
@@ -65,21 +68,22 @@ namespace nightowlsign.data.Models.Schedule
                     using (nightowlsign_Entities db = new nightowlsign_Entities())
                     {
                         db.Schedules.Attach(entity);
-                        var modifiedStore = db.Entry(entity);
-                        modifiedStore.Property(e => e.Name).IsModified = true;
-                        modifiedStore.Property(e => e.StartDate).IsModified = true;
-                        modifiedStore.Property(e => e.EndDate).IsModified = true;
-                        modifiedStore.Property(e => e.Monday).IsModified = true;
-                        modifiedStore.Property(e => e.Tuesday).IsModified = true;
-                        modifiedStore.Property(e => e.Wednesday).IsModified = true;
-                        modifiedStore.Property(e => e.Thursday).IsModified = true;
-                        modifiedStore.Property(e => e.Friday).IsModified = true;
-                        modifiedStore.Property(e => e.Saturday).IsModified = true;
-                        modifiedStore.Property(e => e.Sunday).IsModified = true;
-                        modifiedStore.Property(e => e.DefaultPlayList).IsModified = true;
-                        modifiedStore.Property(e => e.StartTime).IsModified = true;
-                        modifiedStore.Property(e => e.EndTime).IsModified = true;
-                        modifiedStore.Property(e => e.Valid).IsModified = true;
+                        var modifiedSchedule = db.Entry(entity);
+                        modifiedSchedule.Property(e => e.Name).IsModified = true;
+                        modifiedSchedule.Property(e => e.StartDate).IsModified = true;
+                        modifiedSchedule.Property(e => e.EndDate).IsModified = true;
+                        modifiedSchedule.Property(e => e.Monday).IsModified = true;
+                        modifiedSchedule.Property(e => e.Tuesday).IsModified = true;
+                        modifiedSchedule.Property(e => e.Wednesday).IsModified = true;
+                        modifiedSchedule.Property(e => e.Thursday).IsModified = true;
+                        modifiedSchedule.Property(e => e.Friday).IsModified = true;
+                        modifiedSchedule.Property(e => e.Saturday).IsModified = true;
+                        modifiedSchedule.Property(e => e.Sunday).IsModified = true;
+                        modifiedSchedule.Property(e => e.DefaultPlayList).IsModified = true;
+                        modifiedSchedule.Property(e => e.StartTime).IsModified = true;
+                        modifiedSchedule.Property(e => e.EndTime).IsModified = true;
+                        modifiedSchedule.Property(e => e.Valid).IsModified = true;
+                        modifiedSchedule.Property(e => e.SignId).IsModified = true;
 
                         db.SaveChanges();
                         ret = true;
@@ -119,7 +123,8 @@ namespace nightowlsign.data.Models.Schedule
                             DefaultPlayList = entity.DefaultPlayList,
                             StartTime = entity.StartTime,
                             EndTime = entity.EndTime,
-                            Valid = entity.Valid
+                            Valid = entity.Valid,
+                            SignId = entity.SignId
                         };
 
                         db.Schedules.Add(newSchedule);

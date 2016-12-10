@@ -47,9 +47,5 @@ namespace nightowlsign.data.Models
             // GC.SuppressFinalize(this);
         }
         #endregion
-
-
     }
-
-    
 }

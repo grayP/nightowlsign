@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-
-
 using System.Threading.Tasks;
 using System.Linq;
 using nightowlsign.data.Models.Signs;
 
-namespace nightowlsign.data.Models.Images
+namespace nightowlsign.data.Models.Image
 {
     public class ImageViewModel : BaseModel.ViewModelBase
     {
@@ -21,14 +19,14 @@ namespace nightowlsign.data.Models.Images
         //Properties--------------
         public List<ImagesAndSign> Images { get; set; }
         public ImagesAndSign SearchEntity { get; set; }
-        public Image Entity { get; set; }
+        public data.Image Entity { get; set; }
         public HttpPostedFileBase file { get; set; }
 
-        public UploadedImage imageToUpload { get; set; }
+        public UploadedImage ImageToUpload { get; set; }
 
         public string CommandString { get; set; }
         public string Message { get; set; }
-        public int? SearchSignID { get; set; }
+        public int? SearchSignId { get; set; }
         public IList<SelectListItem> SignList
         {
             get
@@ -43,7 +41,7 @@ namespace nightowlsign.data.Models.Images
                             Model = "Show All"
                         }
                     };
-                  
+
                     selectList.AddRange(from item in
                                       db.Signs.OrderBy(x => x.Model)
                                         select new SelectListItem()
@@ -55,7 +53,7 @@ namespace nightowlsign.data.Models.Images
                     return selectList;
                 }
             }
-          
+
         }
 
 
@@ -64,12 +62,15 @@ namespace nightowlsign.data.Models.Images
         {
             Images = new List<ImagesAndSign>();
             SearchEntity = new ImagesAndSign();
-            Entity = new Image();
-            Entity.DateTaken = DateTime.Now;
+            Entity = new data.Image
+            {
+                DateTaken = DateTime.Now
+            };
 
-            imageToUpload = new UploadedImage();
-
-            imageToUpload.DateTaken = DateTime.Now;
+            ImageToUpload = new UploadedImage
+            {
+                DateTaken = DateTime.Now
+            };
             base.Init();
         }
 
@@ -109,7 +110,7 @@ namespace nightowlsign.data.Models.Images
         {
             ImageManager cmm = new ImageManager();
             SearchEntity.Caption = SearchEntity.Caption;
-            SearchEntity.SignSize = SearchSignID;
+            SearchEntity.SignSize = SearchSignId;
             Images = cmm.Get(SearchEntity);
         }
 
@@ -118,11 +119,11 @@ namespace nightowlsign.data.Models.Images
             ImageManager imm = new ImageManager();
             Entity = imm.Find(Convert.ToInt32(EventArgument));
 
-            imageToUpload.Caption = Entity.Caption;
-            imageToUpload.Id = Entity.Id;
-            imageToUpload.Url = Entity.ImageURL;
-            imageToUpload.DateTaken = Entity.DateTaken ?? DateTime.Now;
-            imageToUpload.SignId = Entity.SignSize ?? 0;
+            ImageToUpload.Caption = Entity.Caption;
+            ImageToUpload.Id = Entity.Id;
+            ImageToUpload.Url = Entity.ImageURL;
+            ImageToUpload.DateTaken = Entity.DateTaken ?? DateTime.Now;
+            ImageToUpload.SignId = Entity.SignSize ?? 0;
 
             base.Edit();
         }
@@ -130,7 +131,7 @@ namespace nightowlsign.data.Models.Images
         protected override void Add()
         {
             IsValid = true;
-            imageToUpload = new UploadedImage
+            ImageToUpload = new UploadedImage
             {
                 SignId = Entity.SignSize ?? 0
             };
@@ -140,7 +141,7 @@ namespace nightowlsign.data.Models.Images
         protected override void Save()
         {
             ImageManager imm = new ImageManager();
-            if (imm.Update(imageToUpload))
+            if (imm.Update(ImageToUpload))
             {
                 Mode = "List";
                 Message = "Image successfully updated";
@@ -157,16 +158,16 @@ namespace nightowlsign.data.Models.Images
             {
                 ImageService _imageService = new ImageService();
 
-                if (imageToUpload.SignId > 0)
+                if (ImageToUpload.SignId > 0)
                 {
-                    var sign = signManager.Find(imageToUpload.SignId);
-                    imageToUpload.SignHeight = sign.Height ?? 96;
-                    imageToUpload.SignWidth = sign.Width ?? 244;
+                    var sign = signManager.Find(ImageToUpload.SignId);
+                    ImageToUpload.SignHeight = sign.Height ?? 96;
+                    ImageToUpload.SignWidth = sign.Width ?? 244;
                 }
-                imageToUpload = await _imageService.CreateUploadedImage(file, imageToUpload);
-                await _imageService.AddImageToBlobStorageAsync(imageToUpload);
+                ImageToUpload = await _imageService.CreateUploadedImage(file, ImageToUpload);
+                await _imageService.AddImageToBlobStorageAsync(ImageToUpload);
 
-                success = await imm.Insert(imageToUpload);
+                success = await imm.Insert(ImageToUpload);
                 if (success)
                 {
                     Mode = "List";

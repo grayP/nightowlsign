@@ -36,6 +36,7 @@
           <Property Name="StartTime" Type="time" Precision="7" />
           <Property Name="EndTime" Type="time" Precision="7" />
           <Property Name="DefaultPlayList" Type="bit" Nullable="false" />
+          <Property Name="SignId" Type="int" />
         </EntityType>
         <EntityType Name="ScheduleImage">
           <Key>
@@ -300,6 +301,7 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <Property Name="StartTime" Type="Time" Precision="7" />
           <Property Name="EndTime" Type="Time" Precision="7" />
           <Property Name="DefaultPlayList" Type="Boolean" Nullable="false" />
+          <Property Name="SignId" Type="Int32" />
         </EntityType>
         <EntityType Name="ScheduleStore">
           <Key>
@@ -439,6 +441,7 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="Models.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="SignId" ColumnName="SignId" />
                 <ScalarProperty Name="DefaultPlayList" ColumnName="DefaultPlayList" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />

@@ -1,5 +1,5 @@
 ﻿using ImageStorage;
-using nightowlsign.data.Models.Images;
+using nightowlsign.data.Models.Image;
 
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -19,16 +19,16 @@ namespace nightowlsign.Controllers
         [AllowAnonymous]
         public ActionResult Index(int? scheduleId)
         {
-            ImageViewModel.SearchSignID = scheduleId ?? 0;
+            ImageViewModel.SearchSignId = scheduleId ?? 0;
             ImageViewModel.HandleRequest();
-            ImageViewModel.imageToUpload.Status = false;
+            ImageViewModel.ImageToUpload.Status = false;
 
             return View(ImageViewModel);
         }
         [AllowAnonymous]
         public ActionResult Show(ImageViewModel imageViewModel)
         {
-            ImageViewModel.SearchSignID = imageViewModel.SearchSignID ?? 0;
+            ImageViewModel.SearchSignId = imageViewModel.SearchSignId ?? 0;
             ImageViewModel.HandleRequest();
           return View("Index", ImageViewModel);
         }

@@ -103,9 +103,9 @@ namespace nightowlsign.data.Models
             }
         }
 
-        public Image Find(int Id)
+        public data.Image Find(int Id)
         {
-            Image ret = null;
+            data.Image ret = null;
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
                 ret = db.Images.Find(Id);

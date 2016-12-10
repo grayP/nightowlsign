@@ -76,7 +76,7 @@ namespace ImageStorage
             {
                 var thumb = new Thumbnail()
                 {
-                    bitmap = ResizeImage(image, oldImage.SignHeight*i, oldImage.SignWidth * i),
+                    Bitmap = ResizeImage(image, oldImage.SignHeight*i, oldImage.SignWidth * i),
                     Height = i
                 };
                 oldImage.Thumbnails.Add(thumb);
