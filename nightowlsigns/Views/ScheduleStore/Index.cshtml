@@ -6,7 +6,7 @@
 
 <h2>Store List - @Model.Schedule.Name</h2>
 
-@using (Html.BeginForm("Index", "ScheduleStore", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
+@using (Html.BeginForm("Index", "ScheduleStore", new { SignId= Model.SignSize}, FormMethod.Post,  new { encType = "multipart/form-data", name = "myform" }))
 {
     <!-- Start Hidden form -->
     @Html.HiddenFor(m => m.EventCommand)
@@ -14,6 +14,7 @@
     @Html.HiddenFor(m => m.Mode)
     @Html.HiddenFor(m => m.Schedule.Id)
     @Html.HiddenFor(m => m.Schedule.Name)
+    @Html.HiddenFor(m => m.Schedule.SignId)
     <!-- End Hidden form-->
 
    

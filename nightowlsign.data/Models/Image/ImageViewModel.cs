@@ -41,7 +41,6 @@ namespace nightowlsign.data.Models.Image
                             Model = "Show All"
                         }
                     };
-
                     selectList.AddRange(from item in
                                       db.Signs.OrderBy(x => x.Model)
                                         select new SelectListItem()
@@ -163,11 +162,18 @@ namespace nightowlsign.data.Models.Image
                     var sign = signManager.Find(ImageToUpload.SignId);
                     ImageToUpload.SignHeight = sign.Height ?? 96;
                     ImageToUpload.SignWidth = sign.Width ?? 244;
-                }
-                ImageToUpload = await _imageService.CreateUploadedImage(file, ImageToUpload);
-                await _imageService.AddImageToBlobStorageAsync(ImageToUpload);
 
-                success = await imm.Insert(ImageToUpload);
+                    ImageToUpload = await _imageService.CreateUploadedImage(file, ImageToUpload);
+                    await _imageService.AddImageToBlobStorageAsync(ImageToUpload);
+
+                    success = await imm.Insert(file.FileName, ImageToUpload);
+                }
+                else
+                {
+                    success = false;
+                    Message = "Please Select a Sign Size for this image<br>";
+                }
+               
                 if (success)
                 {
                     Mode = "List";
@@ -177,7 +183,7 @@ namespace nightowlsign.data.Models.Image
                 }
                 else
                 {
-                    Message = "Error uploading image";
+                    Message += "Error uploading image";
                 };
             }
             ValidationErrors = imm.ValidationErrors;

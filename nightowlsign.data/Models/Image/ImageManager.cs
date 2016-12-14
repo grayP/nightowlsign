@@ -117,13 +117,13 @@ namespace nightowlsign.data.Models.Image
         }
 
 
-        public async Task<Boolean> Insert(UploadedImage imageToUpload)
+        public async Task<Boolean> Insert(string fileName, UploadedImage imageToUpload)
         {
             bool ret = false;
             try
             {
                 data.Image entity = new data.Image();
-                entity.Caption = imageToUpload.Caption;
+                entity.Caption = fileName;
                 entity.ImageURL = imageToUpload.Url;
                 entity.ThumbNailLarge = ImageService.ImageToByte(imageToUpload.Thumbnails[1].Bitmap);
                 entity.ThumbNailSmall = ImageService.ImageToByte(imageToUpload.Thumbnails[0].Bitmap);

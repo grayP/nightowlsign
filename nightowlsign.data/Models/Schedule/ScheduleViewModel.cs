@@ -13,7 +13,7 @@ namespace nightowlsign.data.Models.Schedule
         {
 
         }
-        public List<data.Schedule> Schedules { get; set; }
+        public List<data.ScheduleAndSign> Schedules { get; set; }
         public data.Schedule SearchEntity { get; set; }
         public data.Schedule Entity { get; set; }
         public IEnumerable<SelectListItem> SignList
@@ -35,7 +35,7 @@ namespace nightowlsign.data.Models.Schedule
         }
         protected override void Init()
         {
-            Schedules = new List<data.Schedule>();
+            Schedules = new List<data.ScheduleAndSign>();
             SearchEntity = new data.Schedule();
             Entity = new data.Schedule();
             base.Init();

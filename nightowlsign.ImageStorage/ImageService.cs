@@ -37,7 +37,7 @@ namespace ImageStorage
                 byte[] fileBytes = new byte[file.ContentLength];
                 await file.InputStream.ReadAsync(fileBytes, 0, Convert.ToInt32(file.ContentLength));
                 Image image = Image.FromStream(file.InputStream);
-
+                
                 try
                 {
                     PropertyItem propItem = image.GetPropertyItem(36867);

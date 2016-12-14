@@ -12,6 +12,7 @@ namespace nightowlsign.data.Models
         public byte[] ThumbNail { get; set; }
         public int SignSize { get; set; }
         public string ImageUrl { get; set; }
+        public int SignId { get; set; }
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls

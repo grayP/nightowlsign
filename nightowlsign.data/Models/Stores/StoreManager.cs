@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,10 +24,40 @@ namespace nightowlsign.data.Models.Stores
                 var ret = db.StoreAndSigns.OrderBy(x => x.Name).ToList<StoreAndSign>();
                 if (!string.IsNullOrEmpty(Entity.Name))
                 {
-                   ret= ret.FindAll(p => p.Name.ToLower().StartsWith(Entity.Name));
+                    ret = ret.FindAll(p => p.Name.ToLower().StartsWith(Entity.Name));
                 }
+                GetPlayLists(ret);
                 return ret;
             }
+        }
+
+        private void GetPlayLists(List<StoreAndSign> storeList)
+        {
+            foreach (var store in storeList)
+            {
+                store.PlayLists = GetPlayList(store.id);
+            }
+        }
+
+        private List<SelectPlayList> GetPlayList(int storeId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+
+                var ret = (from s in db.Schedules
+                    join ss in db.ScheduleStores on s.Id equals ss.ScheduleID
+                    select new SelectPlayList()
+                    {
+                        Id = s.Id,
+                        PlayListName = s.Name,
+                        StoreId = ss.StoreId
+                    }
+                ).Where(e => e.StoreId == storeId);
+
+
+                return ret.ToList();
+            }
+
         }
 
         public Store Find(int storeId)
@@ -141,4 +172,10 @@ namespace nightowlsign.data.Models.Stores
         }
     }
 
+    public class SelectPlayList
+    {
+        public int Id { get; set; }
+        public string PlayListName { get; set; }
+        public int? StoreId { get; set; }
+    }
 }

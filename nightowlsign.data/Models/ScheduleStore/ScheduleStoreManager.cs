@@ -29,23 +29,23 @@ namespace nightowlsign.data.Models
 
         }
 
-        public List<StoreSelect> GetAllStores()
+        public List<StoreSelect> GetAllStores(int SignSizeId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                var query = (from s in db.Store
-                             select new StoreSelect { StoreId= s.id, Name = s.Name });
+                var query = (from s in db.Store.Where(e=>e.SignId==SignSizeId)
+                             select new StoreSelect { StoreId= s.id, Name = s.Name, SignId = s.SignId ?? 0});
                 return query.ToList();
             }
         }
 
 
-        public Store Find(int Id)
+        public Store Find(int id)
         {
             Store ret = null;
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.Store.Find(Id);
+                ret = db.Store.Find(id);
             }
             return ret;
 

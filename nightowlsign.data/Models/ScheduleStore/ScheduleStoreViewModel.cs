@@ -19,6 +19,8 @@ namespace nightowlsign.data.Models
         public data.Schedule Schedule { get; set; }
         public List<StoreSelect> AllStores { get; set; }
         public List<int?> schedulestore { get; set; }
+        public int SignSize { get; set; }
+    
 
         protected override void Init()
         {
@@ -31,8 +33,9 @@ namespace nightowlsign.data.Models
             base.HandleRequest();
         }
 
-        public void loadData()
+        public void LoadData(int signId)
         {
+            SignSize = signId;
             Get();
         }
 
@@ -41,11 +44,10 @@ namespace nightowlsign.data.Models
 
             ScheduleStoreManager sm = new ScheduleStoreManager();
          //   schedulestore = sm.Get(Schedule);
-            AllStores = sm.GetAllStores();
+            AllStores = sm.GetAllStores(SignSize);
             foreach (StoreSelect ss in AllStores)
             {
                 ss.ScheduleId = Schedule.Id;
-
                 ScheduleStore selected = sm.GetValues(ss);
                 if (selected != null)
                 {
@@ -53,12 +55,8 @@ namespace nightowlsign.data.Models
                     ss.Id = selected.Id;
                     ss.StoreId = selected.StoreId ?? 0;
                 }
-
-
                // ss.Selected = sm.IsSelected(Schedule.Id, ss.Id);
-
             }
-
         }
     }
 }

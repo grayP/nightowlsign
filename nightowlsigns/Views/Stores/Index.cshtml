@@ -19,7 +19,7 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    @Html.LabelFor(m => m.SearchEntity.Name, "Name")
+                    @Html.LabelFor(m => m.SearchEntity.Name, "Store Name")
                     @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control" })
                 </div>
 
@@ -51,9 +51,8 @@
                         <th>Name</th>
                         <th class="centrealign">Sign</th>
                         <th>Playlist</th>
-                        @*<th>Last Updated</th>*@
+                        <th>PlayLists</th>
                         <th>Manager</th>
-                        <th>Phone</th>
                         <th class="pdsa-action-button-column">Delete</th>
                     </tr>
                 </thead>
@@ -68,12 +67,11 @@
                             <td class="centrealign">
                                 @item.Model
                             </td>
-                            <td>
-                                <a href="@Url.Action("Index", "Schedules", new {StoreId = item.id})" data-toggle="tooltip" title="Playlists for this store" class="btn btn-sm btn-default" alt="PlayLists"><i class="fa fa-television" aria-hidden="true"></i></a>
+                            <td class="centrealign">
+                                <a href="@Url.Action("Index", "Schedules", new { SignId = item.SignId })" data-toggle="tooltip" title="Playlists for this store" class="btn btn-sm btn-default" alt="PlayLists"><i class="fa fa-television" aria-hidden="true"></i></a>
                             </td>
-                            @*<td>@string.Format("{0:dd MMM yy}", item.LastInstalled)</td>*@
+                            <td>@Html.DropDownList("Id", new SelectList(@item.PlayLists, "Id", "PlayListName"), new { @class="form-control"})</td>
                             <td>@item.Manager</td>
-                            <td>@item.Phone</td>
 
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>

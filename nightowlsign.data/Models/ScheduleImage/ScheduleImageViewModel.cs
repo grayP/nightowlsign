@@ -13,6 +13,7 @@ namespace nightowlsign.data.Models
 
 
         public data.Schedule Schedule { get; set; }
+        public int SignId { get; set; }
         public List<ImageSelect> AllImages { get; set; }
         public List<int?> scheduleImage { get; set; }
 
@@ -37,7 +38,7 @@ namespace nightowlsign.data.Models
 
             ScheduleImageManager sm = new ScheduleImageManager();
          //   schedulestore = sm.Get(Schedule);
-            AllImages = sm.GetAllImages(Schedule.Id);
+            AllImages = sm.GetAllImages(SignId, Schedule.Id);
             foreach (ImageSelect imageSelect in AllImages)
             {
                 imageSelect.ScheduleId = Schedule.Id;
@@ -48,10 +49,9 @@ namespace nightowlsign.data.Models
                     imageSelect.Selected = true;
                     imageSelect.Id = selected.Id;
                     imageSelect.ImageId = selected.ImageID ?? 0;
+                    imageSelect.SignId = SignId;
                 }
-
             }
-
         }
     }
 }

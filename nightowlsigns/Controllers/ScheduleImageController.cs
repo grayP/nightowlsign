@@ -11,9 +11,12 @@ namespace nightowlsign.Controllers
     {
         // GET: 
         [Authorize(Roles = "Admin")]
-        public ActionResult Index(int scheduleId, string scheduleName)
+        public ActionResult Index(int SignId, int scheduleId, string scheduleName)
         {
-            ScheduleImageViewModel ssvm = new ScheduleImageViewModel();
+            ScheduleImageViewModel ssvm = new ScheduleImageViewModel
+            {
+                SignId = SignId
+            };
             ssvm.Schedule.Id = scheduleId;
             ssvm.Schedule.Name = scheduleName;
             ssvm.loadData();
@@ -31,9 +34,10 @@ namespace nightowlsign.Controllers
             foreach (ImageSelect imageSelect in imageSelects)
             {
                 sim.UpdateImageList(imageSelect, model.Schedule);
+
             }
 
-            return RedirectToAction("Index", "Schedules");
+            return RedirectToAction("Index", "Schedules", new {SignId=model.SignId});
 
         }
     }

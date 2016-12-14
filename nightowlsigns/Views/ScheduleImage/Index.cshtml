@@ -4,9 +4,9 @@
     ViewBag.Title = "Image List";
 }
 
-<h2>Store List - @Model.Schedule.Name</h2>
+<h2>Image List - @Model.Schedule.Name</h2>
 
-@using (Html.BeginForm("Index", "ScheduleImage", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
+@using (Html.BeginForm("Index", "ScheduleImage", new { SignId = Model.SignId }, FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
 {
     <!-- Start Hidden form -->
     @Html.HiddenFor(m => m.EventCommand)
@@ -14,10 +14,15 @@
     @Html.HiddenFor(m => m.Mode)
     @Html.HiddenFor(m => m.Schedule.Id)
     @Html.HiddenFor(m => m.Schedule.Name)
+    @Html.HiddenFor(m => m.Schedule.SignId)
     <!-- End Hidden form-->
+    <div class="row">
+            @Html.EditorFor(model => model.AllImages)
+    </div>
 
-   
-            <div class="table-responsive">
+
+
+            @*<div class="table-responsive">
                 <table class="table table-condensed table-bordered table-striped table-hover">
                     <thead>
                         <tr>
@@ -30,7 +35,7 @@
                     </tbody>
                 </table>
 
-            </div>
+            </div>*@
             <div class="row">
                 <div class="col-sm-12">
                     <button type="submit" name="operation" class="btn btn-primary" id="btnSave">

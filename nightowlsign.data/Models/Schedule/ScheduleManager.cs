@@ -15,12 +15,12 @@ namespace nightowlsign.data.Models.Schedule
         //Properties
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
 
-        public List<data.Schedule> Get(data.Schedule Entity)
+        public List<data.ScheduleAndSign> Get(data.Schedule Entity)
         {
-            List<data.Schedule> ret = new List<data.Schedule>();
+            List<data.ScheduleAndSign> ret = new List<data.ScheduleAndSign>();
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.Schedules.OrderBy(x => x.Id).ToList<data.Schedule>();
+                ret = db.ScheduleAndSigns.OrderBy(x => x.Id).ToList<data.ScheduleAndSign>();
             }
             if (Entity.SignId>0)
             {

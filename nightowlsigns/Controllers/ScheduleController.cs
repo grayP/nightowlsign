@@ -11,9 +11,10 @@ namespace nightowlsign.Controllers
     {
         // GET: 
         [Authorize(Roles = "Admin")]
-        public ActionResult Index()
+        public ActionResult Index(int SignId)
         {
             var svm = new ScheduleViewModel();
+            svm.SearchEntity.SignId = SignId;
             svm.HandleRequest();
             return View(svm);
         }

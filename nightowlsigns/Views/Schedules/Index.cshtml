@@ -27,8 +27,8 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.SearchEntity.SignId, "Enter Sign Size to filter images")
+                        <div class="form-group pull-right">
+                            @Html.LabelFor(m => m.SearchEntity.SignId, "Enter Sign Size to filter playlists")
                             @Html.DropDownListFor(m => m.SearchEntity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.SearchEntity.SignId)), new { onchange = "this.form.submit();", @class = "form-control" })
                         </div>
                     </div>
@@ -87,19 +87,19 @@
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td>
-                                @Html.DropDownListFor(@item.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(item.SignId)), new { @disabled = "disabled" })
+                                @item.Model 
                             </td>
                             <td>
                                 @item.Name
                             </td>
                             <td class="centrealign">
-                                <a href="@Url.Action("Index", "ScheduleStore", new {scheduleId = item.Id, scheduleName = item.Name}) data-toggle="tooltip" title="Stores to apply the playlist to." class="btn btn-sm btn-default" alt="Store List"><i class="fa fa-television" aria-hidden="true"></i></a>
-                                <a href="@Url.Action("Index", "ScheduleImage",new {scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Images to apply to the schedule." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="glyphicon glyphicon-camera"></i></a>
+                                <a href="@Url.Action("Index", "ScheduleStore", new {SignId=item.SignId, scheduleId = item.Id, scheduleName = item.Name})" data-toggle="tooltip" title="Stores to apply the playlist to." class="btn btn-sm btn-default" alt="Store List"><i class="fa fa-television" aria-hidden="true"></i></a>
+                                <a href="@Url.Action("Index", "ScheduleImage",new {signId=item.SignId,scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Images to apply to the schedule." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="glyphicon glyphicon-camera"></i></a>
                             </td>
                             <td>@string.Format("{0:dd/MM/yyyy}", item.StartDate)  </td>
                             <td>@string.Format("{0:dd/MM/yyyy}", item.EndDate)</td>
-                            <td>@string.Format("{0:HH:mm}", item.StartTime)  </td>
-                            <td>@string.Format("{0:HH:mm}", item.EndTime)</td>
+                            <td>@item.StartTime</td>
+                            <td>@item.EndTime</td>
                             <td class="centrealign">@Html.CheckBoxFor(model => dDefault, new { @disabled = "disabled" })</td>
                             @*<td>
                                     @Html.CheckBoxFor(model => Sunday, new { @disabled = "disabled" })

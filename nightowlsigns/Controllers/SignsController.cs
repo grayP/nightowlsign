@@ -50,11 +50,8 @@ namespace nightowlsign.Controllers
                 {
                     ModelState.AddModelError(item.Key, item.Value);
                 }
-
             }
-
             return View(svm);
         }
-
     }
 }
