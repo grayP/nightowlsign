@@ -25,8 +25,8 @@ label .tip {
 /* Set padding to keep content from hitting the edges */
 .body-content {
    background-color: transparent; 
-   padding-left: 30px;
-   padding-right: 30px;
+   padding-left: 10px;
+   padding-right: 10px;
 }
 
 

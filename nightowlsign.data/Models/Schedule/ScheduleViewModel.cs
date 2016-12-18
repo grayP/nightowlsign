@@ -22,13 +22,22 @@ namespace nightowlsign.data.Models.Schedule
             {
                 using (nightowlsign_Entities db = new nightowlsign_Entities())
                 {
-                    var selectList = (from item in
-                                         db.Signs.OrderBy(x => x.Model)
-                                      select new SelectListItem()
-                                      {
-                                          SignId = item.id,
-                                          Model = item.Model
-                                      }).ToList();
+                    var selectList = new List<SelectListItem>()
+                    {
+                        new SelectListItem
+                        {
+                            Id = 0,
+                            Model = "Show All"
+                        }
+                    };
+                    selectList.AddRange(from item in
+                                      db.Signs.OrderBy(x => x.Model)
+                                        select new SelectListItem()
+                                        {
+                                            SignId = item.id,
+                                            Model = item.Model
+                                        });
+
                     return selectList;
                 }
             }

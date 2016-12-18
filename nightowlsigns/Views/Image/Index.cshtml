@@ -11,16 +11,16 @@
             <div class="alert">
                 @Model.Message
                 <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add" data-pdsa-val="@Model.SearchSignId">
-                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add image to image gallery
+                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add image to gallery
                 </button>
             </div>
         </div>
         <div class="col-lg-6 col-sm-6">
             @using (Html.BeginForm("Show", "Image", FormMethod.Post))
             {
-                <div class="input-group pull-right">
+                <div class="alert pull-right">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.ImageToUpload.SignId, "Enter Sign Size to filter images")
+                        @Html.LabelFor(m => m.ImageToUpload.SignId, "Enter Sign Size to filter images ")
                         @Html.DropDownListFor(m => m.SearchSignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.SearchSignId)), new { onchange = "this.form.submit();", @class = "form-control" })
                     </div>
                 </div>
@@ -38,14 +38,14 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel-info">
-                        <div class="desc_content">Title: @item.Caption</div>
-                        <div class="desc_content">Sign: @item.Model</div>
+                        <div class="desc_content">@item.Caption</div>
+                        <div class="desc_content">@item.Model</div>
                         <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
                         <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
                     </div>
                     <div class="panel-image">
                         <a class="thumbnail" href="@item.ImageURL">
-                            <img class="img-responsive myThumbnail" src="@imageSrc" style="height:80px;" alt="@item.Caption">
+                            <img class="img-responsive myThumbnail" src="@imageSrc" style="width:180px;" alt="@item.Caption">
                         </a>
                     </div>
                 </div>
@@ -100,10 +100,10 @@
                 </div>
 
                 @*<div class="form-group">
-                    @Html.HiddenFor(m => m.ImageToUpload.Id)
-                    @Html.LabelFor(m => m.ImageToUpload.Caption, "Image Description")
-                    @Html.TextBoxFor(m => m.ImageToUpload.Caption, new { @class = "form-control", style = "max-width:500px;" })
-                </div>*@
+                        @Html.HiddenFor(m => m.ImageToUpload.Id)
+                        @Html.LabelFor(m => m.ImageToUpload.Caption, "Image Description")
+                        @Html.TextBoxFor(m => m.ImageToUpload.Caption, new { @class = "form-control", style = "max-width:500px;" })
+                    </div>*@
                 <div class="form-group">
                     @Html.LabelFor(m => m.ImageToUpload.SignId, "Sign")
                     @Html.DropDownListFor(m => m.ImageToUpload.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
