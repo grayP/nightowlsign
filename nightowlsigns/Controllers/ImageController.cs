@@ -1,25 +1,21 @@
 ﻿using ImageStorage;
 using nightowlsign.data.Models.Image;
-
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Web;
 using System.Web.Mvc;
-
-
 
 namespace nightowlsign.Controllers
 {
 
     public class ImageController : Controller
     {
-
         private ImageViewModel ImageViewModel = new ImageViewModel();
-        // GET: Image
 
         [AllowAnonymous]
-        public ActionResult Index(int? scheduleId)
+        public ActionResult Index(int? SignId)
         {
-            ImageViewModel.SearchSignId = scheduleId ?? 0;
+            ImageViewModel.SearchSignId = SignId ?? 0;
             ImageViewModel.HandleRequest();
             ImageViewModel.ImageToUpload.Status = false;
 
@@ -30,23 +26,26 @@ namespace nightowlsign.Controllers
         {
             ImageViewModel.SearchSignId = imageViewModel.SearchSignId ?? 0;
             ImageViewModel.HandleRequest();
-          return View("Index", ImageViewModel);
+            return View("Index", ImageViewModel);
         }
 
-       
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public ActionResult Index(FormCollection formCollection, ImageViewModel iVm)
         {
-
             iVm.IsValid = ModelState.IsValid;
             if (Request != null)
             {
-                iVm.file = Request.Files["file"];
+                var files = HttpContext.Request.Files;
+                for (int i = 0; i < files.Count; i++)
+                {
+                    iVm.File = files[i];
+                    if (i == files.Count-1){iVm.LastImage = true;}
+                    iVm.HandleRequest();
+                }
              }
-
             iVm.HandleRequest();
-
             if (iVm.IsValid)
             {
                 ModelState.Clear();
@@ -60,6 +59,5 @@ namespace nightowlsign.Controllers
             }
             return View(iVm);
         }
-   }
-
+    }
 }

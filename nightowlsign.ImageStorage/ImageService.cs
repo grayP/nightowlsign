@@ -49,9 +49,6 @@ namespace ImageStorage
                     _imageDate = DateTime.Now;
                 }
                 CreateThumbnails(image, oldImage);
-
-
-
                 return new UploadedImage
                 {
                     ContentType = file.ContentType,

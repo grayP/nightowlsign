@@ -38,12 +38,12 @@ namespace nightowlsign.data.Models.Image
             return ret;
         }
 
-        public data.Image Find(int ImageID)
+        public data.Image Find(int imageId)
         {
             data.Image ret = null;
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.Images.Find(ImageID);
+                ret = db.Images.Find(imageId);
             }
             return ret;
 

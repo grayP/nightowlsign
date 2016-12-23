@@ -10,18 +10,18 @@ namespace nightowlsign.data.Models.Image
 {
     public class ImageViewModel : BaseModel.ViewModelBase
     {
-        private readonly SignManager signManager;
+        private readonly SignManager _signManager;
         public ImageViewModel() : base()
         {
-            signManager = new SignManager();
+            _signManager = new SignManager();
         }
 
         //Properties--------------
         public List<ImagesAndSign> Images { get; set; }
         public ImagesAndSign SearchEntity { get; set; }
         public data.Image Entity { get; set; }
-        public HttpPostedFileBase file { get; set; }
-
+        public HttpPostedFileBase File { get; set; }
+        public bool LastImage { get; set; }
         public UploadedImage ImageToUpload { get; set; }
 
         public string CommandString { get; set; }
@@ -48,11 +48,9 @@ namespace nightowlsign.data.Models.Image
                                             SignId = item.id,
                                             Model = item.Model
                                         });
-
                     return selectList;
                 }
             }
-
         }
 
 
@@ -70,6 +68,7 @@ namespace nightowlsign.data.Models.Image
             {
                 DateTaken = DateTime.Now
             };
+            LastImage = false;
             base.Init();
         }
 
@@ -132,7 +131,7 @@ namespace nightowlsign.data.Models.Image
             IsValid = true;
             ImageToUpload = new UploadedImage
             {
-                SignId = Entity.SignSize ?? 0
+                SignId = Entity.SignSize ?? 1
             };
             base.Add();
         }
@@ -155,36 +154,29 @@ namespace nightowlsign.data.Models.Image
             ImageManager imm = new ImageManager();
             if (Mode == "Add")
             {
-                ImageService _imageService = new ImageService();
-
+                ImageService imageService = new ImageService();
                 if (ImageToUpload.SignId > 0)
                 {
-                    var sign = signManager.Find(ImageToUpload.SignId);
+                    SearchSignId = ImageToUpload.SignId;
+                    var sign = _signManager.Find(ImageToUpload.SignId);
                     ImageToUpload.SignHeight = sign.Height ?? 96;
                     ImageToUpload.SignWidth = sign.Width ?? 244;
-
-                    ImageToUpload = await _imageService.CreateUploadedImage(file, ImageToUpload);
-                    await _imageService.AddImageToBlobStorageAsync(ImageToUpload);
-
-                    success = await imm.Insert(file.FileName, ImageToUpload);
+                    ImageToUpload = await imageService.CreateUploadedImage(File, ImageToUpload);
+                    await imageService.AddImageToBlobStorageAsync(ImageToUpload);
+                    success = await imm.Insert(File.FileName, ImageToUpload);
                 }
                 else
                 {
-                    success = false;
-                    Message = "Please Select a Sign Size for this image<br>";
+                    Message = "Please select a Sign Size for the image(s)";
                 }
-               
-                if (success)
+
+                if (success && LastImage)
                 {
                     Mode = "List";
-                    Message = "Image successfully added";
+                    Message = "Image(s) successfully added";
                     base.HandleRequest();
                     Get();
                 }
-                else
-                {
-                    Message += "Error uploading image";
-                };
             }
             ValidationErrors = imm.ValidationErrors;
             return success;
@@ -192,14 +184,12 @@ namespace nightowlsign.data.Models.Image
 
         protected override void Delete()
         {
-            ImageManager cmm = new ImageManager();
-            Entity = cmm.Find(Convert.ToInt32(EventArgument));
-            cmm.Delete(Entity);
+            ImageManager Imm = new ImageManager();
+            Entity = Imm.Find(Convert.ToInt32(EventArgument));
+            Imm.Delete(Entity);
             Get();
             base.Delete();
-
         }
-
-
     }
+
 }

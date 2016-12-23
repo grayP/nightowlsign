@@ -8,11 +8,9 @@ namespace BaseModel
 {
     public class ViewModelBase
     {
-
         public ViewModelBase()
         {
             Init();
-
         }
         public string Mode { get; set; }
         public string EventCommand { get; set; }

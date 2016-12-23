@@ -108,6 +108,12 @@ label .tip {
     margin: 0 7px !important;
 }
 
+.thumb {
+    border: 1px solid #000000;
+    height: 75px;
+    margin: 10px 5px 0 0;
+}
+
 .quotation_div {
    
     display: table;
