@@ -134,6 +134,15 @@
 
 
 <script type="text/javascript">
+    oFReader = new FileReader();
+
+    oFReader.onload = function (oFREvent) {
+        document.getElementById("fotoImg").src = oFREvent.target.result;
+        document.getElementById("fotoImg").style.visibility = "visible";
+        document.getElementById("fotoImg").style.height = 200;
+    };
+
+
     function handleFileSelect(evt) {
         var files = evt.target.files; // FileList object
         // Loop through the FileList and render image files as thumbnails.
@@ -150,6 +159,7 @@
                     var span = document.createElement('span');
                     span.innerHTML = ['<img class="thumb" src="', e.target.result,
                         '" title="', escape(theFile.name), '"/>'].join('');
+                    document.getElementById('previewImg').style.visibility = "visible";
                     document.getElementById('previewImg').insertBefore(span, null);
                 };
             })(f);
