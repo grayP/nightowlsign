@@ -95,9 +95,12 @@
                         <input capture="camera" accept="image/*" multiple id="fileupload" type="file" name="files" style="max-width: 800px; width: 400px;" class="btn btn-primary" />
                     </div>
                 }
+                <div class="well well-sm">
+                    <img src="@Model.ImageToUpload.Url" id="fotoImg" />
+                </div>
 
                 <div class="well well-sm">
-                    <div id="previewImg" src="@Model.ImageToUpload.Url" name="previewImg"></div>
+                    <div id="previewImg" name="previewImg"></div>
                 </div>
 
                 <div class="form-group">
