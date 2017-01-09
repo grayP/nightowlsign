@@ -17,38 +17,21 @@
     @Html.HiddenFor(m => m.Schedule.SignId)
     <!-- End Hidden form-->
     <div class="row">
-            @Html.EditorFor(model => model.AllImages)
+        @Html.EditorFor(model => model.AllImages)
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="submit" name="operation" class="btn btn-primary" id="btnSave">
+                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
+            </button>
+            <a href="@Url.Action("Index", "Schedules", new { SignId = Model.SignId } )" class="btn btn-primary">
+                <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
+            </a>
+        </div>
     </div>
 
 
-
-            @*<div class="table-responsive">
-                <table class="table table-condensed table-bordered table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th class="centrealign">Select</th>
-                            <th>Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @Html.EditorFor(model => model.AllImages)
-                    </tbody>
-                </table>
-
-            </div>*@
-            <div class="row">
-                <div class="col-sm-12">
-                    <button type="submit" name="operation" class="btn btn-primary" id="btnSave">
-                        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
-                    </button>
-                    <a href="@Url.Action("Index", "Schedules")" class="btn btn-primary">
-                        <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
-                    </a>
-                </div>
-            </div>
-
-
             <!-- End Detail Area-->
-            }
+}
 
 

@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group pull-right">
-                            @Html.LabelFor(m => m.SearchEntity.SignId, "Enter Sign Size to filter playlists")
+                            @Html.LabelFor(m => m.SearchEntity.SignId, "Select size to filter")
                             @Html.DropDownListFor(m => m.SearchEntity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.SearchEntity.SignId)), new { onchange = "this.form.submit();", @class = "form-control" })
                         </div>
                     </div>

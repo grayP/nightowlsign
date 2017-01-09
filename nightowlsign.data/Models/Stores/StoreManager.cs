@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.UI.HtmlControls;
 
 
 namespace nightowlsign.data.Models.Stores
@@ -35,25 +37,39 @@ namespace nightowlsign.data.Models.Stores
         {
             foreach (var store in storeList)
             {
-                store.PlayLists = GetPlayList(store.id);
+                store.PlayLists = GetPlayList(store.id, store.SignId ?? 0);
             }
         }
 
-        private List<SelectPlayList> GetPlayList(int storeId)
+        private List<SelectPlayList> GetPlayList(int storeId, int? SignId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
 
-                var ret = (from s in db.Schedules
-                    join ss in db.ScheduleStores on s.Id equals ss.ScheduleID
-                    select new SelectPlayList()
-                    {
-                        Id = s.Id,
-                        PlayListName = s.Name,
-                        StoreId = ss.StoreId
-                    }
-                ).Where(e => e.StoreId == storeId);
+                //var ret = (from s in db.Schedules
+                //    join ss in db.ScheduleStores on s.Id equals ss.ScheduleID
+                //    select new SelectPlayList(){
+                //        Id = s.Id,
+                //        PlayListName = s.Name,
+                //        StoreId = ss.StoreId,
+                //        URL= String.Format("/ScheduleImage?signId={0}&scheduleId={1}&scheduleName={2}", SignId, s.Id, s.Name)
+                //    }
+                //).Where(e => e.StoreId == storeId);
 
+
+                var ret = (from s in db.Schedules
+                        join ss in db.ScheduleStores on s.Id equals ss.ScheduleID
+                        where ss.StoreId == storeId
+                        select new {s.Id, s.Name, ss.StoreId})
+                    .AsEnumerable()
+                    .Select(x => new SelectPlayList()
+                    {
+                        Id = x.Id,
+                        PlayListName = x.Name,
+                        StoreId = x.StoreId,
+                        URL = String.Format("/Schedules?signId={0}", SignId)
+                       // URL = String.Format("/ScheduleImage?signId={0}&scheduleId={1}&scheduleName={2}", SignId, x.Id, x.Name)
+                    });
 
                 return ret.ToList();
             }
@@ -177,5 +193,6 @@ namespace nightowlsign.data.Models.Stores
         public int Id { get; set; }
         public string PlayListName { get; set; }
         public int? StoreId { get; set; }
+        public string URL { get; set; }
     }
 }

@@ -49,10 +49,10 @@
                     <tr>
                         <th class="pdsa-action-button-column">Edit</th>
                         <th>Name</th>
-                        <th class="centrealign">Sign</th>
-                        <th>Playlist</th>
+                        <th>Suburb</th>
+                       <th class="centrealign">Size</th>
+                        <th>Show Playlist</th>
                         <th>Playlists</th>
-                        <th>Manager</th>
                         <th class="pdsa-action-button-column">Delete</th>
                     </tr>
                 </thead>
@@ -61,18 +61,11 @@
                     {
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
-                            <td>
-                                @item.Name
-                            </td>
-                            <td class="centrealign">
-                                @item.Model
-                            </td>
-                            <td class="centrealign">
-                                <a href="@Url.Action("Index", "Schedules", new { SignId = item.SignId })" data-toggle="tooltip" title="Playlists for this store" class="btn btn-sm btn-default" alt="PlayLists"><i class="fa fa-television" aria-hidden="true"></i></a>
-                            </td>
-                            <td>@Html.DropDownList("Id", new SelectList(@item.PlayLists, "Id", "PlayListName"), new { @class="form-control"})</td>
-                            <td>@item.Manager</td>
-
+                            <td>@item.Name</td>
+                            <td>@item.Suburb</td>
+                            <td class="centrealign">@item.Model</td>
+                            <td class="centrealign"><a href="@Url.Action("Index", "Schedules", new { SignId = item.SignId })" data-toggle="tooltip" title="Playlists for this sign size" class="btn btn-sm btn-default" alt="PlayLists"><i class="fa fa-television" aria-hidden="true"></i></a></td>
+                            <td>@Html.DropDownList("Id", new SelectList(@item.PlayLists, "URL", "PlayListName"), new { onchange = "javascript:location.href=this.options[this.selectedIndex].value;", @class ="form-control"})</td>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }

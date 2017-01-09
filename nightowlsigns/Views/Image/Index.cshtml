@@ -4,7 +4,7 @@
     ViewBag.Title = "NightOwl Sign System Images";
     ViewBag.SignId = Model.SearchSignId;
 }
-                                                                                                                                                                        
+
 @if (Model.IsListAreaVisible)
 {
     <div class="row">
@@ -94,16 +94,18 @@
                     <div class="form-group">
                         <input capture="camera" accept="image/*" multiple id="fileupload" type="file" name="files" style="max-width: 800px; width: 400px;" class="btn btn-primary" />
                     </div>
+                    <div class="well well-sm">
+                        <div id="previewImg" name="previewImg"></div>
+                    </div>               
                 }
                 <div class="well well-sm">
-                    <img src="@Model.ImageToUpload.Url" id="fotoImg" />
+                    <img src="@Model.ImageToUpload.Url" id="fotoImg" style="height:200px"/>
                 </div>
 
-                <div class="well well-sm">
-                    <div id="previewImg" name="previewImg"></div>
-                </div>
+
 
                 <div class="form-group">
+                    @Html.HiddenFor(m => m.ImageToUpload.Id)
                     @Html.LabelFor(m => m.ImageToUpload.SignId, "Sign")
                     @Html.DropDownListFor(m => m.ImageToUpload.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
                 </div>
@@ -134,13 +136,6 @@
 
 
 <script type="text/javascript">
-    oFReader = new FileReader();
-
-    oFReader.onload = function (oFREvent) {
-        document.getElementById("fotoImg").src = oFREvent.target.result;
-        document.getElementById("fotoImg").style.visibility = "visible";
-        document.getElementById("fotoImg").style.height = 200;
-    };
 
 
     function handleFileSelect(evt) {

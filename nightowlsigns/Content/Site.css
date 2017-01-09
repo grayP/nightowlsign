@@ -60,9 +60,9 @@ label .tip {
 .navbar-header img
 {
     width:100px;
-    padding-bottom:2px;
-    padding-top:2px;
     padding-right:1px;
+    vertical-align: middle;
+
 }
 
 .cbp-af-header-shrink
@@ -175,9 +175,7 @@ textarea {
     text-align:center;
 }
 
-#fotoImg {
-	width: 98%;		
-}
+
 
 div.desc{
     background-color: #000;
