@@ -36,19 +36,20 @@
         string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
         string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
         <div class="col-sm-6 col-md-4">
-            <div class="panel panel-default">
+            <div class="panel panel-default ">
                 <div class="panel-body">
                     <div class="panel-info">
-                        <div class="desc_content">@item.Caption</div>
-                        <div class="desc_content">@item.Model</div>
                         <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
                         <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
                     </div>
-                    <div class="panel-image">
-                        <a class="thumbnail" href="@item.ImageURL">
-                            <img class="img-responsive myThumbnail" src="@imageSrc" style="width:180px;" alt="@item.Caption">
-                        </a>
-                    </div>
+                    <figure class="cap-left">
+                        <div class="panel-image">
+                            <a class="thumbnail" href="@item.ImageURL">
+                                <img class="img-responsive myThumbnail" src="@imageSrc" style="width:180px;" alt="@item.Caption">
+                            </a>
+                            <figcaption>@item.Caption <br/> @item.Model </figcaption>
+                        </div>
+                    </figure>
                 </div>
             </div>
         </div>
@@ -98,12 +99,7 @@
                         <div id="previewImg" name="previewImg"></div>
                     </div>               
                 }
-                <div class="well well-sm">
-                    <img src="@Model.ImageToUpload.Url" id="fotoImg" style="height:200px"/>
-                </div>
-
-
-
+                
                 <div class="form-group">
                     @Html.HiddenFor(m => m.ImageToUpload.Id)
                     @Html.LabelFor(m => m.ImageToUpload.SignId, "Sign")
@@ -136,6 +132,24 @@
 
 
 <script type="text/javascript">
+             $(document).ready(function() {
+
+                $("[rel='tooltip']").tooltip();
+
+                $('.caption-over').hover(
+
+                function() {
+                    $(this).find('.caption-over').slideDown(250);
+                },
+
+                function() {
+                    $(this).find('.caption-over').slideUp(250);
+                });
+
+            });
+
+
+
 
 
     function handleFileSelect(evt) {

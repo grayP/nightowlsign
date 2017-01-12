@@ -69,6 +69,7 @@ namespace ImageStorage
 
         private static void CreateThumbnails(Image image, UploadedImage oldImage)
         {
+            oldImage.Thumbnails.Clear();
             for (int i = 1; i <= 3; i +=1)
             {
                 var thumb = new Thumbnail()

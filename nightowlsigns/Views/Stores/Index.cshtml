@@ -65,7 +65,7 @@
                             <td>@item.Suburb</td>
                             <td class="centrealign">@item.Model</td>
                             <td class="centrealign"><a href="@Url.Action("Index", "Schedules", new { SignId = item.SignId })" data-toggle="tooltip" title="Playlists for this sign size" class="btn btn-sm btn-default" alt="PlayLists"><i class="fa fa-television" aria-hidden="true"></i></a></td>
-                            <td>@Html.DropDownList("Id", new SelectList(@item.PlayLists, "URL", "PlayListName"), new { onchange = "javascript:location.href=this.options[this.selectedIndex].value;", @class ="form-control"})</td>
+                            <td>@Html.DropDownList("Id", new SelectList(@item.PlayLists, "URL", "PlayListName"), new { @class ="form-control"})</td>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }

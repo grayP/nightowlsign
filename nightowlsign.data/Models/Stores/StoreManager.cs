@@ -45,7 +45,6 @@ namespace nightowlsign.data.Models.Stores
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-
                 //var ret = (from s in db.Schedules
                 //    join ss in db.ScheduleStores on s.Id equals ss.ScheduleID
                 //    select new SelectPlayList(){
@@ -55,7 +54,6 @@ namespace nightowlsign.data.Models.Stores
                 //        URL= String.Format("/ScheduleImage?signId={0}&scheduleId={1}&scheduleName={2}", SignId, s.Id, s.Name)
                 //    }
                 //).Where(e => e.StoreId == storeId);
-
 
                 var ret = (from s in db.Schedules
                         join ss in db.ScheduleStores on s.Id equals ss.ScheduleID
@@ -70,10 +68,8 @@ namespace nightowlsign.data.Models.Stores
                         URL = String.Format("/Schedules?signId={0}", SignId)
                        // URL = String.Format("/ScheduleImage?signId={0}&scheduleId={1}&scheduleName={2}", SignId, x.Id, x.Name)
                     });
-
                 return ret.ToList();
             }
-
         }
 
         public Store Find(int storeId)
