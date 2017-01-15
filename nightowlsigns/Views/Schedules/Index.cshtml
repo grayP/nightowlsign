@@ -20,13 +20,13 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <div class="form-group">
                             @Html.LabelFor(m => m.SearchEntity.Name, "Name")
                             @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control" })
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <div class="form-group pull-right">
                             @Html.LabelFor(m => m.SearchEntity.SignId, "Select size to filter")
                             @Html.DropDownListFor(m => m.SearchEntity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.SearchEntity.SignId)), new { onchange = "this.form.submit();", @class = "form-control" })

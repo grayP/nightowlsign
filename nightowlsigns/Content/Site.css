@@ -59,10 +59,10 @@ label .tip {
 
 .navbar-header img
 {
-    width:100px;
+    width:150px;
     padding-right:1px;
     vertical-align: middle;
-    padding-top: 10px;
+    padding-top: 7px;
 }
 
 .cbp-af-header-shrink
@@ -136,6 +136,11 @@ label .tip {
     opacity: .6;
    
 }
+
+  .error {
+    color: red;
+      
+  }
 
 
 #footer {

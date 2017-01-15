@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/jquery")
     <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
     <script src="https://use.fontawesome.com/8dd41a5f58.js"></script>
+    @RenderSection("scripts", required: false)
     <!--usage-->
     @RenderSection("customCSS", required: false)
     <!--other-->
@@ -51,6 +52,5 @@
     </footer>
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/custom")
-    @RenderSection("scripts", required: false)
 </body>
 </html>
