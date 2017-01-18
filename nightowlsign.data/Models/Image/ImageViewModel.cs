@@ -88,7 +88,7 @@ namespace nightowlsign.data.Models.Image
                     CommandString = "";
                     break;
             }
-            if (EventCommand.ToLower() == "insert")
+            if (EventCommand.ToLower() == "insert" )
             {
                 var task = Task.Run(async () => { await Insert(); });
                 task.Wait();
@@ -172,7 +172,7 @@ namespace nightowlsign.data.Models.Image
 
                 if (success && LastImage)
                 {
-                    Mode = "List";
+                    Mode = "Add";
                     Message = "Image(s) successfully added";
                     base.HandleRequest();
                     Get();

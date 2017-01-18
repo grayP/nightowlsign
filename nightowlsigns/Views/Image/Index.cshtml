@@ -4,11 +4,7 @@
     ViewBag.Title = "NightOwl Sign System Images";
     ViewBag.SignId = Model.SearchSignId;
 }
-@section Scripts
-{
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js"></script>
-}
+
 
 
 @if (Model.IsListAreaVisible)
@@ -34,32 +30,51 @@
             }
         </div>
     </div>
+    <div class="container">
+        <div class="row">
 
+            @foreach (var item in Model.Images)
+            {
 
-    foreach (var item in Model.Images)
-    {
-
-        string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
-        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
-        <div class="col-sm-6 col-md-4">
-            <div class="panel panel-default ">
-                <div class="panel-body">
-                    <div class="panel-info">
-                        <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
-                    </div>
-                    <figure class="cap-left">
-                        <div class="panel-image">
-                            <a class="thumbnail" href="@item.ImageURL">
-                                <img class="img-responsive myThumbnail" src="@imageSrc" style="width:180px;" alt="@item.Caption">
-                            </a>
-                            <figcaption>@item.Caption <br /> @item.Model </figcaption>
+                string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
+                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                <div class="col-sm-6 col-md-4">
+                    <div class="panel panel-default ">
+                        <div class="panel-body">
+                            <div class="panel-info">
+                                <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                            <figure class="cap-left">
+                                <div class="panel-image">
+                                    <a class="thumbnail" href="@item.ImageURL">
+                                        <img class="img-responsive myThumbnail" src="@imageSrc" style="width:180px;" alt="@item.Caption">
+                                    </a>
+                                    <figcaption>@item.Caption <br /> @item.Model </figcaption>
+                                </div>
+                            </figure>
                         </div>
-                    </figure>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
-    }
+    </div>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("[rel='tooltip']").tooltip();
+            $('.caption-over').hover(
+                function () {
+                    $(this).find('.caption-over').slideDown(250);
+                },
+
+                function () {
+                    $(this).find('.caption-over').slideUp(250);
+                });
+        });
+    </script>
 }
 <!-- End List Area-->
 @using (Html.BeginForm("Index", "Image", FormMethod.Post, new { enctype = "multipart/form-data", id = "AddImage" }))
@@ -118,7 +133,7 @@
 
                         @if (!Model.ImageToUpload.Status)
                         {
-                            <button class="btn btn-primary" id="btnSave" data-pdsa-action="@Model.CommandString">
+                            <button class="btn btn-primary" id="btnSave">
                                 <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
                             </button>
                         }
@@ -133,65 +148,81 @@
                 </div>
             </div>
         </div>
+
+
     }
-}
+  }
 
 <script type="text/javascript">
-    $(document).ready(function () {
-
-        $('#AddImage').validate({
-            rules: {
-                ImageToUpload_SignId: {
-                    required: true
-                }
-            },
-            highlight: function (element) {
-                $(element).closest('.form-control').removeClass('success').addClass('error');
-            },
-            success: function (element) {
-                element.text('Please select a sign size!').addClass('valid')
-                    .closest('.form-control').removeClass('error').addClass('success');
-            }
-         });
-
-        $("[rel='tooltip']").tooltip();
-
-        $('.caption-over').hover(
-
-        function () {
-            $(this).find('.caption-over').slideDown(250);
-        },
-
-        function () {
-            $(this).find('.caption-over').slideUp(250);
-        });
-
-    });
+      $('#btnSave').click(function (e) {
+          e.preventDefault();
+          var myErr = false;
+          var signSize = $('#ImageToUpload_SignId').val();
+          if (signSize == '') {
+              $('#messageModal').modal('show');
+              myErr = true;
+          }
+          if (!myErr) {
+              //var cmd = $('#btnSave').attr('data-cmd');
+              //$('#btnSave').attr('data-pdsa-action', cmd);
+              $("#EventCommand").val("insert");
+              //$("#EventArgument").val($(this).data("pdsa-val"));
+              $('#AddImage').submit();
+          }
+      });
 
 
-    function handleFileSelect(evt) {
-        var files = evt.target.files; // FileList object
-        // Loop through the FileList and render image files as thumbnails.
-        for (var i = 0, f; f = files[i]; i++) {
-            // Only process image files.
-            if (!f.type.match('image.*')) {
-                continue;
-            }
-            var reader = new FileReader();
-            // Closure to capture the file information.
-            reader.onload = (function (theFile) {
-                return function (e) {
-                    // Render thumbnail.
-                    var span = document.createElement('span');
-                    span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                        '" title="', escape(theFile.name), '"/>'].join('');
-                    document.getElementById('previewImg').style.visibility = "visible";
-                    document.getElementById('previewImg').insertBefore(span, null);
-                };
-            })(f);
-            // Read in the image file as a data URL.
-            reader.readAsDataURL(f);
-        }
-    }
-    document.getElementById('fileupload').addEventListener('change', handleFileSelect, false);
+
+
+      function handleFileSelect(evt) {
+          var files = evt.target.files; // FileList object
+          // Loop through the FileList and render image files as thumbnails.
+          for (var i = 0, f; f = files[i]; i++) {
+              // Only process image files.
+              if (!f.type.match('image.*')) {
+                  continue;
+              }
+              var reader = new FileReader();
+              // Closure to capture the file information.
+              reader.onload = (function (theFile) {
+                  return function (e) {
+                      // Render thumbnail.
+                      var span = document.createElement('span');
+                      span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                          '" title="', escape(theFile.name), '"/>'].join('');
+                      document.getElementById('previewImg').style.visibility = "visible";
+                      document.getElementById('previewImg').insertBefore(span, null);
+                  };
+              })(f);
+              // Read in the image file as a data URL.
+              reader.readAsDataURL(f);
+          }
+      }
+      document.getElementById('fileupload').addEventListener('change', handleFileSelect, false);
 </script>
+
+
+
+<div class="modal fade" id="messageModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h5 class="modal-title">Errors</h5>
+            </div>
+            <div class="modal-body">
+                <div id="errors" class="help-block">
+                    <small class="help-block" data-fv-validator="notEmpty" data-fv-for="SignSizeID" data-fv-result="INVALID" style="">Please choose a sign size for this image(s)</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -16,8 +16,10 @@
     @Html.HiddenFor(m => m.Schedule.Name)
     @Html.HiddenFor(m => m.Schedule.SignId)
     <!-- End Hidden form-->
-    <div class="row">
-        @Html.EditorFor(model => model.AllImages)
+    <div class="container">
+        <div class="row">
+            @Html.EditorFor(model => model.AllImages)
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
@@ -29,9 +31,24 @@
             </a>
         </div>
     </div>
-
-
             <!-- End Detail Area-->
 }
 
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("[rel='tooltip']").tooltip();
+
+        $('.caption-over').hover(
+
+        function () {
+            $(this).find('.caption-over').slideDown(250);
+        },
+
+        function () {
+            $(this).find('.caption-over').slideUp(250);
+        });
+    });
+</script>
 

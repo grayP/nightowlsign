@@ -8,22 +8,23 @@
 <div class="col-sm-6 col-md-4">
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="panel-info">                
+            <div class="panel-info">
                 <div>
                     @Html.CheckBoxFor(m => m.Selected)
                 </div>
             </div>
-            <div class="panel-image">
-                <img class="img-responsive myThumbnail" src="@imageSrc" style="width: 200px;">
+            <figure class="cap-left">
+                <div class="panel-image">
+                    <img class="img-responsive myThumbnail" src="@imageSrc" style="width: 180px;">
 
-                @Html.HiddenFor(m => m.Id)
-                @Html.HiddenFor(m => m.ImageId)
-                @Html.HiddenFor(m => m.ScheduleId)
-                @Html.HiddenFor(m => m.SignId)
-                @Html.HiddenFor(m => m.Name)
-                <div>@Html.DisplayFor(m => m.Name)</div>
-
-            </div>
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.ImageId)
+                    @Html.HiddenFor(m => m.ScheduleId)
+                    @Html.HiddenFor(m => m.SignId)
+                    @Html.HiddenFor(m => m.Name)
+                    <figcaption>@Html.DisplayFor(m => m.Name)</figcaption>
+                </div>
+            </figure>
         </div>
     </div>
 </div>

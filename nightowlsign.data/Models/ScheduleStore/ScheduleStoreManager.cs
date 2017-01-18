@@ -76,7 +76,6 @@ namespace nightowlsign.data.Models
                         db.ScheduleStores.Remove(scheduleStore);
                         db.SaveChanges();
                     }
-
                 }
             }
         }
@@ -101,10 +100,5 @@ namespace nightowlsign.data.Models
             }
             return ret;
         }
-
-    
-
-
     }
-
 }
