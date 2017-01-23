@@ -173,6 +173,7 @@ namespace nightowlsign.data.Models.Image
                 if (success && LastImage)
                 {
                     Mode = "Add";
+                    EventCommand = "add";
                     Message = "Image(s) successfully added";
                     base.HandleRequest();
                     Get();

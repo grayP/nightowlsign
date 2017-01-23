@@ -97,6 +97,7 @@
                 <!-- Begin Message Area -->
                 <div class="row">
                     <div class="col-sm-12">
+                        @Model.Message
                         @if (!Model.IsValid)
                         {
                             <div class="alert alert-danger alert-dismissable" role="alert">
