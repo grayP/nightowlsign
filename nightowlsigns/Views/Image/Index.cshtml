@@ -35,25 +35,25 @@
 
             @foreach (var item in Model.Images)
             {
-
-                string imageBase64 = Convert.ToBase64String(item.ThumbNailSmall);
+                string imageBase64 = Convert.ToBase64String(item.ThumbNailLarge);
                 string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
                 <div class="col-sm-6 col-md-4">
                     <div class="panel panel-default ">
                         <div class="panel-body">
-                            <div class="panel-info">
-                                <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
-                            </div>
                             <figure class="cap-left">
                                 <div class="panel-image">
                                     <a class="thumbnail" href="@item.ImageURL">
-                                        <img class="img-responsive myThumbnail" src="@imageSrc" style="width:180px;" alt="@item.Caption">
+                                        <img class="img-responsive myThumbnail" src="@imageSrc" style="width:100%;" alt="@item.Caption">
                                     </a>
                                     <figcaption>@item.Caption <br /> @item.Model </figcaption>
                                 </div>
                             </figure>
                         </div>
+                        <div class="panel-footer">
+                            <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" aria-hidden="true" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div>
+
                     </div>
                 </div>
             }

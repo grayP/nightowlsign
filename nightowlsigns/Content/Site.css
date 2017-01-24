@@ -137,10 +137,7 @@ label .tip {
    
 }
 
-  .error {
-    color: red;
-      
-  }
+
 
 
 #footer {
@@ -205,6 +202,12 @@ div.desc{
 .panel-primary {
      border-color:    #030324;
 }
+
+.panel-footer {
+    padding-bottom: 3px;
+    padding-left: 3px;
+    padding-top: 3px;
+}
 .panel-primary > .panel-heading {
     background-color: #030324;
      border-color:    #030324;
@@ -219,7 +222,6 @@ figure {
   position: relative;
   float: left;
   overflow: hidden;
-  margin: 0 20px 20px 0;
 }
 figcaption {
   position: absolute;

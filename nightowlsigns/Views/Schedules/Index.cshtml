@@ -60,14 +60,14 @@
                 <thead>
                     <tr>
                         <th class="pdsa-action-button-column">Edit</th>
-                        <th>Sign</th>
-                        <th data-toggle="tooltip" title="A schedule is a list of images to be displayed"> Name</th>
+                        <th class="centrealign">Sign</th>
+                        <th class="centrealign" data-toggle="tooltip" title="A schedule is a list of images to be displayed"> Name</th>
                         <th class="centrealign">Action</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Default</th>
+                        <th class="centrealign">Start Date</th>
+                        <th class="centrealign">End Date</th>
+                        <th class="centrealign">Start Time</th>
+                        <th class="centrealign">End Time</th>
+                        <th class="centrealign">Default</th>
                         <th class="pdsa-action-button-column">Del</th>
                     </tr>
                 </thead>
@@ -75,31 +75,22 @@
                     @foreach (var item in Model.Schedules)
                     {
                         var dDefault = item.DefaultPlayList;
-                        //var Sunday = item.Sunday;
-                        //var Monday = item.Monday;
-                        //var Tuesday = item.Tuesday;
-                        //var Wednesday = item.Wednesday;
-                        //var Thursday = item.Thursday;
-                        //var Friday = item.Friday;
-                        //var Saturday = item.Saturday;
-
-
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
-                            <td>
+                            <td class="centrealign">
                                 @item.Model 
                             </td>
-                            <td>
+                            <td class="centrealign">
                                 @item.Name
                             </td>
                             <td class="centrealign">
                                 <a href="@Url.Action("Index", "ScheduleStore", new {SignId=item.SignId, scheduleId = item.Id, scheduleName = item.Name})" data-toggle="tooltip" title="Stores to apply the playlist to." class="btn btn-sm btn-default" alt="Store List"><i class="fa fa-television" aria-hidden="true"></i></a>
                                 <a href="@Url.Action("Index", "ScheduleImage",new {signId=item.SignId,scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Images to apply to the schedule." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="glyphicon glyphicon-camera"></i></a>
                             </td>
-                            <td>@string.Format("{0:dd MMM yyyy}", item.StartDate)  </td>
-                            <td>@string.Format("{0:dd MMM yyyy}", item.EndDate)</td>
-                            <td>@item.StartTime</td>
-                            <td>@item.EndTime</td>
+                            <td class="centrealign">@string.Format("{0:dd MMM yyyy}", item.StartDate)  </td>
+                            <td class="centrealign">@string.Format("{0:dd MMM yyyy}", item.EndDate)</td>
+                            <td class="centrealign">@item.StartTime</td>
+                            <td class="centrealign">@item.EndTime</td>
                             <td class="centrealign">@Html.CheckBoxFor(model => dDefault, new { @disabled = "disabled" })</td>
                             @*<td>
                                     @Html.CheckBoxFor(model => Sunday, new { @disabled = "disabled" })

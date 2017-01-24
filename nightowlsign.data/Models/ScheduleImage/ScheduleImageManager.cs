@@ -42,7 +42,7 @@ namespace nightowlsign.data.Models
                              {
                                  ImageId = s.Id,
                                  Name = s.Caption,
-                                 ThumbNail = s.ThumbNailSmall,
+                                 ThumbNail = s.ThumbNailLarge,
                                  SignId = signId,
                                  SignSize = s.SignSize ??0
                              });

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.UI.HtmlControls;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace nightowlsign.data.Models.Stores
@@ -13,6 +9,7 @@ namespace nightowlsign.data.Models.Stores
     public class StoreManager
     {
         private data.Schedule defaultSchedule;
+        private Sign defaultSign;
         public StoreManager()
         {
             ValidationErrors = new List<KeyValuePair<string, string>>();
@@ -23,6 +20,16 @@ namespace nightowlsign.data.Models.Stores
                 EndDate = null,
                 Id = 0,
                 SignId = 0
+            };
+            defaultSign = new Sign
+            {
+                Model = "None",
+                Width = 0,
+                Height = 1,
+                id = 0,
+                StoreId = 0,
+                InstallDate = DateTime.Now
+              
             };
         }
         //Properties
@@ -53,7 +60,16 @@ namespace nightowlsign.data.Models.Stores
                     store.SelectedSchedules.Where(x => x.DefaultPlayList == true)
                         .OrderByDescending(x => x.Id)
                         .DefaultIfEmpty(defaultSchedule).First();
+                store.Sign = GetSign(store.SignId ?? 0) ?? defaultSign;
             }
+        }
+
+        private Sign GetSign(int signId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                return db.Signs.Find(signId);
+            }        
         }
 
         private List<data.Schedule> GetSelectedSchedules(int storeId)
