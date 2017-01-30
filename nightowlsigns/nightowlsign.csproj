@@ -982,6 +982,7 @@
     <Content Include="Views\Schedules\EditorTemplates\TimeSelect.cshtml" />
     <Content Include="Views\ScheduleStore\EditorTemplates\StoreSelect.cshtml" />
     <Content Include="Views\ScheduleStore\Index.cshtml" />
+    <Content Include="Views\Image\EditorTemplates\ImagesAndSign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

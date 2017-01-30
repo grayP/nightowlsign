@@ -19,7 +19,7 @@ namespace nightowlsign.Controllers
             };
             ssvm.Schedule.Id = scheduleId;
             ssvm.Schedule.Name = scheduleName;
-            ssvm.loadData();
+            ssvm.LoadData();
             return View(ssvm);
         }
 

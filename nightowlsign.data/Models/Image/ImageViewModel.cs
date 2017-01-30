@@ -11,6 +11,8 @@ namespace nightowlsign.data.Models.Image
     public class ImageViewModel : BaseModel.ViewModelBase
     {
         private readonly SignManager _signManager;
+        public bool Selected { get; set; }
+
         public ImageViewModel() : base()
         {
             _signManager = new SignManager();
@@ -88,7 +90,7 @@ namespace nightowlsign.data.Models.Image
                     CommandString = "";
                     break;
             }
-            if (EventCommand.ToLower() == "insert" )
+            if (EventCommand.ToLower() == "insert")
             {
                 var task = Task.Run(async () => { await Insert(); });
                 task.Wait();
@@ -185,12 +187,24 @@ namespace nightowlsign.data.Models.Image
 
         protected override void Delete()
         {
-            ImageManager Imm = new ImageManager();
-            Entity = Imm.Find(Convert.ToInt32(EventArgument));
-            Imm.Delete(Entity);
+            ScheduleImageManager sim = new ScheduleImageManager();
+            foreach (var image in Images)
+            {
+                if (image.Selected)
+                {
+                    DeleteImage(image.Id);
+                    sim.RemoveImagesFromScheduleImage(image.Id);
+                }
+            }
             Get();
+        }
+
+        private void DeleteImage(int imageId)
+        {
+            ImageManager imm = new ImageManager();
+            Entity = imm.Find(imageId);
+            imm.Delete(Entity);
             base.Delete();
         }
     }
-
 }

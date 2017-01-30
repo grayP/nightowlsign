@@ -26,7 +26,6 @@ namespace nightowlsign.data.Models
                              select c.ImageID);
                 return query.ToList();
             }
-
         }
 
         public List<ImageSelect> GetAllImages(int signId, int scheduleId)
@@ -59,8 +58,17 @@ namespace nightowlsign.data.Models
                 ret = db.Images.FirstOrDefault(e=>e.Id==id);
             }
             return ret;
-
         }
+
+        public void RemoveImagesFromScheduleImage(int imageId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+             var ret= db.ScheduleImages.Where(e => e.ImageID == imageId);
+                db.ScheduleImages.RemoveRange(ret);
+                db.SaveChanges();
+            }      
+    }
 
         public void UpdateImageList(ImageSelect imageSelect, data.Schedule schedule)
         {
@@ -87,7 +95,6 @@ namespace nightowlsign.data.Models
                         db.ScheduleImages.Remove(scheduleImage);
                         db.SaveChanges();
                     }
-
                 }
             }
         }
