@@ -76,6 +76,11 @@ namespace nightowlsign.data.Models.Image
 
         public override void HandleRequest()
         {
+            if (CommandString?.ToLower() == "delete")
+            {
+                EventCommand = "delete";
+            }
+
             switch (EventCommand.ToLower())
             {
                 case "edit":

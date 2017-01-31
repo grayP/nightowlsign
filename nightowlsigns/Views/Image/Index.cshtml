@@ -33,7 +33,7 @@
     using (Html.BeginForm("Index", "Image", new { SignId = Model.SearchSignId }, FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
     {
         <!-- Start Hidden form -->
-        @Html.HiddenFor(m => m.EventCommand)
+        @Html.HiddenFor(m => m.CommandString)
         @Html.HiddenFor(m => m.EventArgument)
         @Html.HiddenFor(m => m.Mode)
 
@@ -145,13 +145,7 @@
 <script type="text/javascript">
 
     function AddId() {
-        //var delId = (this.value);
-        //var existStr = $("#btnDel").data("pdsa-val");
-        //if (existStr.indexOf(delId.toString()) <= 0) {
-        //    existStr += ',' + delId.toString();
-        //}
-        //$("#btnDel").data("pdsa-val", existStr);
-        $("#EventCommand").val("delete");
+         $("#CommandString").val("delete");
     }
 
     $('#btnSave').click(function (e) {
@@ -163,10 +157,7 @@
             myErr = true;
         }
         if (!myErr) {
-            //var cmd = $('#btnSave').attr('data-cmd');
-            //$('#btnSave').attr('data-pdsa-action', cmd);
-            $("#EventCommand").val("insert");
-            //$("#EventArgument").val($(this).data("pdsa-val"));
+           $("#EventCommand").val("insert");
             $('#AddImage').submit();
         }
     });
