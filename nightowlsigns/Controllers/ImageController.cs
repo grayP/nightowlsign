@@ -22,9 +22,9 @@ namespace nightowlsign.Controllers
             return View(ImageViewModel);
         }
         [AllowAnonymous]
-        public ActionResult Show(ImageViewModel imageViewModel)
+        public ActionResult Show(ImageViewModel imageViewModel, int? SignId)
         {
-            ImageViewModel.SearchSignId = imageViewModel.SearchSignId ?? 0;
+            ImageViewModel.SearchSignId = imageViewModel.SearchSignId ?? SignId ?? 0;
             ImageViewModel.HandleRequest();
             return View("Index", ImageViewModel);
         }
@@ -32,8 +32,9 @@ namespace nightowlsign.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public ActionResult Index(FormCollection formCollection, ImageViewModel iVm)
+        public ActionResult Index(FormCollection formCollection, ImageViewModel iVm, int? SignId)
         {
+            ImageViewModel.SearchSignId =  SignId ?? 0;
             iVm.IsValid = ModelState.IsValid;
             if (Request != null)
             {

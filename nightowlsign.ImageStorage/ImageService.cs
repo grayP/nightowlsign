@@ -126,6 +126,7 @@ namespace ImageStorage
             // finally, upload the image into blob storage using the block blob reference
             var fileBytes = image.Data;
             await blockBlob.UploadFromByteArrayAsync(fileBytes, 0, fileBytes.Length);
+
         }
         public CloudBlobContainer GetImagesBlobContainer()
         {
@@ -133,7 +134,7 @@ namespace ImageStorage
             var storageAccount = CloudStorageAccount.Parse(_blobStorageConnectionString);
             // using the storage account, create the blob client
             var blobClient = storageAccount.CreateCloudBlobClient();
-            // finally, using the blob client, get a reference to our container
+           // finally, using the blob client, get a reference to our container
             var container = blobClient.GetContainerReference(_containerName);
             // if we had not created the container in the portal, this would automatically create it for us at run time
             container.CreateIfNotExists();
@@ -174,6 +175,15 @@ namespace ImageStorage
                 continuationToken = resultSegment.ContinuationToken;
             }
             while (continuationToken != null);
+        }
+
+        public bool DeleteFile(string uniqueFileIdentifier)
+        {
+            var container = GetImagesBlobContainer();
+            // using the container reference, get a block blob reference and set its type
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(uniqueFileIdentifier);
+ 
+           return blockBlob.DeleteIfExists();
         }
     }
 }

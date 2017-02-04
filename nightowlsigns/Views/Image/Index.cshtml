@@ -66,7 +66,7 @@
     </script>
 }
 <!-- End List Area-->
-@using (Html.BeginForm("Index", "Image", FormMethod.Post, new { enctype = "multipart/form-data", id = "AddImage" }))
+@using (Html.BeginForm("Index", "Image", new { SignId = Model.SearchSignId }, FormMethod.Post, new { enctype = "multipart/form-data", id = "AddImage" }))
 {
     <!-- Start Hidden form -->
     @Html.HiddenFor(m => m.EventCommand)
@@ -131,7 +131,7 @@
                         {
                             @Html.ActionLink("Add Another Image", "Index", "Image", null, new { @class = "btn btn-primary" })
                         }
-                        <button class="btn btn-primary" formnovalidate id="btnCancel" data-pdsa-action="cancel">
+                        <button class="btn btn-primary" formnovalidate id="btnCancel" data-pdsa-val=@Model.SearchSignId data-pdsa-action="cancel">
                             <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Finished
                         </button>
                     </div>

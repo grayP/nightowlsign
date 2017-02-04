@@ -114,11 +114,11 @@ namespace nightowlsign.data.Models.Image
         protected override void Get()
         {
             ImageManager cmm = new ImageManager();
-            SearchEntity.Caption = SearchEntity.Caption;
+            //SearchEntity.Caption = SearchEntity.Caption;
             SearchEntity.SignSize = SearchSignId;
             Images = cmm.Get(SearchEntity);
         }
- 
+
         protected override void Edit()
         {
             ImageManager imm = new ImageManager();
@@ -183,7 +183,7 @@ namespace nightowlsign.data.Models.Image
                     EventCommand = "add";
                     Message = "Image(s) successfully added";
                     base.HandleRequest();
-                 
+
                 }
             }
             ValidationErrors = imm.ValidationErrors;
@@ -192,16 +192,34 @@ namespace nightowlsign.data.Models.Image
 
         protected override void Delete()
         {
-            ScheduleImageManager sim = new ScheduleImageManager();
             foreach (var image in Images)
             {
                 if (image.Selected)
                 {
-                    DeleteImage(image.Id);
-                    sim.RemoveImagesFromScheduleImage(image.Id);
+                    DeleteTheImage(image);
+                    //ToDo add in image delete
                 }
             }
             Get();
+        }
+
+        private void DeleteTheImage(ImagesAndSign imageToDelete)
+        {
+            DeleteImage(imageToDelete.Id);
+            DeleteFromScheduleImage(imageToDelete.Id);
+            DeleteImageFromBlob(imageToDelete.Caption);
+        }
+
+        private void DeleteImageFromBlob(string imageName)
+        {
+            ImageService imageService= new ImageService();
+            bool result= imageService.DeleteFile(imageName);
+        }
+
+        private void DeleteFromScheduleImage(int id)
+        {
+            ScheduleImageManager sim = new ScheduleImageManager();
+            sim.RemoveImagesFromScheduleImage(id);
         }
 
         private void DeleteImage(int imageId)
