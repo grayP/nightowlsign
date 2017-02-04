@@ -118,7 +118,7 @@ namespace nightowlsign.data.Models.Image
             SearchEntity.SignSize = SearchSignId;
             Images = cmm.Get(SearchEntity);
         }
-
+ 
         protected override void Edit()
         {
             ImageManager imm = new ImageManager();
@@ -138,7 +138,7 @@ namespace nightowlsign.data.Models.Image
             IsValid = true;
             ImageToUpload = new UploadedImage
             {
-                SignId = Entity.SignSize ?? 1
+                SignId = Entity.SignSize ?? SearchSignId ?? 1
             };
             base.Add();
         }
@@ -183,7 +183,7 @@ namespace nightowlsign.data.Models.Image
                     EventCommand = "add";
                     Message = "Image(s) successfully added";
                     base.HandleRequest();
-                    Get();
+                 
                 }
             }
             ValidationErrors = imm.ValidationErrors;

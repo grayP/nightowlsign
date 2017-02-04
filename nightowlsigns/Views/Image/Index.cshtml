@@ -54,16 +54,15 @@
     }
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("[rel='tooltip']").tooltip();
-            $('.caption-over').hover(
-                function () {
-                    $(this).find('.caption-over').slideDown(250);
-                },
-                function () {
-                    $(this).find('.caption-over').slideUp(250);
-                });
-        });
+        $("[rel='tooltip']").tooltip();
+        $('.caption-over').hover(
+            function () {
+                $(this).find('.caption-over').slideDown(250);
+            },
+            function () {
+                $(this).find('.caption-over').slideUp(250);
+            });
+
     </script>
 }
 <!-- End List Area-->
@@ -87,7 +86,7 @@
                 <!-- Begin Message Area -->
                 <div class="row">
                     <div class="col-sm-12">
-                        @Model.Message
+                        <div class="message">@Model.Message</div>
                         @if (!Model.IsValid)
                         {
                             <div class="alert alert-danger alert-dismissable" role="alert">
@@ -133,7 +132,7 @@
                             @Html.ActionLink("Add Another Image", "Index", "Image", null, new { @class = "btn btn-primary" })
                         }
                         <button class="btn btn-primary" formnovalidate id="btnCancel" data-pdsa-action="cancel">
-                            <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel
+                            <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Finished
                         </button>
                     </div>
                 </div>
@@ -143,9 +142,20 @@
 }
 
 <script type="text/javascript">
+    $(document)
+        .ready(function() {
+            //For putting the confirmation message into a Popup
+            var message = $('.message').html();
+            if (message != undefined) {
+                if (message.length > 0) {
+                    $('.message').html('');
+                    $('#ConfirmUploadModal').modal('show');
+                }
+            }
+        });
 
     function AddId() {
-         $("#CommandString").val("delete");
+        $("#CommandString").val("delete");
     }
 
     $('#btnSave').click(function (e) {
@@ -157,7 +167,7 @@
             myErr = true;
         }
         if (!myErr) {
-           $("#EventCommand").val("insert");
+            $("#EventCommand").val("insert");
             $('#AddImage').submit();
         }
     });
@@ -203,6 +213,26 @@
             <div class="modal-body">
                 <div id="errors" class="help-block">
                     <small class="help-block" data-fv-validator="notEmpty" data-fv-for="SignSizeID" data-fv-result="INVALID" style="">Please choose a sign size for this image(s)</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ConfirmUploadModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h5 class="modal-title">Image Uploads</h5>
+            </div>
+            <div class="modal-body">
+                <div id="errors" class="help-block">
+                    <small class="help-block" data-fv-validator="notEmpty" data-fv-for="SignSizeID" data-fv-result="INVALID" style="">Images successfully uploaded.</small>
                 </div>
             </div>
             <div class="modal-footer">
