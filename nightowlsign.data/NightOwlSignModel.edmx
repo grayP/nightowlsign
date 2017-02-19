@@ -189,7 +189,6 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <Property Name="Port" Type="nvarchar" MaxLength="10" />
           <Property Name="Model" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Function Name="GetCurrentPlayList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
@@ -292,7 +291,6 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <EntitySet Name="LastInstalledSchedules" EntityType="Models.LastInstalledSchedule" />
           <EntitySet Name="StoreAndSigns" EntityType="Models.StoreAndSign" />
           <EntitySet Name="ScheduleAndSigns" EntityType="Models.ScheduleAndSign" />
-          <FunctionImport Name="GetCurrentPlayList" ReturnType="Collection(Models.GetCurrentPlayList_Result)" />
         </EntityContainer>
         <EntityType Name="Store">
           <Key>
@@ -458,12 +456,6 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <Property Name="SignId" Type="Int32" />
           <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="GetCurrentPlayList_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Int32" Name="SignId" Nullable="true" />
-          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Importance" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -650,16 +642,6 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetCurrentPlayList" FunctionName="Models.Store.GetCurrentPlayList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Models.GetCurrentPlayList_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SignId" ColumnName="SignId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Importance" ColumnName="Importance" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

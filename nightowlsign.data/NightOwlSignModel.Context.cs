@@ -12,8 +12,6 @@ namespace nightowlsign.data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class nightowlsign_Entities : DbContext
     {
@@ -39,10 +37,5 @@ namespace nightowlsign.data
         public virtual DbSet<LastInstalledSchedule> LastInstalledSchedules { get; set; }
         public virtual DbSet<StoreAndSign> StoreAndSigns { get; set; }
         public virtual DbSet<ScheduleAndSign> ScheduleAndSigns { get; set; }
-    
-        public virtual ObjectResult<GetCurrentPlayList_Result> GetCurrentPlayList()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCurrentPlayList_Result>("GetCurrentPlayList");
-        }
     }
 }
