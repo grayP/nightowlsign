@@ -58,6 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetCurrentPlayList_Result.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Image.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
@@ -150,16 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\basemodel\basemodel.csproj">
-      <Project>{ce5565be-0f62-4d0d-911b-be540af7d2a3}</Project>
-      <Name>basemodel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\nightowlsign.ImageStorage\ImageStorage.csproj">
-      <Project>{a31b574d-0beb-4b15-b608-271ff545d81e}</Project>
-      <Name>ImageStorage</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="NightOwlSignModel.Context.tt">

@@ -72,12 +72,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\nightowlsign.data\nightowlsign.data.csproj">
-      <Project>{e006fac5-fa56-4a62-921c-2e0cc550ae5f}</Project>
-      <Name>nightowlsign.data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="dlls\CP5200.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
