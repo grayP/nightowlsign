@@ -58,6 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetCurrentPlayList_Result.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Image.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
