@@ -1,52 +1,52 @@
 ﻿using ImageStorage;
-using nightowlsign.data.Models.Images;
-
+using nightowlsign.data.Models.Image;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Web;
 using System.Web.Mvc;
-
-
 
 namespace nightowlsign.Controllers
 {
 
     public class ImageController : Controller
     {
-
         private ImageViewModel ImageViewModel = new ImageViewModel();
-        // GET: Image
 
         [AllowAnonymous]
-        public ActionResult Index(int? scheduleId)
+        public ActionResult Index(int? SignId)
         {
-            ImageViewModel.SearchSignID = scheduleId ?? 0;
+            ImageViewModel.SearchSignId = SignId ?? 0;
             ImageViewModel.HandleRequest();
-            ImageViewModel.imageToUpload.Status = false;
+            ImageViewModel.ImageToUpload.Status = false;
 
             return View(ImageViewModel);
         }
         [AllowAnonymous]
-        public ActionResult Show(ImageViewModel imageViewModel)
+        public ActionResult Show(ImageViewModel imageViewModel, int? SignId)
         {
-            ImageViewModel.SearchSignID = imageViewModel.SearchSignID ?? 0;
+            ImageViewModel.SearchSignId = imageViewModel.SearchSignId ?? SignId ?? 0;
             ImageViewModel.HandleRequest();
-          return View("Index", ImageViewModel);
+            return View("Index", ImageViewModel);
         }
 
-       
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public ActionResult Index(FormCollection formCollection, ImageViewModel iVm)
+        public ActionResult Index(FormCollection formCollection, ImageViewModel iVm, int? SignId)
         {
-
+            ImageViewModel.SearchSignId =  SignId ?? 0;
             iVm.IsValid = ModelState.IsValid;
             if (Request != null)
             {
-                iVm.file = Request.Files["file"];
+                var files = HttpContext.Request.Files;
+                for (int i = 0; i < files.Count; i++)
+                {
+                    iVm.File = files[i];
+                    if (i == files.Count-1){iVm.LastImage = true;}
+                    iVm.HandleRequest();
+                }
              }
-
             iVm.HandleRequest();
-
             if (iVm.IsValid)
             {
                 ModelState.Clear();
@@ -60,6 +60,5 @@ namespace nightowlsign.Controllers
             }
             return View(iVm);
         }
-   }
-
+    }
 }

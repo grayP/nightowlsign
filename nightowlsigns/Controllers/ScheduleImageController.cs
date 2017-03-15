@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using nightowlsign.data;
 using nightowlsign.data.Models;
+using nightowlsign.data.Models.Schedule;
 
 namespace nightowlsign.Controllers
 {
@@ -11,12 +13,15 @@ namespace nightowlsign.Controllers
     {
         // GET: 
         [Authorize(Roles = "Admin")]
-        public ActionResult Index(int scheduleId, string scheduleName)
+        public ActionResult Index(int SignId, int scheduleId, string scheduleName)
         {
-            ScheduleImageViewModel ssvm = new ScheduleImageViewModel();
+            ScheduleImageViewModel ssvm = new ScheduleImageViewModel
+            {
+                SignId = SignId
+            };
             ssvm.Schedule.Id = scheduleId;
             ssvm.Schedule.Name = scheduleName;
-            ssvm.loadData();
+            ssvm.LoadData();
             return View(ssvm);
         }
 
@@ -32,8 +37,10 @@ namespace nightowlsign.Controllers
             {
                 sim.UpdateImageList(imageSelect, model.Schedule);
             }
+            ScheduleManager sm= new ScheduleManager();
+            sm.UpdateDate(model.Schedule.Id);
 
-            return RedirectToAction("Index", "Schedules");
+            return RedirectToAction("Index", "Schedules", new {SignId=model.SignId});
 
         }
     }

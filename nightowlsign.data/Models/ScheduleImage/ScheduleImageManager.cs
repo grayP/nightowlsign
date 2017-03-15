@@ -26,35 +26,45 @@ namespace nightowlsign.data.Models
                              select c.ImageID);
                 return query.ToList();
             }
-
         }
 
-        public List<ImageSelect> GetAllImages(int scheduleId)
+        public List<ImageSelect> GetAllImages(int signId, int scheduleId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                var query = (from s in db.Images
-                             join ss in db.ScheduleSigns.Where(ss=>ss.ScheduleID==scheduleId) 
-                             on s.SignSize equals ss.SignId
-                             select new ImageSelect() { ImageId =s.Id, Name = s.Caption, ThumbNail = s.ThumbNailSmall });
+                var query = (from s in db.Images.Where(s=>s.SignSize==signId)
+                             select new ImageSelect()
+                             {
+                                 ImageId = s.Id,
+                                 Name = s.Caption,
+                                 ThumbNail = s.ThumbNailLarge,
+                                 SignId = signId,
+                                 SignSize = s.SignSize ??0
+                             });
                 return query.ToList();
             }
         }
 
 
-
-
-
-        public Image Find(int Id)
+        public data.Image Find(int id)
         {
-            Image ret = null;
+            data.Image ret = null;
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.Images.Find(Id);
+                ret = db.Images.FirstOrDefault(e=>e.Id==id);
             }
             return ret;
-
         }
+
+        public void RemoveImagesFromScheduleImage(int imageId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+             var ret= db.ScheduleImages.Where(e => e.ImageID == imageId);
+                db.ScheduleImages.RemoveRange(ret);
+                db.SaveChanges();
+            }      
+    }
 
         public void UpdateImageList(ImageSelect imageSelect, data.Schedule schedule)
         {
@@ -81,7 +91,6 @@ namespace nightowlsign.data.Models
                         db.ScheduleImages.Remove(scheduleImage);
                         db.SaveChanges();
                     }
-
                 }
             }
         }

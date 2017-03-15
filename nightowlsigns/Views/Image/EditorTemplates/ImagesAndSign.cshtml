@@ -1,0 +1,28 @@
+﻿@model  nightowlsign.data.ImagesAndSign
+
+@{
+    string imageBase64 = Convert.ToBase64String(Model.ThumbNailLarge);
+    string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+}
+<div class="col-sm-6 col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="panel-info">
+                <div>
+                    @Html.CheckBoxFor(m => m.Selected,  new Dictionary<string, object> { { "onclick","AddId.call(this)"} })
+                </div>
+            </div>
+            <figure class="cap-left">
+                <div class="panel-image">
+                    <img class="img-responsive myThumbnail" src="@imageSrc" style="width: 100%;">
+
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.ImageURL)
+                    @Html.HiddenFor(m => m.Caption)
+                    <figcaption>@Html.DisplayFor(m => m.Caption)</figcaption>
+                </div>
+            </figure>
+        </div>
+    </div>
+</div>
+

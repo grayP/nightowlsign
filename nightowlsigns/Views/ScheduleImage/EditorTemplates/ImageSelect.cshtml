@@ -5,17 +5,26 @@
     string imageBase64 = Convert.ToBase64String(Model.ThumbNail);
     string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
 }
+<div class="col-sm-6 col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="panel-info">
+                <div>
+                    @Html.CheckBoxFor(m => m.Selected)
+                </div>
+            </div>
+            <figure class="cap-left">
+                <div class="panel-image">
+                    <img class="img-responsive myThumbnail" src="@imageSrc" style="width: 100%;">
 
-<tr>
-    <td class="centrealign">
-        @Html.CheckBoxFor(m => m.Selected)
-    </td>
-    <td>
-        <img class="img-responsive myThumbnail" src="@imageSrc" style="height: auto;">
-        @Html.HiddenFor(m => m.Id)
-        @Html.HiddenFor(m => m.ImageId)
-        @Html.HiddenFor(m => m.ScheduleId)
-        @Html.HiddenFor(m => m.Name)
-        @Html.DisplayFor(m => m.Name)
-    </td>
-</tr>
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.ImageId)
+                    @Html.HiddenFor(m => m.ScheduleId)
+                    @Html.HiddenFor(m => m.SignId)
+                    @Html.HiddenFor(m => m.Name)
+                    <figcaption>@Html.DisplayFor(m => m.Name)</figcaption>
+                </div>
+            </figure>
+        </div>
+    </div>
+</div>

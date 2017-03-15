@@ -10,12 +10,12 @@
 namespace nightowlsign.data
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ScheduleSign
+    public partial class GetCurrentPlayList_Result
     {
         public int Id { get; set; }
-        public Nullable<int> ScheduleID { get; set; }
         public Nullable<int> SignId { get; set; }
+        public string Name { get; set; }
+        public int Importance { get; set; }
     }
 }

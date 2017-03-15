@@ -25,8 +25,8 @@ label .tip {
 /* Set padding to keep content from hitting the edges */
 .body-content {
    background-color: transparent; 
-   padding-left: 30px;
-   padding-right: 30px;
+   padding-left: 10px;
+   padding-right: 10px;
 }
 
 
@@ -59,10 +59,10 @@ label .tip {
 
 .navbar-header img
 {
-    width:100px;
-    padding-bottom:2px;
-    padding-top:2px;
+    width:150px;
     padding-right:1px;
+    vertical-align: middle;
+    padding-top: 7px;
 }
 
 .cbp-af-header-shrink
@@ -77,7 +77,6 @@ label .tip {
 .centrealign {
     text-align: center;
 }
-
 
 
 /* right column on front page*/
@@ -108,6 +107,12 @@ label .tip {
     margin: 0 7px !important;
 }
 
+.thumb {
+    border: 1px solid #000000;
+    height: 75px;
+    margin: 10px 5px 0 0;
+}
+
 .quotation_div {
    
     display: table;
@@ -131,6 +136,8 @@ label .tip {
     opacity: .6;
    
 }
+
+
 
 
 #footer {
@@ -169,9 +176,7 @@ textarea {
     text-align:center;
 }
 
-#fotoImg {
-	width: 98%;		
-}
+
 
 div.desc{
     background-color: #000;
@@ -197,6 +202,12 @@ div.desc{
 .panel-primary {
      border-color:    #030324;
 }
+
+.panel-footer {
+    padding-bottom: 3px;
+    padding-left: 3px;
+    padding-top: 3px;
+}
 .panel-primary > .panel-heading {
     background-color: #030324;
      border-color:    #030324;
@@ -205,3 +216,62 @@ div.desc{
     background-color: #030324;   
      border-color:    #030324;
 }
+
+figure {
+  display: block;
+  position: relative;
+  float: left;
+  overflow: hidden;
+}
+figcaption {
+  position: absolute;
+  background: black;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  padding: 10px 20px;
+  opacity: 0;
+  -webkit-transition: all 0.6s ease;
+  -moz-transition:    all 0.6s ease;
+  -o-transition:      all 0.6s ease;
+}
+figure:hover figcaption {
+  opacity: 1;
+}
+figure:before {
+  content: "?";
+  position: absolute;
+  font-weight: 800;
+  background: black;
+  background: rgba(255,255,255,0.75);
+  text-shadow: 0 0 5px white;
+  color: black;
+  width: 24px;
+  height: 24px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius:    12px;
+  border-radius:         12px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 24px;
+  -moz-transition: all 0.6s ease;
+  opacity: 0.75;
+}
+figure:hover:before {
+  opacity: 0;
+}
+
+.cap-left:before {  bottom: 10px; left: 10px; }
+.cap-left figcaption { bottom: 6px; left: -30%; }
+.cap-left:hover figcaption { left: 12px; }
+
+.cap-right:before { bottom: 10px; right: 10px; }
+.cap-right figcaption { bottom: 0; right: -30%; }
+.cap-right:hover figcaption { right: 0; }
+
+.cap-top:before { top: 10px; left: 10px; }
+.cap-top figcaption { left: 0; top: -30%; }
+.cap-top:hover figcaption { top: 0; }
+
+.cap-bot:before { bottom: 10px; left: 10px; }
+.cap-bot figcaption { left: 0; bottom: -30%;}
+.cap-bot:hover figcaption { bottom: 0; }

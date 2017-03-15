@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using nightowlsign.data;
 
 
-namespace nightowlsign.data.Models.Images
+namespace nightowlsign.data.Models.Image
 {
     public class ImageManager
     {
@@ -38,18 +38,18 @@ namespace nightowlsign.data.Models.Images
             return ret;
         }
 
-        public Image Find(int ImageID)
+        public data.Image Find(int imageId)
         {
-            Image ret = null;
+            data.Image ret = null;
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.Images.Find(ImageID);
+                ret = db.Images.Find(imageId);
             }
             return ret;
 
         }
 
-        public bool Validate(Image entity)
+        public bool Validate(data.Image entity)
         {
             ValidationErrors.Clear();
 
@@ -73,12 +73,10 @@ namespace nightowlsign.data.Models.Images
             {
                 if (entity.Caption.ToLower() == entity.Caption)
                 {
-                    ValidationErrors.Add(new KeyValuePair<string, string>("Caption", "Caption cannot be all lower case"));
+               //     ValidationErrors.Add(new KeyValuePair<string, string>("Caption", "Caption cannot be all lower case"));
                 }
-
             }
             return (ValidationErrors.Count == 0);
-
         }
 
 
@@ -89,7 +87,7 @@ namespace nightowlsign.data.Models.Images
             {
                 try
                 {
-                    Image entity = new Image()
+                    data.Image entity = new data.Image()
                     {
                         Id = imageToUpDate.Id,
                         Caption = imageToUpDate.Caption,
@@ -119,16 +117,16 @@ namespace nightowlsign.data.Models.Images
         }
 
 
-        public async Task<Boolean> Insert(UploadedImage imageToUpload)
+        public async Task<Boolean> Insert(string fileName, UploadedImage imageToUpload)
         {
             bool ret = false;
             try
             {
-                Image entity = new Image();
-                entity.Caption = imageToUpload.Caption;
+                data.Image entity = new data.Image();
+                entity.Caption = fileName;
                 entity.ImageURL = imageToUpload.Url;
-                entity.ThumbNailLarge = ImageService.ImageToByte(imageToUpload.Thumbnails[1].bitmap);
-                entity.ThumbNailSmall = ImageService.ImageToByte(imageToUpload.Thumbnails[0].bitmap);
+                entity.ThumbNailLarge = ImageService.ImageToByte(imageToUpload.Thumbnails[1].Bitmap);
+                entity.ThumbNailSmall = ImageService.ImageToByte(imageToUpload.Thumbnails[0].Bitmap);
                 entity.DateTaken = imageToUpload.DateTaken;
                 entity.SignSize = imageToUpload.SignId;
                 ret = Validate(entity);
@@ -151,7 +149,7 @@ namespace nightowlsign.data.Models.Images
         }
 
 
-        public bool Delete(Image entity)
+        public bool Delete(data.Image entity)
         {
             bool ret = false;
             using (nightowlsign_Entities db = new nightowlsign_Entities())

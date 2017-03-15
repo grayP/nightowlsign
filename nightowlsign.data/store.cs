@@ -23,5 +23,9 @@ namespace nightowlsign.data
         public Nullable<decimal> Longitude { get; set; }
         public string Manager { get; set; }
         public string Phone { get; set; }
+        public Nullable<int> SignId { get; set; }
+        public string IpAddress { get; set; }
+        public string SubMask { get; set; }
+        public string Port { get; set; }
     }
 }

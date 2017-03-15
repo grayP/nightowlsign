@@ -19,10 +19,21 @@
                 <div class="panel-title"></div>
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.SearchEntity.Name, "Name")
-                    @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control" })
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SearchEntity.Name, "Playlist Name")
+                            @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group pull-right" style="padding-right: 30px;">
+                            @Html.LabelFor(m => m.SearchEntity.SignId, "Select size to filter")
+                            @Html.DropDownListFor(m => m.SearchEntity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.SearchEntity.SignId)), new { onchange = "this.form.submit();", @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
+
 
             </div>
             <div class="panel-footer">
@@ -49,50 +60,47 @@
                 <thead>
                     <tr>
                         <th class="pdsa-action-button-column">Edit</th>
-                        <th data-toggle="tooltip" title="A schedule is a list of images to be displayed"> Name</th>
+                        <th class="centrealign">Sign</th>
+                        <th class="centrealign" data-toggle="tooltip" title="A schedule is a list of images to be displayed"> Name</th>
                         <th class="centrealign">Action</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Default</th>
-                        <th>S M T W T F S</th>
-                        <th class="pdsa-action-button-column">Delete</th>
+                        <th class="centrealign">Start Date</th>
+                        <th class="centrealign">End Date</th>
+                        <th class="centrealign">Start Time</th>
+                        <th class="centrealign">End Time</th>
+                        <th class="centrealign">Default</th>
+                        <th class="pdsa-action-button-column">Del</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Schedules)
                     {
                         var dDefault = item.DefaultPlayList;
-                        var Sunday = item.Sunday;
-                        var Monday = item.Monday;
-                        var Tuesday = item.Tuesday;
-                        var Wednesday = item.Wednesday;
-                        var Thursday = item.Thursday;
-                        var Friday = item.Friday;
-                        var Saturday = item.Saturday;
-
-
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
-                            <td>
-                                @item.Name
-                                @*@Html.ActionLink(@item.Name, "Index", "Display", new { id = item.Id, Model = item.Name }, null)*@
+                            <td class="centrealign">
+                                @item.Model 
                             </td>
                             <td class="centrealign">
-                                <a href="@Url.Action("Index", "ScheduleSign", new {scheduleId = item.Id, scheduleName = item.Name})" data-toggle="tooltip" title="Signs to apply the schedule to." class="btn btn-sm btn-default" alt="Sign List"><i class="fa fa-television" aria-hidden="true"></i></a>
-                                <a href="@Url.Action("Index", "ScheduleImage",new {scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Images to apply to the schedule." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="glyphicon glyphicon-camera"></i></a>
+                                @item.Name
                             </td>
-                            <td>@string.Format("{0:dd/MM/yyyy}", item.StartDate)  </td>
-                            <td>@string.Format("{0:dd/MM/yyyy}", item.EndDate)</td>
+                            <td class="centrealign">
+                                <a href="@Url.Action("Index", "ScheduleStore", new {SignId=item.SignId, scheduleId = item.Id, scheduleName = item.Name})" data-toggle="tooltip" title="Stores to apply the playlist to." class="btn btn-sm btn-default" alt="Store List"><i class="fa fa-television" aria-hidden="true"></i></a>
+                                <a href="@Url.Action("Index", "ScheduleImage",new {signId=item.SignId,scheduleId = item.Id, scheduleName = item.Name })" data-toggle="tooltip" title="Images to apply to the schedule." class="btn btn-sm btn-default" alt="Images for this schedule"><i class="glyphicon glyphicon-camera"></i></a>
+                            </td>
+                            <td class="centrealign">@string.Format("{0:dd MMM yyyy}", item.StartDate)  </td>
+                            <td class="centrealign">@string.Format("{0:dd MMM yyyy}", item.EndDate)</td>
+                            <td class="centrealign">@item.StartTime</td>
+                            <td class="centrealign">@item.EndTime</td>
                             <td class="centrealign">@Html.CheckBoxFor(model => dDefault, new { @disabled = "disabled" })</td>
-                            <td>
-                                @Html.CheckBoxFor(model => Sunday, new { @disabled = "disabled" })
-                                @Html.CheckBoxFor(model => Monday, new { @disabled = "disabled" })
-                                @Html.CheckBoxFor(model => Tuesday, new { @disabled = "disabled" })
-                                @Html.CheckBoxFor(model => Wednesday, new { @disabled = "disabled" })
-                                @Html.CheckBoxFor(model => Thursday, new { @disabled = "disabled" })
-                                @Html.CheckBoxFor(model => Friday, new { @disabled = "disabled" })
-                                @Html.CheckBoxFor(model => Saturday, new { @disabled = "disabled" })
-                            </td>
+                            @*<td>
+                                    @Html.CheckBoxFor(model => Sunday, new { @disabled = "disabled" })
+                                    @Html.CheckBoxFor(model => Monday, new { @disabled = "disabled" })
+                                    @Html.CheckBoxFor(model => Tuesday, new { @disabled = "disabled" })
+                                    @Html.CheckBoxFor(model => Wednesday, new { @disabled = "disabled" })
+                                    @Html.CheckBoxFor(model => Thursday, new { @disabled = "disabled" })
+                                    @Html.CheckBoxFor(model => Friday, new { @disabled = "disabled" })
+                                    @Html.CheckBoxFor(model => Saturday, new { @disabled = "disabled" })
+                                </td>*@
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.Id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
                         </tr>
                     }
@@ -135,14 +143,20 @@
                 </div>
 
                 <div class="form-group input-group-sm">
+                    @Html.LabelFor(m => m.Entity.SignId, "Sign Size")
+                    @Html.DropDownListFor(m => m.Entity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.Entity.SignId)), new { @class = "form-control" })
+
+                </div>
+
+                <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.StartDate, "Start Date")
-                    @Html.TextBoxFor(m => m.Entity.StartDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", placeholder = "Enter start date here..." })
+                    @Html.TextBoxFor(m => m.Entity.StartDate, "{0:dd MMM yyyy}", new { @class = "form-control datepicker", placeholder = "Enter start date here..." })
                     @Html.ValidationMessageFor(m => m.Entity.StartDate)
 
                 </div>
                 <div class="form-group input-group-sm">
                     @Html.LabelFor(m => m.Entity.EndDate, "End Date")
-                    @Html.TextBoxFor(m => m.Entity.EndDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", placeholder = "Enter end date here..." })
+                    @Html.TextBoxFor(m => m.Entity.EndDate, "{0:dd MMM yyyy}", new { @class = "form-control datepicker", placeholder = "Enter end date here..." })
                     @Html.ValidationMessageFor(m => m.Entity.EndDate)
                 </div>
 
@@ -208,9 +222,9 @@
                 <div class="row">
                     <div class="col-sm-3 col-xs-4">
                         <div class="form-group">
-                             @Html.LabelFor(model => model.Entity.StartTime, "Start Time")
+                            @Html.LabelFor(model => model.Entity.StartTime, "Start Time")
                             <div class="input-group clockpicker" data-placement="right" data-align="bottom" data-autoclose="true">
-                                @Html.TextBoxFor(m => m.Entity.StartTime,  new { @class = "form-control", placeholder = "Start time" })
+                                @Html.TextBoxFor(m => m.Entity.StartTime, new { @class = "form-control", placeholder = "Start time" })
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </span>
@@ -225,7 +239,7 @@
 
                             @Html.LabelFor(model => model.Entity.EndTime, "End Time")
                             <div class="input-group clockpicker" data-placement="right" data-align="bottom" data-autoclose="true">
-                                @Html.TextBoxFor(m => m.Entity.EndTime, new {@class = "form-control", placeholder = "End time"})
+                                @Html.TextBoxFor(m => m.Entity.EndTime, new { @class = "form-control", placeholder = "End time" })
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </span>
@@ -248,19 +262,19 @@
                 </div>
             </div>
         </div>
-                                }
+    }
     <!-- End Detail Area-->
-                                <script type="text/javascript">
-                                    $(function () { // will trigger when the document is ready
-                                        $(document).tooltip();
-                                        $('.clockpicker').clockpicker();
-                                        $('.datepicker').datepicker({
-                                            format: 'dd MM yyyy',
-                                            shortYearCutoff: 99,
-                                            orientation: "bottom"
-                                        }).on('changeDate', function (e) {
-                                            $(this).datepicker('hide');
-                                        });
-                                    });
-                                </script>
-                                }
+    <script type="text/javascript">
+        $(function () { // will trigger when the document is ready
+            $(document).tooltip();
+            $('.clockpicker').clockpicker();
+            $('.datepicker').datepicker({
+                format: 'dd MM yyyy',
+                shortYearCutoff: 99,
+                orientation: "bottom"
+            }).on('changeDate', function (e) {
+                $(this).datepicker('hide');
+            });
+        });
+    </script>
+}

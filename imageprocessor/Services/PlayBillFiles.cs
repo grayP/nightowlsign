@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ImageProcessor.CP5200;
 using ImageProcessor.Enums;
-using Serilog;
+//using Serilog;
 
 namespace ImageProcessor.Services
 {
@@ -18,7 +18,7 @@ namespace ImageProcessor.Services
         private readonly int _screenHeight;
         private readonly int _displayTime;
         private readonly byte _colourMode;
-        private readonly ILogger _logger;
+        //private readonly ILogger _logger;
         private int _playWindowNumber;
         public PlayBillFiles(int width, int height, int displayTime, byte colourMode)
         {
@@ -37,7 +37,7 @@ namespace ImageProcessor.Services
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Program create threw an error");
+               // _logger.Error(ex, "Program create threw an error");
                 return IntPtr.Zero;
             }
         }
@@ -90,7 +90,7 @@ namespace ImageProcessor.Services
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Program save threw error");
+                //_logger.Error(ex, "Program save threw error");
                 throw;
             }
         }
@@ -104,7 +104,7 @@ namespace ImageProcessor.Services
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "PlayBill create threw an error");
+                //_logger.Error(ex, "PlayBill create threw an error");
                 return IntPtr.Zero;
             }
         }
@@ -129,7 +129,7 @@ namespace ImageProcessor.Services
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Program save threw error");
+                //_logger.Error(ex, "Program save threw error");
                 throw;
             }
         }

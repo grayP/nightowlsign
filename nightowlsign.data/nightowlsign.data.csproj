@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>nightowlsign.data</RootNamespace>
     <AssemblyName>nightowlsign.data</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -43,10 +43,6 @@
       <HintPath>..\packages\Seq.Apps.1.6.4\lib\net45\Seq.Apps.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Serilog, Version=0.1.6.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.0.1.6\lib\net45\Serilog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -62,13 +58,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FindCurrentPlayList_Result.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetCurrentPlayList_Result.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Image.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ImagesAndSign.cs">
-      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LastInstalledSchedule.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MetaData\MetaData.cs" />
@@ -77,20 +76,21 @@
     <Compile Include="Models\ScheduleImage\ScheduleImageManager.cs" />
     <Compile Include="Models\ScheduleImage\ScheduleImageViewModel.cs" />
     <Compile Include="Models\Image\ImageSelect.cs" />
+    <Compile Include="Models\ScheduleStore\ScheduleStoreManager.cs" />
+    <Compile Include="Models\ScheduleStore\ScheduleStoreViewModel.cs" />
+    <Compile Include="Models\ScheduleStore\StoreSelect.cs" />
     <Compile Include="Models\Schedule\ScheduleManager.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
-    <Compile Include="Models\SendToSign\SendToSignViewModel.cs" />
-    <Compile Include="Models\SendToSign\SendToSignManager.cs" />
     <Compile Include="Models\Signs\SignDto.cs" />
     <Compile Include="Models\Signs\SignParameters.cs" />
     <Compile Include="Models\Signs\SignManager.cs" />
     <Compile Include="Models\Signs\SignViewModel.cs" />
-    <Compile Include="Models\ScheduleSign\ScheduleSignManager.cs" />
-    <Compile Include="Models\ScheduleSign\ScheduleSignViewModel.cs" />
     <Compile Include="Models\Signs\SignSelect.cs" />
+    <Compile Include="Models\StoreScheduleLog\StoreScheduleLogManager.cs" />
     <Compile Include="Models\StoreSignDto\StoreSignDto.cs" />
     <Compile Include="Models\StoreSign\StoreSignManager.cs" />
     <Compile Include="Models\StoreSign\StoreSignViewModel.cs" />
+    <Compile Include="Models\Stores\Store.cs" />
     <Compile Include="Models\Stores\StoreManager.cs" />
     <Compile Include="Models\Stores\StoreViewModel.cs" />
     <Compile Include="NightOwlSignModel.Context.cs">
@@ -108,15 +108,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PartialClasses\ImagesAndSign.cs" />
     <Compile Include="PartialClasses\PartialClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScheduleImage.cs">
+    <Compile Include="ScheduleAndSign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScheduleSign.cs">
+    <Compile Include="ScheduleImage.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ScheduleStore.cs">
@@ -126,6 +127,12 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Store.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreAndSign.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreScheduleLog.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StoreSign.cs">
@@ -167,6 +174,9 @@
       <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
       <LastGenOutput>NightOwlSignModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\SendToSign\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

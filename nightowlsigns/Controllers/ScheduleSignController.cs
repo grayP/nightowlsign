@@ -26,9 +26,9 @@ namespace nightowlsign.Controllers
         public ActionResult Index(ScheduleSignViewModel model)
         {
             ScheduleSignManager ssm = new ScheduleSignManager();
-            List<SignSelect> signSelects = model.AllSigns;
+            List<data.Models.SelectListItem> signSelects = model.AllSigns;
 
-            foreach (SignSelect signSelect in signSelects)
+            foreach (data.Models.SelectListItem signSelect in signSelects)
             {
                 ssm.UpdateSignList(signSelect, model.schedule);
             }

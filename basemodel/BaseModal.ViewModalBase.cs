@@ -8,11 +8,9 @@ namespace BaseModel
 {
     public class ViewModelBase
     {
-
         public ViewModelBase()
         {
             Init();
-
         }
         public string Mode { get; set; }
         public string EventCommand { get; set; }
@@ -31,7 +29,6 @@ namespace BaseModel
             EventArgument = String.Empty;
             ListMode();
         }
-
         //-----------------------------------------------------------------------------
         public virtual void HandleRequest()
         {
@@ -73,10 +70,7 @@ namespace BaseModel
                     break;
             }
         }
-
-
         //--------------------------------------------------------------------------------------
-
         protected virtual void ListMode()
         {
             IsValid = true;
@@ -85,9 +79,7 @@ namespace BaseModel
             IsSearchVisible = true;
             IsDetailVisible = false;
             Mode = "list";
-
         }
-
         protected virtual void AddMode()
         {
             IsListAreaVisible = false;
@@ -95,7 +87,6 @@ namespace BaseModel
             IsDetailVisible = true;
             Mode = "Add";
         }
-
         protected virtual void EditMode()
         {
             IsListAreaVisible = false;
@@ -103,21 +94,12 @@ namespace BaseModel
             IsDetailVisible = true;
             Mode = "Edit";
         }
-
-
-
-
-
         protected virtual void ResetSearch()
         {
             ListMode();
-
         }
-
-
         protected virtual void Get()
         {
-
         }
         protected virtual void Edit()
         {
@@ -125,17 +107,12 @@ namespace BaseModel
         }
         protected virtual void Add()
         {
-
             AddMode();
-
         }
-
         protected virtual void Delete()
         {
             ListMode();
         }
-
-
         protected virtual void Save()
         {
             if (ValidationErrors.Count > 0)
@@ -155,7 +132,6 @@ namespace BaseModel
                 }
             }
         }
-
     }
 }
 

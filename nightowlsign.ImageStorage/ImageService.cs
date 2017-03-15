@@ -37,7 +37,7 @@ namespace ImageStorage
                 byte[] fileBytes = new byte[file.ContentLength];
                 await file.InputStream.ReadAsync(fileBytes, 0, Convert.ToInt32(file.ContentLength));
                 Image image = Image.FromStream(file.InputStream);
-
+                
                 try
                 {
                     PropertyItem propItem = image.GetPropertyItem(36867);
@@ -49,9 +49,6 @@ namespace ImageStorage
                     _imageDate = DateTime.Now;
                 }
                 CreateThumbnails(image, oldImage);
-
-
-
                 return new UploadedImage
                 {
                     ContentType = file.ContentType,
@@ -72,11 +69,12 @@ namespace ImageStorage
 
         private static void CreateThumbnails(Image image, UploadedImage oldImage)
         {
+            oldImage.Thumbnails.Clear();
             for (int i = 1; i <= 3; i +=1)
             {
                 var thumb = new Thumbnail()
                 {
-                    bitmap = ResizeImage(image, oldImage.SignHeight*i, oldImage.SignWidth * i),
+                    Bitmap = ResizeImage(image, oldImage.SignHeight*i, oldImage.SignWidth * i),
                     Height = i
                 };
                 oldImage.Thumbnails.Add(thumb);
@@ -128,6 +126,7 @@ namespace ImageStorage
             // finally, upload the image into blob storage using the block blob reference
             var fileBytes = image.Data;
             await blockBlob.UploadFromByteArrayAsync(fileBytes, 0, fileBytes.Length);
+
         }
         public CloudBlobContainer GetImagesBlobContainer()
         {
@@ -135,7 +134,7 @@ namespace ImageStorage
             var storageAccount = CloudStorageAccount.Parse(_blobStorageConnectionString);
             // using the storage account, create the blob client
             var blobClient = storageAccount.CreateCloudBlobClient();
-            // finally, using the blob client, get a reference to our container
+           // finally, using the blob client, get a reference to our container
             var container = blobClient.GetContainerReference(_containerName);
             // if we had not created the container in the portal, this would automatically create it for us at run time
             container.CreateIfNotExists();
@@ -176,6 +175,15 @@ namespace ImageStorage
                 continuationToken = resultSegment.ContinuationToken;
             }
             while (continuationToken != null);
+        }
+
+        public bool DeleteFile(string uniqueFileIdentifier)
+        {
+            var container = GetImagesBlobContainer();
+            // using the container reference, get a block blob reference and set its type
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(uniqueFileIdentifier);
+ 
+           return blockBlob.DeleteIfExists();
         }
     }
 }

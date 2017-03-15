@@ -25,7 +25,6 @@ namespace ImageStorage
         public int SignId { get; set; }
         public int SignHeight { get; set; }
         public int SignWidth { get; set; }
-
      
     }
     public class Thumbnail
@@ -33,10 +32,6 @@ namespace ImageStorage
         public int Width { get; set; }
         public int Height { get; set; }
         public string Url { get; set; }
-        public Bitmap bitmap { get; set; }
+        public Bitmap Bitmap { get; set; }
     }
-
-
-
-
 }

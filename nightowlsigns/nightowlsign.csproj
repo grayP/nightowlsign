@@ -296,10 +296,6 @@
       <HintPath>..\packages\Seq.Apps.1.6.4\lib\net45\Seq.Apps.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Serilog, Version=0.1.6.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.0.1.6\lib\net45\Serilog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.1.0\lib\net46\System.AppContext.dll</HintPath>
@@ -522,8 +518,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\ScheduleImageController.cs" />
-    <Compile Include="Controllers\ScheduleSignController.cs" />
-    <Compile Include="Controllers\SendToSignController.cs" />
+    <Compile Include="Controllers\ScheduleStoreController.cs" />
+    <Compile Include="Controllers\ScheduleStoreViewModel.cs" />
     <Compile Include="Controllers\SignsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\StoreSignController.cs" />
@@ -552,6 +548,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\clockpicker.css" />
     <Content Include="Content\images\graphic.png" />
+    <Content Include="Content\images\nightowl.png" />
+    <Content Include="Content\images\NightOwllogo.jpg" />
     <Content Include="Content\images\nightowl_back.jpg" />
     <Content Include="Content\images\night_owl.gif" />
     <Content Include="Content\image\night_owl.gif" />
@@ -592,6 +590,21 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\app.js" />
+    <Content Include="Scripts\js\cors\jquery.postmessage-transport.js" />
+    <Content Include="Scripts\js\cors\jquery.xdr-transport.js" />
+    <Content Include="Scripts\js\jquery.fileupload-angular.js" />
+    <Content Include="Scripts\js\jquery.fileupload-audio.js" />
+    <Content Include="Scripts\js\jquery.fileupload-image.js" />
+    <Content Include="Scripts\js\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Scripts\js\jquery.fileupload-process.js" />
+    <Content Include="Scripts\js\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\js\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\js\jquery.fileupload-video.js" />
+    <Content Include="Scripts\js\jquery.fileupload.js" />
+    <Content Include="Scripts\js\jquery.iframe-transport.js" />
+    <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\js\vendor\jquery.ui.widget.js" />
     <Content Include="Scripts\kendo.modernizr.custom.js" />
     <Content Include="Scripts\kendo\angular.min.js" />
     <Content Include="Scripts\kendo\jquery.min.js" />
@@ -959,17 +972,17 @@
     <Content Include="Views\StoreSign\Index.cshtml" />
     <Content Include="Views\StoreSign\EditorTemplates\SignSelect.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
-    <Content Include="Views\Image\Show.cshtml" />
     <Content Include="Views\Stores\Index.cshtml" />
     <Content Include="Views\Stores\show.cshtml" />
     <Content Include="Views\ScheduleImage\EditorTemplates\ImageSelect.cshtml" />
     <Content Include="Views\ScheduleImage\Index.cshtml" />
-    <Content Include="Views\ScheduleSign\Index.cshtml" />
-    <Content Include="Views\ScheduleSign\EditorTemplates\SignSelect.cshtml" />
     <Content Include="Views\SendToSign\Index.cshtml" />
     <Content Include="Views\SendToSign\EditorTemplates\ImageSelect.cshtml" />
     <Content Include="Views\SendToSign\Resend.cshtml" />
     <Content Include="Views\Schedules\EditorTemplates\TimeSelect.cshtml" />
+    <Content Include="Views\ScheduleStore\EditorTemplates\StoreSelect.cshtml" />
+    <Content Include="Views\ScheduleStore\Index.cshtml" />
+    <Content Include="Views\Image\EditorTemplates\ImagesAndSign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
@@ -987,10 +1000,6 @@
       <Project>{ce5565be-0f62-4d0d-911b-be540af7d2a3}</Project>
       <Name>basemodel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\imageprocessor\ImageProcessor.csproj">
-      <Project>{150b2f5d-b12e-43ae-8e73-018b30a93918}</Project>
-      <Name>ImageProcessor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\nightowlsign.data\nightowlsign.data.csproj">
       <Project>{e006fac5-fa56-4a62-921c-2e0cc550ae5f}</Project>
       <Name>nightowlsign.data</Name>
@@ -1003,6 +1012,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\kendo\2015.3.1111\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

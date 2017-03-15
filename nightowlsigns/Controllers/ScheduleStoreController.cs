@@ -9,14 +9,14 @@ namespace nightowlsign.Controllers
 {
     public class ScheduleStoreController : Controller
     {
-        // GET: RegattaCrew
+        // GET: 
         [Authorize(Roles = "Admin")]
-        public ActionResult Index(int scheduleId, string scheduleName)
+        public ActionResult Index(int SignId, int scheduleId, string scheduleName)
         {
             ScheduleStoreViewModel ssvm = new ScheduleStoreViewModel();
             ssvm.Schedule.Id = scheduleId;
             ssvm.Schedule.Name = scheduleName;
-            ssvm.loadData();
+            ssvm.LoadData(SignId);
             return View(ssvm);
         }
 
@@ -25,14 +25,16 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Index(ScheduleStoreViewModel model)
         {
+            int CurrentSignSize = 0;
             ScheduleStoreManager ssm = new ScheduleStoreManager();
             List<StoreSelect> storeSlects = model.AllStores;
 
             foreach (StoreSelect storeSelect in storeSlects)
             {
                 ssm.UpdateStoreList(storeSelect, model.Schedule);
+                CurrentSignSize = storeSelect.SignId;
             }
-            return RedirectToAction("Index", "Schedules");
+            return RedirectToAction("Index", "Schedules", new {SignId=CurrentSignSize});
 
         }
 

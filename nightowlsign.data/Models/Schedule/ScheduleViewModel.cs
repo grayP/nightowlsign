@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nightowlsign.data.Models.StoreScheduleLog;
 
 namespace nightowlsign.data.Models.Schedule
 {
@@ -11,15 +12,40 @@ namespace nightowlsign.data.Models.Schedule
 
         public ScheduleViewModel() : base()
         {
-
         }
-        public List<data.Schedule> Schedules { get; set; }
+        private StoreScheduleLogManager sslm = new StoreScheduleLogManager();
+        public List<data.ScheduleAndSign> Schedules { get; set; }
         public data.Schedule SearchEntity { get; set; }
         public data.Schedule Entity { get; set; }
+        public IEnumerable<SelectListItem> SignList
+        {
+            get
+            {
+                using (nightowlsign_Entities db = new nightowlsign_Entities())
+                {
+                    var selectList = new List<SelectListItem>()
+                    {
+                        new SelectListItem
+                        {
+                            Id = 0,
+                            Model = "Show All"
+                        }
+                    };
+                    selectList.AddRange(from item in
+                                      db.Signs.OrderBy(x => x.Model)
+                                        select new SelectListItem()
+                                        {
+                                            SignId = item.id,
+                                            Model = item.Model
+                                        });
 
+                    return selectList;
+                }
+            }
+        }
         protected override void Init()
         {
-            Schedules = new List<data.Schedule>();
+            Schedules = new List<data.ScheduleAndSign>();
             SearchEntity = new data.Schedule();
             Entity = new data.Schedule();
             base.Init();
@@ -72,6 +98,8 @@ namespace nightowlsign.data.Models.Schedule
             ScheduleManager sm = new ScheduleManager();
             Entity = sm.Find(Convert.ToInt32(EventArgument));
             sm.Delete(Entity);
+
+            sslm.DeleteLog(Convert.ToInt32(EventArgument));
             Get();
             base.Delete();
         }
