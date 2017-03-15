@@ -29,7 +29,7 @@ namespace nightowlsign.data.Models.Stores
                 id = 0,
                 StoreId = 0,
                 InstallDate = DateTime.Now
-              
+
             };
         }
         //Properties
@@ -53,13 +53,12 @@ namespace nightowlsign.data.Models.Stores
         {
             foreach (var store in storeList)
             {
+                data.Schedule defaultSched =
+                new data.Schedule { Id = 0, Name = "" };
                 store.AvailableSchedules = GetAvailableSchedules(store.id);
                 store.SelectedSchedules = GetSelectedSchedules(store.id);
-                
-                store.CurrentSchedule =
-                    store.SelectedSchedules.Where(x => x.DefaultPlayList == true)
-                        .OrderByDescending(x => x.Id)
-                        .DefaultIfEmpty(defaultSchedule).First();
+                store.DefaultSchedule = GetDefaultSchedule(store.SignId ?? 0) ?? defaultSched;
+                store.CurrentSchedule = GetInstalledSchedule(store.id) ?? defaultSched;
                 store.Sign = GetSign(store.SignId ?? 0) ?? defaultSign;
             }
         }
@@ -69,7 +68,7 @@ namespace nightowlsign.data.Models.Stores
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
                 return db.Signs.Find(signId);
-            }        
+            }
         }
 
         private List<data.Schedule> GetSelectedSchedules(int storeId)
@@ -95,6 +94,44 @@ namespace nightowlsign.data.Models.Stores
             }
         }
 
+        private data.Schedule GetDefaultSchedule(int signId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                var ret = (from s in db.Schedules
+                           where s.SignId == signId && s.DefaultPlayList == true
+                           select new { s.Id, s.Name })
+                    .AsEnumerable()
+                    .OrderByDescending(x => x.Id)
+                    .Select(x => new data.Schedule()
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                    }).FirstOrDefault();
+
+                return ret;
+            }
+        }
+
+        private data.Schedule GetInstalledSchedule(int storeId)
+        {
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                var ret = (from s in db.StoreScheduleLogs
+                           where s.StoreId == storeId
+                           select new { s.ScheduleId, s.ScheduleName, s.DateInstalled })
+                    .AsEnumerable()
+                    .OrderByDescending(x => x.DateInstalled)
+                    .Select(x => new data.Schedule()
+                    {
+                        Id = x.ScheduleId ?? 0,
+                        Name = x.ScheduleName,
+                    }).FirstOrDefault();
+
+                return ret;
+            }
+        }
+
         private List<data.Schedule> GetAvailableSchedules(int storeId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
@@ -103,17 +140,17 @@ namespace nightowlsign.data.Models.Stores
                            join st in db.Store on s.SignId equals st.SignId
                            where st.id == storeId
                            select new { s.Id, s.Name, s.StartDate, s.EndDate, s.DefaultPlayList, s.StartTime, s.EndTime })
-                    .AsEnumerable()
-                    .Select(x => new data.Schedule()
-                    {
-                        Id = x.Id,
-                        Name = x.Name,
-                        StartDate = x.StartDate,
-                        EndDate = x.EndDate,
-                        DefaultPlayList = x.DefaultPlayList,
-                        StartTime = x.StartTime,
-                        EndTime = x.EndTime
-                    });
+                   .AsEnumerable()
+                   .Select(x => new data.Schedule()
+                   {
+                       Id = x.Id,
+                       Name = x.Name,
+                       StartDate = x.StartDate,
+                       EndDate = x.EndDate,
+                       DefaultPlayList = x.DefaultPlayList,
+                       StartTime = x.StartTime,
+                       EndTime = x.EndTime
+                   });
                 return ret.ToList();
             }
         }

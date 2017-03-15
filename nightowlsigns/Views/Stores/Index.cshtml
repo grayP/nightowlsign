@@ -67,9 +67,9 @@
                             <td class="centrealign">@item.Sign.Model</td>
                             <td class="centrealign">@string.Format("{0:0.00}", ((double)@item.Sign.Width / @item.Sign.Height))</td>
                             <td class="centrealign"><a href="@Url.Action("Index", "Schedules", new { SignId = item.SignId ?? 0 })" data-toggle="tooltip" title="Playlists for this sign size" class="btn btn-sm btn-default" alt="PlayLists"><span class="glyphicon glyphicon-calendar"></span></a></td>
+                            <td class="centrealign">@item.DefaultSchedule.Name</td>
                             <td class="centrealign">@item.CurrentSchedule.Name</td>
-                            <td class="centrealign"></td>
-                            <td class="centrealign"><i class="glyphicon glyphicon-play"></i></td>
+                            <td class="centrealign"><a href="@Url.Action("Index","ScheduleImage", new {signId=item.SignId ?? 0, scheduleId=item.CurrentSchedule.Id, scheduleName=item.CurrentSchedule.Name})"> <i class="glyphicon glyphicon-play"></i></a> </td>
                            @*<td class="centrealign">@string.Format("{0:dd MMM yyyy}", item?.CurrentSchedule?.StartDate)</td>
                             <td class="centrealign">@string.Format("{0:dd MMM yyyy}", item?.CurrentSchedule?.EndDate)</td>*@
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>

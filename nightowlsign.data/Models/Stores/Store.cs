@@ -10,6 +10,7 @@ namespace nightowlsign.data
    public partial class StoreAndSign
     {
         //public List<SelectPlayList> PlayLists { get; set; }
+        public Schedule DefaultSchedule { get; set; }
         public Schedule CurrentSchedule { get; set; }
         public List<Schedule> AvailableSchedules { get; set; }
         public List<Schedule> SelectedSchedules { get; set; }

@@ -136,6 +136,9 @@
     <Compile Include="StoreAndSign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StoreScheduleLog.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="StoreSign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
