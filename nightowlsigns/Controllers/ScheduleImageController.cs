@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using nightowlsign.data;
 using nightowlsign.data.Models;
+using nightowlsign.data.Models.Schedule;
 
 namespace nightowlsign.Controllers
 {
@@ -34,8 +36,9 @@ namespace nightowlsign.Controllers
             foreach (ImageSelect imageSelect in imageSelects)
             {
                 sim.UpdateImageList(imageSelect, model.Schedule);
-
             }
+            ScheduleManager sm= new ScheduleManager();
+            sm.UpdateDate(model.Schedule.Id);
 
             return RedirectToAction("Index", "Schedules", new {SignId=model.SignId});
 

@@ -97,6 +97,7 @@ namespace nightowlsign.data.Models.Schedule
             ScheduleManager sm = new ScheduleManager();
             Entity = sm.Find(Convert.ToInt32(EventArgument));
             sm.Delete(Entity);
+
             Get();
             base.Delete();
         }

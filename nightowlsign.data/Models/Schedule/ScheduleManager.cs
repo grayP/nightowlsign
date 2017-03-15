@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using nightowlsign.data;
 
@@ -22,7 +23,7 @@ namespace nightowlsign.data.Models.Schedule
             {
                 ret = db.ScheduleAndSigns.OrderBy(x => x.Id).ToList<data.ScheduleAndSign>();
             }
-            if (Entity.SignId>0)
+            if (Entity.SignId > 0)
             {
                 ret = ret.FindAll(p => p.SignId.Equals(Entity.SignId));
             }
@@ -44,6 +45,17 @@ namespace nightowlsign.data.Models.Schedule
 
         }
 
+        public void UpdateDate(int id)
+        {
+            var schedule = new data.Schedule() { Id = id, LastUpdated = DateTime.UtcNow.ToLocalTime() };
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                db.Schedules.Attach(schedule);
+                db.Entry(schedule).Property(e => e.LastUpdated).IsModified = true;
+                db.SaveChanges();
+            }
+        }
+
         public bool Validate(data.Schedule entity)
         {
             ValidationErrors.Clear();
@@ -51,7 +63,7 @@ namespace nightowlsign.data.Models.Schedule
             {
                 if (entity.Name.ToLower() == entity.Name)
                 {
-                   // ValidationErrors.Add(new KeyValuePair<string, string>("Schedule Name", "Schedule Name cannot be all lower case"));
+                    // ValidationErrors.Add(new KeyValuePair<string, string>("Schedule Name", "Schedule Name cannot be all lower case"));
                 }
             }
             return (ValidationErrors.Count == 0);
@@ -61,6 +73,7 @@ namespace nightowlsign.data.Models.Schedule
         public Boolean Update(data.Schedule entity)
         {
             bool ret = false;
+            entity.LastUpdated = DateTime.Now.ToLocalTime();
             if (Validate(entity))
             {
                 try
@@ -84,6 +97,7 @@ namespace nightowlsign.data.Models.Schedule
                         modifiedSchedule.Property(e => e.EndTime).IsModified = true;
                         modifiedSchedule.Property(e => e.Valid).IsModified = true;
                         modifiedSchedule.Property(e => e.SignId).IsModified = true;
+                        modifiedSchedule.Property(e => e.LastUpdated).IsModified = true;
 
                         db.SaveChanges();
                         ret = true;
@@ -124,7 +138,8 @@ namespace nightowlsign.data.Models.Schedule
                             StartTime = entity.StartTime,
                             EndTime = entity.EndTime,
                             Valid = entity.Valid,
-                            SignId = entity.SignId
+                            SignId = entity.SignId,
+                            LastUpdated = DateTime.Now.ToLocalTime()
                         };
 
                         db.Schedules.Add(newSchedule);

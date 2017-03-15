@@ -32,10 +32,6 @@ namespace nightowlsign.data.Models
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                //var query = (from s in db.Images
-                //             join ss in db.ScheduleSigns.Where(ss => ss.ScheduleID == scheduleId)
-                //             on s.SignSize equals ss.SignId
-                //             select new ImageSelect() { ImageId = s.Id, Name = s.Caption, ThumbNail = s.ThumbNailSmall });
                 var query = (from s in db.Images.Where(s=>s.SignSize==signId)
                              select new ImageSelect()
                              {

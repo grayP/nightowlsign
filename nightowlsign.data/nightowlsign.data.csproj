@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>nightowlsign.data</RootNamespace>
     <AssemblyName>nightowlsign.data</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -58,6 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FindCurrentPlayList_Result.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetCurrentPlayList_Result.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
@@ -65,9 +68,6 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ImagesAndSign.cs">
-      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LastInstalledSchedule.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MetaData\MetaData.cs" />

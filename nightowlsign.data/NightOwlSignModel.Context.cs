@@ -36,7 +36,6 @@ namespace nightowlsign.data
         public virtual DbSet<ScheduleImage> ScheduleImages { get; set; }
         public virtual DbSet<ScheduleSign> ScheduleSigns { get; set; }
         public virtual DbSet<ImagesAndSign> ImagesAndSigns { get; set; }
-        public virtual DbSet<LastInstalledSchedule> LastInstalledSchedules { get; set; }
         public virtual DbSet<StoreAndSign> StoreAndSigns { get; set; }
         public virtual DbSet<ScheduleAndSign> ScheduleAndSigns { get; set; }
         public virtual DbSet<StoreScheduleLog> StoreScheduleLogs { get; set; }
@@ -44,6 +43,11 @@ namespace nightowlsign.data
         public virtual ObjectResult<GetCurrentPlayList_Result> GetCurrentPlayList()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCurrentPlayList_Result>("GetCurrentPlayList");
+        }
+    
+        public virtual ObjectResult<FindCurrentPlayList_Result> FindCurrentPlayList()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindCurrentPlayList_Result>("FindCurrentPlayList");
         }
     }
 }
