@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nightowlsign.data.Models.StoreScheduleLog;
 
 namespace nightowlsign.data.Models.Schedule
 {
@@ -11,8 +12,8 @@ namespace nightowlsign.data.Models.Schedule
 
         public ScheduleViewModel() : base()
         {
-
         }
+        private StoreScheduleLogManager sslm = new StoreScheduleLogManager();
         public List<data.ScheduleAndSign> Schedules { get; set; }
         public data.Schedule SearchEntity { get; set; }
         public data.Schedule Entity { get; set; }
@@ -98,6 +99,7 @@ namespace nightowlsign.data.Models.Schedule
             Entity = sm.Find(Convert.ToInt32(EventArgument));
             sm.Delete(Entity);
 
+            sslm.DeleteLog(Convert.ToInt32(EventArgument));
             Get();
             base.Delete();
         }

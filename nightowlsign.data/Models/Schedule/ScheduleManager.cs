@@ -118,6 +118,7 @@ namespace nightowlsign.data.Models.Schedule
             try
             {
                 ret = Validate(entity);
+                entity.LastUpdated = DateTime.Now.ToLocalTime();
                 if (ret)
                 {
                     using (nightowlsign_Entities db = new nightowlsign_Entities())
@@ -139,7 +140,7 @@ namespace nightowlsign.data.Models.Schedule
                             EndTime = entity.EndTime,
                             Valid = entity.Valid,
                             SignId = entity.SignId,
-                            LastUpdated = DateTime.Now.ToLocalTime()
+                            LastUpdated = entity.LastUpdated
                         };
 
                         db.Schedules.Add(newSchedule);

@@ -81,13 +81,12 @@
     <Compile Include="Models\ScheduleStore\StoreSelect.cs" />
     <Compile Include="Models\Schedule\ScheduleManager.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />
-    <Compile Include="Models\SendToSign\SendToSignViewModel.cs" />
-    <Compile Include="Models\SendToSign\SendToSignManager.cs" />
     <Compile Include="Models\Signs\SignDto.cs" />
     <Compile Include="Models\Signs\SignParameters.cs" />
     <Compile Include="Models\Signs\SignManager.cs" />
     <Compile Include="Models\Signs\SignViewModel.cs" />
     <Compile Include="Models\Signs\SignSelect.cs" />
+    <Compile Include="Models\StoreScheduleLog\StoreScheduleLogManager.cs" />
     <Compile Include="Models\StoreSignDto\StoreSignDto.cs" />
     <Compile Include="Models\StoreSign\StoreSignManager.cs" />
     <Compile Include="Models\StoreSign\StoreSignViewModel.cs" />
@@ -119,9 +118,6 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ScheduleImage.cs">
-      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ScheduleSign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ScheduleStore.cs">
@@ -178,6 +174,9 @@
       <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
       <LastGenOutput>NightOwlSignModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\SendToSign\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
