@@ -247,3 +247,5 @@ ModelManifest.xml
 # playbill files 
 *.lpl
 *.jpg
+
+*.config
