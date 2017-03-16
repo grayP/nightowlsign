@@ -82,13 +82,10 @@ namespace nightowlsign.data.Models
 
         internal ScheduleStore GetValues(StoreSelect storeSelect)
         {
-            ScheduleStore scheduleStore = null;
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                scheduleStore =
-                    db.ScheduleStores.FirstOrDefault(x => x.StoreId == storeSelect.StoreId && x.ScheduleID == storeSelect.ScheduleId);
+                return db.ScheduleStores.FirstOrDefault(x => x.StoreId == storeSelect.StoreId && x.ScheduleID == storeSelect.ScheduleId);
             }
-            return scheduleStore;
         }
 
         internal bool IsSelected(int ScheduleId, int storeId)
@@ -99,6 +96,22 @@ namespace nightowlsign.data.Models
                 ret = db.ScheduleStores.Any(x => x.StoreId == storeId && x.ScheduleID == ScheduleId);
             }
             return ret;
+        }
+
+        internal void Delete(int scheduleId)
+        {
+            try
+            {
+                using (nightowlsign_Entities db = new nightowlsign_Entities())
+                {
+                    db.ScheduleStores.RemoveRange(db.ScheduleStores.Where(x => x.ScheduleID == scheduleId));
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

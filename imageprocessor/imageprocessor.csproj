@@ -69,9 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlls\CP5200API.h" />
-    <EmbeddedResource Include="dlls\LafDll.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nightowlsign.data\nightowlsign.data.csproj">

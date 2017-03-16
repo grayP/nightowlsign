@@ -48,9 +48,7 @@ label .tip {
      padding: 5px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-
 }
-
 
 .navbar-brand
 {
@@ -262,7 +260,7 @@ figure:hover:before {
 
 .cap-left:before {  bottom: 10px; left: 10px; }
 .cap-left figcaption { bottom: 6px; left: -30%; }
-.cap-left:hover figcaption { left: 12px; }
+.cap-left:hover figcaption { left: 12px; font-size: x-small;}
 
 .cap-right:before { bottom: 10px; right: 10px; }
 .cap-right figcaption { bottom: 0; right: -30%; }
