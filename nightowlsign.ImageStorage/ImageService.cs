@@ -177,13 +177,13 @@ namespace ImageStorage
             while (continuationToken != null);
         }
 
-        public bool DeleteFile(string uniqueFileIdentifier)
+        public void DeleteFile(string uniqueFileIdentifier)
         {
             var container = GetImagesBlobContainer();
             // using the container reference, get a block blob reference and set its type
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(uniqueFileIdentifier);
  
-           return blockBlob.DeleteIfExists();
+            blockBlob.DeleteIfExists();
         }
     }
 }

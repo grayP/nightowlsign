@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace nightowlsign.Controllers
 {
-
+        
     public class ImageController : Controller
     {
         private ImageViewModel ImageViewModel = new ImageViewModel();

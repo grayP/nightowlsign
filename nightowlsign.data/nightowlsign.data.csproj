@@ -71,6 +71,7 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MetaData\MetaData.cs" />
+    <Compile Include="Models\Image\IImageManager.cs" />
     <Compile Include="Models\Image\ImageManager.cs" />
     <Compile Include="Models\Image\ImageViewModel.cs" />
     <Compile Include="Models\ScheduleImage\ScheduleImageManager.cs" />

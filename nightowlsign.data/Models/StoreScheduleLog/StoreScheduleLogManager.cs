@@ -15,15 +15,12 @@ namespace nightowlsign.data.Models.StoreScheduleLog
 
         public List<data.StoreScheduleLog> Get(data.StoreScheduleLog storeScheduleLog)
         {
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            using (var db = new nightowlsign_Entities())
             {
-                var ret = db.StoreScheduleLogs.OrderBy(x => x.ScheduleName).ToList<data.StoreScheduleLog>();
-                ret = ret.FindAll(p => p.ScheduleName.ToLower().StartsWith(storeScheduleLog.ScheduleName));
-                return ret;
+                return db.StoreScheduleLogs.OrderBy(x => x.ScheduleName).Where(p => p.ScheduleName.ToLower().StartsWith(storeScheduleLog.ScheduleName)).ToList<data.StoreScheduleLog>();
             }
         }
-
-
+ 
         private data.StoreScheduleLog GetStoreScheduleLog(int scheduleStoreLogId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
