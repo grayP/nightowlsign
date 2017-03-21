@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 
 
@@ -17,9 +16,7 @@ namespace nightowlsign.data.Models.StoreScheduleLog
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                var ret = db.StoreScheduleLogs.OrderBy(x => x.ScheduleName).ToList<data.StoreScheduleLog>();
-                ret = ret.FindAll(p => p.ScheduleName.ToLower().StartsWith(storeScheduleLog.ScheduleName));
-                return ret;
+                return db.StoreScheduleLogs.OrderBy(x => x.ScheduleName).Where(x => x.ScheduleName.ToLower().StartsWith(storeScheduleLog.ScheduleName)).ToList<data.StoreScheduleLog>();
             }
         }
 

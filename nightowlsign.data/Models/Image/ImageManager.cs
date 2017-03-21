@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using nightowlsign.data;
 
 
 namespace nightowlsign.data.Models.Image
@@ -19,20 +17,20 @@ namespace nightowlsign.data.Models.Image
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
 
 
-        public List<ImagesAndSign> Get(ImagesAndSign Entity)
+        public List<ImagesAndSign> Get(ImagesAndSign entity)
         {
-            List<ImagesAndSign> ret = new List<ImagesAndSign>();
+            var ret = new List<ImagesAndSign>();
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ret = db.ImagesAndSigns.OrderBy(x=>x.Model).ThenBy(x => x.Caption).ToList<ImagesAndSign>();
+                ret = db.ImagesAndSigns.OrderBy(x => x.Model).ThenBy(x => x.Caption).ToList<ImagesAndSign>();
             }
-            if (!string.IsNullOrEmpty(Entity.Caption))
+            if (!string.IsNullOrEmpty(entity.Caption))
             {
-                ret = ret.FindAll(p => p.Caption.ToLower().StartsWith(Entity.Caption));
+                ret = ret.FindAll(p => p.Caption.ToLower().StartsWith(entity.Caption));
             }
-            if (Entity.SignSize>0)
+            if (entity.SignSize > 0)
             {
-                ret = ret.FindAll(p => p.SignSize.Equals(Entity.SignSize));
+                ret = ret.FindAll(p => p.SignSize.Equals(entity.SignSize));
             }
 
             return ret;
@@ -40,13 +38,10 @@ namespace nightowlsign.data.Models.Image
 
         public data.Image Find(int imageId)
         {
-            data.Image ret = null;
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            using (var db = new nightowlsign_Entities())
             {
-                ret = db.Images.Find(imageId);
+                return db.Images.Find(imageId);
             }
-            return ret;
-
         }
 
         public bool Validate(data.Image entity)
@@ -73,7 +68,7 @@ namespace nightowlsign.data.Models.Image
             {
                 if (entity.Caption.ToLower() == entity.Caption)
                 {
-               //     ValidationErrors.Add(new KeyValuePair<string, string>("Caption", "Caption cannot be all lower case"));
+                    //     ValidationErrors.Add(new KeyValuePair<string, string>("Caption", "Caption cannot be all lower case"));
                 }
             }
             return (ValidationErrors.Count == 0);
@@ -92,7 +87,7 @@ namespace nightowlsign.data.Models.Image
                         Id = imageToUpDate.Id,
                         Caption = imageToUpDate.Caption,
                         DateTaken = imageToUpDate.DateTaken,
-                        SignSize=imageToUpDate.SignId
+                        SignSize = imageToUpDate.SignId
                     };
                     using (nightowlsign_Entities db = new nightowlsign_Entities())
                     {
