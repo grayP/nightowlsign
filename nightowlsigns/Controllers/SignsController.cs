@@ -1,36 +1,25 @@
-﻿using System;
+﻿using nightowlsign.data.Models.Signs;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using nightowlsign.data;
-using nightowlsign.data.Models.Signs;
-using nightowlsign.Models;
 
 namespace nightowlsign.Controllers
 {
     public class SignsController : Controller
     {
+        private readonly SignViewModel _signViewModel = new SignViewModel();
         // GET: 
         [Authorize(Roles="Admin")]
         public ActionResult Index()
         {
-            SignViewModel svm = new SignViewModel();
-            svm.HandleRequest();
+            _signViewModel.HandleRequest();
 
-            return View(svm);
+            return View(_signViewModel);
         }
         [Authorize(Roles = "Admin")]
-        public ActionResult show(int Id)
+        public ActionResult Show(int Id)
         {
-            SignViewModel svm = new SignViewModel();
-            svm.HandleRequest();
-
-            return View(svm);
+            _signViewModel.HandleRequest();
+       return View(_signViewModel);
         }
 
         [HttpPost]

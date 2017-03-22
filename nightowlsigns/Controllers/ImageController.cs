@@ -10,23 +10,23 @@ namespace nightowlsign.Controllers
         
     public class ImageController : Controller
     {
-        private ImageViewModel ImageViewModel = new ImageViewModel();
+        private readonly ImageViewModel _imageViewModel = new ImageViewModel();
 
         [AllowAnonymous]
         public ActionResult Index(int? SignId)
         {
-            ImageViewModel.SearchSignId = SignId ?? 0;
-            ImageViewModel.HandleRequest();
-            ImageViewModel.ImageToUpload.Status = false;
+            _imageViewModel.SearchSignId = SignId ?? 0;
+            _imageViewModel.HandleRequest();
+            _imageViewModel.ImageToUpload.Status = false;
 
-            return View(ImageViewModel);
+            return View(_imageViewModel);
         }
         [AllowAnonymous]
         public ActionResult Show(ImageViewModel imageViewModel, int? SignId)
         {
-            ImageViewModel.SearchSignId = imageViewModel.SearchSignId ?? SignId ?? 0;
-            ImageViewModel.HandleRequest();
-            return View("Index", ImageViewModel);
+            _imageViewModel.SearchSignId = imageViewModel.SearchSignId ?? SignId ?? 0;
+            _imageViewModel.HandleRequest();
+            return View("Index", _imageViewModel);
         }
 
 
@@ -34,7 +34,7 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Index(FormCollection formCollection, ImageViewModel iVm, int? SignId)
         {
-            ImageViewModel.SearchSignId =  SignId ?? 0;
+            _imageViewModel.SearchSignId =  SignId ?? 0;
             iVm.IsValid = ModelState.IsValid;
             if (Request != null)
             {

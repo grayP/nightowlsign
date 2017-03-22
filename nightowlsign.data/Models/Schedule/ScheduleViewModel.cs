@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nightowlsign.data.Models.ScheduleStore;
 using nightowlsign.data.Models.StoreScheduleLog;
 
 namespace nightowlsign.data.Models.Schedule

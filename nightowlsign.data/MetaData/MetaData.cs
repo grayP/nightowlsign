@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace nightowlsign.data
+namespace nightowlsign.data.Metadata
 {
     public class ScheduleMetaData
     {

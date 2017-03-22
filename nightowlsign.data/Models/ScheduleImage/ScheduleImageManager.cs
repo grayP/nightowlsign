@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using nightowlsign.data;
+using nightowlsign.data.Models.Image;
 
 
 namespace nightowlsign.data.Models

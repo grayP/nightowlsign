@@ -149,7 +149,7 @@
             if (message != undefined) {
                 if (message.length > 0) {
                     $('.message').html('');
-                    $('#ConfirmUploadModal').modal('show');
+                    $('#ConfirmUploadModal').modal('Show');
                 }
             }
         });
@@ -163,7 +163,7 @@
         var myErr = false;
         var signSize = $('#ImageToUpload_SignId').val();
         if (signSize == '') {
-            $('#messageModal').modal('show');
+            $('#messageModal').modal('Show');
             myErr = true;
         }
         if (!myErr) {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using nightowlsign.data.Models.Image;
 
 
 namespace nightowlsign.data.Models

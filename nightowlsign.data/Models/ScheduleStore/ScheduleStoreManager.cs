@@ -5,7 +5,7 @@ using System.Linq;
 using nightowlsign.data;
 
 
-namespace nightowlsign.data.Models
+namespace nightowlsign.data.Models.ScheduleStore
 {
     public class ScheduleStoreManager
     {
@@ -55,7 +55,7 @@ namespace nightowlsign.data.Models
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
-                ScheduleStore storeSelected = new ScheduleStore()
+                data.ScheduleStore storeSelected = new data.ScheduleStore()
                 {
                     StoreId = storeSelect.StoreId,
                     ScheduleID = schedule.Id,
@@ -63,12 +63,12 @@ namespace nightowlsign.data.Models
                };
                 if (storeSelect.Selected)
                 {
-                    db.Set<ScheduleStore>().AddOrUpdate(storeSelected);
+                    db.Set<data.ScheduleStore>().AddOrUpdate(storeSelected);
                     db.SaveChanges();
                 }
                 else
                 {
-                    ScheduleStore scheduleStore =
+                    data.ScheduleStore scheduleStore =
                         db.ScheduleStores.Find(storeSelect.Id);
                     if (scheduleStore!=null)
                     {
@@ -80,7 +80,7 @@ namespace nightowlsign.data.Models
             }
         }
 
-        internal ScheduleStore GetValues(StoreSelect storeSelect)
+        internal data.ScheduleStore GetValues(StoreSelect storeSelect)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {

@@ -5,44 +5,46 @@ using System.Web;
 using System.Web.Mvc;
 using nightowlsign.data;
 using nightowlsign.data.Models;
+using nightowlsign.data.Models.Image;
 using nightowlsign.data.Models.Schedule;
 
 namespace nightowlsign.Controllers
 {
     public class ScheduleImageController : Controller
     {
+        private readonly ScheduleImageManager _scheduleImageManager = new ScheduleImageManager();
+        private readonly ScheduleManager _scheduleManager = new ScheduleManager();
+
         // GET: 
         [Authorize(Roles = "Admin")]
-        public ActionResult Index(int SignId, int scheduleId, string scheduleName)
+        public ActionResult Index(int signId, int scheduleId, string scheduleName)
         {
             ScheduleImageViewModel ssvm = new ScheduleImageViewModel
             {
-                SignId = SignId
+                SignId = signId,
+                Schedule =
+                {
+                    Id = scheduleId,
+                    Name = scheduleName
+                }
             };
-            ssvm.Schedule.Id = scheduleId;
-            ssvm.Schedule.Name = scheduleName;
             ssvm.LoadData();
             return View(ssvm);
         }
-
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public ActionResult Index(ScheduleImageViewModel model)
         {
-            ScheduleImageManager sim = new ScheduleImageManager();
             List<ImageSelect> imageSelects = model.AllImages;
-
-            foreach (ImageSelect imageSelect in imageSelects)
+            //    List<ImageSelect> 
+            foreach (var imageSelect in imageSelects)
             {
-                sim.UpdateImageList(imageSelect, model.Schedule);
+                _scheduleImageManager.UpdateImageList(imageSelect, model.Schedule);
             }
-            ScheduleManager sm= new ScheduleManager();
-            sm.UpdateDate(model.Schedule.Id);
+            _scheduleManager.UpdateDate(model.Schedule.Id);
 
             return RedirectToAction("Index", "Schedules", new {SignId=model.SignId});
-
         }
     }
-
 }

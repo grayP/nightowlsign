@@ -1,11 +1,6 @@
-﻿using nightowlsign.data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace nightowlsign.data.Models
+namespace nightowlsign.data.Models.ScheduleStore
 {
     public class ScheduleStoreViewModel : BaseModel.ViewModelBase
     {
@@ -18,7 +13,7 @@ namespace nightowlsign.data.Models
 
         public data.Schedule Schedule { get; set; }
         public List<StoreSelect> AllStores { get; set; }
-        public List<int?> schedulestore { get; set; }
+        public List<int?> Schedulestore { get; set; }
         public int SignSize { get; set; }
     
 
@@ -41,14 +36,13 @@ namespace nightowlsign.data.Models
 
         protected override void Get()
         {
-
             ScheduleStoreManager sm = new ScheduleStoreManager();
          //   schedulestore = sm.Get(Schedule);
             AllStores = sm.GetAllStores(SignSize);
             foreach (StoreSelect ss in AllStores)
             {
                 ss.ScheduleId = Schedule.Id;
-                ScheduleStore selected = sm.GetValues(ss);
+                data.ScheduleStore selected = sm.GetValues(ss);
                 if (selected != null)
                 {
                     ss.Selected = true;

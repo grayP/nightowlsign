@@ -1,44 +1,39 @@
-﻿using System;
+﻿using nightowlsign.data.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using nightowlsign.data.Models;
+using nightowlsign.data.Models.ScheduleStore;
 
 namespace nightowlsign.Controllers
 {
+
     public class ScheduleStoreController : Controller
     {
+       private readonly ScheduleStoreViewModel _scheduleStoreViewModel = new ScheduleStoreViewModel();
+       private readonly ScheduleStoreManager _scheduleStoreManager = new ScheduleStoreManager();
+
         // GET: 
         [Authorize(Roles = "Admin")]
-        public ActionResult Index(int SignId, int scheduleId, string scheduleName)
+        public ActionResult Index(int signId, int scheduleId, string scheduleName)
         {
-            ScheduleStoreViewModel ssvm = new ScheduleStoreViewModel();
-            ssvm.Schedule.Id = scheduleId;
-            ssvm.Schedule.Name = scheduleName;
-            ssvm.LoadData(SignId);
-            return View(ssvm);
+            _scheduleStoreViewModel.Schedule.Id = scheduleId;
+            _scheduleStoreViewModel.Schedule.Name = scheduleName;
+            _scheduleStoreViewModel.LoadData(signId);
+            return View(_scheduleStoreViewModel);
         }
-
-
+ 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public ActionResult Index(ScheduleStoreViewModel model)
         {
-            int CurrentSignSize = 0;
-            ScheduleStoreManager ssm = new ScheduleStoreManager();
-            List<StoreSelect> storeSlects = model.AllStores;
+            var currentSignSize = 0;
+            List<StoreSelect> storeSelects = model.AllStores;
 
-            foreach (StoreSelect storeSelect in storeSlects)
+            foreach (var storeSelect in storeSelects)
             {
-                ssm.UpdateStoreList(storeSelect, model.Schedule);
-                CurrentSignSize = storeSelect.SignId;
+                _scheduleStoreManager.UpdateStoreList(storeSelect, model.Schedule);
+                currentSignSize = storeSelect.SignId;
             }
-            return RedirectToAction("Index", "Schedules", new {SignId=CurrentSignSize});
-
+            return RedirectToAction("Index", "Schedules", new {SignId=currentSignSize});
         }
-
-
     }
-
 }
