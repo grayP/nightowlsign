@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using nightowlsign.data;
-using nightowlsign.data.Models;
-using nightowlsign.data.Models.Image;
+﻿using nightowlsign.data.Models.Image;
 using nightowlsign.data.Models.Schedule;
+using nightowlsign.data.Models.ScheduleImage;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace nightowlsign.Controllers
 {
