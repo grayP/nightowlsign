@@ -157,8 +157,7 @@ namespace nightowlsign.data.Models.Schedule
             }
         }
 
-
-        public bool Delete(data.Schedule entity)
+  public bool Delete(data.Schedule entity)
         {
             bool ret = false;
             using (nightowlsign_Entities db = new nightowlsign_Entities())

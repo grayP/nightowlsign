@@ -1,9 +1,9 @@
-﻿@model nightowlsign.data.Models.ImageSelect
+﻿@model nightowlsign.data.Models.Image.ImageSelect
 
 @{
 
     string imageBase64 = Convert.ToBase64String(Model.ThumbNail);
-    string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+    string imageSrc = $"data:image/gif;base64,{imageBase64}";
 }
 <div class="col-sm-6 col-md-4">
     <div class="panel panel-default">

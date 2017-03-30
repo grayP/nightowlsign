@@ -10,6 +10,7 @@ using System.Web;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using nightowlsign.data.Models.Image;
 using nightowlsign.Services;
 namespace ImageProcessor.Services
 

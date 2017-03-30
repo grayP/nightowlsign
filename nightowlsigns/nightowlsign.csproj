@@ -566,8 +566,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="playBillFiles\HtmlPage1.html" />
-    <Content Include="playBillFiles\images\HtmlPage1.html" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -580,10 +578,6 @@
     <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css.map" />
     <Content Include="bin\CP5200.lib" />
-    <Content Include="playBillFiles\00010000.lpb" />
-    <Content Include="playBillFiles\00020000.lpb" />
-    <Content Include="playBillFiles\00030000.lpb" />
-    <Content Include="playBillFiles\TestImages.lpp" />
     <None Include="Properties\PublishProfiles\nightowlsign - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nightowlsign - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\nightowlsign.pubxml" />

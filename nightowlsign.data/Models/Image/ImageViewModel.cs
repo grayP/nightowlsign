@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Threading.Tasks;
 using System.Linq;
+using nightowlsign.data.Models.ScheduleImage;
 using nightowlsign.data.Models.Signs;
 
 namespace nightowlsign.data.Models.Image
@@ -11,11 +12,18 @@ namespace nightowlsign.data.Models.Image
     public class ImageViewModel : BaseModel.ViewModelBase
     {
         private readonly SignManager _signManager;
+        private readonly ImageManager _imageManager;
+        private readonly ScheduleImageManager _scheduleImageManager;
+        private readonly ImageService _imageService;
         public bool Selected { get; set; }
 
         public ImageViewModel() : base()
         {
             _signManager = new SignManager();
+             _imageManager = new ImageManager();
+            _scheduleImageManager= new ScheduleImageManager();
+            _imageService= new ImageService();
+
         }
 
         //Properties--------------
@@ -33,7 +41,7 @@ namespace nightowlsign.data.Models.Image
         {
             get
             {
-                using (nightowlsign_Entities db = new nightowlsign_Entities())
+                using (var db = new nightowlsign_Entities())
                 {
                     var selectList = new List<SelectListItem>()
                     {
@@ -113,16 +121,13 @@ namespace nightowlsign.data.Models.Image
 
         protected override void Get()
         {
-            ImageManager cmm = new ImageManager();
-            //SearchEntity.Caption = SearchEntity.Caption;
             SearchEntity.SignSize = SearchSignId;
-            Images = cmm.Get(SearchEntity);
+            Images = _imageManager.Get(SearchEntity);
         }
 
         protected override void Edit()
         {
-            ImageManager imm = new ImageManager();
-            Entity = imm.Find(Convert.ToInt32(EventArgument));
+             Entity = _imageManager.Find(Convert.ToInt32(EventArgument));
 
             ImageToUpload.Caption = Entity.Caption;
             ImageToUpload.Id = Entity.Id;
@@ -145,32 +150,29 @@ namespace nightowlsign.data.Models.Image
 
         protected override void Save()
         {
-            ImageManager imm = new ImageManager();
-            if (imm.Update(ImageToUpload))
+            if (_imageManager.Update(ImageToUpload))
             {
                 Mode = "List";
                 Message = "Image successfully updated";
             }
-            ValidationErrors = imm.ValidationErrors;
+            ValidationErrors = _imageManager.ValidationErrors;
             base.Save();
         }
 
         protected async Task<Boolean> Insert()
         {
-            bool success = false;
-            ImageManager imm = new ImageManager();
+            var success = false;
             if (Mode == "Add")
             {
-                ImageService imageService = new ImageService();
                 if (ImageToUpload.SignId > 0)
                 {
                     SearchSignId = ImageToUpload.SignId;
                     var sign = _signManager.Find(ImageToUpload.SignId);
                     ImageToUpload.SignHeight = sign.Height ?? 96;
                     ImageToUpload.SignWidth = sign.Width ?? 244;
-                    ImageToUpload = await imageService.CreateUploadedImage(File, ImageToUpload);
-                    await imageService.AddImageToBlobStorageAsync(ImageToUpload);
-                    success = await imm.Insert(File.FileName, ImageToUpload);
+                    ImageToUpload = await _imageService.CreateUploadedImage(File, ImageToUpload);
+                    await _imageService.AddImageToBlobStorageAsync(ImageToUpload);
+                    success = await _imageManager.Insert(File.FileName, ImageToUpload);
                 }
                 else
                 {
@@ -183,10 +185,9 @@ namespace nightowlsign.data.Models.Image
                     EventCommand = "add";
                     Message = "Image(s) successfully added";
                     base.HandleRequest();
-
                 }
             }
-            ValidationErrors = imm.ValidationErrors;
+            ValidationErrors = _imageManager.ValidationErrors;
             return success;
         }
 
@@ -212,21 +213,18 @@ namespace nightowlsign.data.Models.Image
 
         private void DeleteImageFromBlob(string imageName)
         {
-            ImageService imageService= new ImageService();
-            bool result= imageService.DeleteFile(imageName);
+            _imageService.DeleteFile(imageName);
         }
 
         private void DeleteFromScheduleImage(int id)
         {
-            ScheduleImageManager sim = new ScheduleImageManager();
-            sim.RemoveImagesFromScheduleImage(id);
+            _scheduleImageManager.RemoveImagesFromScheduleImage(id);
         }
 
         private void DeleteImage(int imageId)
         {
-            ImageManager imm = new ImageManager();
-            Entity = imm.Find(imageId);
-            imm.Delete(Entity);
+            Entity = _imageManager.Find(imageId);
+            _imageManager.Delete(Entity);
             base.Delete();
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace nightowlsign.data.Models.Image
 {
-    public class ImageManager
+    public class ImageManager : IImageManager
     {
         public ImageManager()
         {
@@ -20,7 +20,7 @@ namespace nightowlsign.data.Models.Image
         public List<ImagesAndSign> Get(ImagesAndSign entity)
         {
             var ret = new List<ImagesAndSign>();
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            using (var db = new nightowlsign_Entities())
             {
                 ret = db.ImagesAndSigns.OrderBy(x => x.Model).ThenBy(x => x.Caption).ToList<ImagesAndSign>();
             }
@@ -57,7 +57,6 @@ namespace nightowlsign.data.Models.Image
 
             }
             return (ValidationErrors.Count == 0);
-
         }
 
         public bool Validate(UploadedImage entity)
@@ -74,22 +73,20 @@ namespace nightowlsign.data.Models.Image
             return (ValidationErrors.Count == 0);
         }
 
-
-        public Boolean Update(UploadedImage imageToUpDate)
+        public bool Update(UploadedImage imageToUpDate)
         {
-            bool ret = false;
             if (Validate(imageToUpDate))
             {
                 try
                 {
-                    data.Image entity = new data.Image()
+                   var entity = new data.Image()
                     {
                         Id = imageToUpDate.Id,
                         Caption = imageToUpDate.Caption,
                         DateTaken = imageToUpDate.DateTaken,
                         SignSize = imageToUpDate.SignId
                     };
-                    using (nightowlsign_Entities db = new nightowlsign_Entities())
+                    using (var db = new nightowlsign_Entities())
                     {
                         db.Images.Attach(entity);
                         var modifiedImage = db.Entry(entity);
@@ -98,64 +95,60 @@ namespace nightowlsign.data.Models.Image
                         modifiedImage.Property(e => e.SignSize).IsModified = true;
                         // modifiedImage.Property(e => e.ImageURL).IsModified = true;
                         db.SaveChanges();
-                        ret = true;
+                        return true;
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.InnerException);
-                    ret = false;
+                    return false;
                 }
             }
-
-            return ret;
+            return false;
         }
 
 
-        public async Task<Boolean> Insert(string fileName, UploadedImage imageToUpload)
+        public async Task<bool> Insert(string fileName, UploadedImage imageToUpload)
         {
-            bool ret = false;
             try
             {
-                data.Image entity = new data.Image();
-                entity.Caption = fileName;
-                entity.ImageURL = imageToUpload.Url;
-                entity.ThumbNailLarge = ImageService.ImageToByte(imageToUpload.Thumbnails[1].Bitmap);
-                entity.ThumbNailSmall = ImageService.ImageToByte(imageToUpload.Thumbnails[0].Bitmap);
-                entity.DateTaken = imageToUpload.DateTaken;
-                entity.SignSize = imageToUpload.SignId;
-                ret = Validate(entity);
-                if (ret)
+                var entity = new data.Image
+                {
+                    Caption = fileName,
+                    ImageURL = imageToUpload.Url,
+                    ThumbNailLarge = ImageService.ImageToByte(imageToUpload.Thumbnails[1].Bitmap),
+                    ThumbNailSmall = ImageService.ImageToByte(imageToUpload.Thumbnails[0].Bitmap),
+                    DateTaken = imageToUpload.DateTaken,
+                    SignSize = imageToUpload.SignId
+                };
+                if (Validate(entity))
                 {
                     using (nightowlsign_Entities db = new nightowlsign_Entities())
                     {
                         db.Images.Add(entity);
                         await db.SaveChangesAsync();
-                        ret = true;
+                        return true;
                     }
                 }
-                return ret;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
-                return ret;
+                return false;
             }
+            return false;
         }
 
 
         public bool Delete(data.Image entity)
         {
-            bool ret = false;
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            using (var db = new nightowlsign_Entities())
             {
                 db.Images.Attach(entity);
                 db.Images.Remove(entity);
                 db.SaveChanges();
-                ret = true;
+                return true;
             }
-            return ret;
-
         }
     }
 }

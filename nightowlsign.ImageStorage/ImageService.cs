@@ -149,7 +149,7 @@ namespace ImageStorage
         }
 
 
-        async public static Task ListBlobsSegmentedInFlatListing(CloudBlobContainer container)
+        public static async Task ListBlobsSegmentedInFlatListing(CloudBlobContainer container)
         {
             //List blobs to the console window, with paging.
             Console.WriteLine("List blobs in pages:");
@@ -165,7 +165,7 @@ namespace ImageStorage
                 //This overload allows control of the page size. You can return all remaining results by passing null for the maxResults parameter,
                 //or by calling a different overload.
                 resultSegment = await container.ListBlobsSegmentedAsync("", true, BlobListingDetails.All, 10, continuationToken, null, null);
-                if (resultSegment.Results.Count<IListBlobItem>() > 0) { Console.WriteLine("Page {0}:", ++i); }
+                if (resultSegment.Results.Any()) { Console.WriteLine("Page {0}:", ++i); }
                 foreach (var blobItem in resultSegment.Results)
                 {
                     Console.WriteLine("\t{0}", blobItem.StorageUri.PrimaryUri);
@@ -177,13 +177,13 @@ namespace ImageStorage
             while (continuationToken != null);
         }
 
-        public bool DeleteFile(string uniqueFileIdentifier)
+        public void DeleteFile(string uniqueFileIdentifier)
         {
             var container = GetImagesBlobContainer();
             // using the container reference, get a block blob reference and set its type
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(uniqueFileIdentifier);
  
-           return blockBlob.DeleteIfExists();
+            blockBlob.DeleteIfExists();
         }
     }
 }

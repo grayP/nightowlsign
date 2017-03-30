@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using nightowlsign.data.Models.Image;
 
-
-namespace nightowlsign.data.Models
+namespace nightowlsign.data.Models.ScheduleImage
 {
     public class ScheduleImageViewModel : BaseModel.ViewModelBase
     {
@@ -34,12 +34,12 @@ namespace nightowlsign.data.Models
 
         protected override void Get()
         {
-            ScheduleImageManager sm = new ScheduleImageManager();
+            var sm = new ScheduleImageManager();
             AllImages = sm.GetAllImages(SignId, Schedule.Id);
-            foreach (ImageSelect imageSelect in AllImages)
+            foreach (var imageSelect in AllImages)
             {
                 imageSelect.ScheduleId = Schedule.Id;
-                ScheduleImage selected = sm.GetValues(imageSelect);
+                var selected = sm.GetValues(imageSelect);
                 if (selected != null)
                 {
                     imageSelect.Selected = true;

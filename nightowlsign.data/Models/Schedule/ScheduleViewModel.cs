@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nightowlsign.data.Models.ScheduleStore;
 using nightowlsign.data.Models.StoreScheduleLog;
 
 namespace nightowlsign.data.Models.Schedule
@@ -10,10 +11,10 @@ namespace nightowlsign.data.Models.Schedule
     public class ScheduleViewModel : BaseModel.ViewModelBase
     {
 
-        public ScheduleViewModel() : base()
-        {
-        }
-        private StoreScheduleLogManager sslm = new StoreScheduleLogManager();
+
+        private ScheduleManager _scheduleManager = new ScheduleManager();
+        private StoreScheduleLogManager _storeScheduleLogManager = new StoreScheduleLogManager();
+        private ScheduleStoreManager _scheduleStoreManager = new ScheduleStoreManager();
         public List<data.ScheduleAndSign> Schedules { get; set; }
         public data.Schedule SearchEntity { get; set; }
         public data.Schedule Entity { get; set; }
@@ -61,14 +62,12 @@ namespace nightowlsign.data.Models.Schedule
 
         protected override void Get()
         {
-            ScheduleManager sm = new ScheduleManager();
-            Schedules = sm.Get(SearchEntity);
+            Schedules = _scheduleManager.Get(SearchEntity);
         }
 
         protected override void Edit()
         {
-            ScheduleManager sm = new ScheduleManager();
-            Entity = sm.Find(Convert.ToInt32(EventArgument));
+            Entity = _scheduleManager.Find(Convert.ToInt32(EventArgument));
             base.Edit();
         }
 
@@ -80,26 +79,24 @@ namespace nightowlsign.data.Models.Schedule
         }
         protected override void Save()
         {
-            ScheduleManager sm = new ScheduleManager();
             if (Mode == "Add")
             {
-                sm.Insert(Entity);
+                _scheduleManager.Insert(Entity);
             }
             else
             {
-                sm.Update(Entity);
+                _scheduleManager.Update(Entity);
             }
-            ValidationErrors = sm.ValidationErrors;
+            ValidationErrors = _scheduleManager.ValidationErrors;
             base.Save();
         }
 
         protected override void Delete()
         {
-            ScheduleManager sm = new ScheduleManager();
-            Entity = sm.Find(Convert.ToInt32(EventArgument));
-            sm.Delete(Entity);
-
-            sslm.DeleteLog(Convert.ToInt32(EventArgument));
+            Entity = _scheduleManager.Find(Convert.ToInt32(EventArgument));
+            _scheduleManager.Delete(Entity);
+            _scheduleStoreManager.Delete(Convert.ToInt32(EventArgument));
+            _storeScheduleLogManager.DeleteLog(Convert.ToInt32(EventArgument));
             Get();
             base.Delete();
         }

@@ -10,8 +10,7 @@
 namespace nightowlsign.data
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class ScheduleStore
     {
         public int Id { get; set; }

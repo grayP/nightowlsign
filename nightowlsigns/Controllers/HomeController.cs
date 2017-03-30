@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using nightowlsign.data.Models.Stores;
 
 namespace nightowlsign.Controllers
 {
@@ -8,15 +7,7 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-           // var svm = new StoreViewModel();
-          //  svm.HandleRequest();
-            return RedirectToAction("index","Stores");
-           // return View(svm);
-        }
-
-        public ActionResult Contact()
-        {
-            return View();
+            return RedirectToAction("index", "Stores");
         }
     }
 }
