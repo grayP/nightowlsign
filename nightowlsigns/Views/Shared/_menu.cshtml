@@ -1,4 +1,4 @@
-﻿@if (User.IsInRole("Admin"))
+﻿@if (User.IsInRole("Admin") || (User.IsInRole("SuperUser")))
 {
                     <li>@Html.ActionLink("Home", "Index", "Stores")</li>
                     <li>@Html.ActionLink("Images", "Index", "Image")</li>
@@ -9,7 +9,5 @@
 }
 else
 {
-
                    <li>@Html.ActionLink("Home", "Index", "Stores")</li>
-
 }

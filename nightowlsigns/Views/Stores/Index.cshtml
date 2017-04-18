@@ -31,9 +31,12 @@
                 <button id="btnReset" class="btn btn-sm btn-primary" data-pdsa-action="resetsearch">
                     <i class="glyphicon glyphicon-share-alt"></i>&nbsp; Reset
                 </button>
-                <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add">
-                    <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add
-                </button>
+                @if (User.IsInRole("SuperUser"))
+                {
+                    <button id="btnAdd" class="btn btn-sm btn-primary" data-pdsa-action="add">
+                        <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add
+                    </button>
+                }
             </div>
 
         </div>
@@ -55,7 +58,10 @@
                         <th class="centrealign">Default Playlist</th>
                         <th class="centrealign">Current Playlist</th>
                         <th class="centrealign">Show Playlist</th>
-                        <th class="pdsa-action-button-column">Delete</th>
+                        @if (User.IsInRole("SuperUser"))
+                        {
+                            <th class="pdsa-action-button-column">Delete</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -70,9 +76,12 @@
                             <td class="centrealign">@item.DefaultSchedule.Name</td>
                             <td class="centrealign">@item.CurrentSchedule.Name</td>
                             <td class="centrealign"><a href="@Url.Action("Index","ScheduleImage", new {signId=item.SignId ?? 0, scheduleId=item.CurrentSchedule.Id, scheduleName=item.CurrentSchedule.Name})"> <i class="glyphicon glyphicon-play"></i></a> </td>
-                           @*<td class="centrealign">@string.Format("{0:dd MMM yyyy}", item?.CurrentSchedule?.StartDate)</td>
-                            <td class="centrealign">@string.Format("{0:dd MMM yyyy}", item?.CurrentSchedule?.EndDate)</td>*@
-                            <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            @*<td class="centrealign">@string.Format("{0:dd MMM yyyy}", item?.CurrentSchedule?.StartDate)</td>
+                                <td class="centrealign">@string.Format("{0:dd MMM yyyy}", item?.CurrentSchedule?.EndDate)</td>*@
+                            @if (User.IsInRole("SuperUser"))
+                            {
+                                <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            }
                         </tr>
                     }
                 </tbody>
@@ -132,23 +141,34 @@
                         @Html.TextBoxFor(m => m.Entity.Phone, new { @class = "form-control" })
                     </div>
                 </div>
-                <div class="col-sm-6 col-xs-12">
+                <div class="col-sm-6 col-xs-12">  
+                @if (User.IsInRole("SuperUser"))
+                {
                     <div class="form-group">
                         @Html.LabelFor(m => m.Entity.SignId, "Sign Size")
-                        @Html.DropDownListFor(m => m.Entity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.Entity.SignId)), new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.Entity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.Entity.SignId)), new {@class = "form-control"})
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Entity.IpAddress, "IP Address")
-                        @Html.TextBoxFor(m => m.Entity.IpAddress, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Entity.IpAddress, new {@class = "form-control"})
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Entity.SubMask, "Sub Mask")
-                        @Html.TextBoxFor(m => m.Entity.SubMask, new { @class = "form-control", PlaceHolder = "255.255.255.255" })
+                        @Html.TextBoxFor(m => m.Entity.SubMask, new {@class = "form-control", PlaceHolder = "255.255.255.255"})
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Entity.Port, "Port No")
-                        @Html.TextBoxFor(m => m.Entity.Port, new { @class = "form-control", PlaceHolder = "5200" })
+                        @Html.TextBoxFor(m => m.Entity.Port, new {@class = "form-control", PlaceHolder = "5200"})
                     </div>
+                }
+                else
+                {
+
+                    @Html.HiddenFor(m => m.Entity.SignId)
+                    @Html.HiddenFor(m => m.Entity.IpAddress)
+                    @Html.HiddenFor(m => m.Entity.SubMask)
+                    @Html.HiddenFor(m => m.Entity.Port)
+                }
                 </div>
             </div>
             <div class="panel-footer">

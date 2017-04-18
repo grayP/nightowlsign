@@ -4,13 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nightowlsign.data.Interfaces;
 
 namespace nightowlsign.data.Models.Stores
 {
-    public class StoreViewModel : BaseModel.ViewModelBase
+    public class StoreViewModel : BaseModel.ViewModelBase, IStoreViewModel
     {
+        private nightowlsign_Entities _context;
+        private StoreManager _storeManager;
         public StoreViewModel() : base()
         {
+            _context = new nightowlsign_Entities();
+            _storeManager = new StoreManager(_context);
         }
         public List<Store> Stores { get; set; }
         public List<StoreAndSign> StoresAndSigns { get; set; }
@@ -20,9 +25,7 @@ namespace nightowlsign.data.Models.Stores
         {
             get
             {
-                using (nightowlsign_Entities db = new nightowlsign_Entities())
-                {
-                    var selectList = new List<SelectListItem>()
+                var selectList = new List<SelectListItem>()
                     {
                         new SelectListItem
                         {
@@ -30,19 +33,17 @@ namespace nightowlsign.data.Models.Stores
                             Model = "Show All"
                         }
                     };
-                    selectList.AddRange(from item in
-                                      db.Signs.OrderBy(x => x.Model)
-                                        select new SelectListItem()
-                                        {
-                                            SignId = item.id,
-                                            Model = item.Model
-                                        });
+                selectList.AddRange(from item in
+                                  _context.Signs.OrderBy(x => x.Model)
+                                    select new SelectListItem()
+                                    {
+                                        SignId = item.id,
+                                        Model = item.Model
+                                    });
 
-                    return selectList;
-                }
+                return selectList;
             }
         }
-
 
         protected override void Init()
         {
@@ -61,14 +62,12 @@ namespace nightowlsign.data.Models.Stores
         }
         protected override void Get()
         {
-            StoreManager sm = new StoreManager();
-            StoresAndSigns = sm.Get(SearchEntity);
+            StoresAndSigns = _storeManager.Get(SearchEntity);
 
         }
         protected override void Edit()
         {
-            StoreManager sm = new StoreManager();
-            Entity = sm.Find(Convert.ToInt32(EventArgument));
+            Entity = _storeManager.Find(Convert.ToInt32(EventArgument));
             base.Edit();
         }
         protected override void Add()
@@ -80,23 +79,22 @@ namespace nightowlsign.data.Models.Stores
         }
         protected override void Save()
         {
-            StoreManager sm = new StoreManager();
+            
             if (Mode == "Add")
             {
-                sm.Insert(Entity);
+                _storeManager.Insert(Entity);
             }
             else
             {
-                sm.Update(Entity);
+                _storeManager.Update(Entity);
             }
-            ValidationErrors = sm.ValidationErrors;
+            ValidationErrors = _storeManager.ValidationErrors;
             base.Save();
         }
         protected override void Delete()
         {
-            StoreManager sm = new StoreManager();
-            Entity = sm.Find(Convert.ToInt32(EventArgument));
-            sm.Delete(Entity);
+            Entity = _storeManager.Find(Convert.ToInt32(EventArgument));
+            _storeManager.Delete(Entity);
             Get();
             base.Delete();
         }

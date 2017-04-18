@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using nightowlsign.data.Interfaces;
 
 
 namespace nightowlsign.data.Models.Stores
 {
     public class StoreManager
     {
+        private IDbContext _context;
         private data.Schedule defaultSchedule;
         private Sign defaultSign;
-        public StoreManager()
+        public StoreManager(IDbContext context)
         {
+            _context = context;
             ValidationErrors = new List<KeyValuePair<string, string>>();
             defaultSchedule = new data.Schedule
             {

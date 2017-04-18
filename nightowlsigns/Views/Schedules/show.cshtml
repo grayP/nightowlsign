@@ -3,9 +3,7 @@
 @{
     ViewBag.Title = "Schedules";
 }
-
-
-<!-- Start List Area  -->
+ <!-- Start List Area  -->
 @if (Model.IsListAreaVisible)
 {
     <div class="table-responsive">
@@ -17,8 +15,6 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Valid</th>
-                   
-
                 </tr>
             </thead>
             <tbody>
@@ -33,11 +29,9 @@
                             <a href="@Url.Action("show", "Stores",new { storeId = item.Id })" class="btn btn-sm btn-default" alt="Documents"><i class="glyphicon glyphicon-book"></i></a>
 
                         </td>
-                      
                         <td>@item.StartDate.Value.ToString("dd-mmm-yyyy")</td>
                         <td>@item.EndDate.Value.ToString("dd-mmm-yyyy")</td>
                         <td>@item.Valid</td>
-                       
                     </tr>
                 }
             </tbody>

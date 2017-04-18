@@ -111,22 +111,16 @@ namespace nightowlsign
                 Roles.AddUserToRole("ctyquin@goa.com.au", _role);
             if (!Roles.IsUserInRole("GClarke@bne.mcgees.com.au", _role))
                 Roles.AddUserToRole("GClarke@bne.mcgees.com.au", _role);
-            if (!Roles.IsUserInRole("alex@propsol.com.au", _role))
-                Roles.AddUserToRole("alex@propsol.com.au", _role);
-            if (!Roles.IsUserInRole("pcrooke@bretts.com.au", _role))
-                Roles.AddUserToRole("pcrooke@bretts.com.au", _role);
-            if (!Roles.IsUserInRole("fraser@rsaarchitects.net", _role))
-                Roles.AddUserToRole("fraser@rsaarchitects.net", _role);
         }
 
 
 
         bool AddUserAndRole(nightowlsign.Models.ApplicationDbContext context)
         {
-            IdentityResult ir;
+           // IdentityResult ir;
             var rm = new RoleManager<IdentityRole>
                 (new RoleStore<IdentityRole>(context));
-            ir = rm.Create(new IdentityRole("Admin"));
+          //  var ir = rm.Create(new IdentityRole("Admin"));
             var um = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
 
@@ -138,7 +132,7 @@ namespace nightowlsign
                 Email = "sam@elitetiger.com"
             };
 
-            ir = um.Create(user, "P@ssword1");
+            var ir = um.Create(user, "P@ssword1");
             //if (ir.Succeeded == false)
             //    return ir.Succeeded;
             ir = um.AddToRole(user.Id, "Admin");
