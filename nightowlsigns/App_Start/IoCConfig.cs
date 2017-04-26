@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Autofac;
@@ -26,6 +28,7 @@ namespace nightowlsign
             // InstancePerHttpRequest() - ASP.NET MVC will throw an exception if 
             // you try to reuse a controller instance for multiple requests. 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             #endregion
 
@@ -64,10 +67,18 @@ namespace nightowlsign
 
             To use these abstractions add the AutofacWebTypesModule to the container 
             using the standard RegisterModule method. 
+
             */
-            builder.RegisterType<nightowlsign_Entities>().As<IDbContext>().InstancePerLifetimeScope();
+            // builder.RegisterType<DbContext>().As<IDbContext>().InstancePerLifetimeScope();
             builder.RegisterType<StoreViewModel>().As<IStoreViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<StoreManager>().As<IStoreManager>().InstancePerLifetimeScope();
             builder.RegisterModule<AutofacWebTypesModule>();
+            builder.RegisterType<nightowlsign_Entities>()
+                    .AsImplementedInterfaces()
+                    .InstancePerLifetimeScope();
+
+
+            builder.Register(c => new nightowlsign_Entities()).As<IDbContext>().InstancePerRequest();
 
 
             #endregion

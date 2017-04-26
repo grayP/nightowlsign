@@ -121,6 +121,7 @@
     <Compile Include="Models\StoreSignDto\StoreSignDto.cs" />
     <Compile Include="Models\StoreSign\StoreSignManager.cs" />
     <Compile Include="Models\StoreSign\StoreSignViewModel.cs" />
+    <Compile Include="Models\Stores\IStoreManager.cs" />
     <Compile Include="Models\Stores\IStoreViewModel.cs" />
     <Compile Include="Models\Stores\Store.cs" />
     <Compile Include="Models\Stores\StoreManager.cs" />

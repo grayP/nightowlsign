@@ -1,14 +1,19 @@
 ﻿using System.Web.Mvc;
+using nightowlsign.data;
+using nightowlsign.data.Interfaces;
 using nightowlsign.data.Models.Stores;
 
 namespace nightowlsign.Controllers
 {
     public class StoresController : Controller
     {
-        private StoreViewModel _storeViewModel= new StoreViewModel();
+        private readonly StoreViewModel _storeViewModel;
 
- 
-
+        public StoresController(IDbContext context)
+        {
+            _storeViewModel =new StoreViewModel(context);
+        }
+       
         // GET: 
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
