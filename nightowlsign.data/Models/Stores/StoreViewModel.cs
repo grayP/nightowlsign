@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using nightowlsign.data.Interfaces;
 
@@ -11,15 +10,13 @@ namespace nightowlsign.data.Models.Stores
 {
     public class StoreViewModel : BaseModel.ViewModelBase, IStoreViewModel
     {
-         private IDbContext _context;
+        private nightowlsign_Entities _context;
         private StoreManager _storeManager;
-        public StoreViewModel(IDbContext context) : base()
+        public StoreViewModel() : base()
         {
-            _context = context;
+            _context = new nightowlsign_Entities();
             _storeManager = new StoreManager(_context);
         }
-
-
         public List<Store> Stores { get; set; }
         public List<StoreAndSign> StoresAndSigns { get; set; }
         public Store SearchEntity { get; set; }
@@ -37,7 +34,7 @@ namespace nightowlsign.data.Models.Stores
                         }
                     };
                 selectList.AddRange(from item in
-                                  _context.Signs?.OrderBy(x => x.Model)
+                                  _context.Signs.OrderBy(x => x.Model)
                                     select new SelectListItem()
                                     {
                                         SignId = item.id,

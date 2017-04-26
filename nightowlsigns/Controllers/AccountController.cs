@@ -416,23 +416,13 @@ namespace nightowlsign.Controllers
                 var um = new UserManager<ApplicationUser>(
                     new UserStore<ApplicationUser>(context));
 
-                CheckRoleExists(context, role);
-
-                  var ir= um.AddToRole(user.Id, role);
+                var ir= um.AddToRole(user.Id, role);
                 return ir.Succeeded;
 
             }
         }
 
-        private void CheckRoleExists(ApplicationDbContext context, string role)
-        {
-            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            if (!RoleManager.RoleExists(role))
-            {
-                RoleManager.Create(new IdentityRole(role));
-            }
-          }
 
         protected override void Dispose(bool disposing)
         {

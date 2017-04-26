@@ -7,7 +7,7 @@ using nightowlsign.data.Interfaces;
 
 namespace nightowlsign.data.Models.Stores
 {
-    public class StoreManager : IStoreManager
+    public class StoreManager
     {
         private IDbContext _context;
         private data.Schedule defaultSchedule;
@@ -35,25 +35,24 @@ namespace nightowlsign.data.Models.Stores
 
             };
         }
-
-
         //Properties
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
 
         public List<StoreAndSign> Get(Store Entity)
         {
-            
-                var ret = _context.StoreAndSigns.OrderBy(x => x.Name).ToList<StoreAndSign>();
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                var ret = db.StoreAndSigns.OrderBy(x => x.Name).ToList<StoreAndSign>();
                 if (!string.IsNullOrEmpty(Entity.Name))
                 {
                     ret = ret.FindAll(p => p.Name.ToLower().StartsWith(Entity.Name));
                 }
                 GetPlayLists(ret);
                 return ret;
-           
+            }
         }
 
-        public void GetPlayLists(List<StoreAndSign> storeList)
+        private void GetPlayLists(List<StoreAndSign> storeList)
         {
             foreach (var store in storeList)
             {
@@ -67,14 +66,15 @@ namespace nightowlsign.data.Models.Stores
             }
         }
 
-        public Sign GetSign(int signId)
+        private Sign GetSign(int signId)
         {
-            
-                return _context.Signs.Find(signId);
-           
+            using (nightowlsign_Entities db = new nightowlsign_Entities())
+            {
+                return db.Signs.Find(signId);
+            }
         }
 
-        public List<data.Schedule> GetSelectedSchedules(int storeId)
+        private List<data.Schedule> GetSelectedSchedules(int storeId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
@@ -97,7 +97,7 @@ namespace nightowlsign.data.Models.Stores
             }
         }
 
-        public data.Schedule GetDefaultSchedule(int signId)
+        private data.Schedule GetDefaultSchedule(int signId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
@@ -116,7 +116,7 @@ namespace nightowlsign.data.Models.Stores
             }
         }
 
-        public data.Schedule GetInstalledSchedule(int storeId)
+        private data.Schedule GetInstalledSchedule(int storeId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
@@ -135,7 +135,7 @@ namespace nightowlsign.data.Models.Stores
             }
         }
 
-        public List<data.Schedule> GetAvailableSchedules(int storeId)
+        private List<data.Schedule> GetAvailableSchedules(int storeId)
         {
             using (nightowlsign_Entities db = new nightowlsign_Entities())
             {
