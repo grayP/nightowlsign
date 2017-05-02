@@ -41,14 +41,14 @@
     <div class="container">
         <div class="body-content">
             <section class="row">
-                <div class="z_fill-screen fixed-attachment">
+                <div class="fixed-attachment">
                     @RenderBody()
                 </div>
             </section>
         </div>
     </div>
     <footer id="footer">
-        <p>&copy; @DateTime.Now.Year - Night Owl Sign System</p>
+        <div>&copy; @DateTime.Now.Year - Night Owl Sign System @typeof(nightowlsign.MvcApplication).Assembly.GetName().Version</div>
     </footer>
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/custom")
