@@ -14,9 +14,8 @@ namespace nightowlsign.data
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    using nightowlsign.data.Interfaces;
-
-    public partial class nightowlsign_Entities : DbContext, IDbContext
+    
+    public partial class nightowlsign_Entities : DbContext
     {
         public nightowlsign_Entities()
             : base("name=nightowlsign_Entities")

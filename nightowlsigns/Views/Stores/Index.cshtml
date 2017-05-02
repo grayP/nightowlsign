@@ -160,6 +160,10 @@
                         @Html.LabelFor(m => m.Entity.Port, "Port No")
                         @Html.TextBoxFor(m => m.Entity.Port, new {@class = "form-control", PlaceHolder = "5200"})
                     </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.ProgramFile, "Program File")
+                        @Html.TextBoxFor(m => m.Entity.ProgramFile, new { @class = "form-control", PlaceHolder = "0001000" })
+                    </div>
                 }
                 else
                 {

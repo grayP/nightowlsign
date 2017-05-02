@@ -65,7 +65,7 @@ namespace nightowlsign
             To use these abstractions add the AutofacWebTypesModule to the container 
             using the standard RegisterModule method. 
             */
-            builder.RegisterType<nightowlsign_Entities>().As<IDbContext>().InstancePerLifetimeScope();
+           // builder.RegisterType<nightowlsign_Entities>().As<IDbContext>().InstancePerLifetimeScope();
             builder.RegisterType<StoreViewModel>().As<IStoreViewModel>().InstancePerLifetimeScope();
             builder.RegisterModule<AutofacWebTypesModule>();
 

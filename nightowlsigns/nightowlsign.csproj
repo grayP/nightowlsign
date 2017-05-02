@@ -574,6 +574,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
@@ -589,6 +590,8 @@
     <None Include="Properties\PublishProfiles\nightowlsign - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\nightowlsign.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cbpAnimatedHeader.js" />
+    <Content Include="Scripts\zclassie.js" />
     <Content Include="Scripts\clockpicker.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
