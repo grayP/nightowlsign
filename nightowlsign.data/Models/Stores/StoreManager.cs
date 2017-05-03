@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using nightowlsign.data.Interfaces;
 
 
 namespace nightowlsign.data.Models.Stores
@@ -38,12 +36,12 @@ namespace nightowlsign.data.Models.Stores
         //Properties
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
 
-        public List<StoreAndSign> Get(Store Entity)
+        public List<StoreAndSign> Get(Store entity)
         {
             var ret = _context.StoreAndSigns.OrderBy(x => x.Name).ToList<StoreAndSign>();
-            if (!string.IsNullOrEmpty(Entity.Name))
+            if (!string.IsNullOrEmpty(entity.Name))
             {
-                ret = ret.FindAll(p => p.Name.ToLower().StartsWith(Entity.Name));
+                ret = ret.FindAll(p => p.Name.ToLower().StartsWith(entity.Name));
             }
             GetPlayLists(ret);
             return ret;
@@ -57,7 +55,7 @@ namespace nightowlsign.data.Models.Stores
                 new data.Schedule { Id = 0, Name = "" };
                 store.AvailableSchedules = GetAvailableSchedules(store.id);
                 store.SelectedSchedules = GetSelectedSchedules(store.id);
-                store.DefaultSchedule = GetDefaultSchedule(store.SignId ?? 0) ?? defaultSched;
+                store.DefaultSchedule = GetDefaultSchedule(store.id) ?? defaultSched;
                 store.CurrentSchedule = GetInstalledSchedule(store.id) ?? defaultSched;
                 store.Sign = GetSign(store.SignId ?? 0) ?? defaultSign;
             }
@@ -88,11 +86,12 @@ namespace nightowlsign.data.Models.Stores
             return ret.ToList();
         }
 
-        private data.Schedule GetDefaultSchedule(int signId)
+        private data.Schedule GetDefaultSchedule(int storeId)
         {
-            var ret = (from s in _context.Schedules
-                       where s.SignId == signId && s.DefaultPlayList == true
-                       select new { s.Id, s.Name })
+            var ret = (from s in _context.ScheduleStores
+                       join sc in _context.Schedules on s.ScheduleID equals sc.Id
+                       where s.StoreId == storeId & sc.DefaultPlayList==true
+                       select new { sc.Id, sc.Name })
                 .AsEnumerable()
                 .OrderByDescending(x => x.Id)
                 .Select(x => new data.Schedule()
@@ -142,7 +141,6 @@ namespace nightowlsign.data.Models.Stores
 
         public Store Find(int storeId)
         {
-            Store ret = null;
             return _context.Store.Find(storeId);
 
         }
@@ -161,83 +159,72 @@ namespace nightowlsign.data.Models.Stores
         }
 
 
-        public Boolean Update(Store entity)
+        public bool Update(Store entity)
         {
-            bool ret = false;
-            if (Validate(entity))
-            {
-                try
-                {
-                    _context.Store.Attach(entity);
-                    var modifiedStore = _context.Entry(entity);
-                    modifiedStore.Property(e => e.Name).IsModified = true;
-                    modifiedStore.Property(e => e.Address).IsModified = true;
-                    modifiedStore.Property(e => e.Suburb).IsModified = true;
-                    modifiedStore.Property(e => e.State).IsModified = true;
-                    modifiedStore.Property(e => e.Manager).IsModified = true;
-                    modifiedStore.Property(e => e.Phone).IsModified = true;
-                    modifiedStore.Property(e => e.SignId).IsModified = true;
-                    modifiedStore.Property(e => e.IpAddress).IsModified = true;
-                    modifiedStore.Property(e => e.SubMask).IsModified = true;
-                    modifiedStore.Property(e => e.Port).IsModified = true;
-                    modifiedStore.Property(e => e.ProgramFile).IsModified = true;
-                    _context.SaveChanges();
-                    ret = true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.InnerException);
-                    ret = false;
-                }
-            }
-            return ret;
-        }
-
-        public Boolean Insert(Store entity)
-        {
-            bool ret = false;
+            if (!Validate(entity)) return false;
             try
             {
-                ret = Validate(entity);
-                if (ret)
-                {
-                        Store newStore = new Store()
-                        {
-                            Name = entity.Name.Trim(),
-                            Address = entity.Address,
-                            Suburb = entity.Suburb,
-                            State = entity.State,
-                            Manager = entity.Manager,
-                            Phone = entity.Phone,
-                            SignId = entity.SignId,
-                            IpAddress = entity.IpAddress,
-                            SubMask = entity.SubMask,
-                            Port = entity.Port,
-                            ProgramFile = entity.ProgramFile
-                        };
-
-                        _context.Store.Add(newStore);
-                        _context.SaveChanges();
-                        ret = true;
-                }
-                return ret;
+                _context.Store.Attach(entity);
+                var modifiedStore = _context.Entry(entity);
+                modifiedStore.Property(e => e.Name).IsModified = true;
+                modifiedStore.Property(e => e.Address).IsModified = true;
+                modifiedStore.Property(e => e.Suburb).IsModified = true;
+                modifiedStore.Property(e => e.State).IsModified = true;
+                modifiedStore.Property(e => e.Manager).IsModified = true;
+                modifiedStore.Property(e => e.Phone).IsModified = true;
+                modifiedStore.Property(e => e.SignId).IsModified = true;
+                modifiedStore.Property(e => e.IpAddress).IsModified = true;
+                modifiedStore.Property(e => e.SubMask).IsModified = true;
+                modifiedStore.Property(e => e.Port).IsModified = true;
+                modifiedStore.Property(e => e.ProgramFile).IsModified = true;
+                _context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
-                return ret;
+                return false;
+            }
+        }
+
+        public bool Insert(Store entity)
+        {
+            try
+            {
+                if (!Validate(entity)) return false;
+                var newStore = new Store()
+                {
+                    Name = entity.Name.Trim(),
+                    Address = entity.Address,
+                    Suburb = entity.Suburb,
+                    State = entity.State,
+                    Manager = entity.Manager,
+                    Phone = entity.Phone,
+                    SignId = entity.SignId,
+                    IpAddress = entity.IpAddress,
+                    SubMask = entity.SubMask,
+                    Port = entity.Port,
+                    ProgramFile = entity.ProgramFile
+                };
+
+                _context.Store.Add(newStore);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return false;
             }
         }
 
 
         public bool Delete(Store entity)
         {
-            bool ret = false;
             _context.Store.Attach(entity);
             _context.Store.Remove(entity);
             _context.SaveChanges();
-            ret = true;
-            return ret;
+            return true;
         }
     }
 
