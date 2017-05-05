@@ -15,7 +15,7 @@ namespace nightowlsign.data.Models.ScheduleImage
         public data.Schedule Schedule { get; set; }
         public int SignId { get; set; }
         public List<ImageSelect> AllImages { get; set; }
-        public List<int?> scheduleImage { get; set; }
+        public List<int?> ScheduleImage { get; set; }
 
         protected override void Init()
         {
@@ -30,6 +30,13 @@ namespace nightowlsign.data.Models.ScheduleImage
         public void LoadData()
         {
             Get();
+        }
+
+        public void GetImagesForThisSchedule(int scheduleId)
+        {
+            var sm = new ScheduleImageManager();
+            AllImages = sm.GetAllImages(Schedule.Id);
+         
         }
 
         protected override void Get()

@@ -9,23 +9,27 @@ using nightowlsign.data.Models.Signs;
 
 namespace nightowlsign.data.Models.Image
 {
-    public class ImageViewModel : BaseModel.ViewModelBase
+    public class ImageViewModel : BaseModel.ViewModelBase, IImageViewModel
     {
-        private readonly SignManager _signManager;
+        private readonly ISignManager _signManager;
         private readonly ImageManager _imageManager;
         private readonly ScheduleImageManager _scheduleImageManager;
         private readonly ImageService _imageService;
         public bool Selected { get; set; }
 
-        public ImageViewModel() : base()
+        public ImageViewModel(ISignManager signManager) : base()
         {
-            _signManager = new SignManager();
-             _imageManager = new ImageManager();
-            _scheduleImageManager= new ScheduleImageManager();
-            _imageService= new ImageService();
+            _signManager = signManager;
+            _imageManager = new ImageManager();
+            _scheduleImageManager = new ScheduleImageManager();
+            _imageService = new ImageService();
 
         }
 
+        public ImageViewModel()
+        {
+            
+        }
         //Properties--------------
         public List<ImagesAndSign> Images { get; set; }
         public ImagesAndSign SearchEntity { get; set; }
@@ -127,7 +131,7 @@ namespace nightowlsign.data.Models.Image
 
         protected override void Edit()
         {
-             Entity = _imageManager.Find(Convert.ToInt32(EventArgument));
+            Entity = _imageManager.Find(Convert.ToInt32(EventArgument));
 
             ImageToUpload.Caption = Entity.Caption;
             ImageToUpload.Id = Entity.Id;

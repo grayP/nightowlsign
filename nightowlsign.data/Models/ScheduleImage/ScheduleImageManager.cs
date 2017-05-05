@@ -16,7 +16,7 @@ namespace nightowlsign.data.Models.ScheduleImage
 
         public List<int?> Get(data.Schedule entity)
         {
-             using (var db = new nightowlsign_Entities())
+            using (var db = new nightowlsign_Entities())
             {
                 var query = (from c in db.ScheduleImages
                              where c.ScheduleID == entity.Id
@@ -29,25 +29,43 @@ namespace nightowlsign.data.Models.ScheduleImage
         {
             using (var db = new nightowlsign_Entities())
             {
-                var query = (from s in db.Images.Where(s=>s.SignSize==signId)
+                var query = (from s in db.Images.Where(s => s.SignSize == signId)
                              select new ImageSelect()
                              {
                                  ImageId = s.Id,
                                  Name = s.Caption,
                                  ThumbNail = s.ThumbNailLarge,
                                  SignId = signId,
-                                 SignSize = s.SignSize ??0
+                                 SignSize = s.SignSize ?? 0
                              });
                 return query.ToList();
             }
         }
 
+        public List<ImageSelect> GetAllImages(int scheduleId)
+        {
+            using (var db = new nightowlsign_Entities())
+            {
+                var query = (from s in db.ScheduleImages
+                             join i in db.Images on s.ImageID equals i.Id
+                             where s.ScheduleID == scheduleId
+                             select new ImageSelect()
+                             {
+                                 ImageId = i.Id,
+                                 Name = i.Caption,
+                                 ThumbNail = i.ThumbNailLarge,
+                                 SignSize = i.SignSize ?? 0,
+                                 Selected = true
+                             });
+                return query.ToList();
+            }
+        }
 
         public data.Image Find(int id)
         {
             using (var db = new nightowlsign_Entities())
             {
-                return db.Images.FirstOrDefault(e=>e.Id==id);
+                return db.Images.FirstOrDefault(e => e.Id == id);
             }
         }
 
@@ -55,11 +73,11 @@ namespace nightowlsign.data.Models.ScheduleImage
         {
             using (var db = new nightowlsign_Entities())
             {
-             var ret= db.ScheduleImages.Where(e => e.ImageID == imageId);
+                var ret = db.ScheduleImages.Where(e => e.ImageID == imageId);
                 db.ScheduleImages.RemoveRange(ret);
                 db.SaveChanges();
-            }      
-    }
+            }
+        }
 
         public void UpdateImageList(ImageSelect imageSelect, data.Schedule schedule)
         {
@@ -92,10 +110,10 @@ namespace nightowlsign.data.Models.ScheduleImage
 
         internal data.ScheduleImage GetValues(ImageSelect imageSelect)
         {
-           
+
             using (var db = new nightowlsign_Entities())
             {
-               return  db.ScheduleImages.FirstOrDefault(x => x.ImageID == imageSelect.ImageId && x.ScheduleID == imageSelect.ScheduleId);
+                return db.ScheduleImages.FirstOrDefault(x => x.ImageID == imageSelect.ImageId && x.ScheduleID == imageSelect.ScheduleId);
             }
         }
 

@@ -15,7 +15,7 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Index(int signId, int scheduleId, string scheduleName)
         {
-            ScheduleImageViewModel ssvm = new ScheduleImageViewModel
+            var ssvm = new ScheduleImageViewModel
             {
                 SignId = signId,
                 Schedule =
@@ -25,6 +25,21 @@ namespace nightowlsign.Controllers
                 }
             };
             ssvm.LoadData();
+            return View(ssvm);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Display(int scheduleId, string scheduleName)
+        {
+            var ssvm = new ScheduleImageViewModel
+            {
+                Schedule =
+                {
+                    Id = scheduleId,
+                    Name = scheduleName
+                }
+            };
+            ssvm.GetImagesForThisSchedule(scheduleId);
             return View(ssvm);
         }
 

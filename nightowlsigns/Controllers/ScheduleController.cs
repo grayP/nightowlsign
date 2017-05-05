@@ -9,21 +9,26 @@ namespace nightowlsign.Controllers
 {
     public class SchedulesController : Controller
     {
+        private IScheduleViewModel _scheduleViewModel;
+
+        public SchedulesController(IScheduleViewModel scheduleViewModel)
+        {
+            _scheduleViewModel = scheduleViewModel;
+        }
         // GET: 
         [Authorize(Roles = "Admin")]
         public ActionResult Index(int signId)
         {
-            var svm = new ScheduleViewModel {SearchEntity = {SignId = signId}};
-            svm.HandleRequest();
-            return View(svm);
+            _scheduleViewModel.SearchEntity.SignId = signId;
+            _scheduleViewModel.HandleRequest();
+            return View(_scheduleViewModel);
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult Show()
         {
-            var svm = new ScheduleViewModel();
-            svm.HandleRequest();
-            return View(svm);
+             _scheduleViewModel.HandleRequest();
+            return View(_scheduleViewModel);
         }
 
         [HttpPost]
@@ -47,5 +52,4 @@ namespace nightowlsign.Controllers
             return View(svm);
         }
     }
-
 }

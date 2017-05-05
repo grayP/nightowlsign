@@ -1,0 +1,52 @@
+﻿@using nightowlsign.data.Models.ScheduleImage
+@model ScheduleImageViewModel
+
+@{
+    ViewBag.Title = "Image List";
+}
+
+<h2>Image List - @Model.Schedule.Name</h2>
+
+@using (Html.BeginForm("Index", "ScheduleImage", new { SignId = Model.SignId }, FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
+{
+    <!-- Start Hidden form -->
+    @Html.HiddenFor(m => m.EventCommand)
+    @Html.HiddenFor(m => m.EventArgument)
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.Schedule.Id)
+    @Html.HiddenFor(m => m.Schedule.Name)
+    @Html.HiddenFor(m => m.Schedule.SignId)
+    <!-- End Hidden form-->
+    <div class="container">
+        <div class="row">
+            @Html.EditorFor(model => model.AllImages)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="@Url.Action("Index", "Stores")" class="btn btn-primary">
+                <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Back
+            </a>
+        </div>
+    </div>
+            <!-- End Detail Area-->
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("[rel='tooltip']").tooltip();
+
+        $('.caption-over').hover(
+
+        function () {
+            $(this).find('.caption-over').slideDown(250);
+        },
+
+        function () {
+            $(this).find('.caption-over').slideUp(250);
+        });
+    });
+</script>
+

@@ -8,7 +8,7 @@ using nightowlsign.data.Models.StoreScheduleLog;
 
 namespace nightowlsign.data.Models.Schedule
 {
-    public class ScheduleViewModel : BaseModel.ViewModelBase
+    public class ScheduleViewModel : BaseModel.ViewModelBase, IScheduleViewModel
     {
 
 

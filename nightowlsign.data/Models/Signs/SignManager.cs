@@ -7,7 +7,18 @@ using nightowlsign.data.Models.Signs;
 
 namespace nightowlsign.data.Models.Signs
 {
-    public class SignManager
+    public interface ISignManager
+    {
+        List<KeyValuePair<string, string>> ValidationErrors { get; set; }
+        List<Sign> Get(Sign Entity);
+        Sign Find(int signID);
+        bool Validate(Sign entity);
+        Boolean Update(Sign entity);
+        Boolean Insert(Sign entity);
+        bool Delete(Sign entity);
+    }
+
+    public class SignManager : ISignManager
     {
  
             public SignManager()

@@ -529,7 +529,6 @@
     <Compile Include="Controllers\ScheduleStoreViewModel.cs" />
     <Compile Include="Controllers\SignsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
-    <Compile Include="Controllers\StoreSignController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -833,8 +832,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -982,8 +979,6 @@
     <Content Include="Scripts\kendo\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\kendo.webcomponents.min.js.map" />
     <Content Include="Scripts\kendo\kendo.window.min.js.map" />
-    <Content Include="Views\StoreSign\Index.cshtml" />
-    <Content Include="Views\StoreSign\EditorTemplates\SignSelect.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Stores\Index.cshtml" />
     <Content Include="Views\Stores\show.cshtml" />
@@ -996,6 +991,7 @@
     <Content Include="Views\ScheduleStore\EditorTemplates\StoreSelect.cshtml" />
     <Content Include="Views\ScheduleStore\Index.cshtml" />
     <Content Include="Views\Image\EditorTemplates\ImagesAndSign.cshtml" />
+    <Content Include="Views\ScheduleImage\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

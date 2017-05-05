@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using nightowlsign.data.Models.StoreSignDto;
 using System.IO;
 using System.Web;
 
@@ -34,16 +33,6 @@ namespace ImageProcessor.Services
 
         }
 
-        public string SendFiletoSign(List<StoreSignDTO> StoresForSchedule)
-        {
-            string displayMessage = string.Empty;
-            foreach (var storeSign in StoresForSchedule)
-            {
-                displayMessage = string.Format(InitComm(storeSign.IPAddress, storeSign.SubMask, storeSign.Port), Environment.NewLine);
-                displayMessage += string.Format(SendFiletoSign(), Environment.NewLine);
-            }
-            return displayMessage;
-        }
         public string SendFiletoSign()
         {
             try

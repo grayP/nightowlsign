@@ -5,9 +5,12 @@ namespace nightowlsign.Controllers
 {
     public class StoresController : Controller
     {
-        private StoreViewModel _storeViewModel= new StoreViewModel();
+        private readonly IStoreViewModel _storeViewModel;
 
- 
+        public StoresController(IStoreViewModel storeViewModel)
+        {
+            _storeViewModel = storeViewModel;
+        }
 
         // GET: 
         [Authorize(Roles = "Admin")]

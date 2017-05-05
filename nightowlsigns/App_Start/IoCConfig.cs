@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
-using nightowlsign.Controllers;
-using nightowlsign.data;
-using nightowlsign.data.Interfaces;
 using nightowlsign.data.Models.Stores;
+using System.Linq;
+using System.Web.Mvc;
+using nightowlsign.data.Models.Image;
+using nightowlsign.data.Models.Schedule;
+using nightowlsign.data.Models.Signs;
 
 namespace nightowlsign
 {
@@ -67,6 +64,9 @@ namespace nightowlsign
             */
            // builder.RegisterType<nightowlsign_Entities>().As<IDbContext>().InstancePerLifetimeScope();
             builder.RegisterType<StoreViewModel>().As<IStoreViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<ScheduleViewModel>().As<IScheduleViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<ImageViewModel>().As<IImageViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<SignManager>().As<ISignManager>().InstancePerLifetimeScope();
             builder.RegisterModule<AutofacWebTypesModule>();
 
 

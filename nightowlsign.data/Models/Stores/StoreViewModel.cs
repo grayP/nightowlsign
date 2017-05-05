@@ -10,8 +10,8 @@ namespace nightowlsign.data.Models.Stores
 {
     public class StoreViewModel : BaseModel.ViewModelBase, IStoreViewModel
     {
-        private nightowlsign_Entities _context;
-        private StoreManager _storeManager;
+        private readonly nightowlsign_Entities _context;
+        private readonly StoreManager _storeManager;
         public StoreViewModel() : base()
         {
             _context = new nightowlsign_Entities();
@@ -73,8 +73,7 @@ namespace nightowlsign.data.Models.Stores
         protected override void Add()
         {
             IsValid = true;
-            Entity = new Store();
-            Entity.Name = "";
+            Entity = new Store {Name = ""};
             base.Add();
         }
         protected override void Save()
