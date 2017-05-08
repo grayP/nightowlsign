@@ -13,8 +13,9 @@
         <EntityTypeShape EntityType="Models.ScheduleImage" Width="1.5" PointX="8" PointY="4.75" />
         <EntityTypeShape EntityType="Models.ImagesAndSign" Width="1.5" PointX="0.5" PointY="7.5" />
         <EntityTypeShape EntityType="Models.StoreAndSign" Width="1.5" PointX="9.375" PointY="7.75" />
-        <EntityTypeShape EntityType="Models.ScheduleAndSign" Width="3.125" PointX="5.625" PointY="0.625" />
+        <EntityTypeShape EntityType="Models.ScheduleAndSign" Width="2" PointX="5.625" PointY="0.625" />
         <EntityTypeShape EntityType="Models.StoreScheduleLog" Width="1.5" PointX="5.5" PointY="8.75" />
+        <EntityTypeShape EntityType="Models.Logging" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -99,18 +99,23 @@
     <Compile Include="ImagesAndSign.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IDbContext.cs" />
+    <Compile Include="Interfaces\Inightowlsign_Entities.cs" />
+    <Compile Include="Logging.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MetaData\MetaData.cs" />
     <Compile Include="Models\Image\IImageManager.cs" />
     <Compile Include="Models\Image\IImageViewModel.cs" />
     <Compile Include="Models\Image\ImageManager.cs" />
     <Compile Include="Models\Image\ImageViewModel.cs" />
+    <Compile Include="Models\ScheduleImage\IScheduleImageManager.cs" />
     <Compile Include="Models\ScheduleImage\ScheduleImageManager.cs" />
     <Compile Include="Models\ScheduleImage\ScheduleImageViewModel.cs" />
     <Compile Include="Models\Image\ImageSelect.cs" />
     <Compile Include="Models\ScheduleStore\ScheduleStoreManager.cs" />
     <Compile Include="Models\ScheduleStore\ScheduleStoreViewModel.cs" />
     <Compile Include="Models\ScheduleStore\StoreSelect.cs" />
+    <Compile Include="Models\Schedule\IScheduleManager.cs" />
     <Compile Include="Models\Schedule\IScheduleViewModel.cs" />
     <Compile Include="Models\Schedule\ScheduleManager.cs" />
     <Compile Include="Models\Schedule\ScheduleViewModel.cs" />

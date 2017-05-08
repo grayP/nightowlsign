@@ -534,6 +534,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Logging.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SignParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,7 +5,7 @@ using nightowlsign.data.Models.Image;
 
 namespace nightowlsign.data.Models.ScheduleImage
 {
-    public class ScheduleImageManager
+    public class ScheduleImageManager : IScheduleImageManager
     {
         public ScheduleImageManager()
         {

@@ -17,6 +17,15 @@
           <Property Name="DateTaken" Type="datetime" />
           <Property Name="SignSize" Type="int" />
         </EntityType>
+        <EntityType Name="Logging">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DateStamp" Type="datetime" />
+        </EntityType>
         <EntityType Name="Schedule">
           <Key>
             <PropertyRef Name="Id" />
@@ -176,6 +185,7 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
         <Function Name="FindCurrentPlayList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logging" EntityType="Self.Logging" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScheduleImage" EntityType="Self.ScheduleImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScheduleStore" EntityType="Self.ScheduleStore" Schema="dbo" store:Type="Tables" />
@@ -269,6 +279,7 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <FunctionImport Name="GetCurrentPlayList" ReturnType="Collection(Models.GetCurrentPlayList_Result)" />
           <EntitySet Name="StoreScheduleLogs" EntityType="Models.StoreScheduleLog" />
           <FunctionImport Name="FindCurrentPlayList" ReturnType="Collection(Models.FindCurrentPlayList_Result)" />
+          <EntitySet Name="Loggings" EntityType="Models.Logging" />
         </EntityContainer>
         <EntityType Name="Store">
           <Key>
@@ -433,6 +444,15 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <Property Type="Int32" Name="Importance" Nullable="false" />
           <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
         </ComplexType>
+        <EntityType Name="Logging">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateStamp" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -614,6 +634,16 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Loggings">
+            <EntityTypeMapping TypeName="Models.Logging">
+              <MappingFragment StoreEntitySet="Logging">
+                <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

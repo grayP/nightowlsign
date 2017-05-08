@@ -11,6 +11,11 @@ namespace nightowlsign.Controllers
         private readonly ScheduleImageManager _scheduleImageManager = new ScheduleImageManager();
         private readonly ScheduleManager _scheduleManager = new ScheduleManager();
 
+        public ScheduleImageController()
+        {
+            
+        }
+
         // GET: 
         [Authorize(Roles = "Admin")]
         public ActionResult Index(int signId, int scheduleId, string scheduleName)

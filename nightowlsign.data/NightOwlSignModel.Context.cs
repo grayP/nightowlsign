@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using nightowlsign.data.Interfaces;
+
 namespace nightowlsign.data
 {
     using System;
@@ -15,7 +17,7 @@ namespace nightowlsign.data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class nightowlsign_Entities : DbContext
+    public partial class nightowlsign_Entities : DbContext, Inightowlsign_Entities
     {
         public nightowlsign_Entities()
             : base("name=nightowlsign_Entities")
@@ -37,6 +39,7 @@ namespace nightowlsign.data
         public virtual DbSet<StoreAndSign> StoreAndSigns { get; set; }
         public virtual DbSet<ScheduleAndSign> ScheduleAndSigns { get; set; }
         public virtual DbSet<StoreScheduleLog> StoreScheduleLogs { get; set; }
+        public virtual DbSet<Logging> Loggings { get; set; }
     
         public virtual ObjectResult<GetCurrentPlayList_Result> GetCurrentPlayList()
         {
@@ -46,6 +49,11 @@ namespace nightowlsign.data
         public virtual ObjectResult<FindCurrentPlayList_Result> FindCurrentPlayList()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindCurrentPlayList_Result>("FindCurrentPlayList");
+        }
+
+        object Inightowlsign_Entities.Set<T>()
+        {
+            throw new NotImplementedException();
         }
     }
 }
