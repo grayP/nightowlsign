@@ -12,23 +12,27 @@ namespace nightowlsign.data.Models.Image
     public class ImageViewModel : BaseModel.ViewModelBase, IImageViewModel
     {
         private readonly ISignManager _signManager;
-        private readonly ImageManager _imageManager;
+        private readonly IImageManager _imageManager;
         private readonly ScheduleImageManager _scheduleImageManager;
         private readonly ImageService _imageService;
         public bool Selected { get; set; }
 
-        public ImageViewModel(ISignManager signManager) : base()
+        public ImageViewModel(ISignManager signManager, IImageManager imageManager) : base()
         {
             _signManager = signManager;
-            _imageManager = new ImageManager();
+            _imageManager = imageManager;
             _scheduleImageManager = new ScheduleImageManager();
             _imageService = new ImageService();
 
         }
 
-        public ImageViewModel()
+        public ImageViewModel()  : base()
         {
-            
+            _signManager = new SignManager();
+            _imageManager = new ImageManager();
+            _scheduleImageManager = new ScheduleImageManager();
+            _imageService = new ImageService();
+
         }
         //Properties--------------
         public List<ImagesAndSign> Images { get; set; }

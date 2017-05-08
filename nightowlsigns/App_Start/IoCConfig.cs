@@ -63,6 +63,7 @@ namespace nightowlsign
             using the standard RegisterModule method. 
             */
            // builder.RegisterType<nightowlsign_Entities>().As<IDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<ImageManager>().As<IImageManager>().InstancePerLifetimeScope();
             builder.RegisterType<StoreViewModel>().As<IStoreViewModel>().InstancePerLifetimeScope();
             builder.RegisterType<ScheduleViewModel>().As<IScheduleViewModel>().InstancePerLifetimeScope();
             builder.RegisterType<ImageViewModel>().As<IImageViewModel>().InstancePerLifetimeScope();
