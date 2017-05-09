@@ -15,12 +15,17 @@ namespace nightowlsign.data.Models.Schedule
         private readonly IScheduleManager _scheduleManager;
         private readonly IScheduleStoreManager _scheduleStoreManager;
         private readonly IStoreScheduleLogManager _storeScheduleLogManager;
-        public ScheduleViewModel(Inightowlsign_Entities context, IScheduleManager scheduleManager, IScheduleStoreManager scheduleStoreManager, IStoreScheduleLogManager storeScheduleLogManager)
+       // public ScheduleViewModel(Inightowlsign_Entities context, IScheduleManager scheduleManager, IScheduleStoreManager scheduleStoreManager, IStoreScheduleLogManager storeScheduleLogManager)
+        public ScheduleViewModel()
         {
-            _context = context;
-            _scheduleManager = scheduleManager;
-            _scheduleStoreManager = scheduleStoreManager;
-            _storeScheduleLogManager = storeScheduleLogManager;
+            // _context = context;
+            // _scheduleManager = scheduleManager;
+            // _scheduleStoreManager = scheduleStoreManager;
+            // _storeScheduleLogManager = storeScheduleLogManager;
+            _context = new nightowlsign_Entities();
+            _scheduleManager = new ScheduleManager(_context);
+            _scheduleStoreManager = new ScheduleStoreManager(_context);
+            _storeScheduleLogManager = new StoreScheduleLogManager(_context);
         }
 
 

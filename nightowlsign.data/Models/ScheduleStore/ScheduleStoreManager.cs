@@ -78,30 +78,24 @@ namespace nightowlsign.data.Models.ScheduleStore
             return _context.ScheduleStores.FirstOrDefault(x => x.StoreId == storeSelect.StoreId && x.ScheduleID == storeSelect.ScheduleId);
         }
 
-        internal bool IsSelected(int scheduleId, int storeId)
+        public bool IsSelected(int scheduleId, int storeId)
         {
 
             return _context.ScheduleStores.Any(x => x.StoreId == storeId && x.ScheduleID == scheduleId);
         }
 
-        internal void Delete(int scheduleId)
+       
+        public void Delete(int scheduleId)
         {
             try
             {
-
                 _context.ScheduleStores.RemoveRange(_context.ScheduleStores.Where(x => x.ScheduleID == scheduleId));
                 _context.SaveChanges();
-
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-        }
-
-        void IScheduleStoreManager.Delete(int v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

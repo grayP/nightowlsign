@@ -13,10 +13,14 @@ namespace nightowlsign.data.Models.Stores
     {
         private readonly Inightowlsign_Entities _context;
         private readonly IStoreManager _storeManager;
-        public StoreViewModel(Inightowlsign_Entities context, IStoreManager  storeManager) : base()
+        //public StoreViewModel(Inightowlsign_Entities context, IStoreManager storeManager) : base()
+        public StoreViewModel() : base()
         {
-            _context = context;
-            _storeManager = storeManager;
+            //_context = context;
+            // _storeManager = storeManager;
+            _context = new nightowlsign_Entities();
+            _storeManager = new StoreManager(_context);
+
         }
         public List<Store> Stores { get; set; }
         public List<StoreAndSign> StoresAndSigns { get; set; }
