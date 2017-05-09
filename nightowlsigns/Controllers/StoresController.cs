@@ -13,14 +13,14 @@ namespace nightowlsign.Controllers
         }
 
         // GET: 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index()
         {
             _storeViewModel.HandleRequest();
             return View(_storeViewModel);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult show()
         {
             _storeViewModel.HandleRequest();
@@ -28,7 +28,7 @@ namespace nightowlsign.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(StoreViewModel storeViewModel)
         {
             storeViewModel.IsValid = ModelState.IsValid;

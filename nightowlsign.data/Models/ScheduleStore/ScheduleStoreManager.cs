@@ -19,29 +19,25 @@ namespace nightowlsign.data.Models.ScheduleStore
         //Properties
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
 
-        public List<int?> Get(data.Schedule Entity)
+        public List<int?> Get(data.Schedule entity)
         {
-            int scheduleID = Entity.Id;
             var query = (from c in _context.ScheduleStores
-                         where c.ScheduleID == scheduleID
+                         where c.ScheduleID == entity.Id
                          select c.StoreId);
             return query.ToList();
-
         }
 
-        public List<StoreSelect> GetAllStores(int SignSizeId)
+        public List<StoreSelect> GetAllStores(int signSizeId)
         {
-            var query = (from s in _context.Store.Where(e => e.SignId == SignSizeId)
+            var query = (from s in _context.Store.Where(e => e.SignId == signSizeId)
                          select new StoreSelect { StoreId = s.id, Name = s.Name, SignId = s.SignId ?? 0 });
             return query.ToList();
 
         }
 
-
         public Store Find(int id)
         {
             return _context.Store.Find(id);
-
         }
 
         public void UpdateStoreList(StoreSelect storeSelect, data.Schedule schedule)
@@ -80,10 +76,8 @@ namespace nightowlsign.data.Models.ScheduleStore
 
         public bool IsSelected(int scheduleId, int storeId)
         {
-
             return _context.ScheduleStores.Any(x => x.StoreId == storeId && x.ScheduleID == scheduleId);
         }
-
        
         public void Delete(int scheduleId)
         {

@@ -51,9 +51,7 @@ namespace nightowlsign.data.Models.Schedule
                                         SignId = item.id,
                                         Model = item.Model
                                     });
-
                 return selectList;
-
             }
         }
         protected override void Init()

@@ -8,14 +8,14 @@ namespace nightowlsign.Controllers
     {
         private readonly SignViewModel _signViewModel = new SignViewModel();
         // GET: 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="Admin,SuperUser")]
         public ActionResult Index()
         {
             _signViewModel.HandleRequest();
 
             return View(_signViewModel);
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult Show(int Id)
         {
             _signViewModel.HandleRequest();
@@ -23,7 +23,7 @@ namespace nightowlsign.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult Index(SignViewModel svm)
         {
             svm.IsValid = ModelState.IsValid;

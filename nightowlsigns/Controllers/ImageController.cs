@@ -36,7 +36,7 @@ namespace nightowlsign.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(FormCollection formCollection, ImageViewModel iVm, int? signId)
         {
             _imageViewModel.SearchSignId =  signId ?? 0;

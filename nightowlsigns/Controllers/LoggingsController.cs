@@ -24,13 +24,15 @@ namespace nightowlsign.Controllers
             _loggingManager = loggingManager;
         }
         // GET: Loggings
+        [Authorize(Roles = "Admin,SuperUser")]
+
         public ActionResult Index(string filter="")
         {
             
             return View(_loggingManager.GetLatest(filter));
         }
 
-        // GET: Loggings/Details/5
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Details(int? id)
         {
             if (id == null)

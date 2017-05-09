@@ -4,7 +4,7 @@ namespace nightowlsign.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index()
         {
             return RedirectToAction("index", "Stores");

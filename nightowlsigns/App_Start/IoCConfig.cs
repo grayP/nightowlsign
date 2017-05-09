@@ -85,7 +85,7 @@ namespace nightowlsign
             builder.RegisterType<LoggingManager>().As<ILoggingManager>().InstancePerLifetimeScope();
             builder.RegisterModule<AutofacWebTypesModule>();
 
-            builder.RegisterType<StoresController>().InstancePerRequest();
+            //builder.RegisterType<StoresController>().InstancePerRequest();
 
 
             #endregion

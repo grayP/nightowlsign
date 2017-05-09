@@ -18,7 +18,7 @@ namespace nightowlsign.Controllers
         }
 
         // GET: 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(int signId, int scheduleId, string scheduleName)
         {
             var ssvm = new ScheduleImageViewModel
@@ -34,7 +34,7 @@ namespace nightowlsign.Controllers
             return View(ssvm);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Display(int scheduleId, string scheduleName)
         {
             var ssvm = new ScheduleImageViewModel
@@ -50,7 +50,7 @@ namespace nightowlsign.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(ScheduleImageViewModel model)
         {
             List<ImageSelect> imageSelects = model.AllImages;

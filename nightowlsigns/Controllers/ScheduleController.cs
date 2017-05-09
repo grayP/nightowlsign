@@ -16,7 +16,7 @@ namespace nightowlsign.Controllers
             _scheduleViewModel = scheduleViewModel;
         }
         // GET: 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(int signId)
         {
             _scheduleViewModel.SearchEntity.SignId = signId;
@@ -24,7 +24,7 @@ namespace nightowlsign.Controllers
             return View(_scheduleViewModel);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Show()
         {
              _scheduleViewModel.HandleRequest();
@@ -32,7 +32,7 @@ namespace nightowlsign.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(ScheduleViewModel svm)
         {
             svm.IsValid = ModelState.IsValid;

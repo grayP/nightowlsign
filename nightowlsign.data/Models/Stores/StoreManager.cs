@@ -180,7 +180,7 @@ namespace nightowlsign.data.Models.Stores
                 modifiedStore.Property(e => e.SubMask).IsModified = true;
                 modifiedStore.Property(e => e.Port).IsModified = true;
                 modifiedStore.Property(e => e.ProgramFile).IsModified = true;
-                _context.SaveChanges();
+                db.SaveChanges();
                 return true;
                 }
             }

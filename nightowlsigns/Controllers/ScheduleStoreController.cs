@@ -19,7 +19,7 @@ namespace nightowlsign.Controllers
         }
 
         // GET: 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(int signId, int scheduleId, string scheduleName)
         {
             _scheduleStoreViewModel.Schedule.Id = scheduleId;
@@ -29,7 +29,7 @@ namespace nightowlsign.Controllers
         }
  
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(ScheduleStoreViewModel model)
         {
             var currentSignSize = 0;
