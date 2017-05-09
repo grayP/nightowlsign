@@ -1,6 +1,7 @@
 ﻿using nightowlsign.data.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using nightowlsign.data.Models.Schedule;
 using nightowlsign.data.Models.ScheduleStore;
 
 namespace nightowlsign.Controllers
@@ -8,8 +9,14 @@ namespace nightowlsign.Controllers
 
     public class ScheduleStoreController : Controller
     {
-       private readonly ScheduleStoreViewModel _scheduleStoreViewModel = new ScheduleStoreViewModel();
-       private readonly ScheduleStoreManager _scheduleStoreManager = new ScheduleStoreManager();
+        private readonly IScheduleStoreViewModel _scheduleStoreViewModel;
+        private readonly IScheduleStoreManager _scheduleStoreManager;
+
+        public ScheduleStoreController(IScheduleStoreViewModel scheduleStoreViewModel, IScheduleStoreManager scheduleStoreManager)
+        {
+            _scheduleStoreViewModel = scheduleStoreViewModel;
+            _scheduleStoreManager = scheduleStoreManager;
+        }
 
         // GET: 
         [Authorize(Roles = "Admin")]

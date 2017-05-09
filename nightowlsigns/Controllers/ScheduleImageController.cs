@@ -8,12 +8,13 @@ namespace nightowlsign.Controllers
 {
     public class ScheduleImageController : Controller
     {
-        private readonly ScheduleImageManager _scheduleImageManager = new ScheduleImageManager();
-        private readonly ScheduleManager _scheduleManager = new ScheduleManager();
+        private readonly IScheduleImageManager _scheduleImageManager ;
+        private readonly IScheduleManager _scheduleManager;
 
-        public ScheduleImageController()
+        public ScheduleImageController(IScheduleImageManager scheduleImageManager, IScheduleManager scheduleManager)
         {
-            
+            _scheduleImageManager = scheduleImageManager;
+            _scheduleManager = scheduleManager;
         }
 
         // GET: 

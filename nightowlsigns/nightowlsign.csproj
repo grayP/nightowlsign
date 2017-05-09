@@ -522,6 +522,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\LoggingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\ScheduleImageController.cs" />
@@ -534,7 +535,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Logging.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SignParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -993,6 +993,11 @@
     <Content Include="Views\ScheduleStore\Index.cshtml" />
     <Content Include="Views\Image\EditorTemplates\ImagesAndSign.cshtml" />
     <Content Include="Views\ScheduleImage\Display.cshtml" />
+    <Content Include="Views\Loggings\Create.cshtml" />
+    <Content Include="Views\Loggings\Delete.cshtml" />
+    <Content Include="Views\Loggings\Details.cshtml" />
+    <Content Include="Views\Loggings\Edit.cshtml" />
+    <Content Include="Views\Loggings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

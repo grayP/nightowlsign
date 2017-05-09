@@ -9,7 +9,7 @@ namespace nightowlsign.Controllers
 {
     public class SchedulesController : Controller
     {
-        private IScheduleViewModel _scheduleViewModel;
+        private readonly IScheduleViewModel _scheduleViewModel;
 
         public SchedulesController(IScheduleViewModel scheduleViewModel)
         {

@@ -2,12 +2,19 @@
 
 namespace nightowlsign.data.Models.ScheduleStore
 {
-    public class ScheduleStoreViewModel : BaseModel.ViewModelBase
+    public class ScheduleStoreViewModel : BaseModel.ViewModelBase, IScheduleStoreViewModel
     {
-        public ScheduleStoreViewModel() : base()
+        private readonly IScheduleStoreManager _scheduleStoreManager;
+        public ScheduleStoreViewModel(IScheduleStoreManager scheduleStoreManager) : base()
         {
+            _scheduleStoreManager = scheduleStoreManager;
             Schedule = new data.Schedule();
             AllStores = new List<StoreSelect>();
+        }
+
+        public ScheduleStoreViewModel()
+        {
+            
         }
 
 
@@ -36,13 +43,11 @@ namespace nightowlsign.data.Models.ScheduleStore
 
         protected override void Get()
         {
-            ScheduleStoreManager sm = new ScheduleStoreManager();
-         //   schedulestore = sm.Get(Schedule);
-            AllStores = sm.GetAllStores(SignSize);
+             AllStores = _scheduleStoreManager.GetAllStores(SignSize);
             foreach (StoreSelect ss in AllStores)
             {
                 ss.ScheduleId = Schedule.Id;
-                data.ScheduleStore selected = sm.GetValues(ss);
+                data.ScheduleStore selected = _scheduleStoreManager.GetValues(ss);
                 if (selected != null)
                 {
                     ss.Selected = true;

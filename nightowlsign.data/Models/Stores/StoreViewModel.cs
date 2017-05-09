@@ -5,17 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using nightowlsign.data.Interfaces;
+using nightowlsign.data.Models.ScheduleStore;
 
 namespace nightowlsign.data.Models.Stores
 {
     public class StoreViewModel : BaseModel.ViewModelBase, IStoreViewModel
     {
-        private readonly nightowlsign_Entities _context;
-        private readonly StoreManager _storeManager;
-        public StoreViewModel() : base()
+        private readonly Inightowlsign_Entities _context;
+        private readonly IStoreManager _storeManager;
+        public StoreViewModel(Inightowlsign_Entities context, IStoreManager  storeManager) : base()
         {
-            _context = new nightowlsign_Entities();
-            _storeManager = new StoreManager(_context);
+            _context = context;
+            _storeManager = storeManager;
         }
         public List<Store> Stores { get; set; }
         public List<StoreAndSign> StoresAndSigns { get; set; }

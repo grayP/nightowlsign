@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using nightowlsign.data;
+using nightowlsign.data.Interfaces;
 
 
 namespace nightowlsign.data.Models.ScheduleStore
 {
-    public class ScheduleStoreManager
+    public class ScheduleStoreManager : IScheduleStoreManager
     {
-        public ScheduleStoreManager()
+        private readonly Inightowlsign_Entities _context;
+        public ScheduleStoreManager(Inightowlsign_Entities context)
         {
+            _context = context;
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
         //Properties
@@ -19,35 +22,25 @@ namespace nightowlsign.data.Models.ScheduleStore
         public List<int?> Get(data.Schedule Entity)
         {
             int scheduleID = Entity.Id;
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
-            {
-                var query = (from c in db.ScheduleStores
-                             where c.ScheduleID == scheduleID
-                             select c.StoreId);
-                return query.ToList();
-            }
+            var query = (from c in _context.ScheduleStores
+                         where c.ScheduleID == scheduleID
+                         select c.StoreId);
+            return query.ToList();
 
         }
 
         public List<StoreSelect> GetAllStores(int SignSizeId)
         {
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
-            {
-                var query = (from s in db.Store.Where(e=>e.SignId==SignSizeId)
-                             select new StoreSelect { StoreId= s.id, Name = s.Name, SignId = s.SignId ?? 0});
-                return query.ToList();
-            }
+            var query = (from s in _context.Store.Where(e => e.SignId == SignSizeId)
+                         select new StoreSelect { StoreId = s.id, Name = s.Name, SignId = s.SignId ?? 0 });
+            return query.ToList();
+
         }
 
 
         public Store Find(int id)
         {
-            Store ret = null;
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
-            {
-                ret = db.Store.Find(id);
-            }
-            return ret;
+            return _context.Store.Find(id);
 
         }
 
@@ -59,8 +52,8 @@ namespace nightowlsign.data.Models.ScheduleStore
                 {
                     StoreId = storeSelect.StoreId,
                     ScheduleID = schedule.Id,
-                    Id=storeSelect.Id
-               };
+                    Id = storeSelect.Id
+                };
                 if (storeSelect.Selected)
                 {
                     db.Set<data.ScheduleStore>().AddOrUpdate(storeSelected);
@@ -70,7 +63,7 @@ namespace nightowlsign.data.Models.ScheduleStore
                 {
                     data.ScheduleStore scheduleStore =
                         db.ScheduleStores.Find(storeSelect.Id);
-                    if (scheduleStore!=null)
+                    if (scheduleStore != null)
                     {
                         db.ScheduleStores.Attach(scheduleStore);
                         db.ScheduleStores.Remove(scheduleStore);
@@ -80,38 +73,35 @@ namespace nightowlsign.data.Models.ScheduleStore
             }
         }
 
-        internal data.ScheduleStore GetValues(StoreSelect storeSelect)
+        public data.ScheduleStore GetValues(StoreSelect storeSelect)
         {
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
-            {
-                return db.ScheduleStores.FirstOrDefault(x => x.StoreId == storeSelect.StoreId && x.ScheduleID == storeSelect.ScheduleId);
-            }
+            return _context.ScheduleStores.FirstOrDefault(x => x.StoreId == storeSelect.StoreId && x.ScheduleID == storeSelect.ScheduleId);
         }
 
-        internal bool IsSelected(int ScheduleId, int storeId)
+        internal bool IsSelected(int scheduleId, int storeId)
         {
-            bool ret = false;
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
-            {
-                ret = db.ScheduleStores.Any(x => x.StoreId == storeId && x.ScheduleID == ScheduleId);
-            }
-            return ret;
+
+            return _context.ScheduleStores.Any(x => x.StoreId == storeId && x.ScheduleID == scheduleId);
         }
 
         internal void Delete(int scheduleId)
         {
             try
             {
-                using (nightowlsign_Entities db = new nightowlsign_Entities())
-                {
-                    db.ScheduleStores.RemoveRange(db.ScheduleStores.Where(x => x.ScheduleID == scheduleId));
-                    db.SaveChanges();
-                }
+
+                _context.ScheduleStores.RemoveRange(_context.ScheduleStores.Where(x => x.ScheduleID == scheduleId));
+                _context.SaveChanges();
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+        }
+
+        void IScheduleStoreManager.Delete(int v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

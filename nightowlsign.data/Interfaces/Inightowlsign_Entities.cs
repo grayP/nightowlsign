@@ -21,6 +21,7 @@ namespace nightowlsign.data.Interfaces
         DbSet<StoreAndSign> StoreAndSigns { get; set; }
         DbSet<ScheduleAndSign> ScheduleAndSigns { get; set; }
         DbSet<StoreScheduleLog> StoreScheduleLogs { get; set; }
+        DbSet<Logging> Loggings { get; set; }
         Database Database { get; }
         DbChangeTracker ChangeTracker { get; }
         DbContextConfiguration Configuration { get; }

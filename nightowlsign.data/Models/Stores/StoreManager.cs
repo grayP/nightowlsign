@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using nightowlsign.data.Interfaces;
 
 
 namespace nightowlsign.data.Models.Stores
 {
-    public class StoreManager
+    public class StoreManager : IStoreManager
     {
-        private nightowlsign_Entities _context;
+        private readonly Inightowlsign_Entities _context;
         private data.Schedule defaultSchedule;
         private Sign defaultSign;
-        public StoreManager(nightowlsign_Entities context)
+        public StoreManager(Inightowlsign_Entities context)
         {
             _context = context;
             ValidationErrors = new List<KeyValuePair<string, string>>();
@@ -164,8 +165,10 @@ namespace nightowlsign.data.Models.Stores
             if (!Validate(entity)) return false;
             try
             {
-                _context.Store.Attach(entity);
-                var modifiedStore = _context.Entry(entity);
+                using (var db =new nightowlsign_Entities())
+                {
+                    db.Store.Attach(entity);
+                var modifiedStore = db.Entry(entity);
                 modifiedStore.Property(e => e.Name).IsModified = true;
                 modifiedStore.Property(e => e.Address).IsModified = true;
                 modifiedStore.Property(e => e.Suburb).IsModified = true;
@@ -179,6 +182,7 @@ namespace nightowlsign.data.Models.Stores
                 modifiedStore.Property(e => e.ProgramFile).IsModified = true;
                 _context.SaveChanges();
                 return true;
+                }
             }
             catch (Exception ex)
             {

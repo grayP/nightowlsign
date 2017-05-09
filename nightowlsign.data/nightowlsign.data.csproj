@@ -108,10 +108,14 @@
     <Compile Include="Models\Image\IImageViewModel.cs" />
     <Compile Include="Models\Image\ImageManager.cs" />
     <Compile Include="Models\Image\ImageViewModel.cs" />
+    <Compile Include="Models\Logging\ILoggingManager.cs" />
+    <Compile Include="Models\Logging\LoggingManager.cs" />
     <Compile Include="Models\ScheduleImage\IScheduleImageManager.cs" />
     <Compile Include="Models\ScheduleImage\ScheduleImageManager.cs" />
     <Compile Include="Models\ScheduleImage\ScheduleImageViewModel.cs" />
     <Compile Include="Models\Image\ImageSelect.cs" />
+    <Compile Include="Models\ScheduleStore\IScheduleStoreManager.cs" />
+    <Compile Include="Models\ScheduleStore\IScheduleStoreViewModel.cs" />
     <Compile Include="Models\ScheduleStore\ScheduleStoreManager.cs" />
     <Compile Include="Models\ScheduleStore\ScheduleStoreViewModel.cs" />
     <Compile Include="Models\ScheduleStore\StoreSelect.cs" />
@@ -124,7 +128,9 @@
     <Compile Include="Models\Signs\SignManager.cs" />
     <Compile Include="Models\Signs\SignViewModel.cs" />
     <Compile Include="Models\Signs\SignSelect.cs" />
+    <Compile Include="Models\StoreScheduleLog\IStoreScheduleLogManager.cs" />
     <Compile Include="Models\StoreScheduleLog\StoreScheduleLogManager.cs" />
+    <Compile Include="Models\Stores\IStoreManager.cs" />
     <Compile Include="Models\Stores\IStoreViewModel.cs" />
     <Compile Include="Models\Stores\Store.cs" />
     <Compile Include="Models\Stores\StoreManager.cs" />

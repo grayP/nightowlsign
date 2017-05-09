@@ -2,10 +2,18 @@
 using Autofac.Integration.Mvc;
 using nightowlsign.data.Models.Stores;
 using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
+using nightowlsign.Controllers;
+using nightowlsign.data;
+using nightowlsign.data.Interfaces;
 using nightowlsign.data.Models.Image;
+using nightowlsign.data.Models.Logging;
 using nightowlsign.data.Models.Schedule;
+using nightowlsign.data.Models.ScheduleImage;
+using nightowlsign.data.Models.ScheduleStore;
 using nightowlsign.data.Models.Signs;
+using nightowlsign.data.Models.StoreScheduleLog;
 
 namespace nightowlsign
 {
@@ -28,14 +36,14 @@ namespace nightowlsign
 
             #region Setup a common pattern
             // placed here before RegisterControllers as last one wins
-            builder.RegisterAssemblyTypes()
-                   .Where(t => t.Name.EndsWith("Manager"))
-                   .AsImplementedInterfaces()
-                   .InstancePerRequest();
-            builder.RegisterAssemblyTypes()
-                   .Where(t => t.Name.EndsWith("Service"))
-                   .AsImplementedInterfaces()
-                   .InstancePerRequest();
+            //builder.RegisterAssemblyTypes()
+            //       .Where(t => t.Name.EndsWith("Manager"))
+            //       .AsImplementedInterfaces()
+            //       .InstancePerRequest();
+            //builder.RegisterAssemblyTypes()
+            //       .Where(t => t.Name.EndsWith("Service"))
+            //       .AsImplementedInterfaces()
+            //       .InstancePerRequest();
             #endregion
 
 
@@ -62,13 +70,22 @@ namespace nightowlsign
             To use these abstractions add the AutofacWebTypesModule to the container 
             using the standard RegisterModule method. 
             */
-           // builder.RegisterType<nightowlsign_Entities>().As<IDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<nightowlsign_Entities>().As<Inightowlsign_Entities>().InstancePerLifetimeScope();
             builder.RegisterType<ImageManager>().As<IImageManager>().InstancePerLifetimeScope();
             builder.RegisterType<StoreViewModel>().As<IStoreViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<StoreManager>().As<IStoreManager>().InstancePerLifetimeScope();
             builder.RegisterType<ScheduleViewModel>().As<IScheduleViewModel>().InstancePerLifetimeScope();
             builder.RegisterType<ImageViewModel>().As<IImageViewModel>().InstancePerLifetimeScope();
             builder.RegisterType<SignManager>().As<ISignManager>().InstancePerLifetimeScope();
+            builder.RegisterType<ScheduleManager>().As<IScheduleManager>().InstancePerLifetimeScope();
+            builder.RegisterType<ScheduleImageManager>().As<IScheduleImageManager>().InstancePerLifetimeScope();
+            builder.RegisterType<ScheduleStoreViewModel>().As<IScheduleStoreViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<ScheduleStoreManager>().As<IScheduleStoreManager>().InstancePerLifetimeScope();
+            builder.RegisterType<StoreScheduleLogManager>().As<IStoreScheduleLogManager>().InstancePerLifetimeScope();
+            builder.RegisterType<LoggingManager>().As<ILoggingManager>().InstancePerLifetimeScope();
             builder.RegisterModule<AutofacWebTypesModule>();
+
+            builder.RegisterType<StoresController>().InstancePerRequest();
 
 
             #endregion
@@ -78,6 +95,7 @@ namespace nightowlsign
             #region Set the MVC dependency resolver to use Autofac
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
             #endregion
 
             return container;
