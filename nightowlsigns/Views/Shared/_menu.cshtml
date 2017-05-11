@@ -1,12 +1,19 @@
-﻿@if (User.IsInRole("Admin") || (User.IsInRole("SuperUser")))
+﻿@if (User.IsInRole("Admin"))
 {
                     <li>@Html.ActionLink("Home", "Index", "Stores")</li>
                     <li>@Html.ActionLink("Images", "Index", "Image")</li>
-                    <li>@Html.ActionLink("Playlists", "Index", "Schedules", new { SignId="0" }, null)</li>
-                    <li>@Html.ActionLink("Log", "Index", "Loggings", new {filter="Result"}, null)</li>
-                    @*<li>@Html.ActionLink("Signs", "Index", "Signs")</li>*@
+                    <li>@Html.ActionLink("Playlists", "Index", "Schedules", new { SignId = "0" }, null)</li>
 }
+else if (User.IsInRole("SuperUser"))
+{
+                    <li>@Html.ActionLink("Home", "Index", "Stores")</li>
+                    <li>@Html.ActionLink("Images", "Index", "Image")</li>
+                    <li>@Html.ActionLink("Playlists", "Index", "Schedules", new { SignId = "0" }, null)</li>
+                    <li>@Html.ActionLink("Log", "Index", "Loggings", new { filter = "Result" }, null)</li>
+
+}
+
 else
 {
-                   <li>@Html.ActionLink("Home", "Index", "Stores")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Stores")</li>
 }
