@@ -294,9 +294,8 @@
       <HintPath>..\packages\Microsoft.Net.Http.Headers.1.0.0\lib\netstandard1.1\Microsoft.Net.Http.Headers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Seq.Apps, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Seq.Apps.1.6.4\lib\net45\Seq.Apps.dll</HintPath>
@@ -1022,6 +1021,10 @@
     <ProjectReference Include="..\nightowlsign.ImageStorage\ImageStorage.csproj">
       <Project>{a31b574d-0beb-4b15-b608-271ff545d81e}</Project>
       <Name>ImageStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SignSystemAPI\SignSystemAPI.csproj">
+      <Project>{12dc5955-7ef5-477d-98a2-171b480c676e}</Project>
+      <Name>SignSystemAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

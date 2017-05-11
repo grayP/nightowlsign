@@ -17,7 +17,7 @@ namespace nightowlsign.data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class nightowlsign_Entities : DbContext, Inightowlsign_Entities
+    public partial class nightowlsign_Entities : DbContext   , Inightowlsign_Entities
     {
         public nightowlsign_Entities()
             : base("name=nightowlsign_Entities")
@@ -41,14 +41,9 @@ namespace nightowlsign.data
         public virtual DbSet<StoreScheduleLog> StoreScheduleLogs { get; set; }
         public virtual DbSet<Logging> Loggings { get; set; }
     
-        public virtual ObjectResult<GetCurrentPlayList_Result> GetCurrentPlayList()
+        public virtual ObjectResult<FindCurrentPlayListForStore_Result> FindCurrentPlayListForStore()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCurrentPlayList_Result>("GetCurrentPlayList");
-        }
-    
-        public virtual ObjectResult<FindCurrentPlayList_Result> FindCurrentPlayList()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindCurrentPlayList_Result>("FindCurrentPlayList");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindCurrentPlayListForStore_Result>("FindCurrentPlayListForStore");
         }
 
         object Inightowlsign_Entities.Set<T>()
