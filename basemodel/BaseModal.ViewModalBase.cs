@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BaseModel
 {
@@ -9,6 +10,7 @@ namespace BaseModel
         {
             Init();
         }
+
         public string Mode { get; set; }
         public string EventCommand { get; set; }
         public string EventArgument { get; set; }
@@ -26,6 +28,7 @@ namespace BaseModel
             EventArgument = String.Empty;
             ListMode();
         }
+
         //-----------------------------------------------------------------------------
         public virtual void HandleRequest()
         {
@@ -35,6 +38,10 @@ namespace BaseModel
                 case "search":
                     ListMode();
                     Get();
+                    break;
+                case "listasync":
+                    ListMode();
+                    GetAsync().RunSynchronously();
                     break;
                 case "resetsearch":
                     ResetSearch();
@@ -67,6 +74,7 @@ namespace BaseModel
                     break;
             }
         }
+
         //--------------------------------------------------------------------------------------
         protected virtual void ListMode()
         {
@@ -77,6 +85,7 @@ namespace BaseModel
             IsDetailVisible = false;
             Mode = "list";
         }
+
         protected virtual void AddMode()
         {
             IsListAreaVisible = false;
@@ -84,6 +93,7 @@ namespace BaseModel
             IsDetailVisible = true;
             Mode = "Add";
         }
+
         protected virtual void EditMode()
         {
             IsListAreaVisible = false;
@@ -91,14 +101,23 @@ namespace BaseModel
             IsDetailVisible = true;
             Mode = "Edit";
         }
+
         protected virtual void ResetSearch()
         {
             ListMode();
         }
+
         protected virtual void Get()
         {
         }
-        protected virtual void Edit()
+
+        protected virtual async Task GetAsync()
+        {
+            
+        }
+
+
+    protected virtual void Edit()
         {
             EditMode();
         }

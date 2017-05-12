@@ -1,7 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using nightowlsign.data.Interfaces;
+using SignSystemAPI.Constants;
+using SignSystemAPI.Client;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Helpers;
+using Newtonsoft.Json;
 
 
 namespace nightowlsign.data.Models.Stores
@@ -36,6 +43,23 @@ namespace nightowlsign.data.Models.Stores
         }
         //Properties
         public List<KeyValuePair<string, string>> ValidationErrors { get; set; }
+
+        public async Task<List<StoreAndSign>> GetAsync(Store entity)
+        {
+            var client = ApiClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/store");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var model = JsonConvert.DeserializeObject<IEnumerable<StoreAndSign>>(content);
+                return model.ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public List<StoreAndSign> Get(Store entity)
         {
@@ -91,7 +115,7 @@ namespace nightowlsign.data.Models.Stores
         {
             var ret = (from s in _context.ScheduleStores
                        join sc in _context.Schedules on s.ScheduleID equals sc.Id
-                       where s.StoreId == storeId & sc.DefaultPlayList==true
+                       where s.StoreId == storeId & sc.DefaultPlayList == true
                        select new { sc.Id, sc.Name })
                 .AsEnumerable()
                 .OrderByDescending(x => x.Id)
@@ -165,23 +189,24 @@ namespace nightowlsign.data.Models.Stores
             if (!Validate(entity)) return false;
             try
             {
-                using (var db =new nightowlsign_Entities())
+                using (var db = new nightowlsign_Entities())
                 {
                     db.Store.Attach(entity);
-                var modifiedStore = db.Entry(entity);
-                modifiedStore.Property(e => e.Name).IsModified = true;
-                modifiedStore.Property(e => e.Address).IsModified = true;
-                modifiedStore.Property(e => e.Suburb).IsModified = true;
-                modifiedStore.Property(e => e.State).IsModified = true;
-                modifiedStore.Property(e => e.Manager).IsModified = true;
-                modifiedStore.Property(e => e.Phone).IsModified = true;
-                modifiedStore.Property(e => e.SignId).IsModified = true;
-                modifiedStore.Property(e => e.IpAddress).IsModified = true;
-                modifiedStore.Property(e => e.SubMask).IsModified = true;
-                modifiedStore.Property(e => e.Port).IsModified = true;
-                modifiedStore.Property(e => e.ProgramFile).IsModified = true;
-                db.SaveChanges();
-                return true;
+                    var modifiedStore = db.Entry(entity);
+                    modifiedStore.Property(e => e.Name).IsModified = true;
+                    modifiedStore.Property(e => e.Address).IsModified = true;
+                    modifiedStore.Property(e => e.Suburb).IsModified = true;
+                    modifiedStore.Property(e => e.State).IsModified = true;
+                    modifiedStore.Property(e => e.Manager).IsModified = true;
+                    modifiedStore.Property(e => e.Phone).IsModified = true;
+                    modifiedStore.Property(e => e.SignId).IsModified = true;
+                    modifiedStore.Property(e => e.IpAddress).IsModified = true;
+                    modifiedStore.Property(e => e.SubMask).IsModified = true;
+                    modifiedStore.Property(e => e.Port).IsModified = true;
+                    modifiedStore.Property(e => e.ProgramFile).IsModified = true;
+                    modifiedStore.Property(e => e.NumImages).IsModified = true;
+                    db.SaveChanges();
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -208,7 +233,8 @@ namespace nightowlsign.data.Models.Stores
                     IpAddress = entity.IpAddress,
                     SubMask = entity.SubMask,
                     Port = entity.Port,
-                    ProgramFile = entity.ProgramFile
+                    ProgramFile = entity.ProgramFile,
+                    NumImages = entity.NumImages
                 };
 
                 _context.Store.Add(newStore);
@@ -221,7 +247,6 @@ namespace nightowlsign.data.Models.Stores
                 return false;
             }
         }
-
 
         public bool Delete(Store entity)
         {

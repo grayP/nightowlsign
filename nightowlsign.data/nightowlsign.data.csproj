@@ -48,6 +48,9 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Seq.Apps, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Seq.Apps.1.6.4\lib\net45\Seq.Apps.dll</HintPath>
       <Private>True</Private>
@@ -87,6 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModule.cs" />
+    <Compile Include="FindCurrentPlayListForStore_Result.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FindCurrentPlayList_Result.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
@@ -200,6 +206,10 @@
     <ProjectReference Include="..\nightowlsign.ImageStorage\ImageStorage.csproj">
       <Project>{a31b574d-0beb-4b15-b608-271ff545d81e}</Project>
       <Name>ImageStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SignSystemAPI\SignSystemAPI.csproj">
+      <Project>{12dc5955-7ef5-477d-98a2-171b480c676e}</Project>
+      <Name>SignSystemAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

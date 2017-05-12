@@ -165,8 +165,13 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Entity.ProgramFile, "Program File")
-                        @Html.TextBoxFor(m => m.Entity.ProgramFile, new { @class = "form-control", PlaceHolder = "0001000" })
+                        @Html.TextBoxFor(m => m.Entity.ProgramFile, new { @class = "form-control", PlaceHolder = "00010000" })
+                    </div>   
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Entity.NumImages, "Number of Images in Program File")
+                        @Html.TextBoxFor(m => m.Entity.NumImages, new { @class = "form-control", PlaceHolder = "12" })
                     </div>
+
                 }
                 else
                 {
@@ -175,6 +180,8 @@
                     @Html.HiddenFor(m => m.Entity.IpAddress)
                     @Html.HiddenFor(m => m.Entity.SubMask)
                     @Html.HiddenFor(m => m.Entity.Port)
+                    @Html.HiddenFor(m => m.Entity.ProgramFile)
+                    @Html.HiddenFor(m => m.Entity.NumImages)
                 }
                 </div>
             </div>

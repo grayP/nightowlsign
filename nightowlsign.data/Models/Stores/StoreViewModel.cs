@@ -11,7 +11,7 @@ namespace nightowlsign.data.Models.Stores
 {
     public class StoreViewModel : BaseModel.ViewModelBase, IStoreViewModel
     {
-        private readonly Inightowlsign_Entities _context;
+        private readonly nightowlsign_Entities _context;
         private readonly IStoreManager _storeManager;
         //public StoreViewModel(Inightowlsign_Entities context, IStoreManager storeManager) : base()
         public StoreViewModel() : base()
@@ -65,10 +65,14 @@ namespace nightowlsign.data.Models.Stores
         {
             SearchEntity = new Store();
         }
+
         protected override void Get()
         {
             StoresAndSigns = _storeManager.Get(SearchEntity);
-
+        }
+        protected override async Task  GetAsync()
+        {
+            StoresAndSigns = await _storeManager.GetAsync(SearchEntity);
         }
         protected override void Edit()
         {

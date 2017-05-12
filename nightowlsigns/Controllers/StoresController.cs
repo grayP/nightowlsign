@@ -16,6 +16,7 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index()
         {
+          //  _storeViewModel.EventCommand = "ListAsync";
             _storeViewModel.HandleRequest();
             return View(_storeViewModel);
         }

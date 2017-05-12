@@ -8,10 +8,10 @@ using Autofac;
 
 namespace nightowlsign.data
 {
-    public class DataModule : Module
+    public class zDataModule : Module
     {
         private string connStr;
-        public DataModule(string connString)
+        public zDataModule(string connString)
         {
             this.connStr = connString;
         }
