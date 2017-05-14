@@ -141,6 +141,7 @@
     <Compile Include="Models\Stores\Store.cs" />
     <Compile Include="Models\Stores\StoreManager.cs" />
     <Compile Include="Models\Stores\StoreViewModel.cs" />
+    <Compile Include="Models\UpLoadLog\UpLoadLoggingManager.cs" />
     <Compile Include="NightOwlSignModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -181,6 +182,9 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StoreScheduleLog.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UpLoadLog.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

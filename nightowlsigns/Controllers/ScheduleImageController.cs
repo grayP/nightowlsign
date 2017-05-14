@@ -3,6 +3,7 @@ using nightowlsign.data.Models.Schedule;
 using nightowlsign.data.Models.ScheduleImage;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using nightowlsign.data.Models.UpLoadLog;
 
 namespace nightowlsign.Controllers
 {
@@ -10,11 +11,13 @@ namespace nightowlsign.Controllers
     {
         private readonly IScheduleImageManager _scheduleImageManager ;
         private readonly IScheduleManager _scheduleManager;
+        private readonly IUpLoadLoggingManager _upLoadLoggingManager;
 
-        public ScheduleImageController(IScheduleImageManager scheduleImageManager, IScheduleManager scheduleManager)
+        public ScheduleImageController(IScheduleImageManager scheduleImageManager, IScheduleManager scheduleManager, IUpLoadLoggingManager upLoadLoggingManager)
         {
             _scheduleImageManager = scheduleImageManager;
             _scheduleManager = scheduleManager;
+            _upLoadLoggingManager = upLoadLoggingManager;
         }
 
         // GET: 
@@ -60,6 +63,7 @@ namespace nightowlsign.Controllers
                 _scheduleImageManager.UpdateImageList(imageSelect, model.Schedule);
             }
             _scheduleManager.UpdateDate(model.Schedule.Id);
+           _upLoadLoggingManager.Delete(model.Schedule.Id);
 
             return RedirectToAction("Index", "Schedules", new {SignId=model.SignId});
         }

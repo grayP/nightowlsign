@@ -14,6 +14,7 @@ using nightowlsign.data.Models.ScheduleImage;
 using nightowlsign.data.Models.ScheduleStore;
 using nightowlsign.data.Models.Signs;
 using nightowlsign.data.Models.StoreScheduleLog;
+using nightowlsign.data.Models.UpLoadLog;
 
 namespace nightowlsign
 {
@@ -83,6 +84,7 @@ namespace nightowlsign
             builder.RegisterType<ScheduleStoreManager>().As<IScheduleStoreManager>().InstancePerLifetimeScope();
             builder.RegisterType<StoreScheduleLogManager>().As<IStoreScheduleLogManager>().InstancePerLifetimeScope();
             builder.RegisterType<LoggingManager>().As<ILoggingManager>().InstancePerLifetimeScope();
+            builder.RegisterType<UpLoadLoggingManager>().As<IUpLoadLoggingManager>().InstancePerLifetimeScope();
             builder.RegisterModule<AutofacWebTypesModule>();
 
             //builder.RegisterType<StoresController>().InstancePerRequest();

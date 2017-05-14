@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using nightowlsign.data.Interfaces;
 using nightowlsign.data.Models.ScheduleStore;
 using nightowlsign.data.Models.StoreScheduleLog;
+using nightowlsign.data.Models.UpLoadLog;
 
 namespace nightowlsign.data.Models.Schedule
 {
@@ -15,17 +16,19 @@ namespace nightowlsign.data.Models.Schedule
         private readonly IScheduleManager _scheduleManager;
         private readonly IScheduleStoreManager _scheduleStoreManager;
         private readonly IStoreScheduleLogManager _storeScheduleLogManager;
+        private readonly IUpLoadLoggingManager _upLoadLoggingManager;
        // public ScheduleViewModel(Inightowlsign_Entities context, IScheduleManager scheduleManager, IScheduleStoreManager scheduleStoreManager, IStoreScheduleLogManager storeScheduleLogManager)
-        public ScheduleViewModel()
+        public ScheduleViewModel(Inightowlsign_Entities context)
         {
-            // _context = context;
+             _context = context;
             // _scheduleManager = scheduleManager;
             // _scheduleStoreManager = scheduleStoreManager;
             // _storeScheduleLogManager = storeScheduleLogManager;
-            _context = new nightowlsign_Entities();
+           // _context = new nightowlsign_Entities();
             _scheduleManager = new ScheduleManager(_context);
             _scheduleStoreManager = new ScheduleStoreManager(_context);
             _storeScheduleLogManager = new StoreScheduleLogManager(_context);
+            _upLoadLoggingManager= new UpLoadLoggingManager(_context);
         }
 
 
@@ -96,6 +99,7 @@ namespace nightowlsign.data.Models.Schedule
             else
             {
                 _scheduleManager.Update(Entity);
+                 _upLoadLoggingManager.Delete(Entity.Id);
             }
             ValidationErrors = _scheduleManager.ValidationErrors;
             base.Save();
