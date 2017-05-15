@@ -42,31 +42,27 @@ namespace nightowlsign.data.Models.ScheduleStore
 
         public void UpdateStoreList(StoreSelect storeSelect, data.Schedule schedule)
         {
-            using (nightowlsign_Entities db = new nightowlsign_Entities())
+
+            var scheduleStore = _context.ScheduleStores.Find(storeSelect.Id);
+            if (storeSelect.Selected)
             {
-                data.ScheduleStore storeSelected = new data.ScheduleStore()
+                if (scheduleStore != null) return;
+                var storeSelected = new data.ScheduleStore()
                 {
                     StoreId = storeSelect.StoreId,
                     ScheduleID = schedule.Id,
                     Id = storeSelect.Id
                 };
-                if (storeSelect.Selected)
-                {
-                    db.Set<data.ScheduleStore>().AddOrUpdate(storeSelected);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    data.ScheduleStore scheduleStore =
-                        db.ScheduleStores.Find(storeSelect.Id);
-                    if (scheduleStore != null)
-                    {
-                        db.ScheduleStores.Attach(scheduleStore);
-                        db.ScheduleStores.Remove(scheduleStore);
-                        db.SaveChanges();
-                    }
-                }
+                _context.ScheduleStores.Add(storeSelected);
             }
+            else
+            {
+                if (scheduleStore == null) return;
+                _context.ScheduleStores.Attach(scheduleStore);
+                _context.ScheduleStores.Remove(scheduleStore);
+            }
+            _context.SaveChanges();
+
         }
 
         public data.ScheduleStore GetValues(StoreSelect storeSelect)
@@ -78,7 +74,7 @@ namespace nightowlsign.data.Models.ScheduleStore
         {
             return _context.ScheduleStores.Any(x => x.StoreId == storeId && x.ScheduleID == scheduleId);
         }
-       
+
         public void Delete(int scheduleId)
         {
             try

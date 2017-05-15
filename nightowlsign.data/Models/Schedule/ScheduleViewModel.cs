@@ -4,31 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using nightowlsign.data.Interfaces;
-using nightowlsign.data.Models.ScheduleStore;
-using nightowlsign.data.Models.StoreScheduleLog;
 using nightowlsign.data.Models.UpLoadLog;
 
 namespace nightowlsign.data.Models.Schedule
 {
     public class ScheduleViewModel : BaseModel.ViewModelBase, IScheduleViewModel
     {
-        private readonly Inightowlsign_Entities _context;
+        private nightowlsign_Entities _context;
         private readonly IScheduleManager _scheduleManager;
-        private readonly IScheduleStoreManager _scheduleStoreManager;
-        private readonly IStoreScheduleLogManager _storeScheduleLogManager;
-        private readonly IUpLoadLoggingManager _upLoadLoggingManager;
-       // public ScheduleViewModel(Inightowlsign_Entities context, IScheduleManager scheduleManager, IScheduleStoreManager scheduleStoreManager, IStoreScheduleLogManager storeScheduleLogManager)
-        public ScheduleViewModel(Inightowlsign_Entities context)
+        //public ScheduleViewModel(Inightowlsign_Entities context, IScheduleManager scheduleManager)
+        public ScheduleViewModel()
         {
-             _context = context;
-            // _scheduleManager = scheduleManager;
-            // _scheduleStoreManager = scheduleStoreManager;
-            // _storeScheduleLogManager = storeScheduleLogManager;
-           // _context = new nightowlsign_Entities();
+            //_context = context;
+            //_scheduleManager = scheduleManager;
+            _context = new nightowlsign_Entities();
             _scheduleManager = new ScheduleManager(_context);
-            _scheduleStoreManager = new ScheduleStoreManager(_context);
-            _storeScheduleLogManager = new StoreScheduleLogManager(_context);
-            _upLoadLoggingManager= new UpLoadLoggingManager(_context);
         }
 
 
@@ -99,7 +89,6 @@ namespace nightowlsign.data.Models.Schedule
             else
             {
                 _scheduleManager.Update(Entity);
-                 _upLoadLoggingManager.Delete(Entity.Id);
             }
             ValidationErrors = _scheduleManager.ValidationErrors;
             base.Save();
@@ -109,8 +98,6 @@ namespace nightowlsign.data.Models.Schedule
         {
             Entity = _scheduleManager.Find(Convert.ToInt32(EventArgument));
             _scheduleManager.Delete(Entity);
-            _scheduleStoreManager.Delete(Convert.ToInt32(EventArgument));
-            _storeScheduleLogManager.DeleteLog(Convert.ToInt32(EventArgument));
             Get();
             base.Delete();
         }

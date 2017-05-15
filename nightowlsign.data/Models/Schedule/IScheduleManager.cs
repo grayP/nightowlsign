@@ -10,8 +10,8 @@ namespace nightowlsign.data.Models.Schedule
         data.Schedule Find(int ScheduleId);
         void UpdateDate(int id);
         bool Validate(data.Schedule entity);
-        Boolean Update(data.Schedule entity);
-        Boolean Insert(data.Schedule entity);
+        bool Update(data.Schedule entity);
+        bool Insert(data.Schedule entity);
         bool Delete(data.Schedule entity);
     }
 }

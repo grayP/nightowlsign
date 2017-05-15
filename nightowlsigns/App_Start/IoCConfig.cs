@@ -87,15 +87,16 @@ namespace nightowlsign
             builder.RegisterType<UpLoadLoggingManager>().As<IUpLoadLoggingManager>().InstancePerLifetimeScope();
             builder.RegisterModule<AutofacWebTypesModule>();
 
-            //builder.RegisterType<StoresController>().InstancePerRequest();
+
+        //builder.RegisterType<StoresController>().InstancePerRequest();
 
 
-            #endregion
+        #endregion
 
-            //builder.RegisterModule(new DataModule("nightowlsign_Entities"));
+        //builder.RegisterModule(new DataModule("nightowlsign_Entities"));
 
-            #region Set the MVC dependency resolver to use Autofac
-            var container = builder.Build();
+        #region Set the MVC dependency resolver to use Autofac
+        var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             #endregion
