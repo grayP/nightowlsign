@@ -42,7 +42,6 @@ namespace nightowlsign.data.Models.UpLoadLog
             var results = _context.UpLoadLogs.Where(u => u.ScheduleId == scheduleId);
             _context.UpLoadLogs.RemoveRange(results);
             _context.SaveChanges();
-
         }
         public int? GetOverallStatus(int storeId, DateTime? lastUpdated, int scheduleid)
         {

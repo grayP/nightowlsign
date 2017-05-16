@@ -58,12 +58,10 @@ namespace nightowlsign.data.Models.StoreScheduleLog
 
         public bool Delete(data.StoreScheduleLog entity)
         {
-
             _context.StoreScheduleLogs.Attach(entity);
             _context.StoreScheduleLogs.Remove(entity);
             _context.SaveChanges();
             return true;
-
         }
 
         public void DeleteLog(int scheduleId)
