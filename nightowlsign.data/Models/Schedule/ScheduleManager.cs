@@ -65,7 +65,7 @@ namespace nightowlsign.data.Models.Schedule
         public Boolean Update(data.Schedule entity)
         {
             bool ret = false;
-            entity.LastUpdated = DateTime.Now.ToLocalTime();
+            entity.LastUpdated = DateTime.Now.ToUniversalTime();
             if (Validate(entity))
             {
                 try
@@ -108,7 +108,7 @@ namespace nightowlsign.data.Models.Schedule
         {
             try
             {
-                entity.LastUpdated = DateTime.Now.ToLocalTime();
+                entity.LastUpdated = DateTime.Now.ToUniversalTime();
                 if (Validate(entity))
                 {
                     data.Schedule newSchedule = new data.Schedule()
