@@ -49,16 +49,15 @@ namespace ImageStorage
                     _imageDate = DateTime.Now;
                 }
                 CreateThumbnails(image, oldImage);
+                var fnme = Guid.NewGuid();
                 return new UploadedImage
                 {
                     ContentType = file.ContentType,
                     Caption = oldImage.Caption,
                     Thumbnails = oldImage.Thumbnails,
                     Data = fileBytes,
-                    Name = file.FileName,
-                    Url = string.Format("{0}/{1}",
-                    _imageRootPath,
-                    file.FileName),
+                    Name = fnme.ToString(),
+                    Url = $"{_imageRootPath}/{fnme.ToString()}",
                     DateTaken = _imageDate,
                     SignId = oldImage.SignId
 
