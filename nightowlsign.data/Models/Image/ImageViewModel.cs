@@ -23,7 +23,6 @@ namespace nightowlsign.data.Models.Image
             _imageManager = imageManager;
             _scheduleImageManager = new ScheduleImageManager();
             _imageService = new ImageService();
-
         }
 
         public ImageViewModel()  : base()
@@ -32,7 +31,6 @@ namespace nightowlsign.data.Models.Image
             _imageManager = new ImageManager();
             _scheduleImageManager = new ScheduleImageManager();
             _imageService = new ImageService();
-
         }
         //Properties--------------
         public List<ImagesAndSign> Images { get; set; }
@@ -45,6 +43,7 @@ namespace nightowlsign.data.Models.Image
         public string CommandString { get; set; }
         public string Message { get; set; }
         public int? SearchSignId { get; set; }
+        public Single ImageAspectRatio { get; set; }
         public IList<SelectListItem> SignList
         {
             get
@@ -56,7 +55,8 @@ namespace nightowlsign.data.Models.Image
                         new SelectListItem
                         {
                             Id = 0,
-                            Model = "Show All"
+                            Model = "Show All",
+                            AspectRatio=1.0
                         }
                     };
                     selectList.AddRange(from item in
@@ -64,7 +64,8 @@ namespace nightowlsign.data.Models.Image
                                         select new SelectListItem()
                                         {
                                             SignId = item.id,
-                                            Model = item.Model
+                                            Model = item.Model    ,
+                                            AspectRatio=(double)item.Width/item.Height
                                         });
                     return selectList;
                 }

@@ -59,7 +59,7 @@ namespace nightowlsign.data.Models.Stores
         }
 
         public StoreAndSign GetOneStore(int id)
-        {
+        {                       
             return _context.StoreAndSigns.FirstOrDefault(i => i.id == id);
         }
         public List<StoreAndSign> Get(Store entity)

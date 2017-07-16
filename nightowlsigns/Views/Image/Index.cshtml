@@ -1,4 +1,5 @@
 ﻿@using nightowlsign.data.Models.Image
+@using SelectListItem = nightowlsign.data.Models.SelectListItem
 @model  ImageViewModel
 @{
     ViewBag.Title = "NightOwl Sign System Images";
@@ -73,7 +74,10 @@
     @Html.HiddenFor(m => m.EventArgument)
     @Html.HiddenFor(m => m.Mode)
     @Html.HiddenFor(m => m.ImageToUpload.Url)
-
+    foreach (SelectListItem t in Model.SignList)
+    {
+        @Html.Hidden("SignId-" + t.SignId, t.AspectRatio)
+    }
     if (Model.IsDetailVisible)
     {
         <div class="panel panel-primary">
@@ -110,12 +114,13 @@
                         <div id="previewImg" name="previewImg"></div>
                     </div>
                 }
-                <div id="aspectRatio"></div>
                 <div class="form-group">
                     @Html.HiddenFor(m => m.ImageToUpload.Id)
                     @Html.LabelFor(m => m.ImageToUpload.SignId, "Sign Size")
                     @Html.DropDownListFor(m => m.ImageToUpload.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.EventArgument)), new { @class = "form-control" })
                 </div>
+                <div id="aspectRatio"></div>
+                @Html.HiddenFor(m => m.ImageAspectRatio)
             </div>
             <div class="panel-footer">
                 <div class="row">
@@ -142,67 +147,78 @@
 }
 
 <script type="text/javascript">
-    $(document)
-        .ready(function() {
-            //For putting the confirmation message into a Popup
-            var message = $('.message').html();
-            if (message != undefined) {
-                if (message.length > 0) {
-                    $('.message').html('');
-                    $('#ConfirmUploadModal').modal('Show');
+        $(document)
+            .ready(function () {
+                //For putting the confirmation message into a Popup
+                var message = $('.message').html();
+                if (message != undefined) {
+                    if (message.length > 0) {
+                        $('.message').html('');
+                        $('#ConfirmUploadModal').modal('show');
+                    }
+                }
+            });
+
+        function AddId() {
+            $("#CommandString").val("delete");
+        }
+
+
+
+        $('#btnSave').click(function (e) {
+            e.preventDefault();
+            var myErr = false;
+            var signSize = $('#ImageToUpload_SignId').val();
+            if (signSize == '') {
+                $('#messageModal').modal('show');
+                myErr = true;
+            }
+            else {
+                var signAr = Math.round($('#SignId-' + signSize).val()*100)/100;
+                var imageAr = $('#ImageAspectRatio').val();
+                if (imageAr > 0) {
+                    var compare = signAr / imageAr;
+                    if (0.8 > compare || 1.2 < compare) {
+                        myErr = !confirm('Aspect ratios between image(' + imageAr + ') and sign(' + signAr + ') differ by more than 20%');
+                    }
                 }
             }
-        });
-
-    function AddId() {
-        $("#CommandString").val("delete");
-    }
-
-    $('#btnSave').click(function (e) {
-        e.preventDefault();
-        var myErr = false;
-        var signSize = $('#ImageToUpload_SignId').val();
-        if (signSize == '') {
-            $('#messageModal').modal('Show');
-            myErr = true;
-        }
-        if (!myErr) {
-            $("#EventCommand").val("insert");
-            $('#AddImage').submit();
-        }
-    });
-    var _URL = window.URL || window.webkitURL;
-    function handleFileSelect(evt) {
-        var files = evt.target.files; // FileList object
-        // Loop through the FileList and render image files as thumbnails.
-        for (var i = 0, f; f = files[i]; i++) {
-            // Only process image files.
-            if (!f.type.match('image.*')) {
-                continue;
+            if (!myErr) {
+                $("#EventCommand").val("insert");
+                $('#AddImage').submit();
             }
-            var reader = new FileReader();
-            // Closure to capture the file information.
-            reader.onload = (function (theFile) {
-                return function (e) {
-                    // Render thumbnail.            
-                    var img = new Image();
-                    img.onload = function () {
-                        document.getElementById('aspectRatio').innerHTML =  Math.round((this.width * 100) / (this.height + 1)) / 100;
-                        
+        });
+        var _URL = window.URL || window.webkitURL;
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
+            // Loop through the FileList and render image files as thumbnails.
+            for (var i = 0, f; f = files[i]; i++) {
+                // Only process image files.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+                var reader = new FileReader();
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        var img = new Image();
+                        img.onload = function () {
+                            document.getElementById('ImageAspectRatio').value = Math.round((this.width * 100) / (this.height + 1)) / 100;
+                        };
+                        img.src = _URL.createObjectURL(theFile);
+                        var span = document.createElement('span');
+                        span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+                        document.getElementById('previewImg').style.visibility = "visible";
+                        document.getElementById('previewImg').insertBefore(span, null);
                     };
-                    img.src = _URL.createObjectURL(theFile);
-                    var span = document.createElement('span');
-                    span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                        '" title="', escape(theFile.name), '"/>'].join('');
-                    document.getElementById('previewImg').style.visibility = "visible";
-                    document.getElementById('previewImg').insertBefore(span, null);
-                };
-            })(f);
-            // Read in the image file as a data URL.
-            reader.readAsDataURL(f);
+                })(f);
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }
         }
-    }
-    document.getElementById('fileupload').addEventListener('change', handleFileSelect, false);
+        document.getElementById('fileupload').addEventListener('change', handleFileSelect, false);
 </script>
 
 

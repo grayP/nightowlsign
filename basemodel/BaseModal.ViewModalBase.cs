@@ -52,7 +52,7 @@ namespace BaseModel
                     
                 case "add":
                     Add();
-                    Get();
+                    //Get();
                     break;
                 case "cancel":
                     ListMode();

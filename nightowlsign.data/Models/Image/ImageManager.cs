@@ -22,17 +22,12 @@ namespace nightowlsign.data.Models.Image
             var ret = new List<ImagesAndSign>();
             using (var db = new nightowlsign_Entities())
             {
-                ret = db.ImagesAndSigns.OrderBy(x => x.Model).ThenBy(x => x.Caption).ToList<ImagesAndSign>();
+                         ret = db.ImagesAndSigns.Where(x=>x.SignSize==entity.SignSize).ToList<ImagesAndSign>();
             }
             if (!string.IsNullOrEmpty(entity.Caption))
             {
                 ret = ret.FindAll(p => p.Caption.ToLower().StartsWith(entity.Caption));
             }
-            if (entity.SignSize > 0)
-            {
-                ret = ret.FindAll(p => p.SignSize.Equals(entity.SignSize));
-            }
-
             return ret;
         }
 
@@ -79,7 +74,7 @@ namespace nightowlsign.data.Models.Image
             {
                 try
                 {
-                   var entity = new data.Image()
+                    var entity = new data.Image()
                     {
                         Id = imageToUpDate.Id,
                         Caption = imageToUpDate.Caption,

@@ -40,7 +40,6 @@ label .tip {
 
 .fixed-attachment{
         background-attachment:fixed;
-
 }
 
 /* Navbar */
@@ -168,6 +167,9 @@ textarea {
     max-width: 280px;
 }
 
+input[type="checkbox"] {
+    transform:scale(1.5, 1.5);
+}
 
 .pdsa-action-button-column{
     width:4em;

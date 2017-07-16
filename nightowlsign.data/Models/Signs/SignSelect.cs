@@ -19,7 +19,7 @@ namespace nightowlsign.data.Models
         public string Port { get; set; }
         public int? ScheduleId { get; set; }
         [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
-        public decimal? AspectRatio { get; set; }
+        public double? AspectRatio { get; set; }
 
     }
 }
