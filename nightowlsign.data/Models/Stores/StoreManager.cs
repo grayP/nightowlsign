@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using nightowlsign.data.Interfaces;
+using SignSystemAPI.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using nightowlsign.data.Interfaces;
-using SignSystemAPI.Constants;
-using SignSystemAPI.Client;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Helpers;
-using Newtonsoft.Json;
 
 
 namespace nightowlsign.data.Models.Stores
@@ -61,6 +58,10 @@ namespace nightowlsign.data.Models.Stores
             }
         }
 
+        public StoreAndSign GetOneStore(int id)
+        {
+            return _context.StoreAndSigns.FirstOrDefault(i => i.id == id);
+        }
         public List<StoreAndSign> Get(Store entity)
         {
             var ret = _context.StoreAndSigns.OrderBy(x => x.Name).ToList<StoreAndSign>();

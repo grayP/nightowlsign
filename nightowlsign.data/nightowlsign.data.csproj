@@ -31,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.6.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\SignSystemApi\packages\Autofac.4.6.0\lib\net45\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Mvc5.4.0.1\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <HintPath>..\..\SignSystemApi\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -139,7 +139,6 @@
     <Compile Include="Models\Stores\IStoreManager.cs" />
     <Compile Include="Models\Stores\IStoreViewModel.cs" />
     <Compile Include="Models\Stores\Store.cs" />
-    <Compile Include="Models\Stores\StoreDto.cs" />
     <Compile Include="Models\Stores\StoreManager.cs" />
     <Compile Include="Models\Stores\StoreViewModel.cs" />
     <Compile Include="Models\UpLoadLog\UpLoadLoggingManager.cs" />
@@ -190,7 +189,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="NightOwlSignModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NightOwlSignModel.Designer.cs</LastGenOutput>

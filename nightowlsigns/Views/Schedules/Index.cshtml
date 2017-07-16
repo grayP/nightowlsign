@@ -251,7 +251,13 @@
 
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12">  
+                        @*@if (Model.EventCommand=="edit")
+                        {
+                            <button class="btn btn-primary" id="btnCopy" data-pdsa-action="copy">
+                                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Create new Copy
+                            </button>
+                        }*@
                         <button class="btn btn-primary" id="btnSave" data-pdsa-action="save">
                             <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
                         </button>

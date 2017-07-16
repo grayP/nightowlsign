@@ -110,7 +110,7 @@
                         <div id="previewImg" name="previewImg"></div>
                     </div>
                 }
-
+                <div id="aspectRatio"></div>
                 <div class="form-group">
                     @Html.HiddenFor(m => m.ImageToUpload.Id)
                     @Html.LabelFor(m => m.ImageToUpload.SignId, "Sign Size")
@@ -171,7 +171,7 @@
             $('#AddImage').submit();
         }
     });
-
+    var _URL = window.URL || window.webkitURL;
     function handleFileSelect(evt) {
         var files = evt.target.files; // FileList object
         // Loop through the FileList and render image files as thumbnails.
@@ -184,7 +184,13 @@
             // Closure to capture the file information.
             reader.onload = (function (theFile) {
                 return function (e) {
-                    // Render thumbnail.
+                    // Render thumbnail.            
+                    var img = new Image();
+                    img.onload = function () {
+                        document.getElementById('aspectRatio').innerHTML =  Math.round((this.width * 100) / (this.height + 1)) / 100;
+                        
+                    };
+                    img.src = _URL.createObjectURL(theFile);
                     var span = document.createElement('span');
                     span.innerHTML = ['<img class="thumb" src="', e.target.result,
                         '" title="', escape(theFile.name), '"/>'].join('');

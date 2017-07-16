@@ -59,7 +59,9 @@ namespace ImageStorage
                     Name = fnme.ToString(),
                     Url = $"{_imageRootPath}/{fnme.ToString()}",
                     DateTaken = _imageDate,
-                    SignId = oldImage.SignId
+                    SignId = oldImage.SignId,
+                    ImageHeight = image.Height,
+                    ImageWidth = image.Width,
 
                 };
             }

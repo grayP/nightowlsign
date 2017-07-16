@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace BaseModel
@@ -47,6 +48,8 @@ namespace BaseModel
                     ResetSearch();
                     Get();
                     break;
+                case "copy":
+                    
                 case "add":
                     Add();
                     Get();

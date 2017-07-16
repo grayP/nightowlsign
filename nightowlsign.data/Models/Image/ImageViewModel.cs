@@ -178,10 +178,11 @@ namespace nightowlsign.data.Models.Image
                     var sign = _signManager.Find(ImageToUpload.SignId);
                     ImageToUpload.SignHeight = sign.Height ?? 96;
                     ImageToUpload.SignWidth = sign.Width ?? 244;
+
                     ImageToUpload = await _imageService.CreateUploadedImage(File, ImageToUpload);
-                    await _imageService.AddImageToBlobStorageAsync(ImageToUpload);
                     success = await _imageManager.Insert(File.FileName, ImageToUpload);
-                }
+                    if (success) await _imageService.AddImageToBlobStorageAsync(ImageToUpload);
+               }
                 else
                 {
                     Message = "Please select a Sign Size for the image(s)";

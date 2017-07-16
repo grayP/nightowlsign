@@ -7,6 +7,7 @@ namespace nightowlsign.data.Models.Stores
     {
         List<KeyValuePair<string, string>> ValidationErrors { get; set; }
         Task <List<StoreAndSign>> GetAsync(Store entity);
+        StoreAndSign GetOneStore(int id);
         List<StoreAndSign> Get(Store entity);
         Store Find(int storeId);
         bool Validate(Store entity);
