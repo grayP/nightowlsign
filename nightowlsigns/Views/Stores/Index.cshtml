@@ -76,7 +76,7 @@
                             <td class="centrealign">@item.DefaultSchedule.Name</td>
                             <td class="centrealign" title="Status=@item.LastUpdateStatus, Last update=@item.LastUpdateTime">@item.CurrentSchedule.Name</td>
                             <td class="centrealign">
-                                @if (@item.CurrentSchedule.Id!=0)
+                                @if (@item.CurrentSchedule.Id != 0)
                                 {
                                     <a href="@Url.Action("Index", "ScheduleImage", new {signId = item.SignId, scheduleId = item.CurrentSchedule.Id, scheduleName = item.CurrentSchedule.Name})"> <i class="glyphicon glyphicon-play"></i></a>
                                 }
@@ -144,50 +144,54 @@
                         @Html.TextBoxFor(m => m.Entity.Phone, new { @class = "form-control" })
                     </div>
                 </div>
-                <div class="col-sm-6 col-xs-12">  
-                @if (User.IsInRole("SuperUser"))
-                {
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Entity.SignId, "Sign Size")
-                        @Html.DropDownListFor(m => m.Entity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.Entity.SignId)), new {@class = "form-control"})
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Entity.IpAddress, "IP Address")
-                        @Html.TextBoxFor(m => m.Entity.IpAddress, new {@class = "form-control"})
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Entity.SubMask, "Sub Mask")
-                        @Html.TextBoxFor(m => m.Entity.SubMask, new {@class = "form-control", PlaceHolder = "255.255.255.255"})
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Entity.Port, "Port No")
-                        @Html.TextBoxFor(m => m.Entity.Port, new {@class = "form-control", PlaceHolder = "5200"})
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Entity.ProgramFile, "Program File")
-                        @Html.TextBoxFor(m => m.Entity.ProgramFile, new { @class = "form-control", PlaceHolder = "00010000" })
-                    </div>   
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Entity.NumImages, "Number of Images in Program File")
-                        @Html.TextBoxFor(m => m.Entity.NumImages, new { @class = "form-control", PlaceHolder = "12" })
-                    </div>
+                <div class="col-sm-6 col-xs-12">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Entity.SignId, "Sign Size")
+                            @Html.DropDownListFor(m => m.Entity.SignId, new SelectList(Model.SignList, "SignId", "Model", Convert.ToInt32(Model.Entity.SignId)), new { @class = "form-control" })
+                        </div>
+                    }
+                    @if (User.IsInRole("SuperUser"))
+                    {
 
-                }
-                else
-                {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Entity.IpAddress, "IP Address")
+                            @Html.TextBoxFor(m => m.Entity.IpAddress, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Entity.SubMask, "Sub Mask")
+                            @Html.TextBoxFor(m => m.Entity.SubMask, new { @class = "form-control", PlaceHolder = "255.255.255.255" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Entity.Port, "Port No")
+                            @Html.TextBoxFor(m => m.Entity.Port, new { @class = "form-control", PlaceHolder = "5200" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Entity.ProgramFile, "Program File")
+                            @Html.TextBoxFor(m => m.Entity.ProgramFile, new { @class = "form-control", PlaceHolder = "00010000" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Entity.NumImages, "Number of Images in Program File")
+                            @Html.TextBoxFor(m => m.Entity.NumImages, new { @class = "form-control", PlaceHolder = "12" })
+                        </div>
 
-                    @Html.HiddenFor(m => m.Entity.SignId)
-                    @Html.HiddenFor(m => m.Entity.IpAddress)
-                    @Html.HiddenFor(m => m.Entity.SubMask)
-                    @Html.HiddenFor(m => m.Entity.Port)
-                    @Html.HiddenFor(m => m.Entity.ProgramFile)
-                    @Html.HiddenFor(m => m.Entity.NumImages)
-                }
+                    }
+                    else
+                    {
+
+                        @Html.HiddenFor(m => m.Entity.SignId)
+                        @Html.HiddenFor(m => m.Entity.IpAddress)
+                        @Html.HiddenFor(m => m.Entity.SubMask)
+                        @Html.HiddenFor(m => m.Entity.Port)
+                        @Html.HiddenFor(m => m.Entity.ProgramFile)
+                        @Html.HiddenFor(m => m.Entity.NumImages)
+                    }
                 </div>
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col-sm-12">             
+                    <div class="col-sm-12">
                         <button class="btn btn-primary" id="btnSave" data-pdsa-action="save">
                             <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp; Save
                         </button>
