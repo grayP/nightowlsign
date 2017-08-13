@@ -10,14 +10,15 @@ namespace nightowlsign.data.Models.Schedule
 {
     public class ScheduleViewModel : BaseModel.ViewModelBase, IScheduleViewModel
     {
-        private nightowlsign_Entities _context;
+        private Inightowlsign_Entities _context;
         private readonly IScheduleManager _scheduleManager;
-        //public ScheduleViewModel(Inightowlsign_Entities context, IScheduleManager scheduleManager)
+       // public ScheduleViewModel(Inightowlsign_Entities context, IScheduleManager scheduleManager)
         public ScheduleViewModel()
         {
             //_context = context;
             //_scheduleManager = scheduleManager;
             _context = new nightowlsign_Entities();
+            //Inightowlsign_Entities
             _scheduleManager = new ScheduleManager(_context);
         }
 

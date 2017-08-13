@@ -36,7 +36,7 @@ namespace nightowlsign.data.Models.ScheduleImage
                                  Name = s.Caption,
                                  ThumbNail = s.ThumbNailLarge,
                                  SignId = signId,
-                                 SignSize = s.SignSize ?? 0
+                                 SignSize = s.SignSize ?? 0 
                              });
                 return query.ToList();
             }

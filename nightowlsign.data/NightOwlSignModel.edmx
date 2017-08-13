@@ -76,6 +76,16 @@
           <Property Name="InstallDate" Type="datetime" />
           <Property Name="StoreId" Type="int" />
         </EntityType>
+        <EntityType Name="SignBrightness">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SignId" Type="int" />
+          <Property Name="Period" Type="int" />
+          <Property Name="BrightnessLevel" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+        </EntityType>
         <EntityType Name="Store">
           <Key>
             <PropertyRef Name="id" />
@@ -87,7 +97,7 @@
           <Property Name="State" Type="nvarchar" MaxLength="10" />
           <Property Name="Latitude" Type="decimal" Precision="10" Scale="4" />
           <Property Name="Longitude" Type="decimal" Precision="10" Scale="4" />
-          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="255" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="SignId" Type="int" />
           <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
@@ -203,6 +213,7 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <EntitySet Name="ScheduleImage" EntityType="Self.ScheduleImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScheduleStore" EntityType="Self.ScheduleStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sign" EntityType="Self.Sign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SignBrightness" EntityType="Self.SignBrightness" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreScheduleLog" EntityType="Self.StoreScheduleLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpLoadLog" EntityType="Self.UpLoadLog" Schema="dbo" store:Type="Tables" />
@@ -295,6 +306,7 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <EntitySet Name="Loggings" EntityType="Models.Logging" />
           <FunctionImport Name="FindCurrentPlayListForStore" ReturnType="Collection(Models.FindCurrentPlayListForStore_Result)" />
           <EntitySet Name="UpLoadLogs" EntityType="Models.UpLoadLog" />
+          <EntitySet Name="SignBrightnesses" EntityType="Models.SignBrightness" />
         </EntityContainer>
         <EntityType Name="Store">
           <Key>
@@ -307,7 +319,7 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Latitude" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="Longitude" Type="Decimal" Precision="10" Scale="4" />
-          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SignId" Type="Int32" />
           <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -488,6 +500,16 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
           <Property Name="ResultCode" Type="Int32" />
           <Property Name="DateTime" Type="DateTime" Precision="3" />
           <Property Name="ScheduleId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SignBrightness">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SignId" Type="Int32" />
+          <Property Name="Period" Type="Int32" />
+          <Property Name="BrightnessLevel" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -692,6 +714,17 @@ warning 6002: The table/view 'nightowlsign.dbo.StoreAndSign' does not have a pri
                 <ScalarProperty Name="ProgramFile" ColumnName="ProgramFile" />
                 <ScalarProperty Name="StoreId" ColumnName="StoreId" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SignBrightnesses">
+            <EntityTypeMapping TypeName="Models.SignBrightness">
+              <MappingFragment StoreEntitySet="SignBrightness">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BrightnessLevel" ColumnName="BrightnessLevel" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="SignId" ColumnName="SignId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

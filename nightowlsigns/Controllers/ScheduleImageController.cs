@@ -56,7 +56,7 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(ScheduleImageViewModel model)
         {
-            List<ImageSelect> imageSelects = model.AllImages;
+            IEnumerable<ImageSelect> imageSelects = model.AllImages;
             //    List<ImageSelect> 
             foreach (var imageSelect in imageSelects)
             {

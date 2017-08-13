@@ -110,6 +110,8 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MetaData\MetaData.cs" />
+    <Compile Include="Models\Brightness\BrightnessManager.cs" />
+    <Compile Include="Models\Brightness\BrightnessViewModel.cs" />
     <Compile Include="Models\Image\IImageManager.cs" />
     <Compile Include="Models\Image\IImageViewModel.cs" />
     <Compile Include="Models\Image\ImageManager.cs" />
@@ -173,6 +175,9 @@
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Sign.cs">
+      <DependentUpon>NightOwlSignModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SignBrightness.cs">
       <DependentUpon>NightOwlSignModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Store.cs">

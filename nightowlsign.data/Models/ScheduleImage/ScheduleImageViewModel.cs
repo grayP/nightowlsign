@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using nightowlsign.data.Models.Image;
 
 namespace nightowlsign.data.Models.ScheduleImage
@@ -14,7 +15,7 @@ namespace nightowlsign.data.Models.ScheduleImage
 
         public data.Schedule Schedule { get; set; }
         public int SignId { get; set; }
-        public List<ImageSelect> AllImages { get; set; }
+        public IEnumerable<ImageSelect> AllImages { get; set; }
         public List<int?> ScheduleImage { get; set; }
 
         protected override void Init()
@@ -35,7 +36,7 @@ namespace nightowlsign.data.Models.ScheduleImage
         public void GetImagesForThisSchedule(int scheduleId)
         {
             var sm = new ScheduleImageManager();
-            AllImages = sm.GetAllImages(Schedule.Id);
+            AllImages = sm.GetAllImages(Schedule.Id).OrderBy(s=>s.Selected).ThenBy(s=>s.Name);
          
         }
 

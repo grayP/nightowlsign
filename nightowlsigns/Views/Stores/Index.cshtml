@@ -78,7 +78,7 @@
                             <td class="centrealign">
                                 @if (@item.CurrentSchedule.Id != 0)
                                 {
-                                    <a href="@Url.Action("Index", "ScheduleImage", new {signId = item.SignId, scheduleId = item.CurrentSchedule.Id, scheduleName = item.CurrentSchedule.Name})"> <i class="glyphicon glyphicon-play"></i></a>
+                                    <a href="@Url.Action("Display", "ScheduleImage", new {signId = item.SignId, scheduleId = item.CurrentSchedule.Id, scheduleName = item.CurrentSchedule.Name})"> <i class="glyphicon glyphicon-play"></i></a>
                                 }
                             </td>
                             @if (User.IsInRole("SuperUser"))
