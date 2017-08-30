@@ -34,7 +34,7 @@ namespace nightowlsign.data.Models.ScheduleImage
                              {
                                  ImageId = s.Id,
                                  Name = s.Caption,
-                                 ThumbNail = s.ThumbNailLarge,
+                                 ThumbNail = s.ThumbNailSmall,
                                  SignId = signId,
                                  SignSize = s.SignSize ?? 0 
                              });
@@ -53,7 +53,7 @@ namespace nightowlsign.data.Models.ScheduleImage
                              {
                                  ImageId = i.Id,
                                  Name = i.Caption,
-                                 ThumbNail = i.ThumbNailLarge,
+                                 ThumbNail = i.ThumbNailSmall,
                                  SignSize = i.SignSize ?? 0,
                                  Selected = true
                              });

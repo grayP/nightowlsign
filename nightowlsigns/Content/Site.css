@@ -1,21 +1,19 @@
 ﻿
-html { 
-/*background: url(/Content/images/nightowl_back.jpg) no-repeat center center fixed; 
+html {
+    /*background: url(/Content/images/nightowl_back.jpg) no-repeat center center fixed; 
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-background-color: transparent;*/ 
+background-color: transparent;*/
 }
 
 
 body {
-    background-color: transparent; 
+    background-color: transparent;
     padding-top: 80px;
     padding-bottom: 80px;
-   
-    height:100%;
-
+    height: 100%;
 }
 
 label .tip {
@@ -24,53 +22,51 @@ label .tip {
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-   background-color: transparent; 
-   padding-left: 10px;
-   padding-right: 10px;
+    background-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 
-.fill-screen{
-   background-size: cover;
-   background-position:center;
-}
-.content-filler{
-
+.fill-screen {
+    background-size: cover;
+    background-position: center;
 }
 
-.fixed-attachment{
-        background-attachment:fixed;
+.content-filler {
+}
+
+.fixed-attachment {
+    background-attachment: fixed;
 }
 
 /* Navbar */
 .navbar {
-     padding: 5px;
+    padding: 5px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }
 
-.navbar-brand
-{
-     padding:1px 1px 1px 1px;
+.navbar-brand {
+    padding: 1px 1px 1px 1px;
 }
 
-.navbar-header img
-{
-    width:150px;
-    padding-right:1px;
+.navbar-header img {
+    width: 150px;
+    padding-right: 1px;
     vertical-align: middle;
     padding-top: 7px;
 }
 
-.cbp-af-header-shrink
-{
-    padding:2px;
-    opacity:.9;
+.cbp-af-header-shrink {
+    padding: 2px;
+    opacity: .9;
 }
 /* Tables */
 .rightalign {
     text-align: right;
 }
+
 .centrealign {
     text-align: center;
 }
@@ -79,17 +75,18 @@ label .tip {
 /* right column on front page*/
 .rightaside a {
     padding: 50px;
-           color:white;
-
+    color: white;
 }
+
 .rightaside .glyphicon {
-    font-size:50px;
+    font-size: 50px;
 }
 
 /* Imges screen */
 .list-group li {
     list-style: none !important;
 }
+
 .panel-body {
     padding: 7px !important;
 }
@@ -111,27 +108,25 @@ label .tip {
 }
 
 .quotation_div {
-   
     display: table;
-    height:500px;
+    height: 500px;
     background-size: 100% auto;
 }
 
-.quotation_div .overlay {
-    display: table-cell;
-    vertical-align: middle;
-   
-}
-  .overlay p {
+    .quotation_div .overlay {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+.overlay p {
     text-align: center;
     color: white;
-    font-family:'Times New Roman';
+    font-family: 'Times New Roman';
     font-size: 300%;
-    font-weight:100;
+    font-weight: 100;
     line-height: 3;
     padding: 0 10%;
     opacity: .6;
-   
 }
 
 
@@ -141,17 +136,17 @@ label .tip {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color:#030324 ;
+    background-color: #030324;
     padding: 10px;
     color: #999999;
 }
 
-.navbar 
-{
-  background-color:#030324
+.navbar {
+    background-color: #030324
 }
+
 table {
-        background-color: white; 
+    background-color: white;
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -167,40 +162,41 @@ textarea {
     max-width: 280px;
 }
 
-input[type="checkbox"] {
-    transform:scale(1.5, 1.5);
+    input[type="checkbox"] {
+        transform: scale(1.5, 1.5);
+    }
+
+.pdsa-action-button-column {
+    width: 4em;
+    text-align: center;
 }
 
-.pdsa-action-button-column{
-    width:4em;
-    text-align:center;
-}
 
 
-
-div.desc{
+div.desc {
     background-color: #000;
     bottom: 0;
     color: #fff;
     left: 0;
     opacity: 0.3;
     position: relative;
-    right:0;
+    right: 0;
     filter: alpha(opacity=20);
     padding: 5px;
 }
 
-.fix{
+.fix {
     width: 100%;
     padding: 0px;
 }
-/*//Location Page*/ 
+/*//Location Page*/
 
-.labels{
+.labels {
     opacity: .6;
 }
+
 .panel-primary {
-     border-color:    #030324;
+    border-color: #030324;
 }
 
 .panel-footer {
@@ -208,70 +204,128 @@ div.desc{
     padding-left: 3px;
     padding-top: 3px;
 }
+
 .panel-primary > .panel-heading {
     background-color: #030324;
-     border-color:    #030324;
+    border-color: #030324;
 }
+
 .btn-primary {
-    background-color: #030324;   
-     border-color:    #030324;
+    background-color: #030324;
+    border-color: #030324;
 }
 
 figure {
-  display: block;
-  position: relative;
-  float: left;
-  overflow: hidden;
+    display: block;
+    position: relative;
+    float: left;
+    overflow: hidden;
 }
+
 figcaption {
-  position: absolute;
-  background: black;
-  background: rgba(0,0,0,0.75);
-  color: white;
-  padding: 10px 20px;
-  opacity: 0;
-  -webkit-transition: all 0.6s ease;
-  -moz-transition:    all 0.6s ease;
-  -o-transition:      all 0.6s ease;
+    position: absolute;
+    background: black;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 10px 20px;
+    opacity: 0;
+    -webkit-transition: all 0.6s ease;
+    -moz-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
 }
+
 figure:hover figcaption {
-  opacity: 1;
+    opacity: 1;
 }
+
 figure:before {
-  content: "?";
-  position: absolute;
-  font-weight: 800;
-  background: black;
-  background: rgba(255,255,255,0.75);
-  text-shadow: 0 0 5px white;
-  color: black;
-  width: 24px;
-  height: 24px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius:    12px;
-  border-radius:         12px;
-  text-align: center;
-  font-size: 14px;
-  line-height: 24px;
-  -moz-transition: all 0.6s ease;
-  opacity: 0.75;
+    content: "?";
+    position: absolute;
+    font-weight: 800;
+    background: black;
+    background: rgba(255,255,255,0.75);
+    text-shadow: 0 0 5px white;
+    color: black;
+    width: 24px;
+    height: 24px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 24px;
+    -moz-transition: all 0.6s ease;
+    opacity: 0.75;
 }
+
 figure:hover:before {
-  opacity: 0;
+    opacity: 0;
 }
 
-.cap-left:before {  bottom: 10px; left: 10px; }
-.cap-left figcaption { bottom: 6px; left: -30%; }
-.cap-left:hover figcaption { left: 12px; font-size: x-small;}
+.cap-left:before {
+    bottom: 10px;
+    left: 10px;
+}
 
-.cap-right:before { bottom: 10px; right: 10px; }
-.cap-right figcaption { bottom: 0; right: -30%; }
-.cap-right:hover figcaption { right: 0; }
+.cap-left figcaption {
+    bottom: 6px;
+    left: -30%;
+}
 
-.cap-top:before { top: 10px; left: 10px; }
-.cap-top figcaption { left: 0; top: -30%; }
-.cap-top:hover figcaption { top: 0; }
+.cap-left:hover figcaption {
+    left: 12px;
+    font-size: x-small;
+}
 
-.cap-bot:before { bottom: 10px; left: 10px; }
-.cap-bot figcaption { left: 0; bottom: -30%;}
-.cap-bot:hover figcaption { bottom: 0; }
+.cap-right:before {
+    bottom: 10px;
+    right: 10px;
+}
+
+.cap-right figcaption {
+    bottom: 0;
+    right: -30%;
+}
+
+.cap-right:hover figcaption {
+    right: 0;
+}
+
+.cap-top:before {
+    top: 10px;
+    left: 10px;
+}
+
+.cap-top figcaption {
+    left: 0;
+    top: -30%;
+}
+
+.cap-top:hover figcaption {
+    top: 0;
+}
+
+.cap-bot:before {
+    bottom: 10px;
+    left: 10px;
+}
+
+.cap-bot figcaption {
+    left: 0;
+    bottom: -30%;
+}
+
+.cap-bot:hover figcaption {
+    bottom: 0;
+}
+
+
+body.modal-open {
+    overflow: hidden;
+    position: absolute !important;
+    top: 50%;
+}
+
+.modal-img {
+    padding: 1px 2px 2px 1px;
+}

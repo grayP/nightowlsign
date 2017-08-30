@@ -40,6 +40,7 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Display(int scheduleId, string scheduleName)
         {
+
             var ssvm = new ScheduleImageViewModel
             {
                 Schedule =
@@ -49,7 +50,7 @@ namespace nightowlsign.Controllers
                 }
             };
             ssvm.GetImagesForThisSchedule(scheduleId);
-            return View(ssvm);
+            return PartialView(ssvm);
         }
 
         [HttpPost]

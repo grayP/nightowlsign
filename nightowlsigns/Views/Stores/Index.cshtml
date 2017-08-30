@@ -10,6 +10,16 @@
     @Html.HiddenFor(m => m.EventArgument)
     @Html.HiddenFor(m => m.Mode)
     <!-- End Hidden form-->
+
+
+    <div class="modal" id="editor-container" tabindex="-1" role="dialog" aria-labelledby="editor-title" style="width: 100%;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="editor-content-container">
+            </div>
+        </div>
+    </div>
+
+
     <!-- Start Search Area -->
     if (Model.IsSearchVisible)
     {
@@ -46,6 +56,7 @@
      <!-- Start List Area  -->
     if (Model.IsListAreaVisible)
     {
+
         <div class="table-responsive">
             <table class="table table-condensed table-bordered table-striped table-hover">
                 <thead>
@@ -57,7 +68,7 @@
                         <th class="centrealign">Schedules</th>
                         <th class="centrealign">Default Playlist</th>
                         <th class="centrealign">Current Playlist</th>
-                        <th class="centrealign">Show Playlist</th>
+
                         @if (User.IsInRole("SuperUser"))
                         {
                             <th class="pdsa-action-button-column">Delete</th>
@@ -73,14 +84,9 @@
                             <td class="centrealign">@item.Sign.Model</td>
                             <td class="centrealign">@string.Format("{0:0.00}", ((double)@item.Sign.Width / @item.Sign.Height))</td>
                             <td class="centrealign"><a href="@Url.Action("Index", "Schedules", new { SignId = item.SignId ?? 0 })" data-toggle="tooltip" title="Playlists for this sign size" class="btn btn-sm btn-default" alt="PlayLists"><span class="glyphicon glyphicon-calendar"></span></a></td>
-                            <td class="centrealign">@item.DefaultSchedule.Name</td>
-                            <td class="centrealign" title="Status=@item.LastUpdateStatus, Last update=@item.LastUpdateTime">@item.CurrentSchedule.Name</td>
-                            <td class="centrealign">
-                                @if (@item.CurrentSchedule.Id != 0)
-                                {
-                                    <a href="@Url.Action("Display", "ScheduleImage", new {signId = item.SignId, scheduleId = item.CurrentSchedule.Id, scheduleName = item.CurrentSchedule.Name})"> <i class="glyphicon glyphicon-play"></i></a>
-                                }
-                            </td>
+                            <td class="centrealign"><a class="listItems" data-id="@item.DefaultSchedule.Id" data-title="@item.DefaultSchedule.Name" >@item.DefaultSchedule.Name</a></td>
+                            <td class="centrealign" title="Status=@item.LastUpdateStatus, Last update=@item.LastUpdateTime"><a class="listItems" data-id="@item.CurrentSchedule.Id" data-title="@item.CurrentSchedule.Name" >@item.CurrentSchedule.Name</a></td>
+                           
                             @if (User.IsInRole("SuperUser"))
                             {
                                 <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="delete" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i></a></td>
@@ -208,9 +214,28 @@
     <!-- End Detail Area-->
 
 }
+<script type="text/javascript">
+    $('.listItems').click(function () {
+            var itemId = $(this).data("id");
+            var itemName = $(this).data("title");
+            $.get({
+                url: 'ScheduleImage/Display',
+                data: {
+                    'scheduleId': itemId,
+                    'scheduleName': itemName,
+                    'signId': 0
+                },
+                dataType: 'html',
+                success: function (data) {
+                    $('#editor-content-container').html(data);
+                    $('#editor-container').modal('show');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        });
 
-@section scripts
-{
+     
+</script>
 
-
-}

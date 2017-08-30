@@ -1,52 +1,19 @@
 ﻿@using nightowlsign.data.Models.ScheduleImage
 @model ScheduleImageViewModel
 
-@{
-    ViewBag.Title = "Image List";
-}
-
-<h2>Image List - @Model.Schedule.Name</h2>
-
-@using (Html.BeginForm("Index", "ScheduleImage", new { SignId = Model.SignId }, FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
-{
-    <!-- Start Hidden form -->
-    @Html.HiddenFor(m => m.EventCommand)
-    @Html.HiddenFor(m => m.EventArgument)
-    @Html.HiddenFor(m => m.Mode)
-    @Html.HiddenFor(m => m.Schedule.Id)
-    @Html.HiddenFor(m => m.Schedule.Name)
-    @Html.HiddenFor(m => m.Schedule.SignId)
-    <!-- End Hidden form-->
-    <div class="container">
-        <div class="row">
-            @Html.EditorFor(model => model.AllImages)
-        </div>
-    </div>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title" id="modal-title">@Model.Schedule.Name</h4>
+</div>
+<div class="modal-body">
     <div class="row">
-        <div class="col-sm-12">
-            <a href="@Url.Action("Index", "Stores")" class="btn btn-primary">
-                <i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Back
-            </a>
-        </div>
+        @foreach (var item in Model.AllImages)
+        {
+            string imageBase64 = Convert.ToBase64String(item.ThumbNail);
+            string imageSrc = $"data:image/gif;base64,{imageBase64}";
+            <div class="col-sm-6 col-md-3">
+                <img class="img-responsive modal-img" src="@imageSrc" style="width: 100%;">
+            </div>
+        }
     </div>
-            <!-- End Detail Area-->
-}
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $("[rel='tooltip']").tooltip();
-
-        $('.caption-over').hover(
-
-        function () {
-            $(this).find('.caption-over').slideDown(250);
-        },
-
-        function () {
-            $(this).find('.caption-over').slideUp(250);
-        });
-    });
-</script>
-
+</div>

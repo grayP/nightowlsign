@@ -36,7 +36,7 @@ namespace nightowlsign.data.Models.ScheduleImage
         public void GetImagesForThisSchedule(int scheduleId)
         {
             var sm = new ScheduleImageManager();
-            AllImages = sm.GetAllImages(Schedule.Id).OrderBy(s=>s.Selected).ThenBy(s=>s.Name);
+            AllImages = sm.GetAllImages(Schedule.Id).OrderBy(s=>s.Name);
          
         }
 

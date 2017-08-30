@@ -1,10 +1,10 @@
 ﻿@model  nightowlsign.data.ImagesAndSign
 
 @{
-    string imageBase64 = Convert.ToBase64String(Model.ThumbNailLarge);
+    string imageBase64 = Convert.ToBase64String(Model.ThumbNailSmall);
     string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
 }
-<div class="col-sm-6 col-md-4">
+<div class="col-sm-6 col-md-2">
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="panel-info">

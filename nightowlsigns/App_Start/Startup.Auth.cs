@@ -67,9 +67,9 @@ namespace nightowlsign
             //    ClientSecret = ""
             //});
           //AddUserAndRole(ApplicationDbContext.Create());
-         //  SeedUsers();
-         //   var success = AddUserAndRole(ApplicationDbContext.Create());
-         //    Security security= new Security();
+           //SeedUsers();
+           // var success = AddUserAndRole(ApplicationDbContext.Create());
+            // Security security= new Security();
 //security.AddUserToRole(ApplicationDbContext.Create(),"gray.pritchett@optusnet.com.au", "Admin");
 
         }
