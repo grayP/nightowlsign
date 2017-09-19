@@ -196,11 +196,20 @@
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
+      <TransformOnBuild>true</TransformOnBuild>
     </None>
     <EntityDeploy Include="NightOwlSignModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NightOwlSignModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Debug.Config">
+      <DependentUpon>App.Config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App.Release.Config">
+      <DependentUpon>App.Config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="NightOwlSignModel.edmx.diagram">
       <DependentUpon>NightOwlSignModel.edmx</DependentUpon>
     </None>

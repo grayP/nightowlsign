@@ -13,5 +13,6 @@ namespace nightowlsign.data.Models.Schedule
         bool Update(data.Schedule entity);
         bool Insert(data.Schedule entity);
         bool Delete(data.Schedule entity);
+        void Copy(data.Schedule entity);
     }
 }

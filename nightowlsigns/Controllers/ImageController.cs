@@ -1,5 +1,6 @@
 ﻿using ImageStorage;
 using nightowlsign.data.Models.Image;
+using nightowlsign.Models;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Web;
@@ -20,7 +21,8 @@ namespace nightowlsign.Controllers
         [AllowAnonymous]
         public ActionResult Index(int? SignId)
         {
-            _imageViewModel.SearchSignId = SignId ?? 6;
+
+            _imageViewModel.SearchSignId = Helper.GetSetSignSize(SignId);
             _imageViewModel.HandleRequest();
             _imageViewModel.ImageToUpload.Status = false;
 
@@ -29,7 +31,7 @@ namespace nightowlsign.Controllers
         [AllowAnonymous]
         public ActionResult Show(ImageViewModel imageViewModel, int? SignId)
         {
-            _imageViewModel.SearchSignId = imageViewModel.SearchSignId ?? SignId ?? 6;
+            _imageViewModel.SearchSignId = Helper.GetSetSignSize(SignId); 
             _imageViewModel.HandleRequest();
             return View("Index", _imageViewModel);
         }
@@ -39,7 +41,7 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(FormCollection formCollection, ImageViewModel iVm, int? signId)
         {
-            _imageViewModel.SearchSignId =  signId;
+            iVm.SearchSignId = Helper.GetSetSignSize(signId); 
             iVm.IsValid = ModelState.IsValid;
             if (Request != null)
             {

@@ -79,8 +79,8 @@ namespace nightowlsign.data.Models.Stores
             {
                 data.Schedule defaultSched =
                 new data.Schedule { Id = 0, Name = "" };
-                store.AvailableSchedules = GetAvailableSchedules(store.id);
-                store.SelectedSchedules = GetSelectedSchedules(store.id);
+                //store.AvailableSchedules = GetAvailableSchedules(store.id);
+                //store.SelectedSchedules = GetSelectedSchedules(store.id);
                 store.DefaultSchedule = GetDefaultSchedule(store.id) ?? defaultSched;
                 store.CurrentSchedule = GetInstalledSchedule(store.id) ?? defaultSched;
                 store.Sign = GetSign(store.SignId ?? 0) ?? defaultSign;
@@ -255,6 +255,26 @@ namespace nightowlsign.data.Models.Stores
             _context.Store.Remove(entity);
             _context.SaveChanges();
             return true;
+        }
+
+        public bool ResetLastStatus(Store entity)
+        {
+            try
+            {
+                entity.LastUpdateStatus = -99;
+               
+                    _context.Store.Attach(entity);
+                    var modifiedStore = _context.Entry(entity);
+                    modifiedStore.Property("LastUpdateStatus").IsModified = true;
+                    _context.SaveChanges();
+                    return true;
+               
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return false;
+            }
         }
     }
 

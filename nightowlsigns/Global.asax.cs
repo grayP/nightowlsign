@@ -10,6 +10,8 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Core;
 using Autofac.Integration.Mvc;
+using nightowlsign.data.Models;
+using nightowlsign.Models;
 
 namespace nightowlsign
 {
@@ -19,13 +21,20 @@ namespace nightowlsign
         {
 
             IoCConfig.RegisterDependencies();
-           
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-          
         }
+
+        void Session_Start(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session.Add("__SessionSignSize", new SignSize());
+
+ 
+        }
+
         private void Application_Error(object sender, EventArgs e)
         {
             var ex = Server.GetLastError();
@@ -34,7 +43,7 @@ namespace nightowlsign
             if (httpException?.WebEventCode == WebEventCodes.RuntimeErrorPostTooLarge)
             {
                 //handle the error
-                Response.Write("The file(s) you are trying to upload are too big."); 
+                Response.Write("The file(s) you are trying to upload are too big.");
             }
         }
 

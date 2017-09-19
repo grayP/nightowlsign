@@ -519,6 +519,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\LoggingsController.cs" />
@@ -537,6 +538,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SignParameters.cs" />
+    <Compile Include="Models\SignSize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -561,10 +563,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\clockpicker.css" />
+    <Content Include="Content\images\-1.png" />
+    <Content Include="Content\images\-5.png" />
+    <Content Include="Content\images\-10.png" />
+    <Content Include="Content\images\-99.png" />
+    <Content Include="Content\images\0.png" />
     <Content Include="Content\images\graphic.png" />
     <Content Include="Content\images\nightowl.png" />
     <Content Include="Content\images\NightOwllogo.jpg" />
-    <Content Include="Content\images\nightowl_back.jpg" />
     <Content Include="Content\images\night_owl.gif" />
     <Content Include="Content\image\night_owl.gif" />
     <AdditionalFiles Include="EmbeddedResource\CP5200.dll">
@@ -1009,6 +1015,8 @@
     <Content Include="Views\Loggings\Details.cshtml" />
     <Content Include="Views\Loggings\Edit.cshtml" />
     <Content Include="Views\Loggings\Index.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
@@ -1089,6 +1097,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>IF $(ConfigurationName) == Debug COPY /Y "$(ProjectDir)Web.Debug.config" "$(ProjectDir)Web.config"
+IF $(ConfigurationName) == Release COPY /Y "$(ProjectDir)Web.Release.config" "$(ProjectDir)Web.config"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

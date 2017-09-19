@@ -56,8 +56,7 @@ namespace nightowlsign.data.Models.Schedule
             }
             return (ValidationErrors.Count == 0);
         }
-
-
+ 
         public bool Update(data.Schedule entity)
         {
             DeleteLogs(entity.Id);
@@ -150,6 +149,35 @@ namespace nightowlsign.data.Models.Schedule
             }
         }
 
+        public void Copy(data.Schedule entity)
+        {
+            var NewSchedule = new data.Schedule
+            {
+                Name = entity.Name,
+                StartDate = entity.StartDate,
+                EndDate = entity.EndDate,
+                Monday = entity.Monday,
+                Tuesday = entity.Tuesday,
+                Wednesday = entity.Wednesday,
+                Thursday = entity.Thursday,
+                Friday = entity.Friday,
+                Saturday = entity.Saturday,
+                Sunday = entity.Sunday,
+                StartTime = entity.StartTime,
+                EndTime = entity.EndTime,
+                DefaultPlayList = entity.DefaultPlayList,
+                SignId = entity.SignId
+            };
+            _context.Schedules.Add(NewSchedule);
+            _context.SaveChanges();
+
+            var scheduleImages = _context.ScheduleImages.Where(i => i.ScheduleID == entity.Id).ToList().Select(i => { i.ScheduleID = NewSchedule.Id; return i; }).ToList();
+            _context.ScheduleImages.AddRange(scheduleImages);
+            var scheduleStores = _context.ScheduleStores.Where(s => s.ScheduleID == entity.Id).ToList().Select(s => { s.ScheduleID = NewSchedule.Id; return s; }).ToList();
+            _context.ScheduleStores.AddRange(scheduleStores);
+            _context.SaveChanges();
+        }
+
         public bool Delete(data.Schedule entity)
         {
             DeleteSchedules(entity);
@@ -194,5 +222,4 @@ namespace nightowlsign.data.Models.Schedule
             }
         }
     }
-
 }

@@ -29,6 +29,13 @@ namespace nightowlsign.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles="Admin,Superuser")]
+        public bool Resend(int Id, string Name)
+        {
+            return _storeViewModel.ResetLastStatus(Id);
+
+        }
+        [HttpPost]
         [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(StoreViewModel storeViewModel)
         {

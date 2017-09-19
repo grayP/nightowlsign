@@ -106,5 +106,12 @@ namespace nightowlsign.data.Models.Stores
             Get();
             base.Delete();
         }
+
+
+        bool IStoreViewModel.ResetLastStatus(int id)
+        {
+            Entity = _storeManager.Find(id);
+            return _storeManager.ResetLastStatus(Entity);
+        }
     }
 }

@@ -11,9 +11,10 @@ namespace nightowlsign.data
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class StoreAndSign
     {
+        private DateTime _lastUpdateTime;
         public int id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -30,7 +31,11 @@ namespace nightowlsign.data
         public string Model { get; set; }
         public string ProgramFile { get; set; }
         public Nullable<int> LastUpdateStatus { get; set; }
-        public Nullable<System.DateTime> LastUpdateTime { get; set; }
+        public Nullable<DateTime> LastUpdateTime
+        {
+            get; set;
+        }
+
         public Nullable<int> NumImages { get; set; }
     }
 }

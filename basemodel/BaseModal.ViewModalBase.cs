@@ -49,7 +49,9 @@ namespace BaseModel
                     Get();
                     break;
                 case "copy":
-                    
+                    Copy();
+                    Get();
+                    break;
                 case "add":
                     Add();
                     //Get();
@@ -77,6 +79,10 @@ namespace BaseModel
                     break;
             }
         }
+
+        protected virtual void Copy()
+        {
+         }
 
         //--------------------------------------------------------------------------------------
         protected virtual void ListMode()

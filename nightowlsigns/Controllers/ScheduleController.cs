@@ -4,21 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nightowlsign.data.Models.Schedule;
+using nightowlsign.Models;
 
 namespace nightowlsign.Controllers
 {
     public class SchedulesController : Controller
     {
         private readonly IScheduleViewModel _scheduleViewModel;
-
-        public SchedulesController(IScheduleViewModel scheduleViewModel)
+         public SchedulesController(IScheduleViewModel scheduleViewModel)
         {
             _scheduleViewModel = scheduleViewModel;
-        }
+                 }
         // GET: 
         [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(int signId)
         {
+            signId = Helper.GetSetSignSize(signId);
+
             _scheduleViewModel.SearchEntity.SignId = signId;
             _scheduleViewModel.HandleRequest();
             return View(_scheduleViewModel);
@@ -35,6 +37,8 @@ namespace nightowlsign.Controllers
         [Authorize(Roles = "Admin,SuperUser")]
         public ActionResult Index(ScheduleViewModel svm)
         {
+            svm.SearchEntity.SignId = Helper.GetSetSignSize(svm.SearchEntity.SignId);
+
             svm.IsValid = ModelState.IsValid;
             svm.HandleRequest();
 

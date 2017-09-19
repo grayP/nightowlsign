@@ -18,5 +18,6 @@ namespace nightowlsign.data.Models.Stores
         bool IsValid { get; set; }
         List<KeyValuePair<string, string>> ValidationErrors { get; set; }
         void HandleRequest();
+        bool ResetLastStatus(int id);
     }
 }

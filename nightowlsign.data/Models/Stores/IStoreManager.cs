@@ -14,5 +14,6 @@ namespace nightowlsign.data.Models.Stores
         bool Update(Store entity);
         bool Insert(Store entity);
         bool Delete(Store entity);
+        bool ResetLastStatus(Store entity);
     }
 }

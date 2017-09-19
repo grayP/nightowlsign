@@ -12,13 +12,9 @@ namespace nightowlsign.data.Models.Schedule
     {
         private Inightowlsign_Entities _context;
         private readonly IScheduleManager _scheduleManager;
-       // public ScheduleViewModel(Inightowlsign_Entities context, IScheduleManager scheduleManager)
         public ScheduleViewModel()
         {
-            //_context = context;
-            //_scheduleManager = scheduleManager;
             _context = new nightowlsign_Entities();
-            //Inightowlsign_Entities
             _scheduleManager = new ScheduleManager(_context);
         }
 
@@ -67,6 +63,13 @@ namespace nightowlsign.data.Models.Schedule
         protected override void Get()
         {
             Schedules = _scheduleManager.Get(SearchEntity);
+        }
+
+        protected override void Copy()
+        {
+            _scheduleManager.Copy(Entity);
+            base.Save();
+
         }
 
         protected override void Edit()
