@@ -12,7 +12,7 @@ namespace nightowlsign.data
         public List<data.Schedule> SelectedSchedules { get; set; }
         public Sign Sign { get; set; }
 
-        public DateTime? LocalUpdatedTime => LastUpdateTime.HasValue ? LastUpdateTime.Value.ToLocalTime() : DateTime.MinValue;
+        public DateTime? LocalUpdatedTime => LastUpdateTime.HasValue ? LastUpdateTime.Value.AddHours(10) : DateTime.MinValue;
 
         public void GetPlayLists()
         {

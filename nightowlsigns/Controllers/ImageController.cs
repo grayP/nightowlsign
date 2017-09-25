@@ -31,7 +31,7 @@ namespace nightowlsign.Controllers
         [AllowAnonymous]
         public ActionResult Show(ImageViewModel imageViewModel, int? SignId)
         {
-            _imageViewModel.SearchSignId = Helper.GetSetSignSize(SignId); 
+            _imageViewModel.SearchSignId = Helper.GetSetSignSize(imageViewModel.SearchSignId); 
             _imageViewModel.HandleRequest();
             return View("Index", _imageViewModel);
         }

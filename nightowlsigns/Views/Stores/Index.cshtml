@@ -81,12 +81,12 @@
                     {
                         <tr>
                             <td class="pdsa-action-button-column"><a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a></td>
-                            <td>@item.Name</td>
-                            <td class="centrealign">@item.Sign.Model</td>
+                            <td title="@item.id">@item.Name</td>
+                            <td title="@item.SignId" class="centrealign">@item.Sign.Model</td>
                             <td class="centrealign">@string.Format("{0:0.00}", ((double)@item.Sign.Width / @item.Sign.Height))</td>
                             <td class="centrealign"><a href="@Url.Action("Index", "Schedules", new { SignId = item.SignId ?? 0 })" data-toggle="tooltip" title="Playlists for this sign size" class="btn btn-sm btn-default" alt="PlayLists"><span class="glyphicon glyphicon-calendar"></span></a></td>
                             <td class="centrealign"><a class="listItems" data-id="@item.DefaultSchedule.Id" data-title="@item.DefaultSchedule.Name" >@item.DefaultSchedule.Name </a></td>
-                            <td class="centrealign" title="Status=@item.LastUpdateStatus, Last update=@item.LastUpdateTime"><a class="listItems" data-id="@item.CurrentSchedule.Id" data-title="@item.CurrentSchedule.Name">@item.CurrentSchedule.Name</a></td>
+                            <td class="centrealign" title="Status=@item.LastUpdateStatus, Last update=@item.LocalUpdatedTime"><a class="listItems" data-id="@item.CurrentSchedule.Id" data-title="@item.CurrentSchedule.Name">@item.CurrentSchedule.Name</a></td>
                             <td class="centrealign" title="Status=@item.LastUpdateStatus, Last update=@item.LocalUpdatedTime"><a class="listImage" data-id="@item.id" data-title="@item.Name"><img src="@Html.Raw("/Content/images/" + ( @item.LastUpdateStatus ?? -1 ) + ".png")"> </a></td>
                            
                             @if (User.IsInRole("SuperUser"))
@@ -153,7 +153,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-12">
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                     {
                         <div class="form-group">
                             @Html.LabelFor(m => m.Entity.SignId, "Sign Size")
