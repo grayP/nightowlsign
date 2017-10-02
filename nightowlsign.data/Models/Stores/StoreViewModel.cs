@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using nightowlsign.data.Interfaces;
 using nightowlsign.data.Models.ScheduleStore;
+using nightowlsign.data.Models.Logging;
+using System.Web.Helpers;
 
 namespace nightowlsign.data.Models.Stores
 {
@@ -13,13 +15,15 @@ namespace nightowlsign.data.Models.Stores
     {
         private readonly Inightowlsign_Entities _context;
         private readonly IStoreManager _storeManager;
+        private readonly ILoggingManager _loggingManager;
         //public StoreViewModel(Inightowlsign_Entities context) : base()
         public StoreViewModel() : base()
         {
            //_context = context;
             // _storeManager = storeManager;
             _context = new nightowlsign_Entities();
-            _storeManager = new StoreManager(_context);
+            _loggingManager = new LoggingManager(_context);
+            _storeManager = new StoreManager(_context, _loggingManager);
 
         }
         public List<Store> Stores { get; set; }
@@ -107,11 +111,10 @@ namespace nightowlsign.data.Models.Stores
             base.Delete();
         }
 
-
-        bool IStoreViewModel.ResetLastStatus(int id)
+        public override bool ResetLastStatus(int id)
         {
             Entity = _storeManager.Find(id);
-            return _storeManager.ResetLastStatus(Entity);
+            return  _storeManager.ResetLastStatus(Entity);
         }
     }
 }

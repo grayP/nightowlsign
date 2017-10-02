@@ -26,7 +26,7 @@ namespace nightowlsign.data.Models.UpLoadLog
 
         public List<data.UpLoadLog> GetLatest()
         {
-            return _context.UpLoadLogs.OrderByDescending(i => i.DateTime).Take(50).ToList();
+            return _context.UpLoadLogs.OrderByDescending(i => i.DateTime).Take(100).ToList();
         }
 
         public bool UpLoadNeeded(int storeId, string filename, DateTime lastUpdated)

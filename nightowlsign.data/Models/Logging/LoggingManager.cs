@@ -19,6 +19,25 @@ namespace nightowlsign.data.Models.Logging
         {
             return string.IsNullOrEmpty(filter) ? _context.Loggings.OrderByDescending(i => i.DateStamp).Take(50).ToList() : _context.Loggings.Where(i=>i.Subject==filter).OrderByDescending(i => i.DateStamp).Take(50).ToList();
         }
+        public bool Insert( string description, string Subject)
+        {
+            data.Logging log = new data.Logging();
+            log.DateStamp = DateTime.Now;
+            log.Description = description;
+            log.Subject = Subject;
+            return Insert(log);
+
+        }
+
+        public bool Insert(Exception ex)
+        {
+            data.Logging log = new data.Logging();
+            log.DateStamp = DateTime.Now;
+            log.Description = ex.Message;
+            string subject = ex.InnerException.ToString();
+            log.Subject = subject.Substring(0, Math.Min(subject.Length, 25));
+            return Insert(log);
+        }
 
         public bool Insert(data.Logging log)
         {

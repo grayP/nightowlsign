@@ -564,6 +564,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\clockpicker.css" />
     <Content Include="Content\images\-1.png" />
+    <Content Include="Content\images\-6.png" />
     <Content Include="Content\images\-5.png" />
     <Content Include="Content\images\-10.png" />
     <Content Include="Content\images\-99.png" />
@@ -599,6 +600,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\nightowlsign - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nightowlsign - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\nightowlsign.pubxml" />
@@ -840,12 +842,6 @@
     <Content Include="Views\ScheduleImage\EditorTemplates\ImageSelect.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

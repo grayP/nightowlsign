@@ -30,10 +30,11 @@ namespace nightowlsign.Controllers
 
         [HttpPost]
         [Authorize(Roles="Admin,Superuser")]
-        public bool Resend(int Id, string Name)
+        public ActionResult Resend(int Id, string Name)
         {
-            return _storeViewModel.ResetLastStatus(Id);
 
+           return Json(new { ResetDone = _storeViewModel.ResetLastStatus(Id) });
+          //  return _storeViewModel.ResetLastStatus(Id);
         }
         [HttpPost]
         [Authorize(Roles = "Admin,SuperUser")]

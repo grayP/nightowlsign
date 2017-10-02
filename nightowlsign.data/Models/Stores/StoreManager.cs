@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using nightowlsign.data.Interfaces;
+using nightowlsign.data.Models.Logging;
 using SignSystemAPI.Client;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace nightowlsign.data.Models.Stores
     public class StoreManager : IStoreManager
     {
         private readonly Inightowlsign_Entities _context;
+        private readonly ILoggingManager _loggingManager;
         private data.Schedule defaultSchedule;
         private Sign defaultSign;
-        public StoreManager(Inightowlsign_Entities context)
+        public StoreManager(Inightowlsign_Entities context , ILoggingManager loggingManager)
         {
             _context = context;
+            _loggingManager = loggingManager;
             ValidationErrors = new List<KeyValuePair<string, string>>();
             defaultSchedule = new data.Schedule
             {
@@ -168,7 +171,6 @@ namespace nightowlsign.data.Models.Stores
         public Store Find(int storeId)
         {
             return _context.Store.Find(storeId);
-
         }
 
         public bool Validate(Store entity)
@@ -184,9 +186,9 @@ namespace nightowlsign.data.Models.Stores
             return (ValidationErrors.Count == 0);
         }
 
-
         public bool Update(Store entity)
         {
+            entity.LastUpdateTime = DateTime.Now;
             if (!Validate(entity)) return false;
             try
             {
@@ -206,14 +208,16 @@ namespace nightowlsign.data.Models.Stores
                     modifiedStore.Property(e => e.Port).IsModified = true;
                     modifiedStore.Property(e => e.ProgramFile).IsModified = true;
                     modifiedStore.Property(e => e.NumImages).IsModified = true;
+                    modifiedStore.Property(e => e.LastUpdateStatus).IsModified = true;
                     db.SaveChanges();
+                    _loggingManager.Insert("Update of properties", entity.Name);
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
-                return false;
+               return !_loggingManager.Insert(ex);
+                
             }
         }
 
@@ -244,8 +248,7 @@ namespace nightowlsign.data.Models.Stores
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
-                return false;
+                return !_loggingManager.Insert(ex);
             }
         }
 
@@ -259,22 +262,9 @@ namespace nightowlsign.data.Models.Stores
 
         public bool ResetLastStatus(Store entity)
         {
-            try
-            {
                 entity.LastUpdateStatus = -99;
-               
-                    _context.Store.Attach(entity);
-                    var modifiedStore = _context.Entry(entity);
-                    modifiedStore.Property("LastUpdateStatus").IsModified = true;
-                    _context.SaveChanges();
-                    return true;
-               
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.InnerException);
-                return false;
-            }
+                _loggingManager.Insert("Reset completed", entity.Name);
+                return Update(entity);
         }
     }
 

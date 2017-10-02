@@ -157,6 +157,10 @@ namespace BaseModel
                 }
             }
         }
+        public virtual bool ResetLastStatus(int Id)
+        {
+            return true;
+        }
     }
 }
 
