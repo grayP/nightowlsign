@@ -24,7 +24,7 @@ namespace nightowlsign.Models
             SignSize signSize = GetMySessionObject(HttpContext.Current);
 
             if (signId == null && signSize == null) return 0;
-            if (signId > 0)
+            if (signId >= 0)
             {
                 signSize.SignId = signId ?? 0;
                 HttpContext.Current.Session["__SessionSignSize"] = signSize;

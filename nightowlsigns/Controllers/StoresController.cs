@@ -32,8 +32,8 @@ namespace nightowlsign.Controllers
         [Authorize(Roles="Admin,Superuser")]
         public ActionResult Resend(int Id, string Name)
         {
-
-           return Json(new { ResetDone = _storeViewModel.ResetLastStatus(Id) });
+            var result = Json(new { ResetDone = _storeViewModel.ResetLastStatus(Id) });
+            return result;
           //  return _storeViewModel.ResetLastStatus(Id);
         }
         [HttpPost]
